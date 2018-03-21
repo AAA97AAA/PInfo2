@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.9)  21 MAR 2018 16:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.9)  21 MAR 2018 17:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -572,6 +572,9 @@ Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
+
 (/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 
@@ -597,6 +600,14 @@ Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count92
 )))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+))
 (/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2016/05/05 v6.83n Hypertext links for LaTeX
 
@@ -614,7 +625,7 @@ Package ifluatex Info: LuaTeX not detected.
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
-Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
@@ -643,9 +654,6 @@ Package atveryend Info: \enddocument detected (standard20110627).
 Package: atbegshi 2016/05/16 v1.17 At begin shipout hook (HO)
 Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
-)
-(/usr/local/texlive/2016/texmf-dist/tex/generic/ifxetex/ifxetex.sty
-Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
@@ -764,38 +772,38 @@ Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
 (./DocVision.aux)
 \openout1 = `DocVision.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 48.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 47.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 48.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \degres on input line 47.
-LaTeX Info: Redefining \dots on input line 47.
-LaTeX Info: Redefining \up on input line 47.
+LaTeX Info: Redefining \degres on input line 48.
+LaTeX Info: Redefining \dots on input line 48.
+LaTeX Info: Redefining \up on input line 48.
 
 
 Package frenchb.ldf Warning: OT1 encoding should not be used for French.
 (frenchb.ldf)                Add \usepackage[T1]{fontenc} to the preamble
-(frenchb.ldf)                of your document, on input line 47.
+(frenchb.ldf)                of your document, on input line 48.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -826,7 +834,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box32
-Package hyperref Info: Link coloring OFF on input line 47.
+Package hyperref Info: Link coloring OFF on input line 48.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -836,9 +844,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count115
 )
-LaTeX Info: Redefining \ref on input line 47.
-LaTeX Info: Redefining \pageref on input line 47.
-LaTeX Info: Redefining \nameref on input line 47.
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+LaTeX Info: Redefining \nameref on input line 48.
 
 (./DocVision.out) (./DocVision.out)
 \@outlinefile=\write3
@@ -846,38 +854,38 @@ LaTeX Info: Redefining \nameref on input line 47.
 
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 47.
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 51.
+(lastpage)             ! on input line 48.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 52.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 51.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 52.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 51.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 52.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 51.
+(Font)              <12> on input line 52.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 51.
+(Font)              <8> on input line 52.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 51.
+(Font)              <6> on input line 52.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 56.
+(Font)              <10> on input line 57.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 56.
+(Font)              <7> on input line 57.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 56.
+(Font)              <5> on input line 57.
 
-Underfull \vbox (badness 10000) detected at line 64
+Underfull \vbox (badness 10000) detected at line 65
  []
 
 [1
@@ -903,166 +911,166 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  [3] [4]
 
 LaTeX Font Warning: Font shape `OT1/lmr/bx/sc' undefined
-(Font)              using `OT1/lmr/bx/n' instead on input line 113.
+(Font)              using `OT1/lmr/bx/n' instead on input line 114.
 
 [5]
-Underfull \vbox (badness 10000) detected at line 146
+Underfull \vbox (badness 10000) detected at line 147
  []
 
 
-Underfull \vbox (badness 10000) detected at line 184
+Underfull \vbox (badness 10000) detected at line 185
  []
 
 [6]
-Overfull \hbox (0.9091pt too wide) in paragraph at lines 197--197
+Overfull \hbox (0.9091pt too wide) in paragraph at lines 198--198
 []|\OT1/lmr/bx/n/10.95 Responsibilities|  
  []
 
 
-Overfull \hbox (0.19998pt too wide) in paragraph at lines 191--214
+Overfull \hbox (0.19998pt too wide) in paragraph at lines 192--215
 [] 
  []
 
 [7]
-Overfull \hbox (0.9091pt too wide) in paragraph at lines 222--222
+Overfull \hbox (0.9091pt too wide) in paragraph at lines 223--223
 []|\OT1/lmr/bx/n/10.95 Responsibilities|  
  []
 
 
-Overfull \hbox (0.19998pt too wide) in paragraph at lines 216--235
+Overfull \hbox (0.19998pt too wide) in paragraph at lines 217--236
 [] 
  []
 
 
-Overfull \hbox (0.9091pt too wide) in paragraph at lines 243--243
+Overfull \hbox (0.9091pt too wide) in paragraph at lines 244--244
 []|\OT1/lmr/bx/n/10.95 Responsibilities|  
  []
 
 
-Overfull \hbox (0.19998pt too wide) in paragraph at lines 237--252
+Overfull \hbox (0.19998pt too wide) in paragraph at lines 238--253
 [] 
  []
 
 
-Overfull \hbox (0.9091pt too wide) in paragraph at lines 264--264
+Overfull \hbox (0.9091pt too wide) in paragraph at lines 265--265
 []|\OT1/lmr/bx/n/10.95 Responsibilities|  
  []
 
 
-Overfull \hbox (0.19998pt too wide) in paragraph at lines 254--277
+Overfull \hbox (0.19998pt too wide) in paragraph at lines 255--278
 [] 
  []
 
 [8]
-Overfull \hbox (0.9091pt too wide) in paragraph at lines 286--286
+Overfull \hbox (0.9091pt too wide) in paragraph at lines 287--287
 []|\OT1/lmr/bx/n/10.95 Responsibilities|  
  []
 
 
-Overfull \hbox (0.19998pt too wide) in paragraph at lines 280--303
+Overfull \hbox (0.19998pt too wide) in paragraph at lines 281--304
 [] 
  []
 
 
-Overfull \hbox (0.9091pt too wide) in paragraph at lines 311--311
+Overfull \hbox (0.9091pt too wide) in paragraph at lines 312--312
 []|\OT1/lmr/bx/n/10.95 Responsibilities|  
  []
 
 
-Overfull \hbox (0.19998pt too wide) in paragraph at lines 305--328
+Overfull \hbox (0.19998pt too wide) in paragraph at lines 306--329
 [] 
  []
 
 [9]
-Overfull \hbox (0.9091pt too wide) in paragraph at lines 336--336
+Overfull \hbox (0.9091pt too wide) in paragraph at lines 337--337
 []|\OT1/lmr/bx/n/10.95 Responsibilities|  
  []
 
 
-Overfull \hbox (0.19998pt too wide) in paragraph at lines 330--345
+Overfull \hbox (0.19998pt too wide) in paragraph at lines 331--346
 [] 
  []
 
 
-Overfull \hbox (0.9091pt too wide) in paragraph at lines 353--353
+Overfull \hbox (0.9091pt too wide) in paragraph at lines 354--354
 []|\OT1/lmr/bx/n/10.95 Responsibilities|  
  []
 
 
-Overfull \hbox (0.19998pt too wide) in paragraph at lines 347--368
+Overfull \hbox (0.19998pt too wide) in paragraph at lines 348--369
 [] 
  []
 
 
-Overfull \hbox (0.39996pt too wide) in alignment at lines 370--374
+Overfull \hbox (0.39996pt too wide) in alignment at lines 371--375
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (0.39996pt too wide) in alignment at lines 374--380
+Overfull \hbox (0.39996pt too wide) in alignment at lines 375--381
  [] [] [] [] [] 
  []
 
 [10]
-Underfull \vbox (badness 10000) detected at line 380
+Underfull \vbox (badness 10000) detected at line 381
  []
 
 
-Overfull \hbox (0.19998pt too wide) in alignment at lines 399--403
+Overfull \hbox (0.19998pt too wide) in alignment at lines 400--404
  [] [] 
  []
 
 
-Overfull \hbox (0.19998pt too wide) in alignment at lines 403--411
+Overfull \hbox (0.19998pt too wide) in alignment at lines 404--412
  [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 411
+Underfull \vbox (badness 10000) detected at line 412
  []
 
 
-Overfull \hbox (9.55757pt too wide) in paragraph at lines 414--415
+Overfull \hbox (9.55757pt too wide) in paragraph at lines 415--416
 [] \OT1/lmr/m/n/10.95 is a stan-dalone web-based prod-uct, work-ing on dif-fer-
 ent browsers
  []
 
 [11] [12] [13] [14] [15] [16]
-Overfull \hbox (8.9997pt too wide) in alignment at lines 574--578
+Overfull \hbox (8.9997pt too wide) in alignment at lines 576--580
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (8.9997pt too wide) in alignment at lines 578--594
+Overfull \hbox (8.9997pt too wide) in alignment at lines 580--596
  [] [] [] [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 594
+Underfull \vbox (badness 10000) detected at line 596
  []
 
 [17
 
 ] [18] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 599.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 599.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 601.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 601.
 (./DocVision.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 599.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 599.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 601.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 601.
 Package rerunfilecheck Info: File `DocVision.out' has not changed.
-(rerunfilecheck)             Checksum: C18D4E17FF84E740CC1C021234508A75;4615.
+(rerunfilecheck)             Checksum: 488D54934E0F62D3F53864F6C77BFCF0;4612.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 599.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 601.
  ) 
 Here is how much of TeX's memory you used:
- 7757 strings out of 493014
- 114158 string characters out of 6133352
- 216649 words of memory out of 5000000
- 11090 multiletter control sequences out of 15000+600000
+ 7774 strings out of 493014
+ 114586 string characters out of 6133352
+ 217029 words of memory out of 5000000
+ 11101 multiletter control sequences out of 15000+600000
  58408 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  34i,12n,43p,518b,542s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1074,7 +1082,7 @@ onts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 /lmcsc10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr10.pf
 b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/loc
 al/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr17.pfb>
-Output written on DocVision.pdf (18 pages, 198489 bytes).
+Output written on DocVision.pdf (18 pages, 198543 bytes).
 PDF statistics:
  589 PDF objects out of 1000 (max. 8388607)
  557 compressed objects within 6 object streams
