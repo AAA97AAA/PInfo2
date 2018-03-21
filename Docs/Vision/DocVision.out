@@ -1,0 +1,70 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Purpose}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Scope}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Definitions, Acronyms, and Abbreviations}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{References}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Overview}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Positioning}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Business Opportunity}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Problem Statement}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Product Position Statement}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Stakeholder and User Descriptions}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{Market Demographics}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.2}{Stakeholder Summary}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.3}{User Summary}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.4}{User Environment}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.5}{Stakeholder Profiles}{section.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.5.1}{Student}{subsection.3.5}% 17
+\BOOKMARK [3][-]{subsubsection.3.5.2}{Teacher}{subsection.3.5}% 18
+\BOOKMARK [3][-]{subsubsection.3.5.3}{Client}{subsection.3.5}% 19
+\BOOKMARK [3][-]{subsubsection.3.5.4}{Administrator}{subsection.3.5}% 20
+\BOOKMARK [2][-]{subsection.3.6}{User Profiles}{section.3}% 21
+\BOOKMARK [3][-]{subsubsection.3.6.1}{Registered Premium User}{subsection.3.6}% 22
+\BOOKMARK [3][-]{subsubsection.3.6.2}{Registered Free User}{subsection.3.6}% 23
+\BOOKMARK [3][-]{subsubsection.3.6.3}{Visitor}{subsection.3.6}% 24
+\BOOKMARK [3][-]{subsubsection.3.6.4}{Moderator}{subsection.3.6}% 25
+\BOOKMARK [2][-]{subsection.3.7}{Key Stakeholder or User Needs}{section.3}% 26
+\BOOKMARK [2][-]{subsection.3.8}{Alternatives and Competition}{section.3}% 27
+\BOOKMARK [3][-]{subsubsection.3.8.1}{StackExchange}{subsection.3.8}% 28
+\BOOKMARK [3][-]{subsubsection.3.8.2}{StackOverflow}{subsection.3.8}% 29
+\BOOKMARK [3][-]{subsubsection.3.8.3}{Social Media}{subsection.3.8}% 30
+\BOOKMARK [1][-]{section.4}{Product Overview}{}% 31
+\BOOKMARK [2][-]{subsection.4.1}{Product Perspective}{section.4}% 32
+\BOOKMARK [2][-]{subsection.4.2}{Summary of Capabilities}{section.4}% 33
+\BOOKMARK [2][-]{subsection.4.3}{Assumptions and Dependencies}{section.4}% 34
+\BOOKMARK [1][-]{section.5}{Product Features}{}% 35
+\BOOKMARK [2][-]{subsection.5.1}{Create an Account}{section.5}% 36
+\BOOKMARK [2][-]{subsection.5.2}{Post}{section.5}% 37
+\BOOKMARK [2][-]{subsection.5.3}{Visualize}{section.5}% 38
+\BOOKMARK [2][-]{subsection.5.4}{Search}{section.5}% 39
+\BOOKMARK [2][-]{subsection.5.5}{Login/Logout}{section.5}% 40
+\BOOKMARK [2][-]{subsection.5.6}{Homepage}{section.5}% 41
+\BOOKMARK [2][-]{subsection.5.7}{Voting System}{section.5}% 42
+\BOOKMARK [2][-]{subsection.5.8}{Content Organization}{section.5}% 43
+\BOOKMARK [2][-]{subsection.5.9}{Tags}{section.5}% 44
+\BOOKMARK [2][-]{subsection.5.10}{Inbox}{section.5}% 45
+\BOOKMARK [2][-]{subsection.5.11}{Add Administrator}{section.5}% 46
+\BOOKMARK [2][-]{subsection.5.12}{Send Candidacy for Moderation}{section.5}% 47
+\BOOKMARK [2][-]{subsection.5.13}{Elect Moderator}{section.5}% 48
+\BOOKMARK [2][-]{subsection.5.14}{Moderation Tools}{section.5}% 49
+\BOOKMARK [2][-]{subsection.5.15}{Metadata}{section.5}% 50
+\BOOKMARK [2][-]{subsection.5.16}{Create a Premium Account}{section.5}% 51
+\BOOKMARK [2][-]{subsection.5.17}{Create a Custom Tag}{section.5}% 52
+\BOOKMARK [2][-]{subsection.5.18}{Advertisement Banners}{section.5}% 53
+\BOOKMARK [2][-]{subsection.5.19}{Help Page}{section.5}% 54
+\BOOKMARK [2][-]{subsection.5.20}{Flag}{section.5}% 55
+\BOOKMARK [2][-]{subsection.5.21}{Format}{section.5}% 56
+\BOOKMARK [2][-]{subsection.5.22}{Dashboard}{section.5}% 57
+\BOOKMARK [2][-]{subsection.5.23}{Upload Documents}{section.5}% 58
+\BOOKMARK [1][-]{section.6}{Constraints}{}% 59
+\BOOKMARK [1][-]{section.7}{Quality Ranges}{}% 60
+\BOOKMARK [1][-]{section.8}{Precedence and Priority}{}% 61
+\BOOKMARK [1][-]{section.9}{Other Product Requirements}{}% 62
+\BOOKMARK [2][-]{subsection.9.1}{Applicable Standards}{section.9}% 63
+\BOOKMARK [2][-]{subsection.9.2}{System Requirements}{section.9}% 64
+\BOOKMARK [1][-]{section.10}{Documentation Requirements}{}% 65
+\BOOKMARK [2][-]{subsection.10.1}{User Manual}{section.10}% 66
+\BOOKMARK [2][-]{subsection.10.2}{Online Help}{section.10}% 67
+\BOOKMARK [2][-]{subsection.10.3}{Installation Guides, Configuration, and Read Me File}{section.10}% 68
+\BOOKMARK [1][-]{section.11}{Planning}{}% 69
+\BOOKMARK [1][-]{section.12}{Risks}{}% 70

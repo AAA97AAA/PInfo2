@@ -5,9 +5,16 @@
 \usepackage{lscape}
 %\usepackage{geometry}
 
-\newcommand \projectname {\mbox{\bsc{Academi-co}}}
-\newcommand \teamname {\mbox{\bsc{SoftAware}}}
-\newcommand \teammeber {Petr \bsc{Binko}, Nicolas \bsc{Cotte}, Selim \bsc{Selimi}, Ka\"\i ko \bsc{Goren}, Aslam \bsc{Cader}}
+\newcommand \projectname{\mbox{\bsc{Academi-co}}}
+\newcommand \teamname{\mbox{\bsc{SoftAware}}}
+\newcommand \teammeber{Petr \bsc{Binko}, Nicolas \bsc{Cotte}, Selim \bsc{Selimi}, Ka\"\i ko \bsc{Goren}, Aslam \bsc{Cader}}
+
+\title{\projectname \, Vision}
+\author{\teamname}
+\date{\today}
+
+\usepackage{hyperref}
+\hypersetup{linktoc=all}
 
 \usepackage{enumitem}
 \setlist[description]{leftmargin=\parindent,labelindent=\parindent}
@@ -24,9 +31,13 @@
 \usepackage{lastpage}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhf{}
-\lhead{\projectname \, Vision}
-\rhead{\copyright\teamname, \the\year}
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\makeatother
+%\fancyhf{}
+\lhead{\runtitle}
+\rhead{\copyright \runauthor, \the\year}
 \renewcommand{\headrulewidth}{2pt}
 \cfoot{\thepage /\pageref{LastPage}}
 \renewcommand{\footrulewidth}{1pt}
@@ -35,14 +46,10 @@
 
 \begin {document}
 
-\title {\projectname \, Vision}
-\author {\teamname}
-\date{\today}
-
+%\pagenumbering{arabic}
 \maketitle
+
 \begin{abstract}
-% Petr \bsc{Binko}, Nicolas \bsc{Cotte}, Selim \bsc{Selimi}, Ka\"\i ko \bsc{Goren}, Aslam \bsc{Cader}
-% \bigskip
 \begin{longtable}{| N M{50pt} | ^ M{40pt} | ^ M{115pt} | ^ M{105pt} |}
 	\caption{Revision History} \tabularnewline
 	\hline
@@ -52,14 +59,13 @@
 	\hline
 	19/03/2018 & 1.0 & First draft & \teamname \ Team \tabularnewline
 	\hline
-	20/03/2018 & 1.1 & Update formating & Nicolas \bsc{Cotte} \tabularnewline
+	21/03/2018 & 1.1 & Update User Stories & \teamname \ Team \tabularnewline
 	\hline
 \end{longtable}
 \end{abstract}
 
 \newpage
 \tableofcontents
-\newpage
 
 \section{Introduction}
 \subsection{Purpose}
@@ -441,7 +447,7 @@ As a user, I want to see the most useful content in priority, so that I increase
 As a user, I want to have subjects-related tags, so that I can identify the content's topics.
 
 \subsection{Inbox}
-As a user, I want to have a private inbox, so that I can receive private messages and notifications.
+As a user, I want to have a private inbox, so that I can receive notifications.
 
 \subsection{Add Administrator}
 As the super-user or an administrator, I want to add new administrators, so that the website can be maintained.
