@@ -4,9 +4,6 @@
   <persistence-unit name="academi-co" transaction-type="RESOURCE_LOCAL">
   
   	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-  	  	
-    <class>domain.ConcreteUser</class>
-    <class>domain.Dog</class>
     
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
