@@ -73,6 +73,15 @@ public class ConcreteTag implements Tag, Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -80,7 +89,7 @@ public class ConcreteTag implements Tag, Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof ConcreteTag)) {
 			return false;
 		}
 		ConcreteTag other = (ConcreteTag) obj;

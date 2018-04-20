@@ -252,6 +252,24 @@ public class ConcreteUser implements User, Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bio == null) ? 0 : bio.hashCode());
+		result = prime * result + (canBeModerator ? 1231 : 1237);
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((followedThreads == null) ? 0 : followedThreads.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((inbox == null) ? 0 : inbox.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
+		result = prime * result + ((profilePicture == null) ? 0 : profilePicture.hashCode());
+		result = prime * result + type;
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -259,7 +277,7 @@ public class ConcreteUser implements User, Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof ConcreteUser)) {
 			return false;
 		}
 		ConcreteUser other = (ConcreteUser) obj;
@@ -330,7 +348,6 @@ public class ConcreteUser implements User, Serializable {
 		}
 		return true;
 	}
-
 
 	@Override
 	public String toString() {

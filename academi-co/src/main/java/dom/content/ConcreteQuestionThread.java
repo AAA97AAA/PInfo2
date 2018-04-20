@@ -156,6 +156,18 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((answers == null) ? 0 : answers.hashCode());
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((topics == null) ? 0 : topics.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -163,7 +175,7 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 		if (!super.equals(obj)) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof ConcreteQuestionThread)) {
 			return false;
 		}
 		ConcreteQuestionThread other = (ConcreteQuestionThread) obj;

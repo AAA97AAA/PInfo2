@@ -63,6 +63,14 @@ public class ConcreteComment extends ConcretePost implements Serializable, Comme
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((question == null) ? 0 : question.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -70,7 +78,7 @@ public class ConcreteComment extends ConcretePost implements Serializable, Comme
 		if (!super.equals(obj)) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof ConcreteComment)) {
 			return false;
 		}
 		ConcreteComment other = (ConcreteComment) obj;

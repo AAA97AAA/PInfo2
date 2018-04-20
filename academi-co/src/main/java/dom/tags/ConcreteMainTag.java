@@ -65,6 +65,19 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 	/***** Utility *****/
 
 	@Override
+	protected ConcreteMainTag clone() throws CloneNotSupportedException {
+		return new ConcreteMainTag(getName(), children);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((children == null) ? 0 : children.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -72,7 +85,7 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 		if (!super.equals(obj)) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof ConcreteMainTag)) {
 			return false;
 		}
 		ConcreteMainTag other = (ConcreteMainTag) obj;
@@ -84,11 +97,6 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 			return false;
 		}
 		return true;
-	}
-
-	@Override
-	protected ConcreteMainTag clone() throws CloneNotSupportedException {
-		return new ConcreteMainTag(getName(), children);
 	}
 
 	@Override

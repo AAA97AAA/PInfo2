@@ -199,6 +199,21 @@ public class ConcretePost implements Post, Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result + ((downvoters == null) ? 0 : downvoters.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (isBanned ? 1231 : 1237);
+		result = prime * result + score;
+		result = prime * result + ((upvoters == null) ? 0 : upvoters.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -206,7 +221,7 @@ public class ConcretePost implements Post, Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof ConcretePost)) {
 			return false;
 		}
 		ConcretePost other = (ConcretePost) obj;
@@ -214,7 +229,7 @@ public class ConcretePost implements Post, Serializable {
 			if (other.author != null) {
 				return false;
 			}
-		} else if (author.getId() != other.author.getId()) {
+		} else if (!author.equals(other.author)) {
 			return false;
 		}
 		if (content == null) {
@@ -231,6 +246,13 @@ public class ConcretePost implements Post, Serializable {
 		} else if (!creationDate.equals(other.creationDate)) {
 			return false;
 		}
+		if (downvoters == null) {
+			if (other.downvoters != null) {
+				return false;
+			}
+		} else if (!downvoters.equals(other.downvoters)) {
+			return false;
+		}
 		if (id != other.id) {
 			return false;
 		}
@@ -238,6 +260,13 @@ public class ConcretePost implements Post, Serializable {
 			return false;
 		}
 		if (score != other.score) {
+			return false;
+		}
+		if (upvoters == null) {
+			if (other.upvoters != null) {
+				return false;
+			}
+		} else if (!upvoters.equals(other.upvoters)) {
 			return false;
 		}
 		return true;

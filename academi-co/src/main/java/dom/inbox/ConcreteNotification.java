@@ -100,6 +100,16 @@ public class ConcreteNotification implements Notification, Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((body == null) ? 0 : body.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		result = prime * result + (wasRead ? 1231 : 1237);
+		return result;
+	}
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -107,7 +117,7 @@ public class ConcreteNotification implements Notification, Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof ConcreteNotification)) {
 			return false;
 		}
 		ConcreteNotification other = (ConcreteNotification) obj;
@@ -121,12 +131,18 @@ public class ConcreteNotification implements Notification, Serializable {
 		if (id != other.id) {
 			return false;
 		}
+		if (parent == null) {
+			if (other.parent != null) {
+				return false;
+			}
+		} else if (!parent.equals(other.parent)) {
+			return false;
+		}
 		if (wasRead != other.wasRead) {
 			return false;
 		}
 		return true;
 	}
-
 	@Override
 	public String toString() {
 		return "ConcreteNotification [id=" + id + ", body=" + body + ", wasRead=" + wasRead + "]";

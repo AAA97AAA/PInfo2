@@ -57,6 +57,14 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -64,7 +72,7 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 		if (!super.equals(obj)) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof ConcreteSecondaryTag)) {
 			return false;
 		}
 		ConcreteSecondaryTag other = (ConcreteSecondaryTag) obj;
