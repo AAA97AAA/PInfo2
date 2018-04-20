@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -B -DskipTests -f academi-co/ clean package'
             }
         }
     }
