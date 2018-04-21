@@ -48,12 +48,12 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	private Map<Long, Comment> answers;
 
 	@NotNull
-	@OneToOne(targetEntity = ConcreteMainTag.class)
+	@ManyToOne(targetEntity = ConcreteMainTag.class)
 	@JoinColumn(name = "SUBJECT")
 	private MainTag subject;
 
 	@NotNull
-	@OneToOne(targetEntity = ConcreteTag.class)
+	@ManyToOne(targetEntity = ConcreteTag.class)
 	@JoinColumn(name = "LANGUAGE")
 	private Tag language;
 
