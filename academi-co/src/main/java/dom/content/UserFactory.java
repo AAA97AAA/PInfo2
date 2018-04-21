@@ -3,7 +3,7 @@ package dom.content;
 import java.util.HashMap;
 
 import dom.documentsManager.DocumentFactory;
-import dom.inbox.Inbox;
+import dom.inbox.InboxFactory;
 
 /**
  * Instantiator for registered users
@@ -13,13 +13,14 @@ import dom.inbox.Inbox;
  */
 public class UserFactory {
 
-	static public User createUser(String username, String email, String password, int type, Inbox inbox) {
-		String defaultPath = "???"; //TODO
+	static public User createUser(String username, String email, String password, int type) {
+		String defaultPath = "???"; //TODO: Define default path for profile pic
 		return new ConcreteUser(username, email, password, DocumentFactory.loadDocument(defaultPath),
-				type, "", true, inbox, new HashMap<Long, Post>(), new HashMap<Long, QuestionThread>());
+				type, "", true, InboxFactory.createInbox(), new HashMap<Long, Post>(),
+				new HashMap<Long, QuestionThread>());
 	}
 	
 	static public User createUser(User user) {
-		return user.clone();
+		return ((ConcreteUser) user).clone();
 	}
 }

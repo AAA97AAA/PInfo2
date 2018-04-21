@@ -9,6 +9,4 @@ public interface Document {
 	public byte[] getData();
 	
 	public void download(String targetPath);
-
-	public Document clone();
 }

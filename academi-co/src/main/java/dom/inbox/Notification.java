@@ -1,5 +1,7 @@
 package dom.inbox;
 
+import java.time.LocalDateTime;
+
 /**
  * Inbox notification definition
  * 
@@ -13,6 +15,8 @@ public interface Notification {
 	public String getBody();
 
 	public void setBody(String body);
+	
+	public LocalDateTime getCreationDate();
 
 	public boolean isWasRead();
 

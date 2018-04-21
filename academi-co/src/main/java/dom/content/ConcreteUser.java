@@ -245,7 +245,7 @@ public class ConcreteUser implements User, Serializable {
 	/***** Utility *****/
 
 	@Override
-	public ConcreteUser clone() {
+	protected ConcreteUser clone() {
 		return new ConcreteUser(username, email, password,DocumentFactory.createDocument(profilePicture),
 				type, bio, canBeModerator, inbox, new HashMap<Long, Post>(posts),
 				new HashMap<Long, QuestionThread>(followedThreads));

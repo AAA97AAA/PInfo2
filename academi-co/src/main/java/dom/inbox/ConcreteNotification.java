@@ -1,6 +1,7 @@
 package dom.inbox;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +35,10 @@ public class ConcreteNotification implements Notification, Serializable {
 	@Column(name = "BODY")
 	private String body;
 	
+	@NotNull
+	@Column(name = "CREATION_DATE")
+	private LocalDateTime creationDate;
+	
 	@Column(name = "WAS_READ")
 	private boolean wasRead;
 	
@@ -51,11 +56,12 @@ public class ConcreteNotification implements Notification, Serializable {
 	ConcreteNotification() {}
 
 	ConcreteNotification(String body) {
-		this(body, false);
+		this(body, LocalDateTime.now(), false);
 	}
 
-	ConcreteNotification(String body, boolean wasRead) {
+	ConcreteNotification(String body, LocalDateTime creationDate, boolean wasRead) {
 		this.body = body;
+		this.creationDate = creationDate;
 		this.wasRead = wasRead;
 	}
 	
@@ -82,6 +88,14 @@ public class ConcreteNotification implements Notification, Serializable {
 	}
 
 	@Override
+	public LocalDateTime getCreationDate() {
+		return creationDate;
+	}
+	
+	void setCreationDate(LocalDateTime creationDate) {
+		this.creationDate = creationDate;
+	}
+	@Override
 	public boolean isWasRead() {
 		return wasRead;
 	}
@@ -96,7 +110,7 @@ public class ConcreteNotification implements Notification, Serializable {
 
 	@Override
 	protected ConcreteNotification clone() throws CloneNotSupportedException {
-		return new ConcreteNotification(body, wasRead);
+		return new ConcreteNotification(body, creationDate, wasRead);
 	}
 
 	@Override
@@ -104,11 +118,13 @@ public class ConcreteNotification implements Notification, Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((body == null) ? 0 : body.hashCode());
+		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		result = prime * result + (wasRead ? 1231 : 1237);
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -128,6 +144,13 @@ public class ConcreteNotification implements Notification, Serializable {
 		} else if (!body.equals(other.body)) {
 			return false;
 		}
+		if (creationDate == null) {
+			if (other.creationDate != null) {
+				return false;
+			}
+		} else if (!creationDate.equals(other.creationDate)) {
+			return false;
+		}
 		if (id != other.id) {
 			return false;
 		}
@@ -143,6 +166,7 @@ public class ConcreteNotification implements Notification, Serializable {
 		}
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "ConcreteNotification [id=" + id + ", body=" + body + ", wasRead=" + wasRead + "]";

@@ -26,6 +26,4 @@ public interface QuestionThread extends Post {
 	public Map<Long, SecondaryTag> getTopics();
 	
 	public Collection<Tag> getAllTags();
-	
-	public QuestionThread clone();
 }

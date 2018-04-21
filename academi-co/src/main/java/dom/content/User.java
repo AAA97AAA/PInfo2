@@ -54,6 +54,4 @@ public interface User {
 	public void addFollowedThread(QuestionThread followedThread);
 	
 	public void removeFollowedThread(long id);
-	
-	public User clone();
 }

@@ -69,8 +69,8 @@ public class ConcretePost implements Post, Serializable {
 	@Column(name = "SCORE")
 	private int score;
 	
-	@Column(name = "IS_BANNED")
-	private boolean isBanned;
+	@Column(name = "BANNED")
+	private boolean banned;
 	
 	
 	/***** Constructors *****/
@@ -81,14 +81,14 @@ public class ConcretePost implements Post, Serializable {
 	}
 	
 	ConcretePost(User author, String content, LocalDateTime creationDate, Map<Long, User> upvoters,
-			Map<Long, User> downvoters, int score, boolean isBanned) {
+			Map<Long, User> downvoters, int score, boolean banned) {
 		this.author = author;
 		this.content = content;
 		this.creationDate = creationDate;
 		this.upvoters = upvoters;
 		this.downvoters = downvoters;
 		this.score = score;
-		this.isBanned = isBanned;
+		this.banned = banned;
 	}
 
 	
@@ -178,24 +178,23 @@ public class ConcretePost implements Post, Serializable {
 	void setScore(int score) {
 		this.score = score;
 	}
-
+	
 	@Override
-	public boolean getIsBanned() {
-		return isBanned;
+	public boolean isBanned() {
+		return banned;
 	}
 
 	@Override
-	public void setIsBanned(boolean isBanned) {
-		this.isBanned = isBanned;
+	public void setBanned(boolean banned) {
+		this.banned = banned;
 	}
-	
-	
+
 	/***** Utility *****/
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	protected ConcretePost clone() {
 		return new ConcretePost(author, content, creationDate, new HashMap<Long, User>(upvoters),
-				new HashMap<Long, User> (downvoters), score, isBanned);
+				new HashMap<Long, User> (downvoters), score, banned);
 	}
 
 	@Override
@@ -207,7 +206,7 @@ public class ConcretePost implements Post, Serializable {
 		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
 		result = prime * result + ((downvoters == null) ? 0 : downvoters.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + (isBanned ? 1231 : 1237);
+		result = prime * result + (banned ? 1231 : 1237);
 		result = prime * result + score;
 		result = prime * result + ((upvoters == null) ? 0 : upvoters.hashCode());
 		return result;
@@ -256,7 +255,7 @@ public class ConcretePost implements Post, Serializable {
 		if (id != other.id) {
 			return false;
 		}
-		if (isBanned != other.isBanned) {
+		if (banned != other.banned) {
 			return false;
 		}
 		if (score != other.score) {
@@ -279,6 +278,6 @@ public class ConcretePost implements Post, Serializable {
 		return "ConcretePost [id=" + id + ", author=" + author + ", content=" + content + ", creationDate="
 				+ creationDate + ", upvoters={" + upvotersText.substring(1, upvotersText.length()-1)
 				+ "}, downvoters={" + downvotersText.substring(1, downvotersText.length()-1) + "}, score="
-				+ score + ", isBanned=" + isBanned + "]";
+				+ score + ", isBanned=" + banned + "]";
 	}
 }

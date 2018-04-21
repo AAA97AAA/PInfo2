@@ -122,8 +122,8 @@ public class ConcreteDocument implements Document, Serializable {
 	/***** Utility *****/
 
 	@Override
-	public ConcreteDocument clone() {
-		return new ConcreteDocument(name, Arrays.copyOf(data, data.length));
+	protected ConcreteDocument clone() {
+		return new ConcreteDocument(name, data);
 	}
 
 	@Override

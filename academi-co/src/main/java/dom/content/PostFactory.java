@@ -24,7 +24,7 @@ public class PostFactory {
 	}
 	
 	static public QuestionThread createQuestionThread(QuestionThread questionThread) {
-		return questionThread.clone();
+		return ((ConcreteQuestionThread) questionThread).clone();
 	}
 	
 	static public Comment createComment(User author, String content, QuestionThread question) {
@@ -33,6 +33,6 @@ public class PostFactory {
 	}
 	
 	static public Comment createComment(Comment comment) {
-		return comment.clone();
+		return ((ConcreteComment) comment).clone();
 	}
 }

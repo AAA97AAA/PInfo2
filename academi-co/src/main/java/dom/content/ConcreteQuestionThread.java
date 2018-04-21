@@ -150,9 +150,9 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	/***** Utility *****/
 
 	@Override
-	public ConcreteQuestionThread clone() {
+	protected ConcreteQuestionThread clone() {
 		return new ConcreteQuestionThread(getAuthor(), getContent(), getCreationDate(), getUpvoters(),
-			getDownvoters(), getScore(), getIsBanned(), title, getAnswers(), subject, language, topics);
+			getDownvoters(), getScore(), isBanned(), title, getAnswers(), subject, language, topics);
 	}
 
 	@Override
@@ -229,6 +229,6 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 				+ ", content=" + getContent() + ", creationdate=" + getCreationDate() + ", upvoters={"
 				+ upvotersText.substring(1, upvotersText.length()-1) + "}, downvoters={"
 				+ downvotersText.substring(1, downvotersText.length()-1) + "}, score=" + getScore() + ", isbanned="
-				+ getIsBanned() + "]";
+				+ isBanned() + "]";
 	}
 }

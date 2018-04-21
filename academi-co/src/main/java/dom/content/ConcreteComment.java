@@ -57,9 +57,9 @@ public class ConcreteComment extends ConcretePost implements Serializable, Comme
 	/***** Utility *****/
 
 	@Override
-	public ConcreteComment clone() {
+	protected ConcreteComment clone() {
 		return new ConcreteComment(getAuthor(), getContent(), getCreationDate(), getUpvoters(),
-				getDownvoters(), getScore(), getIsBanned(), question);
+				getDownvoters(), getScore(), isBanned(), question);
 	}
 
 	@Override
@@ -99,6 +99,6 @@ public class ConcreteComment extends ConcretePost implements Serializable, Comme
 		return "ConcreteComment [question=" + question + ", id=" + getId()	+ ", author=" + getAuthor() + ", content=" + getContent()
 				+ ", creationDate=" + getCreationDate() + ", upvoters={" + upvotersText.substring(1, upvotersText.length()-1)
 				+ "}, downvoters={" + downvotersText.substring(1, downvotersText.length()-1) + "}, score=" + getScore()
-				+ ", isBanned=" + getIsBanned() + "]";
+				+ ", isBanned=" + isBanned() + "]";
 	}
 }

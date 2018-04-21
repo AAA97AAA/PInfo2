@@ -9,6 +9,4 @@ package dom.content;
 public interface Comment extends Post {
 
 	public QuestionThread getQuestion();
-	
-	public Comment clone();
 }

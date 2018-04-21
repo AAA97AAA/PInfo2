@@ -33,7 +33,7 @@ public interface Post {
 
 	public int getScore();
 
-	public boolean getIsBanned();
+	public boolean isBanned();
 
-	public void setIsBanned(boolean isBanned);
+	public void setBanned(boolean isBanned);
 }

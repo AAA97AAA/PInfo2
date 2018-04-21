@@ -7,7 +7,7 @@ public class DocumentFactory {
 	}
 	
 	static public Document createDocument(Document document) {
-		return document.clone();
+		return ((ConcreteDocument) document).clone();
 	}
 	
 	static public Document loadDocument(String path) {
