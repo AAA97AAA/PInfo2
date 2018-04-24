@@ -1,14 +1,26 @@
 package dom.content;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
+@RunWith(MockitoJUnitRunner.class)
 public class ConcretePostTest {
-
+	
+	@Mock
+	ConcreteUser mockAuthor;
+	@Mock
+	ConcreteUser mockUserA;
+	@Mock
+	ConcreteUser mockUserB;
+	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testDataCreation() {
+		
+		EqualsVerifier.forClass(ConcretePost.class).verify();
 	}
 
 }

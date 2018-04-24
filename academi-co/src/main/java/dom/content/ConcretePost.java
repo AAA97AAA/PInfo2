@@ -38,7 +38,7 @@ public class ConcretePost implements Post, Serializable {
 
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
 	@NotNull
@@ -76,8 +76,11 @@ public class ConcretePost implements Post, Serializable {
 	/***** Constructors *****/
 
 	ConcretePost() {
+		score = 0;
 		upvoters = new HashMap<Long, User>();
 		downvoters = new HashMap<Long, User>();
+		banned = false;
+		creationDate = LocalDateTime.now();
 	}
 	
 	ConcretePost(User author, String content, LocalDateTime creationDate, Map<Long, User> upvoters,
@@ -97,21 +100,25 @@ public class ConcretePost implements Post, Serializable {
 	@Override
 	public void addUpvoter(User upvoter) {
 		upvoters.put(upvoter.getId(), upvoter);
+		score += 1;
 	}
 
 	@Override
 	public void removeUpvoter(long id) {
 		upvoters.remove(id);
+		score -= 1;
 	}
 
 	@Override
 	public void addDownvoter(User downvoter) {
 		downvoters.put(downvoter.getId(), downvoter);
+		score -= 1;
 	}
 
 	@Override
 	public void removeDownvoter(long id) {
 		downvoters.remove(id);
+		score += 1;
 	}
 
 	/***** Getters/Setters *****/
