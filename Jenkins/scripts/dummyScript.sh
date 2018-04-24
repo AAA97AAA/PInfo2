@@ -1,3 +1,3 @@
 #!/bin/sh
 
-# Dummy script for changing the .git/hooks
+# Dummy script for testing the jenkins plugin on GitHub.
