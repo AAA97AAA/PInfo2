@@ -13,9 +13,10 @@ import dom.inbox.InboxFactory;
  */
 public class UserFactory {
 
+	static public String DEFAULT_PATH = "???"; //TODO: Define default path for profile pic
+	
 	static public User createUser(String username, String email, String password, int type) {
-		String defaultPath = "???"; //TODO: Define default path for profile pic
-		return new ConcreteUser(username, email, password, DocumentFactory.loadDocument(defaultPath),
+		return new ConcreteUser(username, email, password, DocumentFactory.loadDocument(DEFAULT_PATH),
 				type, "", true, InboxFactory.createInbox(), new HashMap<Long, Post>(),
 				new HashMap<Long, QuestionThread>());
 	}

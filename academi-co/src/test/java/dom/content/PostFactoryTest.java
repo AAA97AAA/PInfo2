@@ -28,7 +28,7 @@ import dom.tags.Tag;
 public class PostFactoryTest {
 	
 	/**
-	 * Only instatiate the factory (unimportant)
+	 * Only instantiates the factory (unimportant)
 	 */
 	@Test
 	public void testConstructor() {

@@ -79,7 +79,7 @@ public class ConcreteDocument implements Document, Serializable {
 		} finally {
 			try {
 				stream.close();
-			} catch (IOException e) {
+			} catch (IOException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
