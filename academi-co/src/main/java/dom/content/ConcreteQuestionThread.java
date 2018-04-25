@@ -3,8 +3,8 @@ package dom.content;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -91,12 +91,17 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	 * @return: Collection with: subject -> language -> topic_1 -> topic_2 -> ...
 	 */
 	@Override
-	public Collection<Tag> getAllTags() {
-		Collection<Tag> allTags = new ArrayList<Tag>();
+	public List<Tag> getAllTags() {
+		List<Tag> allTags = new ArrayList<Tag>();
 		allTags.add(subject);
 		allTags.add(language);
 		allTags.addAll(topics.values());
 		return allTags;
+	}
+	
+	@Override
+	public void addAnswer(Comment answer) {
+		answers.put(answer.getId(), answer);
 	}
 
 	/***** Getters/Setters *****/
@@ -153,68 +158,6 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	protected ConcreteQuestionThread clone() {
 		return new ConcreteQuestionThread(getAuthor(), getContent(), getCreationDate(), getUpvoters(),
 			getDownvoters(), getScore(), isBanned(), title, getAnswers(), subject, language, topics);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((answers == null) ? 0 : answers.hashCode());
-		result = prime * result + ((language == null) ? 0 : language.hashCode());
-		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((topics == null) ? 0 : topics.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (!(obj instanceof ConcreteQuestionThread)) {
-			return false;
-		}
-		ConcreteQuestionThread other = (ConcreteQuestionThread) obj;
-		if (answers == null) {
-			if (other.answers != null) {
-				return false;
-			}
-		} else if (!answers.equals(other.answers)) {
-			return false;
-		}
-		if (language == null) {
-			if (other.language != null) {
-				return false;
-			}
-		} else if (!language.equals(other.language)) {
-			return false;
-		}
-		if (subject == null) {
-			if (other.subject != null) {
-				return false;
-			}
-		} else if (!subject.equals(other.subject)) {
-			return false;
-		}
-		if (title == null) {
-			if (other.title != null) {
-				return false;
-			}
-		} else if (!title.equals(other.title)) {
-			return false;
-		}
-		if (topics == null) {
-			if (other.topics != null) {
-				return false;
-			}
-		} else if (!topics.equals(other.topics)) {
-			return false;
-		}
-		return true;
 	}
 
 	@Override

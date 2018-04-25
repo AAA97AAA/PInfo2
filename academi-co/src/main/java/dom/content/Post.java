@@ -35,5 +35,5 @@ public interface Post {
 
 	public boolean isBanned();
 
-	public void setBanned(boolean isBanned);
+	public void setBanned(boolean banned);
 }
