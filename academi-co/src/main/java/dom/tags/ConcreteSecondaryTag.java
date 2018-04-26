@@ -52,7 +52,7 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 	/***** Utility *****/
 	
 	@Override
-	protected ConcreteSecondaryTag clone() throws CloneNotSupportedException {
+	protected ConcreteSecondaryTag clone() {
 		return new ConcreteSecondaryTag(getName(), parent);
 	}
 
@@ -60,7 +60,7 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		result = prime * result + parent.hashCode();
 		return result;
 	}
 
@@ -69,18 +69,20 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 		if (this == obj) {
 			return true;
 		}
-		if (!super.equals(obj)) {
+		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof ConcreteSecondaryTag)) {
+		if (obj.getClass() != getClass()) {
 			return false;
 		}
 		ConcreteSecondaryTag other = (ConcreteSecondaryTag) obj;
-		if (parent == null) {
-			if (other.parent != null) {
-				return false;
-			}
-		} else if (!parent.equals(other.parent)) {
+		if (!parent.equals(other.parent)) {
+			return false;
+		}
+		if (getId() != other.getId()) {
+			return false;
+		}
+		if (!getName().equals(other.getName())) {
 			return false;
 		}
 		return true;

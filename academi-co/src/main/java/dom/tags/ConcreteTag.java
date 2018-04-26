@@ -68,7 +68,7 @@ public class ConcreteTag implements Tag, Serializable {
 	/***** Utility *****/
 
 	@Override
-	protected ConcreteTag clone() throws CloneNotSupportedException {
+	protected ConcreteTag clone() {
 		return new ConcreteTag(name);
 	}
 
@@ -77,7 +77,7 @@ public class ConcreteTag implements Tag, Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + name.hashCode();
 		return result;
 	}
 
@@ -89,18 +89,14 @@ public class ConcreteTag implements Tag, Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof ConcreteTag)) {
+		if (obj.getClass() != getClass()) {
 			return false;
 		}
 		ConcreteTag other = (ConcreteTag) obj;
 		if (id != other.id) {
 			return false;
 		}
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		if (!name.equals(other.name)) {
 			return false;
 		}
 		return true;

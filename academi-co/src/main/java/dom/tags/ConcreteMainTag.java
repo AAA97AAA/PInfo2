@@ -65,7 +65,7 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 	/***** Utility *****/
 
 	@Override
-	protected ConcreteMainTag clone() throws CloneNotSupportedException {
+	protected ConcreteMainTag clone() {
 		return new ConcreteMainTag(getName(), children);
 	}
 
@@ -82,9 +82,6 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 		if (this == obj) {
 			return true;
 		}
-		if (!super.equals(obj)) {
-			return false;
-		}
 		if (!(obj instanceof ConcreteMainTag)) {
 			return false;
 		}
@@ -94,6 +91,12 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 				return false;
 			}
 		} else if (!children.equals(other.children)) {
+			return false;
+		}
+		if (getId() != other.getId()) {
+			return false;
+		}
+		if (!getName().equals(other.getName())) {
 			return false;
 		}
 		return true;
