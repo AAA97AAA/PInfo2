@@ -2,6 +2,7 @@ package dom.documentsManager;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -82,7 +83,7 @@ public class DocumentFactoryTest {
 		}
 		
 		// Apply method
-		Document document = DocumentFactory.loadDocument(targetPath);
+		Document document = spy(DocumentFactory.loadDocument(targetPath));
 		
 		// Verify that the right follow-up method was called
 		verify((ConcreteDocument) document, times(1)).download(targetPath);
