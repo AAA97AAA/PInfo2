@@ -95,7 +95,7 @@ public class ConcretePostTest {
 		post.setScore(actualScore);
 
 		// Try to add upvoters
-		int upvotersSize = ThreadLocalRandom.current().nextInt(min, max);
+		int upvotersSize = ThreadLocalRandom.current().nextInt(min+1, max);
 		actualScore += upvotersSize;
 		for (long i = 0; i < upvotersSize; i++) {
 			User upvoter = mock(ConcreteUser.class);
@@ -106,7 +106,7 @@ public class ConcretePostTest {
 		assertEquals("Wrong score.", actualScore, post.getScore());
 		
 		// Try to add downvoters
-		int downvotersSize = ThreadLocalRandom.current().nextInt(min, max);
+		int downvotersSize = ThreadLocalRandom.current().nextInt(min+1, max);
 		actualScore -= downvotersSize;
 		for (long i = 0; i < downvotersSize; i++) {
 			User downvoter = mock(ConcreteUser.class);
