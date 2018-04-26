@@ -103,7 +103,8 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 	public String toString() {
 		String allChildrenAsText = children.toString();
 		return "ConcreteMainTag [id=" + getId() + ", name="
-				+ getName() + "children={"
-				+ allChildrenAsText.substring(1, allChildrenAsText.length()-1) + "}]";
+				+ getName() + ", children={"
+				+  allChildrenAsText.substring(1, allChildrenAsText.length()-1) + "}]";
+		
 	}
 }
