@@ -22,12 +22,18 @@ import dom.content.QuestionThread;
 
 @Stateless
 public class ConcreteQuestionThreadService implements QuestionThreadService {
+	
+	
+	
+	/******************* Attributes **********************/
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -5808948100662379670L;
 	
 	@PersistenceUnit(unitName="academi-co")
 	private EntityManagerFactory emf;
+	
+	
 	
 	/****************** Constructors ********************/
 	
@@ -38,6 +44,9 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 	}
 
 
+	
+	/******************** Services **********************/
+	
 	@Override
 	public QuestionThread getQuestionThread(long id) {
 		
@@ -84,6 +93,15 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 			if (entityManager != null) entityManager.close();
 		}
 		
+	}
+	
+
+	
+	/****************** Getters / Setters *************/
+	
+	@Override
+	public EntityManagerFactory getEmf() {
+		return emf;
 	}
 	
 

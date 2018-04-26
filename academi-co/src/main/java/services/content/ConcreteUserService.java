@@ -39,12 +39,6 @@ public class ConcreteUserService implements UserService {
 		
 	}
 	
-	@Override
-	public EntityManagerFactory getEmf() {
-		return emf;
-	}
-	
-	
 	
 	@Override
 	public User getUser(long id) {
@@ -54,16 +48,24 @@ public class ConcreteUserService implements UserService {
 		try {
 			entityManager.getTransaction().begin();
 			
-			CriteriaBuilder qb = entityManager.getCriteriaBuilder();
-			CriteriaQuery<User> c = qb.createQuery(User.class);
+			// Creating criteria builder to create a criteria query
+			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 			
-//			System.out.println(c);
+			// Criteria query of return type QuestionThread
+			CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
 			
-			Root<User> variableRoot = c.from(User.class);
-			c.where(qb.equal(variableRoot.get("ID"), id));
 			
-			TypedQuery<User> query = entityManager.createQuery(c);
+			// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
+			Root<User> variableRoot = criteriaQuery.from(User.class);
 			
+			// Condition statement -> Where
+			criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
+			
+			
+			// Creating typed query
+			TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
+			
+			// Return of single result. If we want a list of results, we use getResultList
 			return query.getSingleResult();
 		}
 		
@@ -111,5 +113,14 @@ public class ConcreteUserService implements UserService {
 		}
 			
 	}
+	
+	
+	/****************** Getters / Setters *************/
+	
+	@Override
+	public EntityManagerFactory getEmf() {
+		return emf;
+	}
+	
 	
 }
