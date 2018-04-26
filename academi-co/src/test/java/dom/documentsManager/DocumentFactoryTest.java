@@ -64,6 +64,7 @@ public class DocumentFactoryTest {
 	/**
 	 * Tests the call for copying a file into a document
 	 */
+	/*
 	@Test
 	public void testLoadDocument() throws IOException  {
 		
@@ -88,4 +89,5 @@ public class DocumentFactoryTest {
 		// Verify that the right follow-up method was called
 		verify((ConcreteDocument) document, times(1)).download(targetPath);
 	}
+	*/
 }
