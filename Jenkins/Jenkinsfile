@@ -10,7 +10,19 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -B -DskipTests -f academi-co/ clean package'
+                sh 'mvn -B -DskipTests -f academi-co/pom.xml clean package'
+            }
+        }
+
+        stage('Test') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn -f academi-co/pom.xml test'
             }
         }
     }
@@ -34,11 +46,11 @@ pipeline {
                 subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 to: 'Nicolas.Cotte.1@etu.unige.ch, Petr.Binko@etu.unige.ch',
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                
+
                 body: """<FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':
 
                 Check console output at '${env.BUILD_URL}'
-                Last commit: '${env.GIT_COMMIT}'""",
+                Last commit: '${env.GIT_COMMIT}'"""
             )
         }
     }
