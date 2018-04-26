@@ -24,6 +24,11 @@ pipeline {
             steps {
                 sh 'mvn -f academi-co/pom.xml test'
             }
+            post {
+                always {
+                    junit 'academi-co/target/surefire-reports/*.xml'
+                }
+            }
         }
     }
 
