@@ -22,6 +22,10 @@ import dom.content.QuestionThread;
 
 @Stateless
 public class ConcreteCommentService implements CommentService {
+	
+	
+	
+	/******************* Attributes **********************/
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -1005497794725784917L;
@@ -29,7 +33,23 @@ public class ConcreteCommentService implements CommentService {
 	@PersistenceUnit(unitName="academi-co")
 	private EntityManagerFactory emf;
 	
-
+	
+	
+	/****************** Constructors ********************/
+	
+	public ConcreteCommentService() {}
+	
+	protected ConcreteCommentService(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
+	
+	
+	
+	/******************** Services **********************/
+	
+	/**
+	 * Get a comment from ID
+	 */
 	@Override
 	public Comment getComment(long id) {
 		
@@ -38,14 +58,24 @@ public class ConcreteCommentService implements CommentService {
 		try {
 			entityManager.getTransaction().begin();
 			
-			CriteriaBuilder qb = entityManager.getCriteriaBuilder();
-			CriteriaQuery<Comment> c = qb.createQuery(Comment.class);
+			// Creating criteria builder to create a criteria query
+			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 			
-			Root<Comment> variableRoot = c.from(Comment.class);
-			c.where(qb.equal(variableRoot.get("ID"), id));
+			// Criteria query of return type QuestionThread
+			CriteriaQuery<Comment> criteriaQuery = criteriaBuilder.createQuery(Comment.class);
 			
-			TypedQuery<Comment> query = entityManager.createQuery(c);
 			
+			// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
+			Root<Comment> variableRoot = criteriaQuery.from(Comment.class);
+			
+			// Condition statement -> Where
+			criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
+			
+			
+			// Creating typed query
+			TypedQuery<Comment> query = entityManager.createQuery(criteriaQuery);
+			
+			// Return of single result. If we want a list of results, we use getResultList
 			return query.getSingleResult();
 	
 		}
@@ -54,6 +84,9 @@ public class ConcreteCommentService implements CommentService {
 		}
 	}
 	
+	/**
+	 * Add a comment to a question
+	 */
 	@Override
 	public void addComment(Comment comment) {
 		
@@ -74,6 +107,14 @@ public class ConcreteCommentService implements CommentService {
 		
 	}
 	
+	
+
+	/****************** Getters / Setters *************/
+	
+	@Override
+	public EntityManagerFactory getEmf() {
+		return emf;
+	}
 	
 
 }
