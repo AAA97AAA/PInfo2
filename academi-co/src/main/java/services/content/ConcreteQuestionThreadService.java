@@ -52,13 +52,11 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 			// Criteria query of return type QuestionThread
 			CriteriaQuery<QuestionThread> criteriaQuery = criteriaBuilder.createQuery(QuestionThread.class);
 			
-			
 			// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
 			Root<QuestionThread> variableRoot = criteriaQuery.from(QuestionThread.class);
 			
 			// Condition statement -> Where
 			criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
-			
 			
 			// Creating typed query
 			TypedQuery<QuestionThread> query = entityManager.createQuery(criteriaQuery);

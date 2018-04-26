@@ -124,7 +124,7 @@ public class ConcreteUserTest {
 		ConcreteUser user = new ConcreteUser();
 
 		// Try to add followed threads
-		int addedThreadsSize = ThreadLocalRandom.current().nextInt(min, max);
+		int addedThreadsSize = ThreadLocalRandom.current().nextInt(min+1, max);
 		for (long i = 0; i < addedThreadsSize; i++) {
 			QuestionThread thread = mock(ConcreteQuestionThread.class);
 			when(thread.getId()).thenReturn(i);
