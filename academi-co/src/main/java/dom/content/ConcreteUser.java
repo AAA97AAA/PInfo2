@@ -255,17 +255,17 @@ public class ConcreteUser implements User, Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bio == null) ? 0 : bio.hashCode());
+		result = prime * result + bio.hashCode();
 		result = prime * result + (canBeModerator ? 1231 : 1237);
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + email.hashCode();
 		result = prime * result + ((followedThreads == null) ? 0 : followedThreads.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((inbox == null) ? 0 : inbox.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + inbox.hashCode();
+		result = prime * result + password.hashCode();
 		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
-		result = prime * result + ((profilePicture == null) ? 0 : profilePicture.hashCode());
+		result = prime * result + profilePicture.hashCode();
 		result = prime * result + type;
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + username.hashCode();
 		return result;
 	}
 
@@ -281,21 +281,13 @@ public class ConcreteUser implements User, Serializable {
 			return false;
 		}
 		ConcreteUser other = (ConcreteUser) obj;
-		if (bio == null) {
-			if (other.bio != null) {
-				return false;
-			}
-		} else if (!bio.equals(other.bio)) {
+		if (!bio.equals(other.bio)) {
 			return false;
 		}
 		if (canBeModerator != other.canBeModerator) {
 			return false;
 		}
-		if (email == null) {
-			if (other.email != null) {
-				return false;
-			}
-		} else if (!email.equals(other.email)) {
+		if (!email.equals(other.email)) {
 			return false;
 		}
 		if (followedThreads == null) {
@@ -308,18 +300,10 @@ public class ConcreteUser implements User, Serializable {
 		if (id != other.id) {
 			return false;
 		}
-		if (inbox == null) {
-			if (other.inbox != null) {
-				return false;
-			}
-		} else if (!inbox.equals(other.inbox)) {
+		if (!inbox.equals(other.inbox)) {
 			return false;
 		}
-		if (password == null) {
-			if (other.password != null) {
-				return false;
-			}
-		} else if (!password.equals(other.password)) {
+		if (!password.equals(other.password)) {
 			return false;
 		}
 		if (posts == null) {
@@ -329,21 +313,13 @@ public class ConcreteUser implements User, Serializable {
 		} else if (!posts.equals(other.posts)) {
 			return false;
 		}
-		if (profilePicture == null) {
-			if (other.profilePicture != null) {
-				return false;
-			}
-		} else if (!profilePicture.equals(other.profilePicture)) {
+		if (!profilePicture.equals(other.profilePicture)) {
 			return false;
 		}
 		if (type != other.type) {
 			return false;
 		}
-		if (username == null) {
-			if (other.username != null) {
-				return false;
-			}
-		} else if (!username.equals(other.username)) {
+		if (!username.equals(other.username)) {
 			return false;
 		}
 		return true;

@@ -1,6 +1,6 @@
 package dom.content;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import dom.tags.MainTag;
@@ -25,5 +25,7 @@ public interface QuestionThread extends Post {
 
 	public Map<Long, SecondaryTag> getTopics();
 	
-	public Collection<Tag> getAllTags();
+	public List<Tag> getAllTags();
+	
+	public void addAnswer(Comment answer);
 }

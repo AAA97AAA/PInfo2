@@ -36,8 +36,8 @@ public class ConcreteComment extends ConcretePost implements Serializable, Comme
 	}
 
 	ConcreteComment(User author, String content, LocalDateTime creationDate, Map<Long, User> upvoters,
-			Map<Long, User> downvoters, int score, boolean isBanned, QuestionThread question) {
-		super(author, content, creationDate, upvoters, downvoters, score, isBanned);
+			Map<Long, User> downvoters, int score, boolean banned, QuestionThread question) {
+		super(author, content, creationDate, upvoters, downvoters, score, banned);
 		this.question = question;
 	}
 	
@@ -60,36 +60,6 @@ public class ConcreteComment extends ConcretePost implements Serializable, Comme
 	protected ConcreteComment clone() {
 		return new ConcreteComment(getAuthor(), getContent(), getCreationDate(), getUpvoters(),
 				getDownvoters(), getScore(), isBanned(), question);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((question == null) ? 0 : question.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (!(obj instanceof ConcreteComment)) {
-			return false;
-		}
-		ConcreteComment other = (ConcreteComment) obj;
-		if (question == null) {
-			if (other.question != null) {
-				return false;
-			}
-		} else if (!question.equals(other.question)) {
-			return false;
-		}
-		return true;
 	}
 
 	@Override

@@ -208,9 +208,9 @@ public class ConcretePost implements Post, Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((author == null) ? 0 : author.hashCode());
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result + author.hashCode();
+		result = prime * result + content.hashCode();
+		result = prime * result + creationDate.hashCode();
 		result = prime * result + ((downvoters == null) ? 0 : downvoters.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + (banned ? 1231 : 1237);
@@ -231,25 +231,13 @@ public class ConcretePost implements Post, Serializable {
 			return false;
 		}
 		ConcretePost other = (ConcretePost) obj;
-		if (author == null) {
-			if (other.author != null) {
-				return false;
-			}
-		} else if (!author.equals(other.author)) {
+		if (!author.equals(other.author)) {
 			return false;
 		}
-		if (content == null) {
-			if (other.content != null) {
-				return false;
-			}
-		} else if (!content.equals(other.content)) {
+		if (!content.equals(other.content)) {
 			return false;
 		}
-		if (creationDate == null) {
-			if (other.creationDate != null) {
-				return false;
-			}
-		} else if (!creationDate.equals(other.creationDate)) {
+		if (!creationDate.equals(other.creationDate)) {
 			return false;
 		}
 		if (downvoters == null) {
