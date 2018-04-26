@@ -3,7 +3,7 @@ package services.content;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -24,22 +24,25 @@ import dom.content.QuestionThread;
 public class ConcreteQuestionThreadService implements QuestionThreadService {
 	
 	
-	
 	/******************* Attributes **********************/
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -5808948100662379670L;
 	
-	@PersistenceUnit(unitName="academi-co")
 	private EntityManagerFactory emf;
 	
 	
 	
 	/****************** Constructors ********************/
 	
-	public ConcreteQuestionThreadService() {}
+	public ConcreteQuestionThreadService() {
+		emf = Persistence.createEntityManagerFactory("academi-co");
+	}
 	
-	protected ConcreteQuestionThreadService(EntityManagerFactory emf) {
+	protected ConcreteQuestionThreadService(EntityManagerFactory emf) throws IllegalArgumentException {
+		if (emf == null) {
+			throw new IllegalArgumentException("Entity manager factory cannot be null");
+		}
 		this.emf = emf;
 	}
 
@@ -47,60 +50,56 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 	
 	/******************** Services **********************/
 	
+	/**
+	 * Fetches a thread from the database (by id) and returns it
+	 */
 	@Override
 	public QuestionThread getQuestionThread(long id) {
 		
 		EntityManager entityManager = emf.createEntityManager();
 		
-		try {
-			entityManager.getTransaction().begin();
-			
-			// Creating criteria builder to create a criteria query
-			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-			
-			// Criteria query of return type QuestionThread
-			CriteriaQuery<QuestionThread> criteriaQuery = criteriaBuilder.createQuery(QuestionThread.class);
-			
-			// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-			Root<QuestionThread> variableRoot = criteriaQuery.from(QuestionThread.class);
-			
-			// Condition statement -> Where
-			criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
-			
-			// Creating typed query
-			TypedQuery<QuestionThread> query = entityManager.createQuery(criteriaQuery);
-			
-			// Return of single result. If we want a list of results, we use getResultList
-			return query.getSingleResult();
-		}
+		entityManager.getTransaction().begin();
+		
+		// Creating criteria builder to create a criteria query
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		
+		// Criteria query of return type QuestionThread
+		CriteriaQuery<QuestionThread> criteriaQuery = criteriaBuilder.createQuery(QuestionThread.class);
+		
+		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
+		Root<QuestionThread> variableRoot = criteriaQuery.from(QuestionThread.class);
+		
+		// Condition statement -> Where
+		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
+		
+		// Creating typed query
+		TypedQuery<QuestionThread> query = entityManager.createQuery(criteriaQuery);
+		
 		// Block to close entityManager
-		finally {
-			if(entityManager != null) entityManager.close();
-		}
+		entityManager.close();
+		
+		// Return of single result. If we want a list of results, we use getResultList
+		return query.getSingleResult();
 	}
 	
 	@Override
-	public void addQuestionThread(QuestionThread questionThread) {
+	public QuestionThread addQuestionThread(QuestionThread questionThread) {
 		
 		EntityManager entityManager = emf.createEntityManager();
 		
-		try {
-			entityManager.getTransaction().begin();
-			entityManager.persist(questionThread);
-			entityManager.getTransaction().commit();
-		}
-		finally {
-			if (entityManager != null) entityManager.close();
-		}
+		entityManager.getTransaction().begin();
+		entityManager.persist(questionThread);
+		entityManager.getTransaction().commit();
+		entityManager.close();
 		
+		return questionThread;
 	}
 	
 
 	
 	/****************** Getters / Setters *************/
 	
-	@Override
-	public EntityManagerFactory getEmf() {
+	EntityManagerFactory getEmf() {
 		return emf;
 	}
 	

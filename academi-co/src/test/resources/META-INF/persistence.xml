@@ -1,0 +1,29 @@
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+  version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+  <persistence-unit name="academi-co-test" transaction-type="RESOURCE_LOCAL">
+  
+  	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+  	
+	<!-- Included classes -->
+  	<class>dom.content.ConcreteComment</class>
+  	<class>dom.documentsManager.ConcreteDocument</class>
+  	<class>dom.inbox.ConcreteInbox</class>
+  	<class>dom.tags.ConcreteMainTag</class>
+  	<class>dom.inbox.ConcreteNotification</class>
+  	<class>dom.content.ConcretePost</class>
+  	<class>dom.content.ConcreteQuestionThread</class>
+  	<class>dom.tags.ConcreteSecondaryTag</class>
+  	<class>dom.tags.ConcreteTag</class>
+  	<class>dom.content.ConcreteUser</class>
+    
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:13306/ACADEMI_CO" />
+      <property name="javax.persistence.jdbc.user" value="root" />
+      <property name="javax.persistence.jdbc.password" value="admin" />
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+    </properties>
+    
+  </persistence-unit>
+</persistence>
