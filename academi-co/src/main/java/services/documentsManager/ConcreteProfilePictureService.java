@@ -2,13 +2,12 @@ package services.documentsManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import dom.content.QuestionThread;
 import dom.documentsManager.Document;
 
 public class ConcreteProfilePictureService implements ProfilePictureService {
@@ -20,14 +19,16 @@ public class ConcreteProfilePictureService implements ProfilePictureService {
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = 6703953886153042459L;
 	
-	@PersistenceUnit(unitName="academi-co")
+
 	private EntityManagerFactory emf;
 	
 	
 	
 	/****************** Constructors ********************/
 
-	public ConcreteProfilePictureService() {}
+	public ConcreteProfilePictureService() {
+		emf = Persistence.createEntityManagerFactory("academi-co");
+	}
 	
 	public ConcreteProfilePictureService(EntityManagerFactory emf) {
 		this.emf = emf;
@@ -93,7 +94,6 @@ public class ConcreteProfilePictureService implements ProfilePictureService {
 	
 	/****************** Getters / Setters *************/
 	
-	@Override
 	public EntityManagerFactory getEmf() {
 		return emf;
 	}

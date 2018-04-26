@@ -27,26 +27,33 @@ public class ConcreteUserServiceTest {
 	
 	
 	@Mock
-	CriteriaQuery<Object> fakeCriteriaQuery;
+	private CriteriaQuery<Object> fakeCriteriaQuery;
 	
 	@Mock
-	Root<User> fakeRoot;
+	private Root<User> fakeRoot;
 	
 	@Mock
-	TypedQuery<Object> fakeTypedQuery;
+	private TypedQuery<Object> fakeTypedQuery;
 		
-	
+	/**
+	 * Testing that not empty constructor returns mock entity manager factory
+	 */
 	@Test
 	public void testConstructor() {
 		
 		EntityManagerFactory fakeEmf = mock(EntityManagerFactory.class);
 
-		UserService userServiceFake = new ConcreteUserService(fakeEmf);
+		ConcreteUserService userServiceFake = new ConcreteUserService(fakeEmf);
+//		ConcreteUserService userService = new ConcreteUserService();
 				
-		assertEquals(userServiceFake.getEmf(), fakeEmf);	
+		assertEquals(userServiceFake.getEmf(), fakeEmf);
+//		assertNotNull(userService.emf);
 		
 	}
 	
+	/**
+	 * Unit tests for addUser method from service.	
+	 */
 	@Test
 	public void testAdduser() {
 		
@@ -67,6 +74,9 @@ public class ConcreteUserServiceTest {
 		
 	}
 	
+	/**
+	 * Unit tests for getUser from service.
+	 */
 	@Test
 	public void testGetUser() {
 		
@@ -77,7 +87,7 @@ public class ConcreteUserServiceTest {
 		when(fakeEmf.createEntityManager()).thenReturn(fakeEm);
 		when(fakeEm.getTransaction()).thenReturn(mock(EntityTransaction.class));
 		when(fakeEm.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
-		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);
+		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);		
 		when(fakeCriteriaQuery.from(User.class)).thenReturn(fakeRoot);
 		when(fakeEm.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
 		
@@ -90,9 +100,33 @@ public class ConcreteUserServiceTest {
 		verify(fakeEm).getCriteriaBuilder();
 		verify(fakeCriteriaBuilder).createQuery(any());
 		verify(fakeCriteriaQuery).from(User.class);
-		verify(fakeEm).createQuery(fakeCriteriaQuery);
+		verify(fakeEm).createQuery(fakeCriteriaQuery);		
 		
 	}
-
+	
+	/**
+	 * Unit tests for modifyUser from service
+	 */
+	@Test
+	public void testModifyUser() {
+		
+		EntityManagerFactory fakeEmf = mock(EntityManagerFactory.class);
+		EntityManager fakeEm = mock(EntityManager.class);
+		User user = mock(User.class);
+		
+		when(fakeEmf.createEntityManager()).thenReturn(fakeEm);
+		when(fakeEm.getTransaction()).thenReturn(mock(EntityTransaction.class));
+		
+		
+		UserService userServiceFake = new ConcreteUserService(fakeEmf);
+		
+		userServiceFake.modifyUser(user, user);
+		
+		verify(fakeEm, times(2)).getTransaction();
+		verify(fakeEm, times(1)).persist(user);
+		verify(fakeEm, times(1)).remove(user);
+		verify(fakeEm, times(1)).close();
+		
+	}
 	
 }

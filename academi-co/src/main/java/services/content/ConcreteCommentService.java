@@ -4,7 +4,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -30,16 +29,18 @@ public class ConcreteCommentService implements CommentService {
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -1005497794725784917L;
 
-	@PersistenceUnit(unitName="academi-co")
+	
 	private EntityManagerFactory emf;
 	
 	
 	
 	/****************** Constructors ********************/
 	
-	public ConcreteCommentService() {}
+	public ConcreteCommentService() {
+		emf = Persistence.createEntityManagerFactory("academi-co");
+	}
 	
-	protected ConcreteCommentService(EntityManagerFactory emf) {
+	public ConcreteCommentService(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
 	
@@ -90,7 +91,6 @@ public class ConcreteCommentService implements CommentService {
 	@Override
 	public void addComment(Comment comment) {
 		
-		emf = Persistence.createEntityManagerFactory("academi-co");
 		EntityManager entityManager = emf.createEntityManager();
 		
 		try {
@@ -111,10 +111,9 @@ public class ConcreteCommentService implements CommentService {
 
 	/****************** Getters / Setters *************/
 	
-	@Override
 	public EntityManagerFactory getEmf() {
 		return emf;
 	}
-	
+
 
 }

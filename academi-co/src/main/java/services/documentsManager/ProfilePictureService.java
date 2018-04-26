@@ -14,6 +14,4 @@ public interface ProfilePictureService extends Serializable {
 	
 	public void modifyProfilePicture(Document oldProfilePicture, Document newProfilePicture);
 
-	EntityManagerFactory getEmf();
-
 }

@@ -17,6 +17,4 @@ public interface UserService extends Serializable {
 	
 	public void modifyUser(User oldUser, User newUser);
 
-	EntityManagerFactory getEmf();	
-
 }

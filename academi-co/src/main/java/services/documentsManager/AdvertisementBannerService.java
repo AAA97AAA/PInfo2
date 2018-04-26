@@ -15,7 +15,5 @@ public interface AdvertisementBannerService extends Serializable {
 	public void addAdvertisementBanner(Document advertisementBanner);
 	
 	public void removeAdvertisementBanner(Document advertisementBanner);
-
-	EntityManagerFactory getEmf();
 	
 }

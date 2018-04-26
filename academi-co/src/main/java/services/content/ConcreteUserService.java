@@ -3,7 +3,7 @@ package services.content;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -24,13 +24,14 @@ public class ConcreteUserService implements UserService {
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -7292125416040361069L;
 	
-	@PersistenceUnit(unitName="academi-co")
-	private EntityManagerFactory emf;
+	
+	public EntityManagerFactory emf;
 	
 	
 	/*************** Constructors *****************/
 	
 	public ConcreteUserService () {
+		emf = Persistence.createEntityManagerFactory("academi-co");
 	}
 	
 	protected ConcreteUserService(EntityManagerFactory emf) {
@@ -117,7 +118,7 @@ public class ConcreteUserService implements UserService {
 	
 	/****************** Getters / Setters *************/
 	
-	@Override
+
 	public EntityManagerFactory getEmf() {
 		return emf;
 	}

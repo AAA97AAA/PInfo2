@@ -3,7 +3,7 @@ package services.documentsManager;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,14 +21,16 @@ public class ConcreteAdvertisementBannerService implements AdvertisementBannerSe
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = 4673084995448831858L;
 	
-	@PersistenceUnit(unitName="academi-co")
-	EntityManagerFactory emf;
+	
+	private EntityManagerFactory emf;
 	
 	
 	
 	/****************** Constructors ********************/
 	
-	public ConcreteAdvertisementBannerService() {}
+	public ConcreteAdvertisementBannerService() {
+		emf = Persistence.createEntityManagerFactory("academi-co");
+	}
 	
 	public ConcreteAdvertisementBannerService(EntityManagerFactory emf) {
 		this.emf = emf;
@@ -113,7 +115,6 @@ public class ConcreteAdvertisementBannerService implements AdvertisementBannerSe
 
 	/****************** Getters / Setters *************/
 	
-	@Override
 	public EntityManagerFactory getEmf() {
 		return emf;
 	}
