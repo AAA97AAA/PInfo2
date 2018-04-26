@@ -24,7 +24,7 @@ public class ConcreteUserService implements UserService {
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -7292125416040361069L;
 	
-	@PersistenceUnit(unitName="academi-co1")
+	@PersistenceUnit(unitName="academi-co")
 	private EntityManagerFactory emf;
 	
 	

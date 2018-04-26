@@ -26,7 +26,7 @@ public class ConcreteCommentService implements CommentService {
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -1005497794725784917L;
 
-	@PersistenceUnit(unitName="academi-co1")
+	@PersistenceUnit(unitName="academi-co")
 	private EntityManagerFactory emf;
 	
 

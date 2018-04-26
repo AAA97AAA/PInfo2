@@ -26,7 +26,7 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -5808948100662379670L;
 	
-	@PersistenceUnit(unitName="academi-co1")
+	@PersistenceUnit(unitName="academi-co")
 	private EntityManagerFactory emf;
 	
 	/****************** Constructors ********************/

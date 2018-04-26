@@ -17,7 +17,7 @@ public class ConcreteAdvertisementBannerService implements AdvertisementBannerSe
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = 4673084995448831858L;
 	
-	@PersistenceUnit(unitName="academi-co1")
+	@PersistenceUnit(unitName="academi-co")
 	EntityManagerFactory emf;
 
 	@Override

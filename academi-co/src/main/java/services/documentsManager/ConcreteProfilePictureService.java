@@ -15,7 +15,7 @@ public class ConcreteProfilePictureService implements ProfilePictureService {
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = 6703953886153042459L;
 	
-	@PersistenceUnit(unitName="academi-co1")
+	@PersistenceUnit(unitName="academi-co")
 	private EntityManagerFactory emf;
 
 	@Override
