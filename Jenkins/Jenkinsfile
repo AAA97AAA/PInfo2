@@ -14,7 +14,16 @@ pipeline {
             }
         }
 
-        
+        stage('Containers') {
+            agent {
+                docker {
+                    image 'docker'
+                }
+            }
+            steps {
+                sh 'sh Jenkins/scripts/database/restartDatabase.sh'
+            }
+        }
 
         stage('Test') {
             agent {
