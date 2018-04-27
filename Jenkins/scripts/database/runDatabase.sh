@@ -7,7 +7,7 @@ if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
  	docker build -t $IMAGE_NAME `dirname "$0"`
 fi
 
-if [ "$(docker ps -q -f name=<name>)" ]; then
+if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
 	docker rm -vf $CONTAINER_NAME
 fi
 
