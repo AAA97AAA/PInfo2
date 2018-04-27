@@ -73,9 +73,9 @@ public class ConcreteProfilePictureService implements ProfilePictureService {
 
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
-		
-		entityManager.persist(newProfilePicture);
-		entityManager.remove(oldProfilePicture);
+//		oldProfilePicture.setData(newProfilePicture.getData());		
+//		oldProfilePicture.setName(newProfilePicture.getName());
+		entityManager.persist(oldProfilePicture);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 		
