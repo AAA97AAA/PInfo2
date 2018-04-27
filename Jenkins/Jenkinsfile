@@ -14,7 +14,17 @@ pipeline {
             }
         }
 
-
+        stage('Containers') {
+            agent {
+                docker {
+                    image 'docker'
+                    args '--net="host"'
+                }
+            }
+            steps {
+                sh 'sh Jenkins/scripts/database/runDatabase.sh'
+            }
+        }
 
         stage('Test') {
             agent {
