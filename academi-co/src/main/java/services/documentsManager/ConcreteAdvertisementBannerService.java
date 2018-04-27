@@ -44,35 +44,30 @@ public class ConcreteAdvertisementBannerService implements AdvertisementBannerSe
 	public Document getAdvertisementBanner(long id) {
 		
 		EntityManager entityManager = emf.createEntityManager();
+		entityManager.getTransaction().begin();
+			
+		// Creating criteria builder to create a criteria query
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		
-		try {
-			entityManager.getTransaction().begin();
-			
-			// Creating criteria builder to create a criteria query
-			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-			
-			// Criteria query of return type QuestionThread
-			CriteriaQuery<Document> criteriaQuery = criteriaBuilder.createQuery(Document.class);
-			
-			
-			// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-			Root<Document> variableRoot = criteriaQuery.from(Document.class);
-			
-			// Condition statement -> Where
-			criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
-			
-			
-			// Creating typed query
-			TypedQuery<Document> query = entityManager.createQuery(criteriaQuery);
-			
-			// Return of single result. If we want a list of results, we use getResultList
-			return query.getSingleResult();
-			
-		}
+		// Criteria query of return type QuestionThread
+		CriteriaQuery<Document> criteriaQuery = criteriaBuilder.createQuery(Document.class);
 		
-		finally {
-			if (entityManager != null) entityManager.close();
-		}
+		
+		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
+		Root<Document> variableRoot = criteriaQuery.from(Document.class);
+		
+		// Condition statement -> Where
+		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
+		
+		
+		// Creating typed query
+		TypedQuery<Document> query = entityManager.createQuery(criteriaQuery);
+		
+		entityManager.close();
+
+		// Return of single result. If we want a list of results, we use getResultList
+		return query.getSingleResult();
+			
 		
 	}
 
@@ -81,34 +76,23 @@ public class ConcreteAdvertisementBannerService implements AdvertisementBannerSe
 		
 		EntityManager entityManager = emf.createEntityManager();
 		
-		try {
 			entityManager.getTransaction().begin();
+		
 			entityManager.persist(advertisementBanner);
 			entityManager.getTransaction().commit();
+			entityManager.close();
 			
-		}
-		
-		finally {
-			if (entityManager != null) entityManager.close();
-		}
-		
 	}
 
 	@Override
 	public void removeAdvertisementBanner(Document advertisementBanner) {
 		
 		EntityManager entityManager = emf.createEntityManager();
+		entityManager.getTransaction().begin();
 		
-		try {
-			entityManager.getTransaction().begin();
-			entityManager.remove(advertisementBanner);
-			entityManager.getTransaction().commit();
-			
-		}
-		
-		finally {
-			if (entityManager != null) entityManager.close();
-		}		
+		entityManager.remove(advertisementBanner);
+		entityManager.getTransaction().commit();
+		entityManager.close();		
 	}
 	
 	

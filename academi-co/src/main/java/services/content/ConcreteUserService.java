@@ -45,34 +45,29 @@ public class ConcreteUserService implements UserService {
 	public User getUser(long id) {
 		
 		EntityManager entityManager = emf.createEntityManager();
+		entityManager.getTransaction().begin();
 		
-		try {
-			entityManager.getTransaction().begin();
-			
-			// Creating criteria builder to create a criteria query
-			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-			
-			// Criteria query of return type QuestionThread
-			CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
-			
-			
-			// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-			Root<User> variableRoot = criteriaQuery.from(User.class);
-			
-			// Condition statement -> Where
-			criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
-			
-			
-			// Creating typed query
-			TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
-			
-			// Return of single result. If we want a list of results, we use getResultList
-			return query.getSingleResult();
-		}
+		// Creating criteria builder to create a criteria query
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		
-		finally {
-			if (entityManager != null) entityManager.close();
-		}
+		// Criteria query of return type QuestionThread
+		CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+		
+		
+		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
+		Root<User> variableRoot = criteriaQuery.from(User.class);
+		
+		// Condition statement -> Where
+		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
+		
+		
+		// Creating typed query
+		TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
+		
+		entityManager.close();
+
+		// Return of single result. If we want a list of results, we use getResultList
+		return query.getSingleResult();
 		
 	}
 	
@@ -84,15 +79,10 @@ public class ConcreteUserService implements UserService {
 		
 		EntityManager entityManager = emf.createEntityManager();
 		
-		try {
-			entityManager.getTransaction().begin();
-			entityManager.persist(user);
-			entityManager.getTransaction().commit();
-		}
-		
-		finally {
-			if (entityManager != null) entityManager.close();
-		}
+		entityManager.getTransaction().begin();
+		entityManager.persist(user);
+		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 	
 	/**
@@ -102,17 +92,18 @@ public class ConcreteUserService implements UserService {
 	public void modifyUser(User oldUser, User newUser) {
 		
 		EntityManager entityManager = emf.createEntityManager();
+		entityManager.getTransaction().begin();
 		
-		try {
-			entityManager.getTransaction().begin();
-			entityManager.persist(newUser);
-			entityManager.remove(oldUser);
-			entityManager.getTransaction().commit();
-		}
-		finally {
-			if(entityManager != null) entityManager.close();
-		}
-			
+		oldUser.setBio(newUser.getBio());
+		oldUser.setCanBeModerator(newUser.isCanBeModerator());
+		oldUser.setEmail(newUser.getEmail());
+		oldUser.setPassword(newUser.getPassword());
+		oldUser.setProfilePicture(newUser.getProfilePicture());
+		oldUser.setType(newUser.getType());
+		oldUser.setUsername(newUser.getUsername());
+		entityManager.persist(oldUser);
+		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 	
 	

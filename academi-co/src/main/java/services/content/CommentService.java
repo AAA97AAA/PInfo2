@@ -3,7 +3,6 @@ package services.content;
 import java.io.Serializable;
 
 import javax.ejb.Local;
-import javax.persistence.EntityManagerFactory;
 
 import dom.content.Comment;
 

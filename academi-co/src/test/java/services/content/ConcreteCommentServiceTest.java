@@ -2,27 +2,52 @@ package services.content;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import dom.content.Comment;
 import dom.content.QuestionThread;
 import dom.content.User;
 
+/**
+ * Test class for Comment service
+ * 
+ * @author petrbinko
+ *
+ */
+
+@RunWith(MockitoJUnitRunner.class)
 public class ConcreteCommentServiceTest {
+	
+	// Mock objects
+	@Mock
+	private EntityManagerFactory fakeEmf;
+	
+	@Mock
+	private EntityManager fakeEntityManager;
+	
+	@Mock
+	private CriteriaBuilder fakeCriteriaBuilder;
 	
 	@Mock
 	private CriteriaQuery<Object> fakeCriteriaQuery;
@@ -32,68 +57,86 @@ public class ConcreteCommentServiceTest {
 	
 	@Mock
 	private TypedQuery<Object> fakeTypedQuery;
+	
+	@Mock
+	private User fakeUser;
+	
+	@Mock
+	private QuestionThread fakeQuestionThread;
+	
+	@Mock
+	private Comment fakeComment;
 
 	@Test
-	public void testConstructor() {
-		EntityManagerFactory fakeEmf = mock(EntityManagerFactory.class);
+	public void testConstructorNotEmpty() {
 
+		// Calling new user service
 		ConcreteCommentService commentServiceFake = new ConcreteCommentService(fakeEmf);
-		// ConcreteCommentService commentService = new ConcreteCommentService();
 				
+		// Testing right constructors
 		assertEquals(commentServiceFake.getEmf(), fakeEmf);
-		// assertNotNull(commentService.getEmf());
+	}
+	
+	@Test(expected = PersistenceException.class)
+	public void testConstructorEmpty() {
+		new ConcreteCommentService();
 	}
 	
 	@Test
 	public void testAddComment() {
-		EntityManagerFactory fakeEmf = mock(EntityManagerFactory.class);
-		EntityManager fakeEm = mock(EntityManager.class);
-		Comment comment = mock(Comment.class);
-		QuestionThread questionThread = mock(QuestionThread.class);
-
-		ConcreteCommentService commentServiceFake = new ConcreteCommentService(fakeEmf);
 		
-		when(fakeEmf.createEntityManager()).thenReturn(fakeEm);
-		when(fakeEm.getTransaction()).thenReturn(mock(EntityTransaction.class));
+		// Specifying behavior for mock objects related to calls in the service
+		when(fakeEmf.createEntityManager()).thenReturn(fakeEntityManager);
+		when(fakeEntityManager.getTransaction()).thenReturn(mock(EntityTransaction.class));
 		
-		when(comment.getQuestion()).thenReturn(questionThread);
+		when(fakeComment.getQuestion()).thenReturn(fakeQuestionThread);
 		
-		commentServiceFake.addComment(comment);
 		
-		verify(fakeEm, times(2)).getTransaction();
-		verify(fakeEm, times(1)).persist(comment);
-		verify(fakeEm, times(1)).persist(questionThread);
+		// Calling new comment service
+		CommentService commentServiceFake = new ConcreteCommentService(fakeEmf);
+		commentServiceFake.addComment(fakeComment);
+		
+		
+		// Verifying right method calls on objects in the service's function
+		InOrder order = inOrder(fakeEntityManager);
+		order.verify(fakeEntityManager, times(1)).getTransaction();
+		order.verify(fakeEntityManager, times(1)).persist(fakeComment);
+		order.verify(fakeEntityManager, times(1)).persist(fakeQuestionThread);
+		order.verify(fakeEntityManager, times(1)).getTransaction();
+		order.verify(fakeEntityManager, times(1)).close();
 		
 	}
 	
-//	@Test
-//	public void testGetComment() {
-//		
-//		EntityManagerFactory fakeEmf = mock(EntityManagerFactory.class);
-//		EntityManager fakeEm = mock(EntityManager.class);
-//		CriteriaBuilder fakeCriteriaBuilder = mock(CriteriaBuilder.class);
-//		
-//		ConcreteCommentService commentServiceFake = new ConcreteCommentService(fakeEmf);
-//
-//		
-//		when(fakeEmf.createEntityManager()).thenReturn(fakeEm);
-//		when(fakeEm.getTransaction()).thenReturn(mock(EntityTransaction.class));
-//		when(fakeEm.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
-//		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);
-//		
-//		System.out.println(fakeCriteriaQuery);
-//		
-//		when(fakeCriteriaQuery.from(Comment.class)).thenReturn(fakeRoot);
-//		when(fakeEm.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
-//		
-//		commentServiceFake.getComment(1);
-//		
-//		verify(fakeEm).getTransaction();
-//		verify(fakeEm).getCriteriaBuilder();
-//		verify(fakeCriteriaBuilder).createQuery(any());
-//		verify(fakeCriteriaQuery).from(User.class);
-//		verify(fakeEm).createQuery(fakeCriteriaQuery);	
-//		
-//	}
+	@Test
+	public void testGetComment() {
+
+		// Specifying behavior for mock objects related to calls in the service
+		when(fakeEmf.createEntityManager()).thenReturn(fakeEntityManager);
+		when(fakeEntityManager.getTransaction()).thenReturn(mock(EntityTransaction.class));
+		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
+		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);
+		when(fakeCriteriaQuery.from(Comment.class)).thenReturn(fakeRoot);
+		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
+		
+		// Calling new comment service
+		long id = ThreadLocalRandom.current().nextLong();
+		CommentService commentServiceFake = new ConcreteCommentService(fakeEmf);
+		commentServiceFake.getComment(id);
+		
+		
+		// Verifying right method calls on objects in the service's function
+		InOrder order = inOrder(fakeEntityManager);
+		order.verify(fakeEntityManager, times(1)).getTransaction();
+		order.verify(fakeEntityManager, times(1)).getCriteriaBuilder();
+		verify(fakeCriteriaBuilder, times(1)).createQuery(any());
+		verify(fakeCriteriaQuery, times(1)).from(Comment.class);
+		verify(fakeCriteriaQuery, times(1)).where(fakeCriteriaBuilder.equal(fakeRoot.get("ID"), id));
+		order.verify(fakeEntityManager, times(1)).createQuery(fakeCriteriaQuery);
+		verify(fakeTypedQuery, times(1)).getSingleResult();
+		verify(fakeEntityManager, times(1)).getTransaction();
+		order.verify(fakeEntityManager, times(1)).close();
+
+		
+	}
 
 }
