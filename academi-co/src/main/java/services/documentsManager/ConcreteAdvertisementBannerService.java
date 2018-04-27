@@ -75,12 +75,11 @@ public class ConcreteAdvertisementBannerService implements AdvertisementBannerSe
 	public void addAdvertisementBanner(Document advertisementBanner) {
 		
 		EntityManager entityManager = emf.createEntityManager();
-		
-			entityManager.getTransaction().begin();
-		
-			entityManager.persist(advertisementBanner);
-			entityManager.getTransaction().commit();
-			entityManager.close();
+		entityManager.getTransaction().begin();
+	
+		entityManager.persist(advertisementBanner);
+		entityManager.getTransaction().commit();
+		entityManager.close();
 			
 	}
 
