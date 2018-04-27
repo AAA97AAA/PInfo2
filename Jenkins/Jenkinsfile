@@ -64,7 +64,7 @@ pipeline {
                 to: 'Nicolas.Cotte.1@etu.unige.ch, Petr.Binko@etu.unige.ch',
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']],
 
-                body: """<FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':
+                body: """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':
 
                 Check console output at '${env.BUILD_URL}'
                 Last commit: '${env.GIT_COMMIT}'"""
