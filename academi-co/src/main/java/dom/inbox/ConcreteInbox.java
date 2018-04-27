@@ -97,7 +97,7 @@ public class ConcreteInbox implements Inbox, Serializable {
 	/***** Utility *****/
 
 	@Override
-	protected ConcreteInbox clone() throws CloneNotSupportedException {
+	protected ConcreteInbox clone() {
 		return new ConcreteInbox(content);
 	}
 

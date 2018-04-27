@@ -109,7 +109,7 @@ public class ConcreteNotification implements Notification, Serializable {
 	/***** Utility *****/
 
 	@Override
-	protected ConcreteNotification clone() throws CloneNotSupportedException {
+	protected ConcreteNotification clone() {
 		return new ConcreteNotification(body, creationDate, wasRead);
 	}
 
@@ -117,8 +117,8 @@ public class ConcreteNotification implements Notification, Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((body == null) ? 0 : body.hashCode());
-		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result + body.hashCode();
+		result = prime * result + creationDate.hashCode();
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		result = prime * result + (wasRead ? 1231 : 1237);
@@ -133,22 +133,17 @@ public class ConcreteNotification implements Notification, Serializable {
 		if (obj == null) {
 			return false;
 		}
+		
 		if (!(obj instanceof ConcreteNotification)) {
 			return false;
 		}
+
 		ConcreteNotification other = (ConcreteNotification) obj;
-		if (body == null) {
-			if (other.body != null) {
-				return false;
-			}
-		} else if (!body.equals(other.body)) {
+
+		if (!body.equals(other.body)) {
 			return false;
 		}
-		if (creationDate == null) {
-			if (other.creationDate != null) {
-				return false;
-			}
-		} else if (!creationDate.equals(other.creationDate)) {
+		if (!creationDate.equals(other.creationDate)) {
 			return false;
 		}
 		if (id != other.id) {
