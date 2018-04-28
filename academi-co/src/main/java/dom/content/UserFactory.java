@@ -13,7 +13,7 @@ import dom.inbox.InboxFactory;
  */
 public class UserFactory {
 
-	static public String DEFAULT_PATH = "???"; //TODO: Define default path for profile pic
+	static public String DEFAULT_PATH = "src/main/webapp/images/defaultPP.png"; 
 	
 	static public User createUser(String username, String email, String password, int type) {
 		return new ConcreteUser(username, email, password, DocumentFactory.loadDocument(DEFAULT_PATH),
