@@ -164,6 +164,6 @@ public class ConcreteNotification implements Notification, Serializable {
 	
 	@Override
 	public String toString() {
-		return "ConcreteNotification [id=" + id + ", body=" + body + ", wasRead=" + wasRead + "]";
+		return "ConcreteNotification [id=" + id + ", body=" + body + ", wasRead=" + wasRead + ", creationDate=" + creationDate + "]";
 	}
 }

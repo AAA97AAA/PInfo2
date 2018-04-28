@@ -1,8 +1,8 @@
 package dom.documentsManager;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -64,7 +64,7 @@ public class DocumentFactoryTest {
 	/**
 	 * Tests the call for copying a file into a document
 	 */
-	/*
+	
 	@Test
 	public void testLoadDocument() throws IOException  {
 		
@@ -84,10 +84,11 @@ public class DocumentFactoryTest {
 		}
 		
 		// Apply method
-		Document document = spy(DocumentFactory.loadDocument(targetPath));
+		Document documentMock = new ConcreteDocument("interestingName", data);
+		Document documentToTest = DocumentFactory.loadDocument(targetPath);
 		
-		// Verify that the right follow-up method was called
-		verify((ConcreteDocument) document, times(1)).download(targetPath);
+		// Verify that the right data were founded in the file	
+		assertArrayEquals("Unexpected data in entity.", documentMock.getData(), documentToTest.getData());
 	}
-	*/
+	
 }

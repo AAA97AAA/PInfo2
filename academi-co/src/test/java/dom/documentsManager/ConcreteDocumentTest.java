@@ -1,5 +1,6 @@
 package dom.documentsManager;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
@@ -76,6 +77,7 @@ public class ConcreteDocumentTest {
 		FileOutputStream stream = new FileOutputStream(targetPath);
 		try {
 		    stream.write(data2);
+		    
 		}
 		catch (Exception e) {
 		    e.printStackTrace();
@@ -86,9 +88,13 @@ public class ConcreteDocumentTest {
 		
 		// Apply download and test
 		document.download(targetPath);
+
 		assertEquals("Unexpected id in entity.", id, document.getId());
 		assertEquals("Unexpected name in entity.", name2, document.getName());
-		// assertEquals("Unexpected data in entity.", data2, document.getData());
+		assertArrayEquals("Unexpected data in entity.", data2, document.getData());
+		
+
+		// TODO: Download with exception
 	}
 	
 	/**

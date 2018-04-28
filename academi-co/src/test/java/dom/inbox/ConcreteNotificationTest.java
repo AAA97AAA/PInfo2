@@ -1,12 +1,9 @@
 package dom.inbox;
 
-import static org.junit.Assert.*;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 
@@ -122,7 +119,7 @@ public class ConcreteNotificationTest {
 		
 		
 		// Create expected result
-		String expected = "ConcreteNotification [id=" + id + ", body=" + body + ", wasRead=" + false + "]";
+		String expected = "ConcreteNotification [id=" + id + ", body=" + body + ", wasRead=" + false + ", creationDate=" + creationDate + "]";
 
 		
 		// Control result

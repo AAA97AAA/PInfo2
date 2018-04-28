@@ -1,9 +1,12 @@
 package dom.inbox;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +14,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
 
-import dom.tags.ConcreteMainTag;
-import dom.tags.SecondaryTag;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 /**
@@ -116,7 +117,6 @@ public class ConcreteInboxTest {
 			content.put(i, mock(Notification.class));
 		}
 		when(content.toString()).thenReturn("oklm");
-		
 		// Construct entity
 		ConcreteInbox inbox = new ConcreteInbox(content);
 		inbox.setId(id);

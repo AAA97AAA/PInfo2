@@ -132,7 +132,7 @@ public class ConcreteDocument implements Document, Serializable {
 		int result = 1;
 		result = prime * result + Arrays.hashCode(data);
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + name.hashCode();
 		return result;
 	}
 
@@ -154,11 +154,7 @@ public class ConcreteDocument implements Document, Serializable {
 		if (id != other.id) {
 			return false;
 		}
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		if (!name.equals(other.name)) {
 			return false;
 		}
 		return true;
