@@ -117,14 +117,41 @@
         <hr style="height: 3px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">
         <hr>
 </div>
-<div ng-app="myApp">
-<div ng-controller="AppCtrl" align="center">
-<textarea id="TextArea" ng-model="loremIpsum" ng-keyup="autoExpand($event)" placeholder="Post here...">
-</textarea>
-  </div>
+<h2 id="ctl00_ctl00_MC_AMC_PostEntryObj_NewEntryHeading" class="contrast1-color">Answer this thread:</h2>
+
+
+<input name="ctl00$ctl00$MC$AMC$PostEntryObj$CustomValidationHook" type="text" id="ctl00_ctl00_MC_AMC_PostEntryObj_CustomValidationHook" style="display:none" />
+
+
+<div class="container-post new-message">
+
+	<div class="inline">
+		
+		<p id="AjaxSubmitErrors" class="error callout" style="display:none"></p>
+	
+
+		<a name="PostContent"></a>
+		
+		<div class="clearfix">
+            
+<div id="EditWrap" style="position:relative">
+	<table id="ctl00_ctl00_MC_AMC_PostEntryObj_Content_EditContainer" cellpadding="0" cellspacing="0" class="container-editor">
+	<tr valign="top">
+		<td style="padding-right:15px;width:100%">
+		<textarea name="ctl00$ctl00$MC$AMC$PostEntryObj$Content$MessageText" id="ctl00_ctl00_MC_AMC_PostEntryObj_Content_MessageText" class="resizable text-editor" style="width:1000px;height:200px;"></textarea>
+		
+        
+	</td>
+	</tr>
+</table>
+
+
+</div>
+
 </div>
     
-      
+      </div>
+      </div>
       </div>
       </div>    
 <!--     End Middle Column -->
