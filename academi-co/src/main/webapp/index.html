@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html data-ng-app="persons">
+<head>
+
+
+<title>Template</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+    <script src="lib/dependencies/angular.min.js"></script>
+    <script src="lib/dependencies/angular-resource.min.js"></script>
+    <script src="lib/dependencies/jquery.min.js"></script>
+    <script src="lib/dependencies/ui-bootstrap-tpls.min.js"></script>
+    <script src="lib/dependencies/ng-grid.min.js"></script>
+
+    <script src="script/person.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif} */
+</style>
+</head>
+<body class="w3-theme-l4">
+
+<!-- Navbar -->
+
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-xlarge">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home">Home</i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Dashboard"><i class="fa fa-globe"></i>Dashboard</a>
+  <div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i>Inbox<span class="w3-badge w3-right w3-small w3-green">3</span></button>     
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+      <a href="#" class="w3-bar-item w3-button">Someone commented your thread: "What is the..."</a>
+      <a href="#" class="w3-bar-item w3-button">Someone upvoted your thread: "How to make flat bread"</a>
+      <a href="#" class="w3-bar-item w3-button">Someone asked a question with the tag "Maths"</a>
+    </div>
+  </div>
+
+ <div>
+ 
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
+  </a>
+ </div>
+<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="New Post"><i class="fa fa-plus"></i></a>
+<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="Search"><i class="fa fa-search"></i></a>
+   <div>
+     <a href="#" class="w3-bar-item w3-display-hover w3-button w3-hide-small w3-right w3-padding-large w3-hover-blue" title="My Account">
+    <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
+  </a>
+  </div>
+</div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+<!--     Left Column -->
+    <div class="w3-col m3">
+       <div class="container" ng-app="app" ng-controller="Main">
+</div>
+
+       
+     
+<!--     End Left Column -->
+    </div>
+    
+<!--     Middle Column -->
+    <div class="w3-col m7">
+    
+      </div>
+
+      
+<!--     End Middle Column -->
+   
+     </div>
+     
+<!--     Right Column -->
+    <div class="w3-col m2">
+
+        <div class="w3-container">
+
+        </div>
+
+      <br>
+
+      <br>
+      
+      
+<!--     End Right Column -->
+    </div>
+
+<!-- End Page Container -->
+</div>
+<br>
+
+<!-- Footer -->
+     <div class="w3-dropdown-hover w3-hide-small">
+       <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>     
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
+      <a href="#" class="w3-bar-item w3-button">English</a>
+    </div>
+     </div>
+      <p><a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
+<footer class="w3-container w3-theme-d5">
+<h2>&emsp; &emsp; &emsp; Academi-co &copy; All Rights Reserved<span class="tab">Powered by SoftAware </span></h2>
+</footer>
+
+
+</body>
+</html> 
+
+
+
+

@@ -1,0 +1,278 @@
+body {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+div.fixed {
+    position: fixed;
+    bottom: 140px;
+    right: 60px;
+    left: 1400px;
+    top: 140px;
+    width: 200px;
+}
+
+div.otherpositions {
+	position: relative;
+    bottom: 0px;
+    right: 60px;
+    left: 270px;
+    top: 0px;
+    width: 200px;
+}
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd}
+
+.show {display:block;}
+
+textarea {
+  height:auto;
+  max-width:600px;
+  color:#999;
+  font-weight:400;
+  font-size:30px;
+  font-family:'Ubuntu', Helvetica, Arial, sans-serif;
+  width:100%;
+  background:#fff;
+  border-radius:3px;
+  line-height:2em;
+  border:none;
+  box-shadow:0px 0px 5px 1px rgba(0,0,0,0.1);
+  padding:30px;
+  -webkit-transition: height 2s ease;
+-moz-transition: height 2s ease;
+-ms-transition: height 2s ease;
+-o-transition: height 2s ease;
+transition: height 2s ease;
+}
+
+* {
+  -webkit-font-smoothing:antialiased !important;
+}
+
+  .content{
+    margin: 30% auto;
+    text-align: center;
+}
+      like{
+      color: gray;
+      text-decoration: none !important;
+      .glyphicon{
+        transition: all .5s;
+        &.glyphicon-circle-arrow-up{
+          color: #33cc33;
+        }
+        &.glyphicon glyphicon-upload{
+          &:hover{
+            transform:scale(1.1);
+          }
+        }
+      }    
+    }
+        dislike{
+      color: gray;
+      text-decoration: none !important;
+      .glyphicon{
+        transition: all .5s;
+        &.glyphicon-circle-arrow-down{
+          color: #ff3333;
+        }
+        &.glyphicon glyphicon-download{
+          &:hover{
+            transform:scale(1.1);
+          }
+        }
+      }    
+    } 
+  
+
+
+
+  
+h3 {
+    margin: 0 0 20px;
+    text-align: left;
+}
+
+h2 {
+    position: static;
+    left: 100px;
+    top: 150px;
+    font-size: 15px;
+}
+
+.tag {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.secondarytag {
+    background-color: white;
+    color: black;
+    border: 4px solid #e7e7e7;
+}
+
+.secondarytag:hover {background-color: #e7e7e7;}
+
+.maintag {
+    background-color: white;
+    color: black;
+    border: 4px solid #555555;
+}
+
+.maintag:hover {
+    background-color: #555555;
+    color: white;
+}
+
+div.S {
+    left: 100px;
+    top: 150px;
+    text-align:right;
+}
+
+.tab { 
+       display:inline-block; 
+       margin-left: 900px; 
+}
+
+div.a {
+    text-align: center;
+}
+
+div.b {
+    text-align: left;
+}
+
+div.c {
+    text-align: right;
+} 
+
+div.d {
+    text-align: justify;
+} 
+
+.message {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.grid {
+    width: 40%;
+    float: left;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.grid .remove {
+    width: 20px;
+    height: 20px;
+    margin-top: 8px;
+    color: #a94442;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212, 212, 212);
+    height: 335px;
+}
+
+.form {
+    width: 40%;
+    float: right;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: left;
+}
+
+.form label {
+    width: 100px;
+}
+
+.form input {
+    width: 300px;
+    float: right;
+}
+
+.form .form-group span {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+    color: #5cb85c;
+}
+
+.form .form-group p {
+    margin-top: 15px;
+    margin-left: 200px;
+    color: #a94442;
+}
+
+.form .avatar {
+    height: 250px;
+    float: right;
+    margin-right: 25px;
+}
+
+.form .buttons {
+    clear: both;
+    float: right;
+    margin-top: 10px;
+    margin-right: 25px;
+}
+
+h2 {
+margin: 0;
+display: inline-block;
+}
+
+button{
+  margin:auto;
+  display:block;
+}
