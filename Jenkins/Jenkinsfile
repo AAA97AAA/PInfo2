@@ -60,19 +60,9 @@ pipeline {
 
     post {
         always {
-            stages {
-                stage('KillTestsContainers') {
-                    agent {
-                        docker {
-                            image 'docker'
-                            args '--net="host"'
-                        }
-                    }
-                    steps {
-                        sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-                        sh 'sh Jenkins/Scripts/database/killDatabaseTests.sh'
-                    }
-                }
+            node('KillTestsContainers') {
+                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
+                sh 'sh Jenkins/Scripts/database/killDatabaseTests.sh'
             }
         }
 
