@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage('Containers') {
+        stage('RunTestsContainers') {
             agent {
                 docker {
                     image 'docker'
@@ -22,7 +22,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'sh Jenkins/scripts/database/runDatabase.sh'
+                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh'
+                sh 'sh Jenkins/scripts/database/runDatabaseTests.sh'
             }
         }
 
@@ -42,9 +43,26 @@ pipeline {
                 }
             }
         }
+
+        stage('RunBuildContainers') {
+
+        }
     }
 
     post {
+        always {
+            agent {
+                docker {
+                    image 'docker'
+                    args '--net="host"'
+                }
+            }
+            steps {
+                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
+                sh 'sh Jenkins/scripts/database/killDatabaseTests.sh'
+            }
+        }
+
         success {
             emailext (
                 subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",

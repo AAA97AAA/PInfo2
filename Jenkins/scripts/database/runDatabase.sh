@@ -7,8 +7,6 @@ if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
  	docker build -t $IMAGE_NAME `dirname "$0"`
 fi
 
-if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
-	docker rm -vf $CONTAINER_NAME
+if [ !"$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
+	docker run -p 13306:3306 --name=$CONTAINER_NAME -e MYSQL_ROOT_PASSWORD=admin -d $IMAGE_NAME
 fi
-
-docker run -p 13306:3306 --name=$CONTAINER_NAME -e MYSQL_ROOT_PASSWORD=admin -d $IMAGE_NAME
