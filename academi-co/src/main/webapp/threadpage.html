@@ -15,7 +15,7 @@
 
     <script src="script/person.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
-	
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
 
 <meta charset="UTF-8">
@@ -97,21 +97,59 @@
         <hr>
         <img src="images/fakeprofilepic1.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
         <span class="w3-right w3-opacity">23/05/2017 9:42</span>
-        <h4>Brad Pitt</h4><br>        
+        <h4>Brad Pitt</h4>
+<div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">
+  <div class="content">
+
+      <like href="#" ng-click="doLike()">
+       <i class="glyphicon" ng-class="(light1 == 1)? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-upload'"></i>
+        </like> 
+    <br>    
+      <span ng-model="like.votes">{{like.votes}}</span>
+    <br>
+       <dislike href="#" ng-click="doDislike()">
+       <i class="glyphicon" ng-class="(light2 == 1) ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-download'"></i>
+    </dislike>
+    
+  </div>
+</div>        
         <hr class="w3-clear">
         <p><b>Does anyone know how to do partial derivations in matlab ?</b><p>
         <p>I'm looking for a function that does partial derivations so I can use them for some integrals in matlab. Thanks for helping</p>
 <div class="w3-container w3-card w3-white w3-round w3-margin  "><br>
 
               <img src="images/fakeprofilepic2.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
-        <span class="w3-right w3-opacity">Today 13:42</span>
-        <h5>Angelina Jolie</h5><br>
+        <span class="w3-right w3-opacity">Today 13:42</span> 
+        <h5>Angelina Jolie        
+        <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">
+  <div class="content">
+  
+<span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+      <br>    
+      3
+    <br>
+<span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
+
+  </div>
+  </div>
+		</h5>
         <hr>
         <p>Hi, try the documentation using help command of matlab, the function is called diff(f,x) as I remember</p>
         <hr style="height: 3px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">
         <img src="images/fakeprofilepic3.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
         <span class="w3-right w3-opacity">Today 14:37</span>
-        <h5>Jennifer Aniston</h5><br>
+        <h5>Jennifer Aniston
+        <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">
+  <div class="content">
+  
+<span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+      <br>    
+      -2
+    <br>
+<span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
+
+  </div>
+  </div></h5>
         <hr>
         <p>Wich version of matlab are you using ? There's a new function for partial derivations that is faster than diff in the 2017 version of matlab</p>
         <hr style="height: 3px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">

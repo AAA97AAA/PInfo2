@@ -15,8 +15,8 @@
 
     <script src="script/person.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	
-
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,21 +72,32 @@
   <div class="w3-row">
 <!--     Left Column -->
     <div class="w3-col m3">
-       <div class="container" ng-app="app" ng-controller="Main">
+      <div class="container" ng-app="app" ng-controller="Main" style="text-align: left;">
   <div class="content">
       <like href="#" ng-click="doLike()">
-       <i class="glyphicon" ng-class="(like.userVotes==1) ? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-upload'"></i>
+       <i class="glyphicon" ng-class="(light1 == 1)? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-upload'"></i>
         </like> 
     <br>    
       <span ng-model="like.votes">{{like.votes}}</span>
-   
     <br>
        <dislike href="#" ng-click="doDislike()">
-       <i class="glyphicon" ng-class="(like.userVotes==1) ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-download'"></i>
+       <i class="glyphicon" ng-class="(light2 == 1) ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-download'"></i>
     </dislike>
     
   </div>
 </div>
+
+<div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">
+  <div class="content">
+  
+<span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+      <br>    
+      3
+    <br>
+<span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
+
+  </div>
+  </div>
 
        
      

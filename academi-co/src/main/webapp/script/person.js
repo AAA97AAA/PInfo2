@@ -230,3 +230,45 @@ window.onclick = function(event) {
     }
   }
 }
+
+var app = angular.module('app', [])
+.controller('Main', ['$scope', function($scope) {
+  $scope.like = {};
+  $scope.like.votes = 0;
+  $scope.light1 = -1;
+  $scope.light2 = -1;
+  $scope.token = 1;
+  $scope.Door1 = true;
+  $scope.Door2 = true;
+  $scope.doLike = function() {
+    if ($scope.token == 0 && $scope.Door1 != true) { 
+      $scope.like.votes--; //when button is pressed already, increment
+      $scope.light1 *= (-1);
+      $scope.token++;
+      $scope.Door2 = false;
+    }
+    else if ($scope.token == 1) {
+      $scope.light1 *= (-1);
+      $scope.like.votes++; //when button isn't pressed, increment
+      $scope.token--;
+      $scope.Door1 = false;
+      $scope.Door2 = true;
+    }
+  }
+  $scope.doDislike = function() {
+    if ($scope.token == 0  && $scope.Door2 != true) {
+      $scope.like.votes++; //when button is pressed already, decrement
+      $scope.light2 *= (-1);
+      $scope.token++;
+      $scope.Door1 = false;
+    } 
+    else if ($scope.token == 1){
+      $scope.light2 *= (-1);
+      $scope.like.votes--; //when button isn't pressed, decrement
+      $scope.token--;
+      $scope.Door2 = false;
+      $scope.Door1 = true;
+    }
+  }
+}]);
+

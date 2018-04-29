@@ -4,6 +4,8 @@ body {
     margin-right: auto;
   }
 
+
+
 div.fixed {
     position: fixed;
     bottom: 140px;
@@ -86,11 +88,10 @@ transition: height 2s ease;
   -webkit-font-smoothing:antialiased !important;
 }
 
-  .content{
-    margin: 30% auto;
-    text-align: center;
-}
-      like{
+
+
+like{
+	font-size: 1.2em;
       color: gray;
       text-decoration: none !important;
       .glyphicon{
@@ -105,7 +106,9 @@ transition: height 2s ease;
         }
       }    
     }
-        dislike{
+    
+dislike{
+	font-size: 1.2em;
       color: gray;
       text-decoration: none !important;
       .glyphicon{
