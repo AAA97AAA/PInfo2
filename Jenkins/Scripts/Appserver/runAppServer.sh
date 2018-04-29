@@ -4,8 +4,7 @@ CONTAINER_NAME='cheeky_binko'
 IMAGE_NAME='academi-co-wildfly'
 NETWORK_NAME='academi-co-network'
 
-docker network inspect $NETWORK_NAME 1>/dev/null 2>/dev/null
-if [ $? -ne 0 ]; then
+if [ !"$(docker network ls -q -f name=$NETWORK_NAME)" ]; then
      docker network create --subnet 172.18.0.0/16 $NETWORK_NAME
 fi
 

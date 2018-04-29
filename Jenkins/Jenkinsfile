@@ -59,11 +59,6 @@ pipeline {
     }
 
     post {
-        always {
-            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-            sh 'sh Jenkins/Scripts/database/killDatabaseTests.sh'
-        }
-
         success {
             emailext (
                 subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
