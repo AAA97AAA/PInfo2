@@ -4,12 +4,27 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
+import org.mockito.InOrder;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
@@ -30,8 +45,7 @@ public class ConcreteDocumentTest {
 		// Setup data to be put in the entity
 		long id = 4;
 		String name = "Name";
-		int size = 128 * 128;
-		byte[] data = new byte[size];
+		byte[] data = new byte[ThreadLocalRandom.current().nextInt(1, 100)];
 		new Random().nextBytes(data);
 		
 		// Construct entity with full constructor call
@@ -55,46 +69,142 @@ public class ConcreteDocumentTest {
 	@Test
 	public void testDownload() throws IOException {
 		
-		// Setup data to be put in the entity
+		// Setup expectation
 		long id = 4;
-		String name = "Name";
-		int size = 128 * 128;
+		String filename = "testFile.txt";
+		int size = ThreadLocalRandom.current().nextInt(1, 1024);
 		byte[] data = new byte[size];
 		new Random().nextBytes(data);
 		
-		// Construct entity
-		ConcreteDocument document = new ConcreteDocument(name, data);
+		// Construct comparison entity
+		ConcreteDocument document = new ConcreteDocument(filename, data);
 		document.setId(id);
 		
-		// Create expected result
-		String name2 = "testDownload.png";
-		int size2 = 128 * 128;
-		byte[] data2 = new byte[size2];
-		new Random().nextBytes(data2);
+		// Write temporary file to be read
+//		String targetPath = "./" + name2;
+		File tmpfile = new File(filename);
+		tmpfile.deleteOnExit();
+		FileOutputStream stream = new FileOutputStream(filename);
+	    stream.write(data);
+	    stream.close();
 		
-		// Create file
-		String targetPath = "./" + name2;
-		FileOutputStream stream = new FileOutputStream(targetPath);
-		try {
-		    stream.write(data2);
-		    
-		}
-		catch (Exception e) {
-		    e.printStackTrace();
-		}
-		finally {
-		    stream.close();
-		}
-		
-		// Apply download and test
-		document.download(targetPath);
+		// Call the method and fill the test entity
+		document.download(filename);
 
+		// Control result
 		assertEquals("Unexpected id in entity.", id, document.getId());
-		assertEquals("Unexpected name in entity.", name2, document.getName());
-		assertArrayEquals("Unexpected data in entity.", data2, document.getData());
+		assertEquals("Unexpected name in entity.", filename, document.getName());
+		assertArrayEquals("Unexpected data in entity.", data, document.getData());
 		
-
-		// TODO: Download with exception
+		// Destroy test file
+		tmpfile.delete();
+	}
+	
+	/**
+	 * Tests the 'getFile' method
+	 * 
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	@Test
+	public void testGetFile() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+		IllegalArgumentException, InvocationTargetException {
+		
+		// Set test parameter (current class file)
+		String fileName = getClass().getResource(getClass().getSimpleName() + ".class").getPath();
+		
+		// Compute expected result
+		File expected = new File(fileName);
+		
+		// Make private method accessible and call it
+		ConcreteDocument testDocument = new ConcreteDocument();
+		Method getFile = testDocument.getClass().getDeclaredMethod("getFile", String.class);
+		getFile.setAccessible(true);
+		File actual = (File) getFile.invoke(testDocument, fileName);
+		
+		// Compare outputs
+		assertEquals("Wrong file object generated.", expected, actual);
+	}
+	
+	/**
+	 * Tests the 'getStream' method
+	 * 
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 * @throws IOException
+	 */
+	@Test
+	public void testGetStream() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+		IllegalArgumentException, InvocationTargetException, IOException {
+		
+		// Set test parameter (current class file)
+		File file = new File(getClass().getResource(getClass().getSimpleName() + ".class").getPath());
+		
+		// Compute the expected result
+		byte[] expected = new byte[(int) file.length()];
+		FileInputStream stream = new FileInputStream(file);
+		stream.read(expected);
+		stream.close();
+		
+		// Make private method accessible and call it
+		ConcreteDocument testDocument = new ConcreteDocument();
+		Method getStream = testDocument.getClass().getDeclaredMethod("getStream", File.class);
+		getStream.setAccessible(true);
+		FileInputStream testedStream = (FileInputStream) getStream.invoke(testDocument, file);
+		byte[] actual = new byte[(int) file.length()];
+		testedStream.read(actual);
+		testedStream.close();
+		
+		// Compare outputs
+		assertArrayEquals("Wrong stream object generated.", expected, actual);
+		
+		// Control illegal call
+		assertNull("Managed to read non-existant file (somehow).", getStream.invoke(testDocument, new File("nonexistant.lol")));
+	}
+	
+	@Test
+	public void testGetBytes() throws IOException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		
+		// Generate test data
+		int size = ThreadLocalRandom.current().nextInt(1, 100);
+		byte[] byteArray = new byte[size];
+		FileInputStream fakeStream = mock(FileInputStream.class);
+		
+		// Set stream behavior
+		doAnswer(new Answer<Object>() {
+			public Object answer(InvocationOnMock invocation) {
+				byte[] inputArray = invocation.getArgument(0);
+				for (int i = 0; i < size; i++) {
+					inputArray[i] = byteArray[i];
+				}
+				return null;
+			}
+		}).when(fakeStream).read(any(byte[].class));
+		doThrow(IOException.class).when(fakeStream).close(); // Make 'close' fail "fo' sh*t'n'giggles
+		
+		// Make private method accessible and call it
+		ConcreteDocument testDocument = new ConcreteDocument();
+		Method getBytes = testDocument.getClass().getDeclaredMethod("getBytes", FileInputStream.class, int.class);
+		getBytes.setAccessible(true);
+		byte[] result = (byte[]) getBytes.invoke(testDocument, fakeStream, size);
+		
+		// Control result
+		assertArrayEquals("Wrong byte array read.", byteArray, result);
+		
+		// Verify follow-up calls
+		InOrder order = inOrder(fakeStream);
+		order.verify(fakeStream, times(1)).read(any());
+		order.verify(fakeStream, times(1)).close();
+		
+		// Control that failure to open returns null
+		doThrow(IOException.class).when(fakeStream).read(any(byte[].class));
+		assertNull("Returned non-null value with invalid file.", getBytes.invoke(testDocument, fakeStream, size));
 	}
 	
 	/**

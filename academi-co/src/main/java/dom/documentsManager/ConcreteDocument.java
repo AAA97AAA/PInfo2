@@ -2,6 +2,7 @@ package dom.documentsManager;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -15,6 +16,9 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Document representation implementation
  * with: unique id, name, content (as bytes)
@@ -25,6 +29,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "DOCUMENTS")
 public class ConcreteDocument implements Document, Serializable {
+	
+	// Error logger for file reading problems
+	static private Logger logger = LogManager.getLogger(ConcreteDocument.class);
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = 7828017987854024078L;
@@ -64,29 +71,51 @@ public class ConcreteDocument implements Document, Serializable {
 	@Override
 	public void download(String targetPath) {
 		
-		// Get the file and ready buffer
-		File file = new File(targetPath);
-		byte[] buffer = new byte[(int) file.length()];
+		// Get the file as stream
+		File file = getFile(targetPath);
+		FileInputStream stream = getStream(file);
 		
-		// Read file into buffer (hooray for error control !)
-		FileInputStream stream = null;
-		try {
-			stream = new FileInputStream(file);
-			stream.read(buffer); // Here the file is read
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		} finally {
-			try {
-				stream.close();
-			} catch (IOException | NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
+		// Read file into buffer
+		byte[] buffer = getBytes(stream, (int) file.length());
 		
 		// Update the instance's content
 		setName(file.getName());
 		setData(buffer);
+	}
+	
+	/**
+	 * The following methods are the steps for the 'download' method
+	 * and allow for better factoring and testing
+	 * (hooray for error control !)
+	 */
+	
+	private File getFile(String targetPath) {
+		return new File(targetPath);
+	}
+	
+	private FileInputStream getStream(File file) {
+		try {
+			return new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			logger.error("Could not open file.", e);
+			return null;
+		}
+	}
+	
+	private byte[] getBytes(FileInputStream stream, int size) {
+		byte[] buffer = new byte[size];
+		try {
+			stream.read(buffer);
+		} catch (IOException e) {
+			logger.error("Could not read stream.", e);
+			return null;
+		}
+		try {
+			stream.close();
+		} catch (IOException e) {
+			logger.error("Could not close stream.", e);
+		}
+		return buffer;
 	}
 
 	/***** Getters/Setters *****/

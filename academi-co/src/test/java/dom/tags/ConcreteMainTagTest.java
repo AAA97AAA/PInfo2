@@ -1,20 +1,18 @@
 package dom.tags;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 
-import dom.content.ConcreteUser;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 /**
@@ -78,7 +76,6 @@ public class ConcreteMainTagTest {
 		
 		// Setup data to be put in the entity
 		String name = "Astronomy";
-		long id = 42;
 		long newId = 43;
 		Map<Long, SecondaryTag> children = new HashMap<Long, SecondaryTag>();
 		long min = 1;
@@ -146,7 +143,6 @@ public class ConcreteMainTagTest {
 		
 		// Setup data to be put in the entity
 		String name = "Economy";
-		long id = 42;
 		Map<Long, SecondaryTag> children = new HashMap<Long, SecondaryTag>();
 		long min = 1;
 		long max = 50;

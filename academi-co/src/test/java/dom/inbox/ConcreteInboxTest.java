@@ -135,7 +135,6 @@ public class ConcreteInboxTest {
 	@Test
 	public void testNotification() {
 		// Setup data to be put in the entity 
-		long id = 74;
 		long idNotif = 123;
 		Map<Long, Notification> content = new HashMap<Long, Notification>();
 		
