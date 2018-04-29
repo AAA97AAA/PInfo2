@@ -23,7 +23,7 @@ pipeline {
             }
             steps {
                 sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh'
-                sh 'sh Jenkins/scripts/database/runDatabaseTests.sh'
+                sh 'sh Jenkins/scripts/Database/runDatabaseTests.sh'
             }
         }
 
@@ -45,7 +45,16 @@ pipeline {
         }
 
         stage('RunBuildContainers') {
-
+            agent {
+                docker {
+                    image 'docker'
+                    args '--net="host"'
+                }
+            }
+            steps {
+                sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
+                sh 'sh Jenkins/scripts/Database/runDatabase.sh'
+            }
         }
     }
 
