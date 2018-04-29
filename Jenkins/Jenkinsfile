@@ -23,7 +23,7 @@ pipeline {
             }
             steps {
                 sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh'
-                sh 'sh Jenkins/scripts/Database/runDatabaseTests.sh'
+                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh'
             }
         }
 
@@ -53,15 +53,17 @@ pipeline {
             }
             steps {
                 sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
-                sh 'sh Jenkins/scripts/Database/runDatabase.sh'
+                sh 'sh Jenkins/Scripts/Database/runDatabase.sh'
             }
         }
     }
 
     post {
         always {
-            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-            sh 'sh Jenkins/scripts/database/killDatabaseTests.sh'
+            node('KillTestsContainers') {
+                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
+                sh 'sh Jenkins/Scripts/database/killDatabaseTests.sh'
+            }
         }
 
         success {
