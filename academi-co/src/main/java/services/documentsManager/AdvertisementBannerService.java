@@ -11,7 +11,7 @@ public interface AdvertisementBannerService extends Serializable {
 	
 	public Document getAdvertisementBanner(long id);
 	
-	public void addAdvertisementBanner(Document advertisementBanner);
+	public Document addAdvertisementBanner(Document advertisementBanner);
 	
 	public void removeAdvertisementBanner(long id);
 	
