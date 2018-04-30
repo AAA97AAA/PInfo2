@@ -81,7 +81,6 @@ public class ConcreteDocumentTest {
 		document.setId(id);
 		
 		// Write temporary file to be read
-//		String targetPath = "./" + name2;
 		File tmpfile = new File(filename);
 		tmpfile.deleteOnExit();
 		FileOutputStream stream = new FileOutputStream(filename);
@@ -113,8 +112,8 @@ public class ConcreteDocumentTest {
 	public void testGetFile() throws NoSuchMethodException, SecurityException, IllegalAccessException,
 		IllegalArgumentException, InvocationTargetException {
 		
-		// Set test parameter (current class file)
-		String fileName = getClass().getResource(getClass().getSimpleName() + ".class").getPath();
+		// Set test parameter
+		String fileName = "someFileName.txt";
 		
 		// Compute expected result
 		File expected = new File(fileName);
@@ -143,12 +142,22 @@ public class ConcreteDocumentTest {
 	public void testGetStream() throws NoSuchMethodException, SecurityException, IllegalAccessException,
 		IllegalArgumentException, InvocationTargetException, IOException {
 		
-		// Set test parameter (current class file)
-		File file = new File(getClass().getResource(getClass().getSimpleName() + ".class").getPath());
+		// Set test expectation
+		String filename = "spoofFile.txt";
+		int size = ThreadLocalRandom.current().nextInt(1, 1024);
+		byte[] data = new byte[size];
+		new Random().nextBytes(data);
+		
+		// Write temporary file to be read
+		File tmpfile = new File(filename);
+		tmpfile.deleteOnExit();
+		FileOutputStream outStream = new FileOutputStream(filename);
+		outStream.write(data);
+		outStream.close();
 		
 		// Compute the expected result
-		byte[] expected = new byte[(int) file.length()];
-		FileInputStream stream = new FileInputStream(file);
+		byte[] expected = new byte[(int) tmpfile.length()];
+		FileInputStream stream = new FileInputStream(tmpfile);
 		stream.read(expected);
 		stream.close();
 		
@@ -156,10 +165,13 @@ public class ConcreteDocumentTest {
 		ConcreteDocument testDocument = new ConcreteDocument();
 		Method getStream = testDocument.getClass().getDeclaredMethod("getStream", File.class);
 		getStream.setAccessible(true);
-		FileInputStream testedStream = (FileInputStream) getStream.invoke(testDocument, file);
-		byte[] actual = new byte[(int) file.length()];
+		FileInputStream testedStream = (FileInputStream) getStream.invoke(testDocument, tmpfile);
+		byte[] actual = new byte[(int) tmpfile.length()];
 		testedStream.read(actual);
 		testedStream.close();
+		
+		// Destroy test file
+		tmpfile.delete();
 		
 		// Compare outputs
 		assertArrayEquals("Wrong stream object generated.", expected, actual);
