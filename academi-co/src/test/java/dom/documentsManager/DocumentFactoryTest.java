@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
@@ -76,12 +77,11 @@ public class DocumentFactoryTest {
 		
 		// Create file
 		String targetPath = "./" + name;
-		FileOutputStream stream = new FileOutputStream(targetPath);
-		try {
-		    stream.write(data);
-		} finally {
-		    stream.close();
-		}
+		File file = new File(targetPath);
+		file.deleteOnExit();
+		FileOutputStream stream = new FileOutputStream(file);
+	    stream.write(data);
+	    stream.close();
 		
 		// Apply method
 		Document documentMock = new ConcreteDocument("interestingName", data);
@@ -89,6 +89,9 @@ public class DocumentFactoryTest {
 		
 		// Verify that the right data were founded in the file	
 		assertArrayEquals("Unexpected data in entity.", documentMock.getData(), documentToTest.getData());
+		
+		// Delete test file
+		file.delete();
 	}
 	
 }

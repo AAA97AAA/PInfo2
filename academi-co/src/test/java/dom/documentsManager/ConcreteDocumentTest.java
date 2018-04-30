@@ -32,6 +32,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
  * Test class for ConcreteDocument
  * 
  * @author Clasino
+ * @author kaikoveritch (rework)
  *
  */
 public class ConcreteDocumentTest {
