@@ -14,6 +14,23 @@ pipeline {
             }
         }
 
+        stage('Unit Tests') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn clean verify -f academi-co/pom.xml -DskipITs=true'
+            }
+            post {
+                always {
+                    junit 'academi-co/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
         stage('RunTestsContainers') {
             agent {
                 docker {
@@ -27,7 +44,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Integration Tests') {
             agent {
                 docker {
                     image 'maven:3-alpine'
@@ -35,7 +52,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -f academi-co/pom.xml test'
+                sh 'mvn clean verify -f academi-co/pom.xml -Dsurefire.skip=true'
             }
             post {
                 always {
