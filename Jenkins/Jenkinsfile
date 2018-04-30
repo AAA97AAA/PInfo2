@@ -52,8 +52,6 @@ pipeline {
                 }
             }
             steps {
-                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-                sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
                 sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
                 sh 'sh Jenkins/Scripts/Database/runDatabase.sh'
             }
@@ -61,6 +59,15 @@ pipeline {
     }
 
     post {
+        always {
+            node('Cleanup') {
+                steps {
+                    sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
+                    sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
+                }
+            }
+        }
+
         success {
             emailext (
                 subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",

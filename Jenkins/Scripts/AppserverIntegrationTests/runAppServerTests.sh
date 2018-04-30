@@ -4,7 +4,7 @@ CONTAINER_NAME='bodacious_goren'
 IMAGE_NAME='academi-co-test-wildfly'
 
 if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
- 	docker build -t $IMAGE_NAME `dirname "$0"`
+ 	docker build --rm -t $IMAGE_NAME `dirname "$0"`
 fi
 
 if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
