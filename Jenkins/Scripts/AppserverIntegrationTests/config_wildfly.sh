@@ -36,7 +36,7 @@ batch
 echo "Connection URL: " $CONNECTION_URL
 
 # Add the datasource
-data-source add --name=Academi-co_DS --driver-name=h2 --jndi-name=$ACADEMI_CO_TESTS --connection-url=$H2_URI --user-name=$H2_USER --password=$H2_PWD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000
+data-source add --name=academi-co-tests --driver-name=h2 --jndi-name=$ACADEMI_CO_TESTS --connection-url=$H2_URI --user-name=$H2_USER --password=$H2_PWD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000
 
 # Add a realm based on a database
 /subsystem=security/security-domain=academi-co-realm:add(cache-type=default)

@@ -5,6 +5,8 @@
 
   	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
+    <jta-data-source>academi-co</jta-data-source>
+
 	<!-- Included classes -->
   	<class>dom.content.ConcreteComment</class>
   	<class>dom.documentsManager.ConcreteDocument</class>
