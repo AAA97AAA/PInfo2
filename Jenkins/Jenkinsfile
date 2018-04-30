@@ -22,7 +22,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn clean verify -f academi-co/pom.xml -DskipITs=true'
+                sh 'mvn test -f academi-co/pom.xml'
             }
             post {
                 always {
@@ -52,7 +52,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn clean verify -f academi-co/pom.xml -Dsurefire.skip=true'
+                sh 'mvn integration-test -f academi-co/pom.xml'
             }
             post {
                 always {
