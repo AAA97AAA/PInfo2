@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
 
     stages {
         stage('Build') {
@@ -60,12 +60,8 @@ pipeline {
 
     post {
         always {
-            node('Cleanup') {
-                steps {
-                    sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-                    sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
-                }
-            }
+            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
+            sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
         }
 
         success {
