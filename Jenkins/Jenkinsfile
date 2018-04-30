@@ -62,6 +62,7 @@ pipeline {
         always {
             sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
             sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
+            sh 'docker system prune -fa'
         }
 
         success {
