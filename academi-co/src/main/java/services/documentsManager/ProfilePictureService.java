@@ -3,7 +3,6 @@ package services.documentsManager;
 import java.io.Serializable;
 
 import javax.ejb.Local;
-import javax.persistence.EntityManagerFactory;
 
 import dom.documentsManager.Document;
 
@@ -12,6 +11,6 @@ public interface ProfilePictureService extends Serializable {
 	
 	public Document getProfilePicture(long id);
 	
-	public void modifyProfilePicture(Document oldProfilePicture, Document newProfilePicture);
+	public Document modifyProfilePicture(Document oldProfilePicture, Document newProfilePicture);
 
 }

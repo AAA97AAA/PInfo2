@@ -6,6 +6,7 @@ import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
 
 import dom.content.User;
+import dom.documentsManager.Document;
 
 @Local
 public interface UserService extends Serializable {
@@ -14,6 +15,8 @@ public interface UserService extends Serializable {
 	
 	public void addUser(@NotNull User user);
 	
-	public void modifyUser(User oldUser, User newUser);
+	public void modifyUser(long id, User newUser);
+
+	public void modifyUserProfilePicture(long id, Document newProfilePicture);
 
 }

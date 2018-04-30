@@ -24,7 +24,7 @@ public class ProfilePictureServiceRs {
 	
 	
 	@GET
-	@Path("/{id}")
+	@Path("/getById/{id}")
 	@Produces("application/json")
 	public Document getProfilePicture(long id) {
 		

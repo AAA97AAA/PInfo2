@@ -1,7 +1,6 @@
 package services.content;
 
 import javax.inject.Inject;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,7 +24,7 @@ public class CommentServiceRs {
 	private CommentService commentService;
 	
 	@GET
-	@Path("/{id}")
+	@Path("/getById/{id}")
 	@Produces("application/json")
 	public Comment getComment(@PathParam("id") long id) {
 		

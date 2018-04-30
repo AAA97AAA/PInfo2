@@ -3,7 +3,6 @@ package services.documentsManager;
 import java.io.Serializable;
 
 import javax.ejb.Local;
-import javax.persistence.EntityManagerFactory;
 
 import dom.documentsManager.Document;
 
@@ -14,6 +13,6 @@ public interface AdvertisementBannerService extends Serializable {
 	
 	public void addAdvertisementBanner(Document advertisementBanner);
 	
-	public void removeAdvertisementBanner(Document advertisementBanner);
+	public void removeAdvertisementBanner(long id);
 	
 }

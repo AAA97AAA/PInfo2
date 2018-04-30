@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import dom.content.User;
+import dom.documentsManager.Document;
 
 /**
  * JAX RS annotated class for REST services, using UserService (@Inject annotation)
@@ -32,7 +33,7 @@ public class UserServiceRs {
 	
 	
 	@GET
-	@Path("/{id}")
+	@Path("/getById/{id}")
 	@Produces("application/json")
 	public User getUser(@PathParam("id") long id) {
 		return userService.getUser(id);
@@ -49,11 +50,19 @@ public class UserServiceRs {
 	
 	
 	@POST
-	@Path("/modify")
+	@Path("/modifyUser")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public void modifyUser(User oldUser, User newUser) {
-		userService.modifyUser(oldUser, newUser);
+	public void modifyUser(long id, User newUser) {
+		userService.modifyUser(id, newUser);
+	}
+	
+	@POST
+	@Path("/modifyProfilePicture")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public void modifyUserProfilePicture(long id, Document newProfilePicture) {
+		userService.modifyUserProfilePicture(id, newProfilePicture);
 	}
 	
 	

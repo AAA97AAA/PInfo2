@@ -26,7 +26,7 @@ public class AdvertisementBannerServiceRs {
 	
 	
 	@GET
-	@Path("/{id}")
+	@Path("/getById/{id}")
 	@Produces("application/json")
 	public Document getAdvertisementBanner(@PathParam("id") long id) {
 		
@@ -48,9 +48,9 @@ public class AdvertisementBannerServiceRs {
 	@DELETE
 	@Path("/delete")
 	@Consumes("application/json")
-	public void removeAdvertisementBanner(Document advertisementBanner) {
+	public void removeAdvertisementBanner(long id) {
 		
-		advertisementBannerService.removeAdvertisementBanner(advertisementBanner);
+		advertisementBannerService.removeAdvertisementBanner(id);
 		
 	}
 	

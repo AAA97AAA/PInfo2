@@ -24,7 +24,7 @@ public class QuestionThreadServiceRs {
 	private QuestionThreadService questionThreadService;
 	
 	@GET
-	@Path("/{id}")
+	@Path("/getById/{id}")
 	@Produces("application/json")
 	public QuestionThread getQuestionThread(@PathParam("id") long id) {
 		
