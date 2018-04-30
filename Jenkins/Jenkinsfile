@@ -10,7 +10,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -B -DskipTests -f academi-co/pom.xml clean package'
+                sh 'mvn clean install -B -DskipTests=true -f academi-co/pom.xml'
             }
         }
 
