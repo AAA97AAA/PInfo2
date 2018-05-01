@@ -1,7 +1,6 @@
 package services.content;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -26,7 +25,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import dom.content.User;
 import dom.documentsManager.Document;
-import services.documentsManager.ConcreteProfilePictureService;
 
 /**
  * Test class for User service

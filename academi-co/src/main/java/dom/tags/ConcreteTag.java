@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -19,6 +21,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "LANGUAGE_TAGS")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class ConcreteTag implements Tag, Serializable {
 
 	// Serial version (auto-generated)
