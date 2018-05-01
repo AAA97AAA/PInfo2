@@ -2,9 +2,11 @@ package dom.tags;
 
 import java.io.Serializable;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +18,8 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "SECONDARY_TAGS")
+@PrimaryKeyJoinColumn(name = "ID")
+@DiscriminatorValue("SECONDARY")
 public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, Serializable {
 	
 	// Serial version (auto-generated)

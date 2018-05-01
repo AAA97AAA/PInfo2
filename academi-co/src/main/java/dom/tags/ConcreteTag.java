@@ -3,6 +3,8 @@ package dom.tags;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +23,9 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "LANGUAGE_TAGS")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "TAG_TYPE")
+@DiscriminatorValue("LANGUAGE")
 public class ConcreteTag implements Tag, Serializable {
 
 	// Serial version (auto-generated)

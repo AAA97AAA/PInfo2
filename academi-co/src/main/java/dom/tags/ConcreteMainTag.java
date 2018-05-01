@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +20,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "MAIN_TAGS")
+@PrimaryKeyJoinColumn(name = "ID")
+@DiscriminatorValue("MAIN")
 public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializable {
 	
 	// Serial version (auto-generated)

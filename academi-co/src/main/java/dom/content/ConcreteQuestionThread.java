@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -34,6 +36,8 @@ import dom.tags.Tag;
  */
 @Entity
 @Table(name = "QUESTION_THREADS")
+@PrimaryKeyJoinColumn(name = "ID")
+@DiscriminatorValue("THREAD")
 public class ConcreteQuestionThread extends ConcretePost implements Serializable, QuestionThread {
 
 	// Serial version (auto-generated

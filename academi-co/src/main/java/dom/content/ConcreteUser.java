@@ -58,7 +58,7 @@ public class ConcreteUser implements User, Serializable {
 	private String email;
 	
 	@NotNull
-	@Column(name = "PASSWORD")
+	@Column(name = "PASSWORD_HASH")
 	private String password;
 	
 	@NotNull
@@ -66,7 +66,7 @@ public class ConcreteUser implements User, Serializable {
 	@JoinColumn(name = "PROFILE_PICTURE")
 	private Document profilePicture;
 	
-	@Column(name = "TYPE")
+	@Column(name = "USER_TYPE")
 	private int type;
 	
 	@NotNull

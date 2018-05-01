@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +32,9 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "POSTS")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "POST_TYPE")
+@DiscriminatorValue("POST")
 public class ConcretePost implements Post, Serializable {
 
 	// Serial version (auto-generated)
@@ -38,7 +42,7 @@ public class ConcretePost implements Post, Serializable {
 
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@NotNull
@@ -55,14 +59,14 @@ public class ConcretePost implements Post, Serializable {
 	private LocalDateTime creationDate;
 	
 	@ManyToMany(targetEntity = ConcreteUser.class)
-	@JoinTable(name = "POSTS_UPVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
-		inverseJoinColumns = @JoinColumn(name = "UPVOTER_ID"))
+	@JoinTable(name = "UPVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
+		inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	@MapKey(name = "id")
 	private Map<Long, User> upvoters;
 	
 	@ManyToMany(targetEntity = ConcreteUser.class)
-	@JoinTable(name = "POSTS_DOWNVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
-		inverseJoinColumns = @JoinColumn(name = "DOWNVOTER_ID"))
+	@JoinTable(name = "DOWNVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
+		inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	@MapKey(name = "id")
 	private Map<Long, User> downvoters;
 	

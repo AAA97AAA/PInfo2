@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -18,6 +20,8 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "COMMENTS")
+@PrimaryKeyJoinColumn(name = "ID")
+@DiscriminatorValue("COMMENT")
 public class ConcreteComment extends ConcretePost implements Serializable, Comment {
 
 	// Serial version (auto-generated)
