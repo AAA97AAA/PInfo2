@@ -2,6 +2,22 @@ pipeline {
     agent any
 
     stages {
+        stage('Clean-Up') {
+            agent {
+                docker {
+                    image 'docker'
+                    args '--net="host"'
+                }
+            }
+            steps {
+                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
+                sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
+                sh 'sh Jenkins/Scripts/Appserver/killAppServer.sh'
+                sh 'sh Jenkins/Scripts/Database/killDatabase.sh'
+                sh 'docker system prune -fa'
+            }
+        }
+
         stage('Build') {
             agent {
                 docker {
