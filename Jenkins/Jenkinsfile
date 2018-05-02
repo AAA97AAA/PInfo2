@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    // Set max JVM heap size for maven
+    environment {
+        MAVEN_OPTS = '-Xmx2048m'
+    }
+
     stages {
         // Delete all containers and images
         stage('Clean-Up') {
