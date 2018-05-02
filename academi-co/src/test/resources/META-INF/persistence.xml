@@ -5,7 +5,7 @@
 
   	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-    <jta-data-source>academi-co-tests</jta-data-source>
+    <jta-data-source>java:/academi-co-tests</jta-data-source>
 
 	<!-- Included classes -->
   	<class>dom.content.ConcreteComment</class>

@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import dom.documentsManager.Document;
 
@@ -26,9 +27,19 @@ public class ProfilePictureServiceRs {
 	@GET
 	@Path("/getById/{id}")
 	@Produces("application/json")
-	public Document getProfilePicture(long id) {
+	public Response getProfilePicture(long id) {
 		
-		return profilePictureService.getProfilePicture(id);
+//		Document profilePicture = null;
+		
+//		try { 
+		Document profilePicture = profilePictureService.getProfilePicture(id);
+//		}
+		
+//		catch (NoResultException e) {
+//			return Response.status(Response.Status.NOT_FOUND).build();
+//		}
+		
+		return Response.ok().entity(profilePicture).build();
 		
 	}
 	
