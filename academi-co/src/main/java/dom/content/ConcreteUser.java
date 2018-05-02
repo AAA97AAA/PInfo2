@@ -34,12 +34,6 @@ import dom.inbox.Inbox;
 @Entity
 @Table(name = "USERS")
 public class ConcreteUser implements User, Serializable {
-	
-	/***** Constants *****/
-	static public int BANNED = -1;
-	static public int REGISTERED = 0;
-	static public int MODERATOR = 1;
-	static public int ADMINISTRATOR = 2;
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -854685288099973922L;

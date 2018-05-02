@@ -12,6 +12,12 @@ import dom.inbox.Inbox;
  *
  */
 public interface User {
+	
+	/***** Constants *****/
+	static public int BANNED = -1;
+	static public int REGISTERED = 0;
+	static public int MODERATOR = 1;
+	static public int ADMINISTRATOR = 2;
 
 	public long getId();
 

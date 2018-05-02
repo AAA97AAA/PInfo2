@@ -8,6 +8,7 @@ import dom.content.AllContentTests;
 import dom.documentsManager.AllDocumentTests;
 import dom.inbox.AllInboxTests;
 import dom.tags.AllTagsTests;
+import moderatorsManager.AllModeratorsManagerTests;
 
 /**
  * Test suite for the whole dom package
@@ -16,7 +17,7 @@ import dom.tags.AllTagsTests;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({AllContentTests.class, AllDocumentTests.class, AllInboxTests.class, AllTagsTests.class})
+@SuiteClasses({AllContentTests.class, AllDocumentTests.class, AllInboxTests.class, AllTagsTests.class, AllModeratorsManagerTests.class})
 public class AllDomTests {
 
 }
