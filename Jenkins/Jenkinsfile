@@ -64,7 +64,7 @@ pipeline {
             agent {
                 docker {
                     image 'docker'
-                    args '--net="host --entrypoint=""'
+                    args '--net="host" --entrypoint=""'
                 }
             }
             steps {
