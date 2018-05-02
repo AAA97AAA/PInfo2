@@ -80,7 +80,7 @@ pipeline {
             steps {
                 sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
                 sh 'sh Jenkins/Scripts/Database/runDatabase.sh'
-                sh 'sh jenkins/scripts/deploy.sh'
+                sh 'sh Jenkins/Scripts/deploy.sh'
             }
         }
     }
