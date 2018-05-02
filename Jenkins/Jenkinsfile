@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker'
-            args '--net="host" --entrypoint=""'
-        }
-    }
+    agent any
 
     stages {
         // Delete all containers and images
@@ -86,12 +81,6 @@ pipeline {
     }
 
     post {
-        // Delete all containers and images used for tests
-        always {
-            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-            sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
-            sh 'docker system prune -fa'
-        }
 
         // Send e-mail
         success {
