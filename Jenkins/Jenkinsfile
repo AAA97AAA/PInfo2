@@ -1,12 +1,18 @@
 pipeline {
     agent any
 
+    // Set max JVM heap size for maven
+    environment {
+        MAVEN_OPTS = '-Xmx1024m'
+    }
+
     stages {
+        // Delete all containers and images
         stage('Clean-Up') {
             agent {
                 docker {
                     image 'docker'
-                    args '--net="host"'
+                    args '--net="host" --entrypoint=""'
                 }
             }
             steps {
@@ -18,6 +24,7 @@ pipeline {
             }
         }
 
+        // Build the project
         stage('Build') {
             agent {
                 docker {
@@ -30,11 +37,12 @@ pipeline {
             }
         }
 
+        // Launches the containers used for testing
         stage('RunTestsContainers') {
             agent {
                 docker {
                     image 'docker'
-                    args '--net="host"'
+                    args '--net="host" --entrypoint=""'
                 }
             }
             steps {
@@ -43,6 +51,7 @@ pipeline {
             }
         }
 
+        // Launches the tests
         stage('Tests') {
             agent {
                 docker {
@@ -60,27 +69,25 @@ pipeline {
             }
         }
 
-        stage('RunBuildContainers') {
+        // Deliver the project
+        stage('Deliver') {
             agent {
                 docker {
                     image 'docker'
-                    args '--net="host"'
+                    args '--net="host" --entrypoint="" -v /:/tmp/server'
                 }
             }
             steps {
                 sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
                 sh 'sh Jenkins/Scripts/Database/runDatabase.sh'
+                sh 'sh Jenkins/Scripts/deploy.sh'
             }
         }
     }
 
     post {
-        always {
-            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-            sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
-            sh 'docker system prune -fa'
-        }
 
+        // Send e-mail
         success {
             emailext (
                 subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
