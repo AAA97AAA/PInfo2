@@ -272,8 +272,35 @@ var app = angular.module('app', [])
   }
 }]);
 
+
+var app = angular.module('myApp2', []);
+app.controller('myCtrl', function($scope, $http) {
+
+$scope.intake = function othername() {
+    var input = document.getElementById("userInput").value;
+    output = "&quot"+ "<p>" + input + "</p>" + "&quot";
+    document.getElementById('output').innerHTML = output;
+}
+});
+
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
+	
+	
+	$scope.intake = function othername() {
+	    var input = document.getElementById("userInput").value;
+
+	    
+	    var BEGIN = '<div class=" w3-container w3-card w3-white w3-round w3-margin"><br><img src="images/fakeprofilepic1.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px"><span class="w3-right w3-opacity">1 min</span><h5>Brad Pitt<div class="content"><hr><div style="width:5%; float:right"><span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span><br>0<br><span style="color:gray"><i class="glyphicon glyphicon-download"></i></span></div><div style="width:95%; float:left">';
+	    
+	    var END =   '<br></div></h5></div>'
+
+	    
+	    output = "<p>" + input + "</p>";
+	    document.getElementById('output').innerHTML = BEGIN + output + END;
+
+
+	}
 
       $scope.myWelcome = {
     		  "title": "Does anyone know how to do partial derivative in matlab ?",
@@ -323,6 +350,7 @@ app.controller('myCtrl', function($scope, $http) {
     		  "isBanned": "false"
     		  }
 });
+
 
 
 var app = angular.module('academi-co', [])
