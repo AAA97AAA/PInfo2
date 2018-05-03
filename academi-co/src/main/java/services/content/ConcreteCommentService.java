@@ -48,7 +48,7 @@ public class ConcreteCommentService implements CommentService {
 		
 		// Creating criteria builder to create a criteria query
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		
+				
 		// Criteria query of return type QuestionThread
 		CriteriaQuery<Comment> criteriaQuery = criteriaBuilder.createQuery(Comment.class);
 		

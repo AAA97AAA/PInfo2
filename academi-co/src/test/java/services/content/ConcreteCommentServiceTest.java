@@ -6,7 +6,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Field;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
@@ -17,10 +16,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -29,7 +28,7 @@ import dom.content.QuestionThread;
 import dom.content.User;
 
 /**
- * Test class for Comment service
+ * Unit test for comment service class
  * 
  * @author petrbinko
  *
@@ -69,17 +68,18 @@ public class ConcreteCommentServiceTest {
 	@Mock
 	DataSource fakeDS;
 	
+	@InjectMocks
 	private ConcreteCommentService commentService;
 	
-	@Before
-	public void setEntityManager() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		
-		commentService = new ConcreteCommentService();
-		Field classAttribute = commentService.getClass().getDeclaredField("entityManager");
-		classAttribute.setAccessible(true);
-		classAttribute.set(commentService, fakeEntityManager);
-		
-	}
+//	@Before
+//	public void setEntityManager() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+//		
+//		commentService = new ConcreteCommentService();
+//		Field classAttribute = commentService.getClass().getDeclaredField("entityManager");
+//		classAttribute.setAccessible(true);
+//		classAttribute.set(commentService, fakeEntityManager);
+//		
+//	}
 
 //	@Test
 //	public void testConstructorNotEmpty() {

@@ -7,7 +7,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Field;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
@@ -18,17 +17,17 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import dom.content.QuestionThread;
 
 /**
- * Test class for ConcreteQuestionThreadService
+ * unit test class for concrete question thread service class
  * 
  * @author kaikoveritch
  * @author petrbinko (rework)
@@ -54,48 +53,10 @@ public class ConcreteQuestionThreadServiceTest {
 	
 	@Mock
 	private TypedQuery<QuestionThread> fakeQuery;
-
-	private ConcreteQuestionThreadService questionThreadService;
 	
-	@Before
-	public void setEntityManager() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		
-		// Instantiate tested service
-		questionThreadService = new ConcreteQuestionThreadService();
-		
-		// Replace entity manager with mock
-		Field classAttribute = questionThreadService.getClass().getDeclaredField("entityManager");
-		classAttribute.setAccessible(true);
-		classAttribute.set(questionThreadService, fakeEntityManager);
-		
-	}
+	@InjectMocks
+	ConcreteQuestionThreadService questionThreadService;
 	
-//	/**
-//	 * Tests the empty constructor
-//	 * (Should throw an exception because there is no database)
-//	 */
-//	@Test(expected = PersistenceException.class)
-//	public void testConstructorNoArgument() {
-//		new ConcreteQuestionThreadService();
-//	}
-//	
-//	/**
-//	 * Tests that a mock can successfully be given to the constructor
-//	 */
-//	@Test
-//	public void testConstructor() {
-//		ConcreteQuestionThreadService service = new ConcreteQuestionThreadService(fakeEntityManagerFactory);
-//		assertEquals("Unexpected entity manager factory.", fakeEntityManagerFactory, service.getEmf());
-//	}
-//	
-//	/**
-//	 * Tests construction with null pointer (should fail)
-//	 */
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testIllegalConstruction() {
-//		new ConcreteQuestionThreadService(null);
-//	}
-
 	/**
 	 * Tests the 'getQuestionThread' method
 	 */

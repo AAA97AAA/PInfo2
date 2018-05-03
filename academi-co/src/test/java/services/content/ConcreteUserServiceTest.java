@@ -6,7 +6,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Field;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
@@ -16,18 +15,19 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import dom.content.User;
 import dom.documentsManager.Document;
+import services.documentsManager.ConcreteProfilePictureService;
 
 /**
- * Test class for User service
+ * Unit test for user service class
  * 
  * @author petrbinko
  *
@@ -62,40 +62,23 @@ public class ConcreteUserServiceTest {
 	@Mock
 	private Document fakeDocument;
 	
-	private ConcreteUserService userService;
+	@Mock
+	ConcreteProfilePictureService profilePictureService;
+	
+	@InjectMocks
+	ConcreteUserService userService;
 	
 	
-	@Before
-	public void setEntityManager() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		
-		userService = new ConcreteUserService();
-		Field classAttributeUser = userService.getClass().getDeclaredField("entityManager");
-		classAttributeUser.setAccessible(true);
-		classAttributeUser.set(userService, fakeEntityManager);		
-		
-	}
-		
-//	/**
-//	 * Testing that not empty constructor returns mock entity manager factory
-//	 */
-//	@Test
-//	public void testConstructorNotEmpty() {
+//	@Before
+//	public void setEntityManager() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 //		
-//		// Mock objects
-//		EntityManagerFactory fakeEmf = mock(EntityManagerFactory.class);
-//
-//		// Calling new user service
-//		ConcreteUserService userServiceFake = new ConcreteUserService(fakeEmf);
-//				
-//		// Testing right constructors
-//		assertEquals(userServiceFake.getEmf(), fakeEmf);
+//		userService = new ConcreteUserService();
+//		Field classAttributeUser = userService.getClass().getDeclaredField("entityManager");
+//		classAttributeUser.setAccessible(true);
+//		classAttributeUser.set(userService, fakeEntityManager);		
 //		
 //	}
-//	@Test(expected = PersistenceException.class)
-//	public void testConstructorEmpty() {
-//		new ConcreteUserService();
-//	}
-	
+
 	/**
 	 * Unit tests for addUser method from service.	
 	 */
@@ -159,14 +142,14 @@ public class ConcreteUserServiceTest {
 		userService.modifyUser(id, fakeUser);
 		
 		// Verifying right method calls on objects in the service's function
-		InOrder order2 = inOrder(fakeUser);
-		order2.verify(fakeUser, times(1)).setBio(null);
-		order2.verify(fakeUser, times(1)).setCanBeModerator(any(boolean.class));
-		order2.verify(fakeUser, times(1)).setEmail(null);
-		order2.verify(fakeUser, times(1)).setPassword(null);
-		order2.verify(fakeUser, times(1)).setProfilePicture(null);
-		order2.verify(fakeUser, times(1)).setType(any(int.class));
-		order2.verify(fakeUser, times(1)).setUsername(null);
+		InOrder order = inOrder(fakeUser);
+		order.verify(fakeUser, times(1)).setBio(null);
+		order.verify(fakeUser, times(1)).setCanBeModerator(any(boolean.class));
+		order.verify(fakeUser, times(1)).setEmail(null);
+		order.verify(fakeUser, times(1)).setPassword(null);
+		order.verify(fakeUser, times(1)).setProfilePicture(null);
+		order.verify(fakeUser, times(1)).setType(any(int.class));
+		order.verify(fakeUser, times(1)).setUsername(null);
 		
 	}
 	
@@ -178,34 +161,32 @@ public class ConcreteUserServiceTest {
 	 * @throws IllegalAccessException 
 	 * @throws IllegalArgumentException 
 	 */
-//	@Test
-//	public void testModifyUserProfilePicture() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-//
-//		long id = ThreadLocalRandom.current().nextLong();
-//		
-//		ConcreteProfilePictureService profilePictureService = new ConcreteProfilePictureService();
-//		Field classAttribute = profilePictureService.getClass().getDeclaredField("entityManager");
-//		classAttribute.setAccessible(true);
-//		classAttribute.set(profilePictureService, fakeEntityManager);	
-//		
-//		// Specifying behavior for mock objects related to calls in the service
-//		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
-//		when(fakeUser.getProfilePicture()).thenReturn(fakeDocument);
-//		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);		
-//		when(fakeCriteriaQuery.from(User.class)).thenReturn(fakeRoot);
-//		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
-//		when(fakeTypedQuery.getSingleResult()).thenReturn(fakeUser);
-//		when(userService.getUser(id)).thenReturn(fakeUser);
-//		when(profilePictureService.modifyProfilePicture(fakeDocument, fakeDocument)).thenReturn(fakeDocument);
-//		//doNothing().when(fakeEntityManager).persist(fakeDocument);
-//		
-//		// Calling new user service
-//		userService.modifyUserProfilePicture(id, fakeDocument);
-//		
-//
-//		// Verifying right method calls on objects in the service's function
-//		// verify(fakeUser).setProfilePicture(fakeDocument);
-//
-//	}
+	@Test
+	public void testModifyUserProfilePicture() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+
+		long id = ThreadLocalRandom.current().nextLong();
+		
+		// Specifying behavior for mock objects related to calls in the service
+		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
+		when(fakeUser.getProfilePicture()).thenReturn(fakeDocument);
+		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);		
+		when(fakeCriteriaQuery.from(User.class)).thenReturn(fakeRoot);
+		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
+		when(fakeTypedQuery.getSingleResult()).thenReturn(fakeUser);
+		when(userService.getUser(id)).thenReturn(fakeUser);
+		when(profilePictureService.modifyProfilePicture(fakeDocument, fakeDocument)).thenReturn(fakeDocument);
+		//doNothing().when(fakeEntityManager).persist(fakeDocument);
+		
+		// Calling new user service
+		userService.modifyUserProfilePicture(id, fakeDocument);
+		
+
+		// Verifying right method calls on objects in the service's function
+		InOrder order = inOrder(fakeUser);
+		order.verify(fakeUser, times(1)).getProfilePicture();
+		order.verify(fakeUser, times(1)).setProfilePicture(fakeDocument);
+		verify(profilePictureService).modifyProfilePicture(fakeDocument, fakeDocument);
+
+	}
 	
 }

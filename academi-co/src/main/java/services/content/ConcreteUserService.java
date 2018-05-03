@@ -1,6 +1,7 @@
 package services.content;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -10,12 +11,10 @@ import javax.persistence.criteria.Root;
 
 import dom.content.User;
 import dom.documentsManager.Document;
-import services.documentsManager.ConcreteProfilePictureService;
 import services.documentsManager.ProfilePictureService;
 
 /**
  * Service class implementing services for users
- * 
  * @author petrbinko
  *
  */
@@ -31,6 +30,7 @@ public class ConcreteUserService implements UserService {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	@Inject
 	private ProfilePictureService profilePictureService;
 	
 	
@@ -97,10 +97,7 @@ public class ConcreteUserService implements UserService {
 	
 	@Override
 	public void modifyUserProfilePicture(long id, Document newProfilePicture) {
-		
-		
-		profilePictureService = new ConcreteProfilePictureService();
-
+	
 		User user = getUser(id);
 		Document oldProfilePicture = user.getProfilePicture();
 		user.setProfilePicture(profilePictureService.modifyProfilePicture(oldProfilePicture, newProfilePicture));

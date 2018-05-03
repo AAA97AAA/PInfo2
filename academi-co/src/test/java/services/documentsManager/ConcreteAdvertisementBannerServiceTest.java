@@ -28,7 +28,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import dom.documentsManager.Document;
 
 /**
- * Unit tests for service class Advertisement banner
+ * Unit tests for advertisement banner service class
  * 
  * @author petrbinko
  * @author kaikoveritch (rework)
