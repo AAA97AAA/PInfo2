@@ -101,11 +101,11 @@
 
 		<h3>{{myWelcome.title}}<h3> 
 		<hr>
-        <img src="images/fakeprofilepic1.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+        <img ng-src="data:image/JPEG;base64,{{myWelcome.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
         
         <span class="w3-right w3-opacity">{{myWelcome.creationDate}}</span>
         
-        <h4>Brad Pitt</h4>
+        <h4>{{myWelcome.author}}</h4>
         <br>
 <!-- <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">  -->
 <div style="width:5%; float:right">
@@ -130,7 +130,7 @@
 <!-- Show list of answers -->
 <div class=" w3-container w3-card w3-white w3-round w3-margin" ng-repeat="answer in myWelcome.answers" ><br>
 
-         <img src="images/fakeprofilepic2.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
+         <img ng-src="data:image/JPEG;base64,{{answer.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
         <span class="w3-right w3-opacity">{{answer.creationDate}}</span> 
         <h5>{{answer.author}}        
 <!--         <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; "> -->
@@ -215,7 +215,7 @@ function toggle(anId)
 
 
 <textarea rows="4" cols="50" type="text" id="userInput"></textarea>
-<input style="top:50%; left:5%; width:40%;" type="submit" ng-app="myApp" ng-click="intake()"/>
+<input style="top:50%; left:5%; width:40%;" value="Post a comment" type="submit" ng-app="myApp" ng-click="intake()"/>
 
 </div>
       </div> 
@@ -231,7 +231,7 @@ function toggle(anId)
 
       <div class="w3-card w3-center pub">
 <!--       <a href="https://www.rolex.com" target="_blank"> -->
-         <img src="images/fakeAdRight.png" alt="Add" style="width:200px; height:700px;">
+         <img src="images/adRightChicken.jpg" alt="Add" style="width:200px; height:700px;">
 <!--       </a> -->
 
 
