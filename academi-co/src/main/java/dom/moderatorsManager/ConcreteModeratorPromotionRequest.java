@@ -1,4 +1,4 @@
-package moderatorsManager;
+package dom.moderatorsManager;
 
 import java.io.Serializable;
 

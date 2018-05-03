@@ -1,4 +1,4 @@
-package moderatorsManager;
+package dom.moderatorsManager;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 
 import dom.content.User;
+import dom.moderatorsManager.ConcreteModeratorPromotionRequest;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 /**

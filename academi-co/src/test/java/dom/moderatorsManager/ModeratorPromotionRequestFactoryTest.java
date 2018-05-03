@@ -1,4 +1,4 @@
-package moderatorsManager;
+package dom.moderatorsManager;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -10,6 +10,9 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 
 import dom.content.User;
+import dom.moderatorsManager.ConcreteModeratorPromotionRequest;
+import dom.moderatorsManager.ModeratorPromotionRequest;
+import dom.moderatorsManager.ModeratorPromotionRequestFactory;
 
 /**
  * Test class for ModeratorPromotionRequestFactory.

@@ -7,8 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 import dom.content.AllContentTests;
 import dom.documentsManager.AllDocumentTests;
 import dom.inbox.AllInboxTests;
+import dom.moderatorsManager.AllModeratorsManagerTests;
 import dom.tags.AllTagsTests;
-import moderatorsManager.AllModeratorsManagerTests;
 
 /**
  * Test suite for the whole dom package
