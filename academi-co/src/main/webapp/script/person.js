@@ -298,7 +298,10 @@ app.controller('myCtrl', function($scope, $http) {
 	    
 	    output = "<p>" + input + "</p>";
 	    document.getElementById('output').innerHTML = BEGIN + output + END;
+	
 
+	    userInput.value = userInput.defaultValue;
+	   
 
 	}
 
