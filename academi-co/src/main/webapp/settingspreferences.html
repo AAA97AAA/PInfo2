@@ -3,7 +3,7 @@
 <head>
 
 
-<title>Template</title>
+<title>Settings and preferences</title>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
@@ -66,17 +66,26 @@
 </div>
 
 <!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+<!--     Left Column -->
+    <div style="position: absolute; top: 200px; left: 400px; width: 240px;">
 
-
-       
+<h2><b>Preferences</b></h2>
+<br>
+<input type="checkbox" name="bio" value="bio">Don't show my bio<br>
+<input type="checkbox" name="mail" value="mail">Don't show my email<br>
      
 <!--     End Left Column -->
     </div>
     
 <!--     Middle Column -->
-    <div class="w3-col m7">
-    
+    <div style="position: absolute; top: 400px; left: 950px; width: 640px;">
+    <h2><b>My bio:</b></h2>
+    <textarea rows="4" cols="50" type="text" id="userInput" style="resize:none;"></textarea>
       </div>
+      <input type="submit" value="Submit" id="popUpYes" style="position: absolute; top: 700px; left: 950px; width: 200px; height:40px; hover:gray;">
 
       
 <!--     End Middle Column -->
@@ -84,11 +93,15 @@
      </div>
      
 <!--     Right Column -->
-    <div class="w3-col m2">
+    <div style="position: absolute; top: 200px; left: 1900px; width: 240px;">
 
-        <div class="w3-container">
-
-        </div>
+<h2><b>Settings</b></h2><br>
+  <h3>Change username:</h3> <input type="text" name="username"><br><br><br>
+  <h3>Change password:</h3> Actual password:<input type="text" name="actualpassword">
+  New password: <input type="text" name="newpassword">
+  Repeat new password: <input type="text" name="repeatpassword" ><br><br><br>
+  <h3>New profile picture:</h3><input type="file" name="img" multiple>
+ 
 
       <br>
 
@@ -98,12 +111,15 @@
 <!--     End Right Column -->
     </div>
 
+<img src="images/forgoodui.jpg" alt="Add" style="position: absolute; top: 900px; left: 800px; width:800px; height:200px;"><br>
+
 <!-- End Page Container -->
 </div>
 <br>
 
 <!-- Footer -->
 <div class="footer">
+
      <div class="w3-dropdown-hover w3-hide-small">
        <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
     <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">

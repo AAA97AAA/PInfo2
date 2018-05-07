@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html data-ng-app="persons">
+<head>
+
+
+<title>Template</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+    <script src="lib/dependencies/angular.min.js"></script>
+    <script src="lib/dependencies/angular-resource.min.js"></script>
+    <script src="lib/dependencies/jquery.min.js"></script>
+    <script src="lib/dependencies/ui-bootstrap-tpls.min.js"></script>
+    <script src="lib/dependencies/ng-grid.min.js"></script>
+
+    <script src="script/script-searchpage.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style-searchpage.css"/>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+	
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif} */
+</style>
+</head>
+<body class="w3-theme-l4">
+
+<!-- Navbar -->
+
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-xlarge">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home">Home</i></a>
+  <div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i>Inbox<span class="w3-badge w3-right w3-small w3-green">3</span></button>     
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+      <a href="#" class="w3-bar-item w3-button">Someone commented your thread: "What is the..."</a>
+      <a href="#" class="w3-bar-item w3-button">Someone upvoted your thread: "How to make flat bread"</a>
+      <a href="#" class="w3-bar-item w3-button">Someone asked a question with the tag "Maths"</a>
+    </div>
+  </div>
+
+ <div>
+ 
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
+  </a>
+ </div>
+<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="New Post"><i class="fa fa-plus"></i></a>
+<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="Search"><i class="fa fa-search"></i></a>
+   <div>
+     <a href="#" class="w3-bar-item w3-display-hover w3-button w3-hide-small w3-right w3-padding-large w3-hover-blue" title="My Account">
+    <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
+  </a>
+  </div>
+</div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<!-- Page Container -->
+                 <div class="w3-col m7 otherpositions">
+          <p style="text-align:center;"><img src="images/logo2.png" style="height:70px;width:450px" alt="Logo2"></p>
+      <br></div>
+      
+      
+      <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+      
+<span style="position:absolute; left:400px; width:200px; top:780px;">From date...</span><br><input type="dateBegin" id="dateBegin" style="position:absolute; left:400px; width:200px; top:800px;"></input>
+<span style="position:absolute; left:670px; width:200px; top:780px;">To date...</span><br><input type="dateBegin" id="dateBegin" style="position:absolute; left:670px; width:200px; top:800px;"></input>
+<span style="position:absolute; left:400px; width:200px; top:880px;">Author...</span><br><input type="dateBegin" id="dateBegin" style="position:absolute; left:400px; width:200px; top:900px;"></input>
+<input type="submit" value="Submit" id="popUpYes" style="position: absolute; top: 900px; left: 670px; width: 200px; height:40px; hover:gray;">
+<div id="myDIV" class="header" style="background-color: #000000;  width: 500px;">
+  <h2 style="margin:5px">Primary tag</h2>
+  <input type="text" id="myInput1" placeholder="">
+  <span onclick="newElement1()" class="addBtn">Add</span>
+</div>
+
+<ul id="myUL1" style="width: 500px;">
+</ul>
+
+<br><br> <br><br> 
+<div id="myDIV" class="header"  style="width: 500px;">
+  <h2 style="margin:5px">Secondary tags</h2>
+  <input type="text" id="myInput2" placeholder="">
+  <span onclick="newElement2()" class="addBtn">Add</span>
+</div>
+
+<ul id="myUL2" style="width: 500px;">
+</ul>
+
+
+      <!-- The Grid -->
+
+        
+         <div ng-app="academi-co" ng-controller="profilePageLoad">
+          <!--     Left Column -->
+         <div class="w3-col m3">
+            <br>
+
+            <br>
+            <!--     End Left Column -->
+         </div>
+         
+
+         
+            <!--     Middle Column -->
+
+            <div class="w3-col m7">
+
+               
+               
+               <!-- Central column after MyPosts -->
+               <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin" style="position: absolute; top:200px;">
+                  <br>
+
+                  
+                  
+                  <!-- thread/posts -->
+                  <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
+                     <br>
+                     <br>
+                     <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+                     <span class="w3-right w3-opacity">1 min</span>
+                     <h4>{{post.author}}</h4>
+                     
+                     <div class="content">
+                        <!-- score -->
+                        <hr>
+                        <div style="width:5%; float:right">
+                           <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+                           <br> {{post.score}}
+                           <br>
+                           <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
+                        </div>
+                     </div>
+                     <!-- Posts -->
+                     <div id="post" class="w3-row-padding" style="width:90%; float:left" >
+                        <!-- this is not displayed if it is a reply (ng-if) -->
+                        <div id="postTitle" ng-if= post.title != NULL>
+                           <p><b>{{post.title}}</b></p>
+                        </div>
+                        <p>{{post.content}}</p>
+                        
+                        <!-- Tags -->
+                        <!-- this is not displayed if it is a reply (ng-if) -->
+                        <div class="w3-row-padding" style="margin:0 -16px" ng-if= post.title != NULL>
+                        <hr style="height: 2px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">
+                           <button class="tag maintag">{{post.subject}}</button>
+                           <button class="tag secondarytag" ng-repeat="topic in post.topics">{{topic.name}}</button>
+                        </div>
+                        <br>
+                     </div>
+                  </div>
+                  <!--     End Middle Column -->
+               </div>
+            </div>
+            <!--     Right Column -->
+            <div class="w3-col m2">
+               <div class="w3-container">
+               </div>
+               <div class="w3-card w3-center pub">
+                  <!--       <a href="https://www.rolex.com" target="_blank"> -->
+                  <img src="images/banAdNul.jpg" alt="Advertisement" style="width:200px; height:700px;">
+                  <!--       </a> -->
+               </div>
+               <br>
+               <!--     End Right Column -->
+            </div>
+            <!-- End Page Container -->
+         </div>
+         <br>
+      </div>
+
+
+    
+<!--     Middle Column -->
+    <div class="w3-col m7">
+    
+      </div>
+
+      
+<!--     End Middle Column -->
+   
+     </div>
+     
+<!--     Right Column -->
+    <div class="w3-col m2">
+
+        <div class="w3-container">
+
+        </div>
+
+      <br>
+
+      <br>
+      
+      
+<!--     End Right Column -->
+    </div>
+
+<!-- End Page Container -->
+</div>
+<br>
+
+<!-- Footer -->
+<div class="footer">
+     <div class="w3-dropdown-hover w3-hide-small">
+       <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
+      <a href="#" class="w3-bar-item w3-button">English</a>
+    </div>
+     </div>
+      <p><a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
+<footer class="w3-container w3-theme-d5">
+<h2>&emsp; &emsp; &emsp; Academi-co &copy; All Rights Reserved<span class="tab">Powered by SoftAware </span></h2>
+</footer>
+</div>
+
+</body>
+</html> 
+
+
