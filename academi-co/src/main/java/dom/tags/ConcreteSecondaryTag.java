@@ -94,7 +94,7 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 
 	@Override
 	public String toString() {
-		return "ConcreteMainTag [id=" + getId() + ", name=" + getName() + "parent=" + getParent().getName() + "]";
+		return "ConcreteMainTag [id=" + getId() + ", name=" + getName() + ", parent=" + getParent().getName() + "]";
 	}
 
 }

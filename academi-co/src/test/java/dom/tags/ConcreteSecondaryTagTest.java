@@ -108,7 +108,7 @@ public class ConcreteSecondaryTagTest {
 		secondaryTag.setId(id);
 		
 		// Create expected result
-		String expected = "ConcreteMainTag [id=" + id + ", name=" + name + "parent=" + parentName+ "]";
+		String expected = "ConcreteMainTag [id=" + id + ", name=" + name + ", parent=" + parentName+ "]";
 
 		// Control result
 		assertEquals("Incorrect conversion to string.", expected, secondaryTag.toString());
