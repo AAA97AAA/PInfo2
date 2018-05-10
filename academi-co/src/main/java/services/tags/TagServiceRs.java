@@ -1,5 +1,8 @@
 package services.tags;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -54,23 +57,23 @@ public class TagServiceRs {
 	@Path("/languages")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addLanguageTag(ConcreteTag tag, @Context UriInfo uriInfo) {
-		return Response.created(uriInfo.getAbsolutePath()).entity(service.addTag(tag)).build();
+	public Response addLanguageTag(ConcreteTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
+		return Response.created(new URI(uriInfo.getPath() + "/0")).entity(service.addTag(tag)).build();
 	}
 	
 	@POST
 	@Path("/subjects")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMainTag(ConcreteMainTag tag, @Context UriInfo uriInfo) {
-		return Response.created(uriInfo.getAbsolutePath()).entity(service.addTag(tag)).build();
+	public Response addMainTag(ConcreteMainTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
+		return Response.created(new URI(uriInfo.getPath() + "/0")).entity(service.addTag(tag)).build();
 	}
 	
 	@POST
 	@Path("/topics")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addSecondaryTag(ConcreteSecondaryTag tag, @Context UriInfo uriInfo) {
-		return Response.created(uriInfo.getAbsolutePath()).entity(service.addTag(tag)).build();
+	public Response addSecondaryTag(ConcreteSecondaryTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
+		return Response.created(new URI(uriInfo.getPath() + "/0")).entity(service.addTag(tag)).build();
 	}
 }
