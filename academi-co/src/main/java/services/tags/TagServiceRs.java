@@ -63,7 +63,8 @@ public class TagServiceRs {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addLanguageTag(ConcreteTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
-		return Response.created(new URI(uriInfo.getPath() + "/0")).entity(service.addTag(tag)).build();
+		Tag result = service.addTag(tag);
+		return Response.created(new URI(uriInfo.getPath() + "/" + result.getId())).entity(result).build();
 	}
 	
 	@POST
@@ -71,7 +72,8 @@ public class TagServiceRs {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addMainTag(ConcreteMainTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
-		return Response.created(new URI(uriInfo.getPath() + "/0")).entity(service.addTag(tag)).build();
+		MainTag result = service.addTag(tag);
+		return Response.created(new URI(uriInfo.getPath() + "/" + result.getId())).entity(result).build();
 	}
 	
 	@POST
@@ -79,6 +81,7 @@ public class TagServiceRs {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addSecondaryTag(ConcreteSecondaryTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
-		return Response.created(new URI(uriInfo.getPath() + "/0")).entity(service.addTag(tag)).build();
+		SecondaryTag result = service.addTag(tag);
+		return Response.created(new URI(uriInfo.getPath() + "/" + result.getId())).entity(result).build();
 	}
 }
