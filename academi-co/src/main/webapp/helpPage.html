@@ -3,8 +3,7 @@
 
 <head>
   <!-- Title of the page -->
-  <!-- TODO: add a title for the page -->
-  <title>Index - Academi-co</title>
+  <title>Help Page - Academi-co</title>
 
   <!-- Useful scripts -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -31,6 +30,7 @@
   <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-helpPage.css"/>
 
   <!-- Our Scripts TODO: add your personal js here -->
   <!--<script src="script/person.js"></script> -->
@@ -133,35 +133,62 @@
  </header>
  <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
 
+  <!-- Displayed element at the beginning -->
 
- <div style="text-align:center">
-      <img id="logoHelpPage" src="images/logo2.png"  alt="Logo">
-      <br>
-      <br>
-   <a href="nonConnecteTemplate.html"> Template User non connected</a>
-   <br>
-   <a href="ConnecteTemplate.html"> Template User connected</a>
-   <br>
-    <a href="index.html" >index</a>
-    <br>
-    <a href="administratorPage.html" >administratorPage</a>
-    <br>
-    <a href="helpPage.html"> help page </a>
-    <br>
-    <a href="profilepage.html"> profile page </a>
-    <br>
-    <a href="threadpage.html"> thread page </a>
-    <br>
-    <a href="moderatorspage.html"> moderator page </a>
-    <br>
-    <a href="postthreadpage.html"> post thread page</a>
-    <br>
-    <a href="searchpage.html"> search page </a>
-    <br>
-    <a href="settingspreferences.html"> settings preferences </a>
-    <br>
+<div style="text-align:center">
+     <img id="logoHelpPage" style="text-align:center;vertical-align:middle;" src="images/logo2.png"  alt="Logo">
+     <br>
+     <button id="OurPoliciesButton"  type="button" class="button blueButton" onclick="document.getElementById('OurPolicies').style.display='block'">Our policies</button>
+     <br>
+     <button id="WannaBeModeratorButton" type="button" class="button blueButton" onclick="document.getElementById('WannaBeModerator').style.display='block'">I want to be moderator</button>
+     <br>
+     <button id="QAButton" type="button" class="button blueButton" onclick="document.getElementById('QA').style.display='block'">Questions &amp; Answers</button>
+</div>
 
- </div>
+   <!-- Hidden element that appears when the corresponding button is clicked -->
+
+   <div id="OurPolicies" class="modalBackground scrollModal">
+     <span class="closeButton" onclick="document.getElementById('OurPolicies').style.display='none'">X</span>
+     <form class="modalContent">
+
+
+     </form>
+   </div>
+
+   <div id="WannaBeModerator" class="modalBackground scrollModal">
+     <span class="closeButton" onclick="document.getElementById('WannaBeModerator').style.display='none'">X</span>
+     <form class="modalContent">
+
+     </form>
+   </div>
+
+   <div id="QA" class="modalBackground scrollModal">
+     <span class="closeButton" onclick="document.getElementById('QA').style.display='none'">X</span>
+     <form class="modalContent">
+       <h1 class="titleHP"> Questions &amp; Answers </h1>
+
+       <div style="text-align:left">
+         <p class="questionHP">What is Academi-co?</p>
+         <p class="answerHP">Academi-co is a forum...</p>
+         <br>
+         <p class="questionHP">Ceci est une question</p>
+         <p class="answerHP">Ceci est une réponse</p>
+         <br>
+         <p class="questionHP">Ceci est une question</p>
+         <p class="answerHP">Ceci est une réponse</p>
+         <br>
+         <p class="questionHP">Ceci est une question</p>
+         <p class="answerHP">Ceci est une réponse</p>
+         <br>
+         <p class="questionHP">Ceci est une question</p>
+         <p class="answerHP">Ceci est une réponse</p>
+         <br>
+         <br>
+       </div>
+
+     </form>
+
+   </div>
 
   <!-- - - - - - - - - - - - - - -  Footer  - - - - - - - - - - - - - - -->
   <footer class="footer">
@@ -172,7 +199,7 @@
      <a href="#" class="w3-bar-item w3-button">English</a>
    </div>
     </div>
-     <p><a href="helpPage.html" class="helpPage w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
+     <p><a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
 
   <div class="lastLineFooter w3-container">
     <h5 class="footerCopyright" style="float:left">Academi-co  &copy; All Rights Reserved</h5>

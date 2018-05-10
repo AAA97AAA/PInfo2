@@ -1,0 +1,114 @@
+/* ------ header ------ */
+
+/* full blue bar at the top */
+.mainheader {
+  width:100%; /* all the longer od the page */
+  /* position:fixed  top:0;*/
+background-color: #0b78d1 ;
+}
+
+
+/* Header buttons */
+.buttonHeader {
+  width: auto;
+  height: auto;
+  font-size: 160%;
+  border:none;
+  display: inline-block;
+  /*display: block; /* it a filled rectangle */
+  padding: 12px 24px; /* spacing  8 16*/
+  text-align: left;
+  background-color: #0b78d1;
+  color: #fff;
+}
+
+.buttonHeader:hover {
+  background-color: #ccc;
+  transition: 0.3s;
+}
+/* **** */
+/* inbox */
+.inboxButton {
+  width: auto;
+  transition: all .3s ease;
+}
+
+/* this style allows to have inbox + profilepic (or signin/up) in the same line */
+.inboxDropDown {
+  display: inline-block;
+  border-radius: 5px;
+}
+
+/* hide the dropdown of the inbox */
+.inboxDropDownContent {
+  display: none;
+  background-color: #ccc;
+  border-radius: 5px;
+  position:absolute;
+}
+
+/* styling the content of the inbox */
+.inboxContent {
+  width:auto;
+  display:block;
+  padding:8px 16px;
+  text-align:left;
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+/* display the inbox content */
+.inboxDropDown:hover .inboxDropDownContent{
+  display: block;
+  border-radius: 5px;
+}
+/* **** */
+/* + Button*/
+.plusButton {
+  width:auto;
+}
+
+.plusButton:hover {
+    background-color: #ccc;
+     transition: 0.3s;
+    color: #fff;
+}
+
+/* logo Button
+
+.logoButton {
+
+  background-color: #0b78d1;
+  border:none;
+  outline:0;
+  display:inline-block;
+  padding: 15px 24px;
+  width: auto;
+  float:left;
+
+}
+
+.logoButton:hover {
+  background-color: #ccc;
+  transition: 0.3s;
+  color: #fff;
+}
+*/
+
+/* profilePic button
+.profilePicButton {
+    background-color: #0b78d1;
+    border:none;
+    outline:0;
+    display:inline-block;
+
+    width: auto;
+
+}
+
+.profilePicButton:hover {
+  background-color: #fff;
+  transition: 0.3s;
+}
+
+*/

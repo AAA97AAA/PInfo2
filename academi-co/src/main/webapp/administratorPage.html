@@ -4,7 +4,7 @@
 <head>
   <!-- Title of the page -->
   <!-- TODO: add a title for the page -->
-  <title>Index - Academi-co</title>
+  <title>Admin Page - Academi-co</title>
 
   <!-- Useful scripts -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -20,23 +20,21 @@
   <link rel="stylesheet" href="CSS/ng-grid.min.css" />
 -->
 
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
   <!-- Our stylesheet -->
+  <!--<link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>-->
   <link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-administratorPage.css"/>
 
   <!-- Our Scripts TODO: add your personal js here -->
-  <!--<script src="script/person.js"></script> -->
   <script src="js/modules/allModules.js"></script>
   <script src="js/modules/getRESTCall.js"></script>
-  <script src="js/controllers/script-signInUp.js"></script>
 
   <!-- To have correct caracters for accented letters for example -->
   <meta charset="UTF-8">
@@ -72,100 +70,42 @@
          <a href="#" class="inboxContent" ng-repeat="message in userInbox.messages">{{message.content}}</a>
        </div>
      </div>
-      <!-- Profile Pic -->
-      <button id="loginButton" class="buttonHeader logInButton" onclick="document.getElementById('LoginForm').style.display='block'">Login</button>
-      <button id="signupButton" class="buttonHeader signUpButton" onclick="document.getElementById('SignUpForm').style.display='block'">Sign up</button>
 
+      <!-- Profile Pic -->
+      <a href="profilepage.html" class="buttonHeader profilePicButton" title="My Profile">
+        <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
+      </a>
    </div>
 
-   <!-- Modal for user sign in -->
- <div id="LoginForm" class="modalBackground">
-    <!-- close button -->
-    <span class="closeButton" onclick="document.getElementById('LoginForm').style.display='none'">X</span>
-    <form class="modalContent">
-       <h2 id="textLogin">Login</h2>
-       <br>
-       <input type="text" name="UsernameEntry" placeholder="Username">
-       <br>
-       <br>
-       <input id="LoginPassword" type="password" name="PasswordEntry" placeholder="Password">
-       <i class="fa fa-eye" onmouseover="showLoginPassword();" onmouseout="hideLoginPassword();"></i>
-       <br>
-       <br>
-       <label id="toggleSwitch" class="switch">
-       <input type="checkbox">
-       <span class="slider"></span>
-       </label>
-       <h4 id="stayConnected">Stay Connected</h4>
-       <br>
-       <br>
-       <button id="ConnectedButton" type="button" class="button" onclick="document.getElementById('LoginForm').style.display='none'">Connect</button>
-       <br>
-       <br>
-    </form>
- </div>
 
-<!-- Modal for user sign up -->
-<div id="SignUpForm" class="modalBackground">
-  <!-- close button -->
-  <span class="closeButton" onclick="document.getElementById('SignUpForm').style.display='none'">X</span>
-  <form class="modalContent">
-    <h2 id="textSignUp">Sign up</h2>
-    <br>
-    <br>
-    <!--<h2 class="textinSignUp">Username</h2>-->
-    <input type="text" class="inputSignUp" name="UsernameEntry" placeholder="Username">
-    <br>
-    <!--<h2  class="textinSignUp">Email</h2>-->
-    <input id="EmailSignUp" class="inputSignUp" type="email" name="EmailEntry" placeholder="Email">
-    <br>
-    <!--<h2  class="textinSignUp">Password</h2>-->
-    <input id="SignUpPassword" class="inputSignUp"type="password" name="PasswordEntry" placeholder="Password">
-    <i class="fa fa-eye" onmouseover="showSignUpPassword();" onmouseout="hideSignUpPassword();"></i>
-    <br>
-    <br>
-    <button id="RegisterButton" type="button" class="button" onclick="document.getElementById('SignUpForm').style.display='none'">Create account</button>
-    <br>
-    <br>
-  </form>
+
+  </header>
+   <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
+
+
+
+<div style="text-align:center">
+   <button id="ManageBanners"  type="button" class="buttonAdmin" onclick="document.getElementById('ManageBannersContent').style.display='block'">Manage Banners</button>
+
+   <button id="AddAdministrator"  type="button" class="buttonAdmin" onclick="document.getElementById('AddAdministratorContent').style.display='block'">Add Administrator</button>
+
 </div>
 
- </header>
- <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
 
 
- <div style="text-align:center">
-      <img id="logoHelpPage" src="images/logo2.png"  alt="Logo">
-      <br>
-      <br>
-   <a href="nonConnecteTemplate.html"> Template User non connected</a>
-   <br>
-   <a href="ConnecteTemplate.html"> Template User connected</a>
-   <br>
-    <a href="index.html" >index</a>
-    <br>
-    <a href="administratorPage.html" >administratorPage</a>
-    <br>
-    <a href="helpPage.html"> help page </a>
-    <br>
-    <a href="profilepage.html"> profile page </a>
-    <br>
-    <a href="threadpage.html"> thread page </a>
-    <br>
-    <a href="moderatorspage.html"> moderator page </a>
-    <br>
-    <a href="postthreadpage.html"> post thread page</a>
-    <br>
-    <a href="searchpage.html"> search page </a>
-    <br>
-    <a href="settingspreferences.html"> settings preferences </a>
-    <br>
 
- </div>
+
+
+
+
+
+
+
+
+
 
   <!-- - - - - - - - - - - - - - -  Footer  - - - - - - - - - - - - - - -->
   <footer class="footer">
-
     <div class="w3-dropdown-hover w3-hide-small">
       <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
    <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">

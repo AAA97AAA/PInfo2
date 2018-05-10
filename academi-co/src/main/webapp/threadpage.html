@@ -1,262 +1,257 @@
 <!DOCTYPE html>
-<html data-ng-app="persons">
+<html lang="en">
+
 <head>
+  <!-- Title of the page -->
+  <!-- TODO: add a title for the page -->
+  <title>Thread Page - Academi-co</title>
+
+  <!-- Useful scripts -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-resource.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/ui-bootstrap-tpls.min.js"></script>
+  <script src="js/ng-grid.min.js"></script>
 
 
-<title>Thread Page</title>
+  <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
+  <!--<link rel="stylesheet" href="CSS/bootstrap.min.css" />
+  <link rel="stylesheet" href="CSS/ng-grid.min.css" />
+-->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
-    <script src="lib/dependencies/angular.min.js"></script>
-    <script src="lib/dependencies/angular-resource.min.js"></script>
-    <script src="lib/dependencies/jquery.min.js"></script>
-    <script src="lib/dependencies/ui-bootstrap-tpls.min.js"></script>
-    <script src="lib/dependencies/ng-grid.min.js"></script>
-
-    <script src="script/person.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <!-- Our stylesheet -->
+  <!--<link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>-->
+  <link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-profilePage.css"/>
 
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-/* html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif} */
-</style>
+
+  <!-- Our Scripts TODO: add your personal js here -->
+  <!--<script src="js/modules/allModules.js"></script>
+  <script src="js/modules/getRESTCall.js"></script>
+-->
+  <script src="js/modules/Selim.js"></script>
+
+  <!-- To have correct caracters for accented letters for example -->
+  <meta charset="UTF-8">
+
+  <!-- This is for the Responsive Website -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
-<body class="w3-theme-l4">
+<!-- This body is the container for all the content -->
+<!-- TODO: Here I removed Academi-co app for Selim BSelim.js
+<body class="body" ng-app="academi-co">
+-->
+<body class="body" >
+  <!-- - - - - - - - - - - - - - -  Header: Navigation bar at the top  - - - - - - - - - - - - - - -->
+  <header class="mainheader">
+    <!-- Academi-co logo -->
+    <a href="index.html" class="logoButton buttonHeader" >
+      <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
+    </a>
 
-<!-- Navbar -->
+   <!-- + Button  -->
+   <!-- TODO: add the corresponding link to add a thread -->
+   <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
+   <!-- Search Button -->
 
-<div class="w3-top">
- <div class="w3-bar w3-theme-d2 w3-xlarge">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home">Home</i></a>
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i>Inbox<span class="w3-badge w3-right w3-small w3-green">3</span></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">Someone commented your thread: "What is the..."</a>
-      <a href="#" class="w3-bar-item w3-button">Someone upvoted your thread: "How to make flat bread"</a>
-      <a href="#" class="w3-bar-item w3-button">Someone asked a question with the tag "Maths"</a>
-    </div>
-  </div>
+   <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
+   <!-- Inbox (Notifications) + profile pic logo -->
+   <div style="float:right">
+     <!-- Inbox in header -->
+     <div class="inboxDropDown" ng-controller= "UserInbox">
+       <!-- Inbox button with green number of notifications -->
+       <button class="buttonHeader inboxButton" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-red w3-small">{{userInbox.messages.length}}</span></button>
+       <div class=" inboxDropDownContent" style="right:0;" style="width:300px" >
+         <!-- TODO: add the corresponding link for each notification -->
+         <!-- content in inbox-->
+         <a href="#" class="inboxContent" ng-repeat="message in userInbox.messages">{{message.content}}</a>
+       </div>
+     </div>
 
- <div>
- 
-  <a href="http://localhost:8080/academi-co/profilepage.html#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-    <img src="images/fakeprofilepic1.jpg" style="height:29px;width:29px" alt="Avatar">
-  </a>
- </div>
-<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="New Post"><i class="fa fa-plus"></i></a>
-<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="Search"><i class="fa fa-search"></i></a>
-   <div>
-     <a href="#" class="w3-bar-item w3-display-hover w3-button w3-hide-small w3-right w3-padding-large w3-hover-blue" title="My Account">
-    <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
-  </a>
-  </div>
-</div>
-</div>
-
-<!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-</div>
-
-<!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
-  <!-- The Grid -->
-  <div class="w3-row">
-<!--     Left Column -->
-    <div class="w3-col m3">
-    </div>
-<!--     End Left Column -->
-   
-<!--     Middle Column -->
-     <div class="w3-col m7 otherpositions">
-          <p style="text-align:center;"><img src="images/logo2.png" style="height:70px;width:450px" alt="Logo2"></p>
-      <br>
+      <!-- Profile Pic -->
+      <a href="profilepage.html" class="buttonHeader profilePicButton" title="My Profile">
+        <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
+      </a>
+   </div>
 
 
-<!--       <a href="https://www.bally.ch/de_ch/home/" target="_blank"> -->
-         <img src="images/forgoodui.jpg" alt="Add" style="width:800px; height:200px;">
-<!--       </a> -->
+
+  </header>
+   <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
 
 
-<div ng-app="myApp" ng-controller="myCtrl"> 
-<div class="w3-container w3-card w3-theme-l5 w3-round w3-margin "><br>
-
-<!-- Show MainTag et Secondary tag -->
-          <div class="w3-row-padding" style="margin:0 -16px">
-            <button class="tag maintag">{{myWelcome.subject}}</button>      
+   <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+   <!-- The Grid -->
+   <div class="w3-row">
+   <!--     Left Column -->
+   <div class="w3-col m3">
+   </div>
+   <!--     End Left Column -->
+   <!--     Middle Column -->
+   <div class="w3-col m7 otherpositions">
+   <p style="text-align:center;"><img src="images/logo2.png" style="height:70px;width:450px" alt="Logo2"></p>
+   <br>
+   <!--       <a href="https://www.bally.ch/de_ch/home/" target="_blank"> -->
+   <img src="images/forgoodui.jpg" alt="Add" style="width:800px; height:200px;">
+   <!--       </a> -->
+   <div ng-app="myApp" ng-controller="myCtrl">
+      <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin ">
+         <br>
+         <!-- Show MainTag et Secondary tag -->
+         <div class="w3-row-padding" style="margin:0 -16px">
+            <button class="tag maintag">{{myWelcome.subject}}</button>
             <button class="tag secondarytag" ng-repeat="topic in myWelcome.topics">{{topic.name}}</button>
-        </div>
-        
-        
-        
-<!-- Show Thread -->
-
-		<h3>{{myWelcome.title}}<h3> 
-		<hr>
-        <img ng-src="data:image/JPEG;base64,{{myWelcome.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
-        
-        <span class="w3-right w3-opacity">{{myWelcome.creationDate}}</span>
-        
-        <h4>{{myWelcome.author}}</h4>
-        <br>
-<!-- <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">  -->
-<div style="width:5%; float:right">
-  <div class="content">
-
-      <like href="#" ng-click="doLike()">
-       <i class="glyphicon" ng-class="(light1 == 1)? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-upload'"></i>
-        </like> 
-    <br>    
-<!--       <span ng-model="like.votes">{{like.votes}}</span> -->
-		<span>{{myWelcome.score}}</span>
-    <br>
-       <dislike href="#" ng-click="doDislike()">
-       <i class="glyphicon" ng-class="(light2 == 1) ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-download'"></i>
-    </dislike>
-          
-  </div>
-</div>    
-		
-        <p>{{myWelcome.content}}</p>
-<br>
-<!-- Show list of answers -->
-<div class=" w3-container w3-card w3-white w3-round w3-margin" ng-repeat="answer in myWelcome.answers" ><br>
-
-         <img ng-src="data:image/JPEG;base64,{{answer.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
-        <span class="w3-right w3-opacity">{{answer.creationDate}}</span> 
-        <h5>{{answer.author}}        
-<!--         <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; "> -->
-
-  <div class="content">
-<hr>
-<div style="width:5%; float:right">
-<span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
-      <br>    
-      {{answer.score}}
-    <br>
-<span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
-</div>
-<div style="width:95%; float:left">
-	<p>{{answer.content}}</p>
-  </div>
-		</h5>
-<!--         <img src="images/fakeprofilepic3.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px"> -->
-<!--         <span class="w3-right w3-opacity">Today 14:37</span> -->
-<!--         <h5>Jennifer Aniston -->
-<!--         <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; "> -->
-<!--   <div class="content"> -->
-  
-<!-- <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span> -->
-<!--       <br>     -->
-<!--       -2 -->
-<!--     <br> -->
-<!-- <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span> -->
-
-<!--   </div> -->
-<!--   </div></h5> -->
-<!--         <hr> -->
-<!--         <p>Wich version of matlab are you using ? There's a new function for partial derivations that is faster than diff in the 2017 version of matlab</p> -->
-<!--         <hr style="height: 3px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;"> -->
-<!--         <hr> -->
-</div>
-
-
-<!-- THERE START THE FAKE OF A POST -->
-<!-- <div id="foo" class=" w3-container w3-card w3-white w3-round w3-margin" style="visibility: hidden"><br> -->
-
-<!--          <img src="images/fakeprofilepic1.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px"> -->
-<!--         <span class="w3-right w3-opacity">1 min</span>  -->
-<!--         <h5>Brad Pitt         -->
-
-<!--   <div class="content"> -->
-<!-- <hr> -->
-<!-- <div style="width:5%; float:right"> -->
-<!-- <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span> -->
-<!--       <br>     -->
-<!--       0 -->
-<!--     <br> -->
-<!-- <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span> -->
-<!-- </div> -->
-<!-- <div style="width:95%; float:left"> -->
-
-<output id="output"></output>
-
-
-
-<script>
-function toggle(anId)
-{
-	node = document.getElementById(anId);
-	if (node.style.visibility=="hidden")
-	{
-		// Contenu caché, le montrer
-		node.style.visibility = "visible";
-		node.style.height = "auto";			// Optionnel rétablir la hauteur
-	}
-	else
-	{
-		// Contenu visible, le cacher
-		node.style.visibility = "hidden";
-		node.style.height = "0";			// Optionnel libérer l'espace
-	}
-}
-</script>
-
-<!-- THERE STOPS THE FAKE OF A POST -->
-</div>
-
-
-<textarea rows="4" cols="50" type="text" id="userInput"></textarea>
-<input style="top:50%; left:5%; width:40%;" value="Post a comment" type="submit" ng-app="myApp" ng-click="intake()"/>
-
-</div>
-      </div> 
-      
- 
-<!--     End Middle Column -->
-   
-     
-<!--     Right Column -->
-    <div class="w3-col m2">
-
-
-
+         </div>
+         <!-- Show Thread -->
+         <h3>
+         {{myWelcome.title}}
+         </h3>
+         <hr>
+         <img ng-src="data:image/JPEG;base64,{{myWelcome.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+         <span class="w3-right w3-opacity">{{myWelcome.creationDate}}</span>
+         <h4>{{myWelcome.author}}</h4>
+         <br>
+         <!-- <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">  -->
+         <div style="width:5%; float:right">
+            <div class="content">
+               <like href="#" ng-click="doLike()">
+                  <i class="glyphicon" ng-class="(light1 == 1)? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-upload'"></i>
+               </like>
+               <br>
+               <!--       <span ng-model="like.votes">{{like.votes}}</span> -->
+               <span>{{myWelcome.score}}</span>
+               <br>
+               <dislike href="#" ng-click="doDislike()">
+                  <i class="glyphicon" ng-class="(light2 == 1) ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-download'"></i>
+               </dislike>
+            </div>
+         </div>
+         <p>{{myWelcome.content}}</p>
+         <br>
+         <!-- Show list of answers -->
+         <div class=" w3-container w3-card w3-white w3-round w3-margin" ng-repeat="answer in myWelcome.answers" >
+            <br>
+            <img ng-src="data:image/JPEG;base64,{{answer.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
+            <span class="w3-right w3-opacity">{{answer.creationDate}}</span>
+            <h5>
+               {{answer.author}} </h5>
+               <!--         <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; "> -->
+               <div class="content">
+                  <hr>
+                  <div style="width:5%; float:right">
+                     <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+                     <br>
+                     {{answer.score}}
+                     <br>
+                     <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
+                  </div>
+                  <div style="width:95%; float:left">
+                     <p>{{answer.content}}</p>
+                  </div>
+                  </div>
+                  
+            
+            <!--         <img src="images/fakeprofilepic3.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px"> -->
+            <!--         <span class="w3-right w3-opacity">Today 14:37</span> -->
+            <!--         <h5>Jennifer Aniston -->
+            <!--         <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; "> -->
+            <!--   <div class="content"> -->
+            <!-- <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span> -->
+            <!--       <br>     -->
+            <!--       -2 -->
+            <!--     <br> -->
+            <!-- <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span> -->
+            <!--   </div> -->
+            <!--   </div></h5> -->
+            <!--         <hr> -->
+            <!--         <p>Wich version of matlab are you using ? There's a new function for partial derivations that is faster than diff in the 2017 version of matlab</p> -->
+            <!--         <hr style="height: 3px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;"> -->
+            <!--         <hr> -->
+            </div>
+            <!-- THERE START THE FAKE OF A POST -->
+            <!-- <div id="foo" class=" w3-container w3-card w3-white w3-round w3-margin" style="visibility: hidden"><br> -->
+            <!--          <img src="images/fakeprofilepic1.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px"> -->
+            <!--         <span class="w3-right w3-opacity">1 min</span>  -->
+            <!--         <h5>Brad Pitt         -->
+            <!--   <div class="content"> -->
+            <!-- <hr> -->
+            <!-- <div style="width:5%; float:right"> -->
+            <!-- <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span> -->
+            <!--       <br>     -->
+            <!--       0 -->
+            <!--     <br> -->
+            <!-- <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span> -->
+            <!-- </div> -->
+            <!-- <div style="width:95%; float:left"> -->
+            <output id="output"></output>
+            <script>
+               function toggle(anId)
+               {
+               	node = document.getElementById(anId);
+               	if (node.style.visibility=="hidden")
+               	{
+               		// Contenu caché, le montrer
+               		node.style.visibility = "visible";
+               		node.style.height = "auto";			// Optionnel rétablir la hauteur
+               	}
+               	else
+               	{
+               		// Contenu visible, le cacher
+               		node.style.visibility = "hidden";
+               		node.style.height = "0";			// Optionnel libérer l'espace
+               	}
+               }
+            </script>
+            <!-- THERE STOPS THE FAKE OF A POST -->
+         </div>
+         <textarea rows="4" cols="50" type="text" id="userInput"></textarea>
+         <input style="top:50%; left:5%; width:40%;" value="Post a comment" type="submit" ng-app="myApp" ng-click="intake()"/>
+         <br><br><br><br><br>
+      </div>
+   </div>
+   </div>
+   </div>
+   <!--     End Middle Column -->
+   <!--     Right Column -->
+   <div class="w3-col m2">
       <div class="w3-card w3-center pub">
-<!--       <a href="https://www.rolex.com" target="_blank"> -->
+         <!--       <a href="https://www.rolex.com" target="_blank"> -->
          <img src="images/adRightChicken.jpg" alt="Add" style="width:200px; height:700px;">
-<!--       </a> -->
-
-
+         <!--       </a> -->
       </div>
       <br>
-      
-      
-<!--     End Right Column -->
-    </div>
+      <!--     End Right Column -->
+   </div>
 
-<!-- End Page Container -->
-</div>
-<br>
-</div>
-<!-- Footer -->
-     <div class="w3-dropdown-hover w3-hide-small">
-       <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">English</a>
+
+  <!-- - - - - - - - - - - - - - -  Footer  - - - - - - - - - - - - - - -->
+  <footer class="footer">
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
+   <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
+     <a href="#" class="w3-bar-item w3-button">English</a>
+   </div>
     </div>
-     </div>
-      <p><a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
-<footer class="w3-container w3-theme-d5">
-  <p><h2>&emsp; &emsp; &emsp; Academi-co &copy; All Rights Reserved</span> <span class="tab">Powered by SoftAware </span></h2></p>
-</footer>
+     <p><a href="helpPage.html" class="helpPage w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
+
+  <div class="lastLineFooter w3-container">
+    <h5 class="footerCopyright" style="float:left">Academi-co  &copy; All Rights Reserved</h5>
+    <h5 class="footerCopyright" style="float:right">Powered by SoftAware</h5>
+  </div>
+
+  </footer>
 
 
 </body>
-</html> 
+
+</html>

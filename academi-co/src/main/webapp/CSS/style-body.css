@@ -1,0 +1,8 @@
+.body {
+    background-color: #d2eafd  ; /* couleur du background bleu clair */
+    color:#000 ; /* couleur de l'écriture, noir */
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    /* font-size: x% font-family: Times New Roman, line-height: 1, text-align:left */
+  }

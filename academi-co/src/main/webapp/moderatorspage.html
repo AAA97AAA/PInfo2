@@ -1,256 +1,272 @@
 <!DOCTYPE html>
-<html data-ng-app="persons">
+<html lang="en">
+
 <head>
+  <!-- Title of the page -->
+  <!-- TODO: add a title for the page -->
+  <title>Moderators Page - Academi-co</title>
+
+  <!-- Useful scripts -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-resource.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/ui-bootstrap-tpls.min.js"></script>
+  <script src="js/ng-grid.min.js"></script>
 
 
-<title>Template</title>
+  <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
+  <!--<link rel="stylesheet" href="CSS/bootstrap.min.css" />
+  <link rel="stylesheet" href="CSS/ng-grid.min.css" />
+-->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
-    <script src="lib/dependencies/angular.min.js"></script>
-    <script src="lib/dependencies/angular-resource.min.js"></script>
-    <script src="lib/dependencies/jquery.min.js"></script>
-    <script src="lib/dependencies/ui-bootstrap-tpls.min.js"></script>
-    <script src="lib/dependencies/ng-grid.min.js"></script>
+  <!-- Our stylesheet -->
+  <!--<link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>-->
+  <link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-moderatorspage.css"/>
 
-    <script src="script/script-moderatorspage.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/style-moderatorspage.css"/>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-	
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-/* html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif} */
-</style>
+  <!-- Our Scripts TODO: add your personal js here -->
+  <script src="js/modules/allModules.js"></script>
+  <script src="js/modules/getRESTCall.js"></script>
+
+  <!-- To have correct caracters for accented letters for example -->
+  <meta charset="UTF-8">
+
+  <!-- This is for the Responsive Website -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
-<body class="w3-theme-l4">
+<!-- This body is the container for all the content -->
+<body class="body" ng-app="academi-co">
+  <!-- - - - - - - - - - - - - - -  Header: Navigation bar at the top  - - - - - - - - - - - - - - -->
+  <header class="mainheader">
+    <!-- Academi-co logo -->
+    <a href="index.html" class="logoButton buttonHeader" >
+      <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
+    </a>
 
-<!-- Navbar -->
+   <!-- + Button  -->
+   <!-- TODO: add the corresponding link to add a thread -->
+   <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
+   <!-- Search Button -->
 
-<div class="w3-top">
- <div class="w3-bar w3-theme-d2 w3-xlarge">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home">Home</i></a>
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i>Inbox<span class="w3-badge w3-right w3-small w3-green">3</span></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">Someone commented your thread: "What is the..."</a>
-      <a href="#" class="w3-bar-item w3-button">Someone upvoted your thread: "How to make flat bread"</a>
-      <a href="#" class="w3-bar-item w3-button">Someone asked a question with the tag "Maths"</a>
-    </div>
-  </div>
+   <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
+   <!-- Inbox (Notifications) + profile pic logo -->
+   <div style="float:right">
+     <!-- Inbox in header -->
+     <div class="inboxDropDown" ng-controller= "UserInbox">
+       <!-- Inbox button with green number of notifications -->
+       <button class="buttonHeader inboxButton" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-red w3-small">{{userInbox.messages.length}}</span></button>
+       <div class=" inboxDropDownContent" style="right:0;" style="width:300px" >
+         <!-- TODO: add the corresponding link for each notification -->
+         <!-- content in inbox-->
+         <a href="#" class="inboxContent" ng-repeat="message in userInbox.messages">{{message.content}}</a>
+       </div>
+     </div>
 
- <div>
- 
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-    <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
-  </a>
- </div>
-<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="New Post"><i class="fa fa-plus"></i></a>
-<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="Search"><i class="fa fa-search"></i></a>
-   <div>
-     <a href="#" class="w3-bar-item w3-display-hover w3-button w3-hide-small w3-right w3-padding-large w3-hover-blue" title="My Account">
-    <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
-  </a>
-  </div>
-</div>
-</div>
+      <!-- Profile Pic -->
+      <a href="profilepage.html" class="buttonHeader profilePicButton" title="My Profile">
+        <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
+      </a>
+   </div>
 
-<!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-</div>
 
-<!-- Page Container -->
-      <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
-      <!-- The Grid -->
-      <div class="w3-row">
-        
-         <div ng-app="academi-co" ng-controller="profilePageLoad">
-          <!--     Left Column -->
-         <div class="w3-col m3">
-            <!--       Profile -->
-            <div class="w3-card w3-round w3-white">
 
-            </div>
-            <br>
-            <div class="w3-card w3-round">
-               <div class="w3-white">
-               </div>
-            </div>
-            <br>
-            <!--     End Left Column -->
-         </div>
-         
-         
-         
-            <!--     Middle Column -->
-            <div class="w3-col m7">
-               <!-- Biography of the user -->
-               <div class="w3-row-padding">
-                  <div class="w3-col m12">
+  </header>
+   <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
 
-                     </div>
-                  </div>
-               </div>
-               
-               
-               <!-- Central column after MyPosts -->
-               <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin">
-                  <h1><b>Flagged users</b></h1>
-                  
-                  <!-- thread/posts -->
-                  <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
-                     <br>
-                     <br>
-                     <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
-                     <h4>{{post.author}} <button class="tag ban w3-right">Ban user</button> </h4><br>
-                     
-                  </div>
-                  <!--     End Middle Column -->
-               </div>
-      <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
-      <!-- The Grid -->
-      <div class="w3-row">
-        
-         <div ng-app="academi-co" ng-controller="profilePageLoad">
-          <!--     Left Column -->
-         <div class="w3-col m3">
-            <!--       Profile -->
-            <div class="w3-card w3-round w3-white">
+   <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+   <!-- The Grid -->
+   <div class="w3-row">
 
-            </div>
-            <br>
-            <div class="w3-card w3-round">
-               <div class="w3-white">
-               </div>
-            </div>
-            <br>
-            <!--     End Left Column -->
-         </div>
-         
-         
-         
-            <!--     Middle Column -->
-            <div class="w3-col m7">
-               <!-- Biography of the user -->
-               <div class="w3-row-padding">
-                  <div class="w3-col m12">
+      <div ng-app="academi-co" ng-controller="profilePageLoad">
+       <!--     Left Column -->
+      <div class="w3-col m3">
+         <!--       Profile -->
+         <div class="w3-card w3-round w3-white">
 
-                     </div>
-                  </div>
-               </div>
-               
-               
-               <!-- Central column after MyPosts -->
-               <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin">
-                  <h1><b>Flagged posts</b></h1>
-                  
-                  <!-- thread/posts -->
-                  <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
-                     <br>
-                     <br>
-                     <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
-                     <span class="w3-right w3-opacity">1 min</span>
-                     <h4>{{post.author}}<button class="tag ban w3-right">Delete Post</button></h4><br>
-                     
-                     <div class="content">
-                        <!-- score -->
-                        <hr>
-                        <div style="width:5%; float:right">
-                           <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
-                           <br> {{post.score}}
-                           <br>
-                           <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
-                        </div>
-                     </div>
-                     <!-- Posts -->
-                     <div id="post" class="w3-row-padding" style="width:90%; float:left" >
-                        <!-- this is not displayed if it is a reply (ng-if) -->
-                        <div id="postTitle" ng-if= post.title != NULL>
-                           <p><b>{{post.title}}</b> </p>
-                        </div>
-                        <p>{{post.content}}</p>
-                        
-                        <!-- Tags -->
-                        <!-- this is not displayed if it is a reply (ng-if) -->
-                        <div class="w3-row-padding" style="margin:0 -16px" ng-if= post.title != NULL>
-                        <hr style="height: 2px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">
-                           <button class="tag maintag">{{post.subject}}</button>
-                           <button class="tag secondarytag" ng-repeat="topic in post.topics">{{topic.name}}</button>
-                        </div>
-                        <br>
-                     </div>
-                  </div>
-                  <!--     End Middle Column -->
-               </div>
-            </div>
-            <!--     Right Column -->
-            <div class="w3-col m2">
-               <div class="w3-container">
-               </div>
-               <br>
-               <!--     End Right Column -->
-            </div>
-            <!-- End Page Container -->
          </div>
          <br>
-      </div>
-      </div>
-
-       
-     
-<!--     End Left Column -->
-    </div>
-    
-<!--     Middle Column -->
-    <div class="w3-col m7">
-    
+         <div class="w3-card w3-round">
+            <div class="w3-white">
+            </div>
+         </div>
+         <br>
+         <!--     End Left Column -->
       </div>
 
-      
-<!--     End Middle Column -->
-   
-     </div>
-     
-<!--     Right Column -->
-    <div class="w3-col m2">
 
-        <div class="w3-container">
 
-        </div>
+         <!--     Middle Column -->
+         <div class="w3-col m7">
+            <!-- Biography of the user -->
+            <div class="w3-row-padding">
+               <div class="w3-col m12">
 
+                  </div>
+               </div>
+            </div>
+
+
+            <!-- Central column after MyPosts -->
+            <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin">
+               <h1><b>Flagged users</b></h1>
+
+               <!-- thread/posts -->
+               <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
+                  <br>
+                  <br>
+                  <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+                  <h4>{{post.author}} <button class="tag ban w3-right">Ban user</button> </h4><br>
+
+               </div>
+               <!--     End Middle Column -->
+            </div>
+   <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+   <!-- The Grid -->
+   <div class="w3-row">
+
+      <div ng-app="academi-co" ng-controller="profilePageLoad">
+       <!--     Left Column -->
+      <div class="w3-col m3">
+         <!--       Profile -->
+         <div class="w3-card w3-round w3-white">
+
+         </div>
+         <br>
+         <div class="w3-card w3-round">
+            <div class="w3-white">
+            </div>
+         </div>
+         <br>
+         <!--     End Left Column -->
+      </div>
+
+
+
+         <!--     Middle Column -->
+         <div class="w3-col m7">
+            <!-- Biography of the user -->
+            <div class="w3-row-padding">
+               <div class="w3-col m12">
+
+                  </div>
+               </div>
+            </div>
+
+
+            <!-- Central column after MyPosts -->
+            <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin">
+               <h1><b>Flagged posts</b></h1>
+
+               <!-- thread/posts -->
+               <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
+                  <br>
+                  <br>
+                  <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+                  <span class="w3-right w3-opacity">1 min</span>
+                  <h4>{{post.author}}<button class="tag ban w3-right">Delete Post</button></h4><br>
+
+                  <div class="content">
+                     <!-- score -->
+                     <hr>
+                     <div style="width:5%; float:right">
+                        <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+                        <br> {{post.score}}
+                        <br>
+                        <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
+                     </div>
+                  </div>
+                  <!-- Posts -->
+                  <div id="post" class="w3-row-padding" style="width:90%; float:left" >
+                     <!-- this is not displayed if it is a reply (ng-if) -->
+                     <div id="postTitle" ng-if= post.title>
+                        <p><b>{{post.title}}</b> </p>
+                     </div>
+                     <p>{{post.content}}</p>
+
+                     <!-- Tags -->
+                     <!-- this is not displayed if it is a reply (ng-if) -->
+                     <div class="w3-row-padding" style="margin:0 -16px" ng-if= post.title>
+                     <hr style="height: 2px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">
+                        <button class="tag maintag">{{post.subject}}</button>
+                        <button class="tag secondarytag" ng-repeat="topic in post.topics">{{topic.name}}</button>
+                     </div>
+                     <br>
+                  </div>
+               </div>
+               <!--     End Middle Column -->
+            </div>
+         </div>
+         <!--     Right Column -->
+         <div class="w3-col m2">
+            <div class="w3-container">
+            </div>
+            <br>
+            <!--     End Right Column -->
+         </div>
+         <!-- End Page Container -->
+      </div>
       <br>
+   </div>
+   </div>
 
-      <br>
-      
-      
-<!--     End Right Column -->
-    </div>
 
-<!-- End Page Container -->
-</div>
-<br>
 
-<!-- Footer -->
-<div class="footer">
-     <div class="w3-dropdown-hover w3-hide-small">
-       <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">English</a>
-    </div>
+ <!--     End Left Column -->
+ </div>
+
+ <!--     Middle Column -->
+ <div class="w3-col m7">
+
+   </div>
+
+
+ <!--     End Middle Column -->
+
+  </div>
+
+ <!--     Right Column -->
+ <div class="w3-col m2">
+
+     <div class="w3-container">
+
      </div>
-      <p><a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
-<footer class="w3-container w3-theme-d5">
-<h2>&emsp; &emsp; &emsp; Academi-co &copy; All Rights Reserved<span class="tab">Powered by SoftAware </span></h2>
-</footer>
-</div>
+
+   <br>
+
+   <br>
+
+
+ <!--     End Right Column -->
+ </div>
+
+  <!-- - - - - - - - - - - - - - -  Footer  - - - - - - - - - - - - - - -->
+  <footer class="footer">
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
+   <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
+     <a href="#" class="w3-bar-item w3-button">English</a>
+   </div>
+    </div>
+     <p><a href="helpPage.html" class="helpPage w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
+
+  <div class="lastLineFooter w3-container">
+    <h5 class="footerCopyright" style="float:left">Academi-co  &copy; All Rights Reserved</h5>
+    <h5 class="footerCopyright" style="float:right">Powered by SoftAware</h5>
+  </div>
+
+  </footer>
+
 
 </body>
-</html> 
 
-
+</html>

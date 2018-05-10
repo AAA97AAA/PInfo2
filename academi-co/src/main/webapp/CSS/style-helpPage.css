@@ -1,0 +1,70 @@
+/* Style Our policies Button */
+#OurPoliciesButton {
+  background-color: #0b78d1;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  margin: 20px auto 70px auto;
+}
+
+/* Style WannaBeModeratorButton Button */
+#WannaBeModeratorButton {
+  background-color: #0b78d1;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  margin: 0px auto 70px auto;
+}
+
+/* Style Questions and Answers Button */
+#QAButton {
+  background-color: #0b78d1;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  margin: 0px auto 30px auto;
+}
+
+/* hover style for the 3 buttons */
+#OurPoliciesButton:hover, #WannaBeModeratorButton:hover, #QAButton:hover{
+background-color: #ccc;
+transition: 0.3s;
+}
+
+/* content of the modal of the buttons */
+.titleHP {
+  font-size: 24px;
+  padding: 20px 26px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.questionHP {
+  font-size: 20px;
+  padding: 0px 26px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+
+.answerHP {
+  font-size: 18px;
+  padding: 0px 30px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.scrollModal {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}

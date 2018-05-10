@@ -1,156 +1,168 @@
 <!DOCTYPE html>
-<html data-ng-app="persons">
+<html lang="en">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Title of the page -->
+  <!-- TODO: add a title for the page -->
+  <title>Post Thread - Academi-co</title>
 
-<title>Post thread page</title>
+  <!-- Useful scripts -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-resource.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/ui-bootstrap-tpls.min.js"></script>
+  <script src="js/ng-grid.min.js"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
-    <script src="lib/dependencies/angular.min.js"></script>
-    <script src="lib/dependencies/angular-resource.min.js"></script>
-    <script src="lib/dependencies/jquery.min.js"></script>
-    <script src="lib/dependencies/ui-bootstrap-tpls.min.js"></script>
-    <script src="lib/dependencies/ng-grid.min.js"></script>
+  <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
+  <!--<link rel="stylesheet" href="CSS/bootstrap.min.css" />
+  <link rel="stylesheet" href="CSS/ng-grid.min.css" />
+-->
 
-    <script src="script/script-postthreadpage.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/style-postthreadpage.css"/>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-	
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-/* html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif} */
-</style>
+  <!-- Our stylesheet -->
+  <!--<link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>-->
+  <link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-postthreadpage.css"/>
+
+  <!-- Our Scripts TODO: add your personal js here -->
+  <script src="js/modules/allModules.js"></script>
+  <script src="js/modules/getRESTCall.js"></script>
+
+  <!-- To have correct caracters for accented letters for example -->
+  <meta charset="UTF-8">
+
+  <!-- This is for the Responsive Website -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
-<body class="w3-theme-l4">
+<!-- This body is the container for all the content -->
+<body class="body" ng-app="academi-co">
+  <!-- - - - - - - - - - - - - - -  Header: Navigation bar at the top  - - - - - - - - - - - - - - -->
+  <header class="mainheader">
+    <!-- Academi-co logo -->
+    <a href="index.html" class="logoButton buttonHeader" >
+      <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
+    </a>
 
-<!-- Navbar -->
+   <!-- + Button  -->
+   <!-- TODO: add the corresponding link to add a thread -->
+   <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
+   <!-- Search Button -->
 
-<div class="w3-top">
- <div class="w3-bar w3-theme-d2 w3-xlarge">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home">Home</i></a>
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i>Inbox<span class="w3-badge w3-right w3-small w3-green">3</span></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">Someone commented your thread: "What is the..."</a>
-      <a href="#" class="w3-bar-item w3-button">Someone upvoted your thread: "How to make flat bread"</a>
-      <a href="#" class="w3-bar-item w3-button">Someone asked a question with the tag "Maths"</a>
-    </div>
-  </div>
-
- <div>
- 
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-    <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
-  </a>
- </div>
-<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="New Post"><i class="fa fa-plus"></i></a>
-<a href="#" class="w3-bar-item w3-button  w3-hide-small w3-padding-large w3-hover-white" title="Search"><i class="fa fa-search"></i></a>
-   <div>
-     <a href="#" class="w3-bar-item w3-display-hover w3-button w3-hide-small w3-right w3-padding-large w3-hover-blue" title="My Account">
-    <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
-  </a>
-  </div>
-</div>
-</div>
-
-<!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-</div>
-<br><br><br><br><br>
-                 <div class="w3-col m7 otherpositions">
-          <p style="text-align:center;"><img src="images/logo2.png" style="height:70px;width:450px" alt="Logo2"></p>
-      <br></div>
-
-<!-- Page Container -->
-<br><br> <br><br><br> <br><br><br> <br> <br><br> 
-<div id="myDIV" class="header" style="background-color: #000000;  width: 500px;">
-  <h2 style="margin:5px">Primary tag</h2>
-  <input type="text" id="myInput1" placeholder="">
-  <span onclick="newElement1()" class="addBtn">Add</span>
-</div>
-
-<ul id="myUL1" style="width: 500px;">
-</ul>
-
-<br><br> <br><br> <br> <br>
-<div id="myDIV" class="header"  style="width: 500px;">
-  <h2 style="margin:5px">Secondary tags</h2>
-  <input type="text" id="myInput2" placeholder="">
-  <span onclick="newElement2()" class="addBtn">Add</span>
-</div>
-
-<ul id="myUL2" style="width: 500px;">
-</ul>
-    <div style="position: absolute; top: 300px; left: 750px; width: 1400px;">
-    <h2>Title:</h2>
-    <input type="text" id="userInput"></input><br>
-    </div>
-    <div style="position: absolute; top: 400px; left: 750px; width: 1540px;">
-    <h2>Content:</h2>
-    <textarea rows="20" cols="100" type="text" id="userInput" style="resize:none;"></textarea>
-
-    </div>
-        <input type="submit" value="Submit" id="popUpYes" style="position: absolute; top: 1000px; left: 750px; width: 200px; height:40px; hover:gray;">
-<!--     End Left Column -->
-
-    
-<!--     Middle Column -->
-    <div class="w3-col m7">
-    
-      </div>
-
-      
-<!--     End Middle Column -->
-   
+   <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
+   <!-- Inbox (Notifications) + profile pic logo -->
+   <div style="float:right">
+     <!-- Inbox in header -->
+     <div class="inboxDropDown" ng-controller= "UserInbox">
+       <!-- Inbox button with green number of notifications -->
+       <button class="buttonHeader inboxButton" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-red w3-small">{{userInbox.messages.length}}</span></button>
+       <div class=" inboxDropDownContent" style="right:0;" style="width:300px" >
+         <!-- TODO: add the corresponding link for each notification -->
+         <!-- content in inbox-->
+         <a href="#" class="inboxContent" ng-repeat="message in userInbox.messages">{{message.content}}</a>
+       </div>
      </div>
-     
-<!--     Right Column -->
-    <div class="w3-col m2">
 
-        <div class="w3-container">
+      <!-- Profile Pic -->
+      <a href="profilepage.html" class="buttonHeader profilePicButton" title="My Profile">
+        <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
+      </a>
+   </div>
 
-        </div>
 
-      <br>
 
-      <br>
-      
-           <div class="w3-card w3-center pub">
-                  <!--       <a href="https://www.rolex.com" target="_blank"> -->
-                  <img src="images/banAdNul.jpg" alt="Advertisement" style="width:200px; height:700px;">
-                  <!--       </a> -->
+  </header>
+   <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
+   <br><br> <br><br><br> <br><br><br> <br> <br><br>
+   <div id="myDIV" class="header" style="background-color: #000000;  width: 500px;">
+     <h2 style="margin:5px">Primary tag</h2>
+     <input type="text" id="myInput1" placeholder="">
+     <span onclick="newElement1()" class="addBtn">Add</span>
+   </div>
+
+   <ul id="myUL1" style="width: 500px;">
+   </ul>
+
+   <br><br> <br><br> <br> <br>
+   <div id="myDIV" class="header"  style="width: 500px;">
+     <h2 style="margin:5px">Secondary tags</h2>
+     <input type="text" id="myInput2" placeholder="">
+     <span onclick="newElement2()" class="addBtn">Add</span>
+   </div>
+
+   <ul id="myUL2" style="width: 500px;">
+   </ul>
+       <div style="position: absolute; top: 300px; left: 750px; width: 1400px;">
+       <h2>Title:</h2>
+       <input type="text" id="userInput"></input><br>
+       </div>
+       <div style="position: absolute; top: 400px; left: 750px; width: 1540px;">
+       <h2>Content:</h2>
+       <textarea rows="20" cols="100" type="text" id="userInput" style="resize:none;"></textarea>
+
+       </div>
+           <input type="submit" value="Submit" id="popUpYes" style="position: absolute; top: 1000px; left: 750px; width: 200px; height:40px; hover:gray;">
+   <!--     End Left Column -->
+
+
+   <!--     Middle Column -->
+       <div class="w3-col m7">
+
+         </div>
+
+
+   <!--     End Middle Column -->
+
+
+   <!--     Right Column -->
+       <div class="w3-col m2">
+
+           <div class="w3-container">
+
            </div>
-<!--     End Right Column -->
+
+         <br>
+
+         <br>
+
+              <div class="w3-card w3-center pub">
+                     <!--       <a href="https://www.rolex.com" target="_blank"> -->
+                     <img src="images/banAdNul.jpg" alt="Advertisement" style="width:200px; height:700px;">
+                     <!--       </a> -->
+              </div>
+   <!--     End Right Column -->
+       </div>
+
+   <!-- End Page Container -->
+
+   <br>
+
+  <!-- - - - - - - - - - - - - - -  Footer  - - - - - - - - - - - - - - -->
+  <footer class="footer">
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
+   <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
+     <a href="#" class="w3-bar-item w3-button">English</a>
+   </div>
     </div>
+     <p><a href="helpPage.html" class="helpPage w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
 
-<!-- End Page Container -->
+  <div class="lastLineFooter w3-container">
+    <h5 class="footerCopyright" style="float:left">Academi-co  &copy; All Rights Reserved</h5>
+    <h5 class="footerCopyright" style="float:right">Powered by SoftAware</h5>
+  </div>
 
-<br>
+  </footer>
 
-<!-- Footer -->
-<div class="footer">
-
-     <div class="w3-dropdown-hover w3-hide-small">
-       <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">English</a>
-    </div>
-     </div>
-      <p><a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
-<footer class="w3-container w3-theme-d5">
-<h2>&emsp; &emsp; &emsp; Academi-co &copy; All Rights Reserved<span class="tab">Powered by SoftAware </span></h2>
-</footer>
-</div>
 
 </body>
-</html> 
 
-
+</html>
