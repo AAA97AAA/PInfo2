@@ -13,5 +13,5 @@ if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
 fi
 
 if [ !"$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
-	docker run --ip="172.18.0.1" --net=$NETWORK_NAME -p 13306:3306 --name=$CONTAINER_NAME -e MYSQL_ROOT_PASSWORD=admin -d $IMAGE_NAME
+	docker run --ip="172.18.0.3" --net=$NETWORK_NAME -p 13306:3306 --name=$CONTAINER_NAME -e MYSQL_ROOT_PASSWORD=admin -d $IMAGE_NAME
 fi
