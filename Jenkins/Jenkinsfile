@@ -7,20 +7,6 @@ pipeline {
     }
 
     stages {
-        // Kill all test containers
-        // stage('Clean-Up') {
-        //     agent {
-        //         docker {
-        //             image 'docker'
-        //             args '--net="host" --entrypoint=""'
-        //         }
-        //     }
-        //     steps {
-        //         sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-        //         sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
-        //     }
-        // }
-
         // Build the project
         stage('Build') {
             agent {
@@ -42,7 +28,7 @@ pipeline {
                     args '--net="host" --entrypoint=""'
                 }
             }
-            steps {    
+            steps {
                 sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh'
                 sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh'
             }
@@ -83,6 +69,7 @@ pipeline {
     }
 
     post {
+        // Kill all test containers
         always {
             sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
             sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
