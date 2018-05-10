@@ -11,8 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ConcreteMainTagServiceTest.class, ConcreteSecondaryTagServiceTest.class, ConcreteTagServiceTest.class,
-		MainTagServiceRsTest.class, SecondaryTagServiceRsTest.class, TagServiceRsTest.class })
+@SuiteClasses({ ConcreteTagServiceTest.class, TagServiceRsTest.class })
 public class AllTagServiceTests {
 
 }

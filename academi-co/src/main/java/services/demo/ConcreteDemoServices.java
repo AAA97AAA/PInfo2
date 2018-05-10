@@ -3,7 +3,12 @@ package services.demo;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
+import dom.tags.ConcreteMainTag;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
@@ -30,6 +35,16 @@ public class ConcreteDemoServices implements DemoServices {
 	public MainTag storeMainTag(MainTag tag) {
 		entityManager.persist(tag);
 		return tag;
+	}
+	
+	@Override
+	public MainTag getTag(long id) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<ConcreteMainTag> criteriaQuery = criteriaBuilder.createQuery(ConcreteMainTag.class);
+		Root<ConcreteMainTag> variableRoot = criteriaQuery.from(ConcreteMainTag.class);
+		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("id"), id));
+		TypedQuery<ConcreteMainTag> query = entityManager.createQuery(criteriaQuery);
+		return query.getSingleResult();
 	}
 
 

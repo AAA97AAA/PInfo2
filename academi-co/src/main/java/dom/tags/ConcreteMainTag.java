@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -28,7 +29,7 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 	private static final long serialVersionUID = 8446984008568752093L;
 	
 	@OneToMany(targetEntity = ConcreteSecondaryTag.class, mappedBy = "parent",
-			cascade = CascadeType.ALL, orphanRemoval = true)
+			cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@MapKeyColumn(name = "ID")
 	private Map<Long, SecondaryTag> children;
 

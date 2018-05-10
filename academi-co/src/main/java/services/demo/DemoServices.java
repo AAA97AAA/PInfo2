@@ -14,5 +14,7 @@ public interface DemoServices extends Serializable {
 	
 	public MainTag storeMainTag(MainTag tag);
 	
+	public MainTag getTag(long id);
+	
 	public SecondaryTag storeSecondaryTag(SecondaryTag tag);
 }
