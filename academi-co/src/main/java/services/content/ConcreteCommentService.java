@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import dom.content.Comment;
+import dom.content.ConcreteComment;
 import dom.content.QuestionThread;
 
 /**
@@ -30,13 +31,7 @@ public class ConcreteCommentService implements CommentService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-	
-	/******************* Constructors ********************/
 
-//	public ConcreteCommentService(EntityManager em) {
-//		entityManager = em;
-//	}
 	
 	/******************** Services ***********************/
 	
@@ -50,18 +45,18 @@ public class ConcreteCommentService implements CommentService {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 				
 		// Criteria query of return type QuestionThread
-		CriteriaQuery<Comment> criteriaQuery = criteriaBuilder.createQuery(Comment.class);
+		CriteriaQuery<ConcreteComment> criteriaQuery = criteriaBuilder.createQuery(ConcreteComment.class);
 		
 		
 		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-		Root<Comment> variableRoot = criteriaQuery.from(Comment.class);
+		Root<ConcreteComment> variableRoot = criteriaQuery.from(ConcreteComment.class);
 		
 		// Condition statement -> Where
-		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
+		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("id"), id));
 		
 		
 		// Creating typed query
-		TypedQuery<Comment> query = entityManager.createQuery(criteriaQuery);
+		TypedQuery<ConcreteComment> query = entityManager.createQuery(criteriaQuery);
 		
 		// Return of single result. If we want a list of results, we use getResultList
 		return query.getSingleResult();

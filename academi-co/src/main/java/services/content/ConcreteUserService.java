@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import dom.content.ConcreteUser;
 import dom.content.User;
 import dom.documentsManager.Document;
 import services.documentsManager.ProfilePictureService;
@@ -32,14 +33,7 @@ public class ConcreteUserService implements UserService {
 	
 	@Inject
 	private ProfilePictureService profilePictureService;
-	
-	
-//	/******************* Constructors ********************/
-//
-//	public ConcreteUserService(EntityManager em) {
-//		entityManager = em;
-//	}
-	
+		
 	
 	
 	/******************** Services **********************/
@@ -51,18 +45,18 @@ public class ConcreteUserService implements UserService {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		
 		// Criteria query of return type QuestionThread
-		CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+		CriteriaQuery<ConcreteUser> criteriaQuery = criteriaBuilder.createQuery(ConcreteUser.class);
 		
 		
 		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-		Root<User> variableRoot = criteriaQuery.from(User.class);
+		Root<ConcreteUser> variableRoot = criteriaQuery.from(ConcreteUser.class);
 		
 		// Condition statement -> Where
-		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
+		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("id"), id));
 		
 		
 		// Creating typed query
-		TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
+		TypedQuery<ConcreteUser> query = entityManager.createQuery(criteriaQuery);
 		
 		// Return of single result. If we want a list of results, we use getResultList
 		return query.getSingleResult();
