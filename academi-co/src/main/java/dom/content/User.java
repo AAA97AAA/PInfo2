@@ -2,6 +2,8 @@ package dom.content;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import dom.documentsManager.Document;
 import dom.inbox.Inbox;
 
@@ -11,6 +13,7 @@ import dom.inbox.Inbox;
  * @author kaikoveritch
  *
  */
+@JsonDeserialize(as = ConcreteUser.class)
 public interface User {
 	
 	/***** Constants *****/

@@ -1,5 +1,7 @@
 package dom.moderatorsManager;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import dom.content.User;
 
 /**
@@ -8,6 +10,7 @@ import dom.content.User;
  * @author kaikoveritch
  *
  */
+@JsonDeserialize(as = ConcreteModeratorPromotionRequest.class)
 public interface ModeratorPromotionRequest {
 
 	public void accept();

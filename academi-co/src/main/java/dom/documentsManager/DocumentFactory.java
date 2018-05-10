@@ -1,5 +1,11 @@
 package dom.documentsManager;
 
+/**
+ * Document instantiator class.
+ * 
+ * @author kaikoveritch
+ *
+ */
 public class DocumentFactory {
 
 	static public Document createDocument(String name, byte[] data) {

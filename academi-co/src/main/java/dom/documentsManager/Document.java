@@ -1,5 +1,14 @@
 package dom.documentsManager;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+/**
+ * Document representation definition.
+ * 
+ * @author kaikoveritch
+ *
+ */
+@JsonDeserialize(as = ConcreteDocument.class)
 public interface Document {
 
 	public long getId();

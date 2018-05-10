@@ -18,6 +18,8 @@ import javax.ws.rs.core.UriInfo;
 import dom.tags.ConcreteMainTag;
 import dom.tags.ConcreteSecondaryTag;
 import dom.tags.ConcreteTag;
+import dom.tags.MainTag;
+import dom.tags.SecondaryTag;
 import dom.tags.Tag;
 
 /**
@@ -35,22 +37,25 @@ public class TagServiceRs {
 	@GET
 	@Path("/languages/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Tag getLanguageTag(@PathParam("id") long id) {
-		return service.getLanguageTag(id);
+	public Response getLanguageTag(@PathParam("id") long id) {
+		Tag tag = service.getLanguageTag(id);
+		return Response.ok(tag).build();
 	}
 	
 	@GET
 	@Path("/subjects/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Tag getMainTag(@PathParam("id") long id) {
-		return service.getMainTag(id);
+	public Response getMainTag(@PathParam("id") long id) {
+		MainTag tag = service.getMainTag(id);
+		return Response.ok(tag).build();
 	}
 	
 	@GET
 	@Path("/topics/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Tag getSecondaryTag(@PathParam("id") long id) {
-		return service.getSecondaryTag(id);
+	public Response getSecondaryTag(@PathParam("id") long id) {
+		SecondaryTag tag = service.getSecondaryTag(id);
+		return Response.ok(tag).build();
 	}
 	
 	@POST
