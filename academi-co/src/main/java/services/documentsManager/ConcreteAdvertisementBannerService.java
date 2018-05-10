@@ -1,6 +1,7 @@
 package services.documentsManager;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -18,6 +19,7 @@ import dom.documentsManager.Document;
  * @author kaikoveritch (rework)
  *
  */
+@Default
 @Stateless
 public class ConcreteAdvertisementBannerService implements AdvertisementBannerService {
 	

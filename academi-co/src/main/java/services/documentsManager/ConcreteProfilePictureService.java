@@ -1,5 +1,7 @@
 package services.documentsManager;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -10,6 +12,14 @@ import javax.persistence.criteria.Root;
 import dom.documentsManager.ConcreteDocument;
 import dom.documentsManager.Document;
 
+/**
+ * Profile picture service implementation
+ * 
+ * @author petrbinko
+ *
+ */
+@Default
+@Stateless
 public class ConcreteProfilePictureService implements ProfilePictureService {
 	
 	

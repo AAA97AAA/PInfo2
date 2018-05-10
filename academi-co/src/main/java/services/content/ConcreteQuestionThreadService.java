@@ -1,6 +1,7 @@
 package services.content;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -20,6 +21,7 @@ import dom.content.QuestionThread;
  *
  */
 
+@Default
 @Stateless
 public class ConcreteQuestionThreadService implements QuestionThreadService {
 	
@@ -65,7 +67,6 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 	@Override
 	public QuestionThread addQuestionThread(QuestionThread questionThread) {
 		
-		System.out.println(entityManager);
 		entityManager.persist(questionThread);
 		
 		return questionThread;

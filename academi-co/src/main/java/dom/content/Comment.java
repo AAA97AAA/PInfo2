@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author kaikoveritch
  *
  */
-@JsonDeserialize(as = ConcretePost.class)
+@JsonDeserialize(as = ConcreteComment.class)
 public interface Comment extends Post {
 
 	public QuestionThread getQuestion();
