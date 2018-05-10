@@ -1,28 +1,25 @@
 pipeline {
     agent any
 
-    // Set max JVM heap size for maven
     environment {
+        // Set max JVM heap size for maven
         MAVEN_OPTS = '-Xmx1024m'
     }
 
     stages {
-        // Delete all containers and images
-        stage('Clean-Up') {
-            agent {
-                docker {
-                    image 'docker'
-                    args '--net="host" --entrypoint=""'
-                }
-            }
-            steps {
-                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-                sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
-                sh 'sh Jenkins/Scripts/Appserver/killAppServer.sh'
-                sh 'sh Jenkins/Scripts/Database/killDatabase.sh'
-                sh 'docker system prune -fa'
-            }
-        }
+        // Kill all test containers
+        // stage('Clean-Up') {
+        //     agent {
+        //         docker {
+        //             image 'docker'
+        //             args '--net="host" --entrypoint=""'
+        //         }
+        //     }
+        //     steps {
+        //         sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
+        //         sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
+        //     }
+        // }
 
         // Build the project
         stage('Build') {
@@ -86,6 +83,10 @@ pipeline {
     }
 
     post {
+        always {
+            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
+            sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
+        }
 
         // Send e-mail
         success {
