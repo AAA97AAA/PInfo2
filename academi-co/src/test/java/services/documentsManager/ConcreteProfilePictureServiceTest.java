@@ -21,6 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import dom.documentsManager.ConcreteDocument;
 import dom.documentsManager.Document;
 
 /**
@@ -43,7 +44,7 @@ public class ConcreteProfilePictureServiceTest {
 	private CriteriaQuery<Object> fakeCriteriaQuery;
 	
 	@Mock
-	private Root<Document> fakeRoot;
+	private Root<ConcreteDocument> fakeRoot;
 	
 	@Mock
 	private TypedQuery<Object> fakeTypedQuery;
@@ -62,7 +63,7 @@ public class ConcreteProfilePictureServiceTest {
 		// Specifying behavior for mock objects related to calls in the service
 		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
 		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);
-		when(fakeCriteriaQuery.from(Document.class)).thenReturn(fakeRoot);
+		when(fakeCriteriaQuery.from(ConcreteDocument.class)).thenReturn(fakeRoot);
 		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
 		
 		// Calling new profile picture service
@@ -74,7 +75,7 @@ public class ConcreteProfilePictureServiceTest {
 		InOrder order = inOrder(fakeEntityManager);
 		order.verify(fakeEntityManager, times(1)).getCriteriaBuilder();
 		verify(fakeCriteriaBuilder, times(1)).createQuery(any());
-		verify(fakeCriteriaQuery, times(1)).from(Document.class);
+		verify(fakeCriteriaQuery, times(1)).from(ConcreteDocument.class);
 		verify(fakeCriteriaQuery, times(1)).where(fakeCriteriaBuilder.equal(fakeRoot.get("ID"), id));
 		order.verify(fakeEntityManager, times(1)).createQuery(fakeCriteriaQuery);
 		verify(fakeTypedQuery, times(1)).getSingleResult();

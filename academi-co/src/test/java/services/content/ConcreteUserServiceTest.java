@@ -22,8 +22,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import dom.content.ConcreteUser;
 import dom.content.User;
-import dom.documentsManager.Document;
+import dom.documentsManager.ConcreteDocument;
 import services.documentsManager.ConcreteProfilePictureService;
 
 /**
@@ -51,7 +52,7 @@ public class ConcreteUserServiceTest {
 	private CriteriaQuery<Object> fakeCriteriaQuery;
 	
 	@Mock
-	private Root<User> fakeRoot;
+	private Root<ConcreteUser> fakeRoot;
 	
 	@Mock
 	private TypedQuery<Object> fakeTypedQuery;
@@ -60,7 +61,7 @@ public class ConcreteUserServiceTest {
 	private User fakeUser;
 	
 	@Mock
-	private Document fakeDocument;
+	private ConcreteDocument fakeDocument;
 	
 	@Mock
 	ConcreteProfilePictureService profilePictureService;
@@ -104,7 +105,7 @@ public class ConcreteUserServiceTest {
 		// Specifying behavior for mock objects related to calls in the service
 		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
 		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);		
-		when(fakeCriteriaQuery.from(User.class)).thenReturn(fakeRoot);
+		when(fakeCriteriaQuery.from(ConcreteUser.class)).thenReturn(fakeRoot);
 		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
 		
 		// Calling new user service 
@@ -114,8 +115,8 @@ public class ConcreteUserServiceTest {
 		// Verifying right method calls on objects in the service's function
 		InOrder order = inOrder(fakeEntityManager);
 		order.verify(fakeEntityManager, times(1)).getCriteriaBuilder();
-		verify(fakeCriteriaBuilder, times(1)).createQuery(User.class);
-		verify(fakeCriteriaQuery, times(1)).from(User.class);
+		verify(fakeCriteriaBuilder, times(1)).createQuery(ConcreteUser.class);
+		verify(fakeCriteriaQuery, times(1)).from(ConcreteUser.class);
 		verify(fakeCriteriaQuery, times(1)).where(fakeCriteriaBuilder.equal(fakeRoot.get("ID"), id));
 		order.verify(fakeEntityManager, times(1)).createQuery(fakeCriteriaQuery);
 		verify(fakeTypedQuery, times(1)).getSingleResult();
@@ -134,7 +135,7 @@ public class ConcreteUserServiceTest {
 		// Specifying behavior for mock objects related to calls in the service
 		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
 		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);		
-		when(fakeCriteriaQuery.from(User.class)).thenReturn(fakeRoot);
+		when(fakeCriteriaQuery.from(ConcreteUser.class)).thenReturn(fakeRoot);
 		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
 		when(userService.getUser(id)).thenReturn(fakeUser);
 		
@@ -170,7 +171,7 @@ public class ConcreteUserServiceTest {
 		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
 		when(fakeUser.getProfilePicture()).thenReturn(fakeDocument);
 		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);		
-		when(fakeCriteriaQuery.from(User.class)).thenReturn(fakeRoot);
+		when(fakeCriteriaQuery.from(ConcreteUser.class)).thenReturn(fakeRoot);
 		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
 		when(fakeTypedQuery.getSingleResult()).thenReturn(fakeUser);
 		when(userService.getUser(id)).thenReturn(fakeUser);

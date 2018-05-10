@@ -24,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import dom.content.Comment;
+import dom.content.ConcreteComment;
 import dom.content.QuestionThread;
 import dom.content.User;
 
@@ -51,7 +52,7 @@ public class ConcreteCommentServiceTest {
 	private CriteriaQuery<Object> fakeCriteriaQuery;
 	
 	@Mock
-	private Root<Comment> fakeRoot;
+	private Root<ConcreteComment> fakeRoot;
 	
 	@Mock
 	private TypedQuery<Object> fakeTypedQuery;
@@ -71,30 +72,6 @@ public class ConcreteCommentServiceTest {
 	@InjectMocks
 	private ConcreteCommentService commentService;
 	
-//	@Before
-//	public void setEntityManager() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-//		
-//		commentService = new ConcreteCommentService();
-//		Field classAttribute = commentService.getClass().getDeclaredField("entityManager");
-//		classAttribute.setAccessible(true);
-//		classAttribute.set(commentService, fakeEntityManager);
-//		
-//	}
-
-//	@Test
-//	public void testConstructorNotEmpty() {
-//
-//		// Calling new user service
-//		ConcreteCommentService commentServiceFake = new ConcreteCommentService(fakeEmf);
-//				
-//		// Testing right constructors
-//		assertEquals(commentServiceFake.getEmf(), fakeEmf);
-//	}
-//	
-//	@Test(expected = PersistenceException.class)
-//	public void testConstructorEmpty() {
-//		new ConcreteCommentService();
-//	}
 	
 	@Test
 	public void testAddComment() {
@@ -120,7 +97,7 @@ public class ConcreteCommentServiceTest {
 		// Specifying behavior for mock objects related to calls in the service
 		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
 		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);
-		when(fakeCriteriaQuery.from(Comment.class)).thenReturn(fakeRoot);
+		when(fakeCriteriaQuery.from(ConcreteComment.class)).thenReturn(fakeRoot);
 		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
 		
 		// Calling new comment service
@@ -132,7 +109,7 @@ public class ConcreteCommentServiceTest {
 		InOrder order = inOrder(fakeEntityManager);
 		order.verify(fakeEntityManager, times(1)).getCriteriaBuilder();
 		verify(fakeCriteriaBuilder, times(1)).createQuery(any());
-		verify(fakeCriteriaQuery, times(1)).from(Comment.class);
+		verify(fakeCriteriaQuery, times(1)).from(ConcreteComment.class);
 		verify(fakeCriteriaQuery, times(1)).where(fakeCriteriaBuilder.equal(fakeRoot.get("ID"), id));
 		order.verify(fakeEntityManager, times(1)).createQuery(fakeCriteriaQuery);
 		verify(fakeTypedQuery, times(1)).getSingleResult();

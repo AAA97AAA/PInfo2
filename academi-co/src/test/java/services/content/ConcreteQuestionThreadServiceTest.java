@@ -24,6 +24,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import dom.content.ConcreteQuestionThread;
 import dom.content.QuestionThread;
 
 /**
@@ -46,13 +47,13 @@ public class ConcreteQuestionThreadServiceTest {
 	private CriteriaBuilder fakeCriteriaBuilder;
 	
 	@Mock
-	private CriteriaQuery<QuestionThread> fakeCriteriaQuery;
+	private CriteriaQuery<ConcreteQuestionThread> fakeCriteriaQuery;
 	
 	@Mock
-	private Root<QuestionThread> fakeRoot;
+	private Root<ConcreteQuestionThread> fakeRoot;
 	
 	@Mock
-	private TypedQuery<QuestionThread> fakeQuery;
+	private TypedQuery<ConcreteQuestionThread> fakeQuery;
 	
 	@InjectMocks
 	ConcreteQuestionThreadService questionThreadService;
@@ -64,13 +65,13 @@ public class ConcreteQuestionThreadServiceTest {
 	public void testGetQuestionThread() {
 		
 		// Additional mocks
-		QuestionThread thread = mock(QuestionThread.class);
+		ConcreteQuestionThread thread = mock(ConcreteQuestionThread.class);
 		
 		// Add behavior to the mocks
 		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);
 		when(fakeEntityManager.getTransaction()).thenReturn(mock(EntityTransaction.class));
-		when(fakeCriteriaBuilder.createQuery(QuestionThread.class)).thenReturn(fakeCriteriaQuery);
-		when(fakeCriteriaQuery.from(QuestionThread.class)).thenReturn(fakeRoot);
+		when(fakeCriteriaBuilder.createQuery(ConcreteQuestionThread.class)).thenReturn(fakeCriteriaQuery);
+		when(fakeCriteriaQuery.from(ConcreteQuestionThread.class)).thenReturn(fakeRoot);
 		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeQuery);
 		when(fakeQuery.getSingleResult()).thenReturn(thread);
 		
@@ -81,8 +82,8 @@ public class ConcreteQuestionThreadServiceTest {
 		// Control the follow-up calls triggered
 		InOrder order = inOrder(fakeEntityManager);
 		order.verify(fakeEntityManager, times(1)).getCriteriaBuilder();
-		verify(fakeCriteriaBuilder, times(1)).createQuery(QuestionThread.class);
-		verify(fakeCriteriaQuery, times(1)).from(QuestionThread.class);
+		verify(fakeCriteriaBuilder, times(1)).createQuery(ConcreteQuestionThread.class);
+		verify(fakeCriteriaQuery, times(1)).from(ConcreteQuestionThread.class);
 		verify(fakeCriteriaQuery, times(1)).where(fakeCriteriaBuilder.equal(fakeRoot.get("ID"), id));
 		order.verify(fakeEntityManager, times(1)).createQuery(fakeCriteriaQuery);
 		verify(fakeQuery, times(1)).getSingleResult();
