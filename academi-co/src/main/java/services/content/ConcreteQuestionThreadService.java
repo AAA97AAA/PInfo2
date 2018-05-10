@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import dom.content.ConcreteQuestionThread;
 import dom.content.QuestionThread;
 
 /**
@@ -30,29 +31,6 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-	
-	/******************* Constructors ********************/
-//
-//	public ConcreteQuestionThreadService(EntityManager em) {
-//		entityManager = em;
-//	}
-//	
-	
-	
-	/****************** Constructors ********************/
-	
-//	public ConcreteQuestionThreadService() {
-//		emf = Persistence.createEntityManagerFactory("academi-co");
-//	}
-//	
-//	protected ConcreteQuestionThreadService(EntityManagerFactory emf) throws IllegalArgumentException {
-//		if (emf == null) {
-//			throw new IllegalArgumentException("Entity manager factory cannot be null");
-//		}
-//		this.emf = emf;
-//	}
-
 
 	
 	/********************* Services **********************/
@@ -69,16 +47,16 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		
 		// Criteria query of return type QuestionThread
-		CriteriaQuery<QuestionThread> criteriaQuery = criteriaBuilder.createQuery(QuestionThread.class);
+		CriteriaQuery<ConcreteQuestionThread> criteriaQuery = criteriaBuilder.createQuery(ConcreteQuestionThread.class);
 		
 		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-		Root<QuestionThread> variableRoot = criteriaQuery.from(QuestionThread.class);
+		Root<ConcreteQuestionThread> variableRoot = criteriaQuery.from(ConcreteQuestionThread.class);
 		
 		// Condition statement -> Where
-		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("ID"), id));
+		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("id"), id));
 		
 		// Creating typed query
-		TypedQuery<QuestionThread> query = entityManager.createQuery(criteriaQuery);
+		TypedQuery<ConcreteQuestionThread> query = entityManager.createQuery(criteriaQuery);
 		
 		// Return of single result. If we want a list of results, we use getResultList
 		return query.getSingleResult();
@@ -87,6 +65,7 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 	@Override
 	public QuestionThread addQuestionThread(QuestionThread questionThread) {
 		
+		System.out.println(entityManager);
 		entityManager.persist(questionThread);
 		
 		return questionThread;
