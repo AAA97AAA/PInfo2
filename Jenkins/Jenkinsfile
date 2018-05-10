@@ -42,9 +42,9 @@ pipeline {
                     args '--net="host" --entrypoint=""'
                 }
             }
-            steps {
-                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh'
+            steps {    
                 sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh'
+                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh'
             }
         }
 
@@ -75,8 +75,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
                 sh 'sh Jenkins/Scripts/Database/runDatabase.sh'
+                sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
                 sh 'sh Jenkins/Scripts/deploy.sh'
             }
         }
