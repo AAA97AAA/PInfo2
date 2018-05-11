@@ -11,10 +11,10 @@ pipeline {
         IMAGE_APPSERVER = 'academi_co_wildfly'
         IMAGE_APPSERVER_IT = 'academi_co_wildfly_tests'
 
-        DOCKER_DB = 'concealed_cader'
-        DOCKER_DB_IT = 'shady_selimi'
-        DOCKER_APPSERVER = 'cheeky_binko'
-        DOCKER_APPSERVER_IT = 'bodacious_goren'
+        DOCKER_DB = 'concealed_cader' // 172.18.0.1
+        DOCKER_DB_IT = 'shady_selimi' // 172.18.0.3
+        DOCKER_APPSERVER = 'cheeky_binko' // 172.18.0.2
+        DOCKER_APPSERVER_IT = 'bodacious_goren' // 172.18.0.4
 
         // Scripts: script.sh network image container [...]
     }
@@ -42,12 +42,12 @@ pipeline {
                 }
             }
             steps {
-                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB_IT}'
-                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh'
+                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh' ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB_IT}
+                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER_IT} ${DOCKER_APPSERVER_IT}'
             }
         }
 
-        // Launches the tests
+        // // Launches the tests
         // stage('Tests') {
         //     agent {
         //         docker {
