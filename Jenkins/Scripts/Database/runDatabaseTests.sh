@@ -1,7 +1,7 @@
 #!/bin/bash
 # 1: network, 2: image, 3: container
 
-if [[ "$(docker images -q $2 2> /dev/null)" == "" ]]; then
+if [ !"$(docker images -q $2)" ]; then
  	docker build --rm -t $2 `dirname "$0"`
 fi
 

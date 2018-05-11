@@ -1,17 +1,10 @@
 #!/bin/bash
+# 1: network, 2: image, 3: container
 
-CONTAINER_NAME='concealed_cader'
-IMAGE_NAME='academi-co-mysql'
-NETWORK_NAME='academi-co-network'
-
-if [ !"$(docker network ls -q -f name=$NETWORK_NAME)" ]; then
-     docker network create --subnet 172.18.0.0/16 $NETWORK_NAME
+if [[ "$(docker images -q $2 2> /dev/null)" == "" ]]; then
+ 	docker build --rm -t $2 `dirname "$0"`
 fi
 
-if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
- 	docker build --rm -t $IMAGE_NAME `dirname "$0"`
-fi
-
-if [ !"$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
-	docker run --ip="172.18.0.2" --net=$NETWORK_NAME -p 13306:3306 --name=$CONTAINER_NAME -e MYSQL_ROOT_PASSWORD=admin -d $IMAGE_NAME
+if [ !"$(docker ps -q -f name=$3)" ]; then
+	docker run --ip="172.18.0.2" --net=$1 -p 13306:3306 --name=$3 -e MYSQL_ROOT_PASSWORD=admin -d $2
 fi

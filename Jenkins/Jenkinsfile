@@ -76,8 +76,10 @@ pipeline {
         //         }
         //     }
         //     steps {
-        //         sh 'sh Jenkins/Scripts/Database/runDatabase.sh'
-        //         sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
+        //         sh 'sh Jenkins/Scripts/Database/runDatabase.sh \
+        //             ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB}'
+        //         sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh \
+        //             ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER} ${DOCKER_APPSERVER}'
         //         sh 'sh Jenkins/Scripts/deploy.sh'
         //     }
         // }
@@ -86,8 +88,8 @@ pipeline {
     post {
         // Kill all test containers
         always {
-            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh'
-            sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh'
+            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh ${DOCKER_APPSERVER_IT}'
+            sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh ${DOCKER_DB_IT}'
         }
 
         // Send e-mail
