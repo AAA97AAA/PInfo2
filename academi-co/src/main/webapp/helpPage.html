@@ -29,6 +29,7 @@
   <link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-searchbar.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-helpPage.css"/>
 
@@ -36,6 +37,7 @@
   <!--<script src="script/person.js"></script> -->
   <script src="js/modules/allModules.js"></script>
   <script src="js/modules/getRESTCall.js"></script>
+  <script src="js/controllers/script-searchbar.js"></script>
   <script src="js/controllers/script-signInUp.js"></script>
 
   <!-- To have correct caracters for accented letters for example -->
@@ -53,11 +55,47 @@
     <a href="index.html" class="logoButton buttonHeader" >
       <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
     </a>
-
    <!-- + Button  -->
    <!-- TODO: add the corresponding link to add a thread -->
    <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
    <!-- Search Button -->
+         <input type="text" placeholder="Search..." name="search">
+      <button type="submit" style="background-color: white; border-radius: 7px;"><i class="fa fa-search"></i></button>
+   <button class="buttonHeader" style="font-size:23px;cursor:pointer; color:white;" onclick="openNav()">&#9660;</button>
+<!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
+
+ <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<span style="position:absolute; left:1100px; width:200px; top:180px;">From date</span><br><input type="text" id="dateBegin" style="position:absolute; left:1230px; width:200px; top:180px;"></input>
+<span style="position:absolute; left:1500px; width:200px; top:180px;">To date</span><br><input type="text" id="dateBegin" style="position:absolute; left:1600px; width:200px; top:180px;"></input>
+<span style="position:absolute; left:1130px; width:200px; top:280px;">Author</span><br><input type="text" id="dateBegin" style="position:absolute; left:1230px; width:200px; top:280px;"></input>
+<input type="submit" value="Submit" id="popUpYes" style="border-radius: 7px; position: absolute; top: 700px; left:1500px; width: 200px; height:40px; hover:gray;">
+<div id="myDIV" class="header" style="background-color: #1f2c47;  width: 550px; margin-left:200px;">
+  <h2 style="margin:0px">Primary tag</h2>
+  <input type="text" id="myInput1" placeholder="">
+  <span onclick="newElement1()" class="addBtn" style="border-radius: 7px;">Add</span>
+</div>
+
+<ul id="myUL1" style="width: 550px; margin-left:200px;">
+</ul>
+
+<br><br> <br><br> 
+<div id="myDIV" class="header"  style="background-color: #263659; width: 550px; margin-left:200px;">
+  <h2 style="margin:0px">Secondary tags</h2>
+  <input type="text" id="myInput2" placeholder="">
+  <span onclick="newElement2()" class="addBtn" style="border-radius: 7px;">Add</span>
+</div>
+
+<ul id="myUL2" style="width: 550px; margin-left:200px;">
+</ul>
+
+</div>
+
+</div>
+  
+<!-- ENDING OF SLIDE-NAVIGATION SEARCH -->
 
    <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
    <!-- Inbox (Notifications) + profile pic logo -->
@@ -72,66 +110,17 @@
          <a href="#" class="inboxContent" ng-repeat="message in userInbox.messages">{{message.content}}</a>
        </div>
      </div>
-      <!-- Profile Pic -->
-      <button id="loginButton" class="buttonHeader logInButton" onclick="document.getElementById('LoginForm').style.display='block'">Login</button>
-      <button id="signupButton" class="buttonHeader signUpButton" onclick="document.getElementById('SignUpForm').style.display='block'">Sign up</button>
 
+      <!-- Profile Pic -->
+      <a href="profilepage.html" class="buttonHeader profilePicButton" title="My Profile">
+        <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
+      </a>
    </div>
 
-   <!-- Modal for user sign in -->
- <div id="LoginForm" class="modalBackground">
-    <!-- close button -->
-    <span class="closeButton" onclick="document.getElementById('LoginForm').style.display='none'">X</span>
-    <form class="modalContent">
-       <h2 id="textLogin">Login</h2>
-       <br>
-       <input type="text" name="UsernameEntry" placeholder="Username">
-       <br>
-       <br>
-       <input id="LoginPassword" type="password" name="PasswordEntry" placeholder="Password">
-       <i class="fa fa-eye" onmouseover="showLoginPassword();" onmouseout="hideLoginPassword();"></i>
-       <br>
-       <br>
-       <label id="toggleSwitch" class="switch">
-       <input type="checkbox">
-       <span class="slider"></span>
-       </label>
-       <h4 id="stayConnected">Stay Connected</h4>
-       <br>
-       <br>
-       <button id="ConnectedButton" type="button" class="button" onclick="document.getElementById('LoginForm').style.display='none'">Connect</button>
-       <br>
-       <br>
-    </form>
- </div>
+  
 
-<!-- Modal for user sign up -->
-<div id="SignUpForm" class="modalBackground">
-  <!-- close button -->
-  <span class="closeButton" onclick="document.getElementById('SignUpForm').style.display='none'">X</span>
-  <form class="modalContent">
-    <h2 id="textSignUp">Sign up</h2>
-    <br>
-    <br>
-    <!--<h2 class="textinSignUp">Username</h2>-->
-    <input type="text" class="inputSignUp" name="UsernameEntry" placeholder="Username">
-    <br>
-    <!--<h2  class="textinSignUp">Email</h2>-->
-    <input id="EmailSignUp" class="inputSignUp" type="email" name="EmailEntry" placeholder="Email">
-    <br>
-    <!--<h2  class="textinSignUp">Password</h2>-->
-    <input id="SignUpPassword" class="inputSignUp"type="password" name="PasswordEntry" placeholder="Password">
-    <i class="fa fa-eye" onmouseover="showSignUpPassword();" onmouseout="hideSignUpPassword();"></i>
-    <br>
-    <br>
-    <button id="RegisterButton" type="button" class="button" onclick="document.getElementById('SignUpForm').style.display='none'">Create account</button>
-    <br>
-    <br>
-  </form>
-</div>
-
- </header>
- <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
+  </header>
+   <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
 
   <!-- Displayed element at the beginning -->
 
