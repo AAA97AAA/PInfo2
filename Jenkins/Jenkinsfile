@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Set max JVM heap size for maven
-        MAVEN_OPTS = '-Xmx1024m'
+        MAVEN_OPTS = '-Xmx512m'
     }
 
     stages {
