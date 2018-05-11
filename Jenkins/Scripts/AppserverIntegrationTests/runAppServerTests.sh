@@ -1,14 +1,12 @@
 #!/bin/bash
+# 1: network, 2: image, 3: container
 
-CONTAINER_NAME='bodacious_goren'
-IMAGE_NAME='academi-co-test-wildfly'
-
-if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
- 	docker build --rm -t $IMAGE_NAME `dirname "$0"`
+if [[ "$(docker images -q $2 2> /dev/null)" == "" ]]; then
+ 	docker build --rm -t $2 `dirname "$0"`
 fi
 
-if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
-	docker rm -vf $CONTAINER_NAME
+if [ "$(docker ps -q -f name=$3)" ]; then
+	docker rm -vf $3
 fi
 
-docker run -p 8080:8080 -p 9990:9990 -p 8777:8787 --name=$CONTAINER_NAME -d $IMAGE_NAME
+docker run --ip="172.18.0.1" --net=$1 -p 18080:8080 -p 19990:9990 -p 18777:8787 --name=$3 -d $2

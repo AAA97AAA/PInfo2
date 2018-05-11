@@ -26,7 +26,7 @@ wait_for_server
 
 echo "=> Executing the commands"
 export ACADEMI_CO_TESTS="java:/academi-co-tests"
-export H2_URI="jdbc:mysql://localhost:3306/ACADEMI_CO_DB"
+export H2_URI="jdbc:mysql://172.18.0.3:3306/ACADEMI_CO_DB"
 export H2_USER="root"
 export H2_PWD="admin"
 

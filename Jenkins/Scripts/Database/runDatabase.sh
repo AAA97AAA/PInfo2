@@ -6,5 +6,5 @@ if [[ "$(docker images -q $2 2> /dev/null)" == "" ]]; then
 fi
 
 if [ !"$(docker ps -q -f name=$3)" ]; then
-	docker run --ip="172.18.0.2" --net=$1 -p 13306:3306 --name=$3 -e MYSQL_ROOT_PASSWORD=admin -d $2
+	docker run --ip="172.18.0.1" --net=$1 -p 3306:3306 --name=$3 -e MYSQL_ROOT_PASSWORD=admin -d $2
 fi

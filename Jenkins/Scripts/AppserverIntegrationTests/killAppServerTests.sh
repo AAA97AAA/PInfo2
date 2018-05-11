@@ -1,7 +1,5 @@
 #!/bin/bash
 
-CONTAINER_NAME='bodacious_goren'
-
-if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
-	docker rm -vf $CONTAINER_NAME
+if [ "$(docker ps -q -f name=$1)" ]; then
+	docker rm -vf $1
 fi

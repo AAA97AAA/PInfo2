@@ -9,4 +9,4 @@ if [ "$(docker ps -q -f name=$3)" ]; then
 	docker rm -vf $3
 fi
 
-docker run -p 3306:3306 --name=$3 -e MYSQL_ROOT_PASSWORD=admin -d $2
+docker run --ip="172.18.0.3" --net=$1 -p 13306:3306 --name=$3 -e MYSQL_ROOT_PASSWORD=admin -d $2

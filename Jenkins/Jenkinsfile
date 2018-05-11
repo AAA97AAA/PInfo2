@@ -49,40 +49,40 @@ pipeline {
             }
         }
 
-        // // Launches the tests
-        // stage('Tests') {
-        //     agent {
-        //         docker {
-        //             image 'maven:3-alpine'
-        //             args '-v /root/.m2:/root/.m2'
-        //         }
-        //     }
-        //     steps {
-        //         sh 'mvn -f academi-co/pom.xml test'
-        //     }
-        //     post {
-        //         always {
-        //             junit 'academi-co/target/surefire-reports/*.xml'
-        //         }
-        //     }
-        // }
-        //
-        // // Deliver the project
-        // stage('Deliver') {
-        //     agent {
-        //         docker {
-        //             image 'docker'
-        //             args '--net="host" --entrypoint="" -v /:/tmp/server'
-        //         }
-        //     }
-        //     steps {
-        //         sh 'sh Jenkins/Scripts/Database/runDatabase.sh \
-        //             ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB}'
-        //         sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh \
-        //             ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER} ${DOCKER_APPSERVER}'
-        //         sh 'sh Jenkins/Scripts/deploy.sh'
-        //     }
-        // }
+        // Launches the tests
+        stage('Tests') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn -f academi-co/pom.xml test'
+            }
+            post {
+                always {
+                    junit 'academi-co/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
+        // Deliver the project
+        stage('Deliver') {
+            agent {
+                docker {
+                    image 'docker'
+                    args '--net="host" --entrypoint="" -v /:/tmp/server'
+                }
+            }
+            steps {
+                sh 'sh Jenkins/Scripts/Database/runDatabase.sh \
+                    ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB}'
+                sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh \
+                    ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER} ${DOCKER_APPSERVER} ${DOCKER_DB}'
+                sh 'sh Jenkins/Scripts/deploy.sh'
+            }
+        }
     }
 
     post {
