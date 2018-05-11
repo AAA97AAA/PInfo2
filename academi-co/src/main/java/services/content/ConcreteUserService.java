@@ -1,6 +1,7 @@
 package services.content;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +20,7 @@ import services.documentsManager.ProfilePictureService;
  * @author petrbinko
  *
  */
+@Default
 @Stateless
 public class ConcreteUserService implements UserService {
 
@@ -67,16 +69,17 @@ public class ConcreteUserService implements UserService {
 	 * Adding new user to database
 	 */
 	@Override
-	public void addUser(User user) {
+	public User addUser(User user) {
 		
 		entityManager.persist(user);
+		return user;
 	}
 	
 	/**
 	 * Service to modify User in database
 	 */
 	@Override
-	public void modifyUser(long id, User newUser) {
+	public User modifyUser(long id, User newUser) {
 		
 		User oldUser = this.getUser(id);
 				
@@ -87,15 +90,18 @@ public class ConcreteUserService implements UserService {
 		oldUser.setProfilePicture(newUser.getProfilePicture());
 		oldUser.setType(newUser.getType());
 		oldUser.setUsername(newUser.getUsername());
+		
+		return oldUser;
 	}
 	
 	@Override
-	public void modifyUserProfilePicture(long id, Document newProfilePicture) {
+	public User modifyUserProfilePicture(long id, Document newProfilePicture) {
 	
 		User user = getUser(id);
 		Document oldProfilePicture = user.getProfilePicture();
 		user.setProfilePicture(profilePictureService.modifyProfilePicture(oldProfilePicture, newProfilePicture));
 		
+		return user;
 		
 	}
 	

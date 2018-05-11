@@ -10,8 +10,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
+import dom.content.ConcreteUser;
 import dom.content.User;
 import dom.documentsManager.Document;
 
@@ -25,7 +29,7 @@ import dom.documentsManager.Document;
 public class UserServiceRs {
 	
 	@Inject
-	private UserService userService;
+	private UserService service;
 		
 	/**
 	 * Get a user by his ID
@@ -34,21 +38,21 @@ public class UserServiceRs {
 	 */
 	@GET
 	@Path("/getById/{id}")
-	@Produces("application/json")
-	public Response getUser(@PathParam("id") long id) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser(@PathParam("id") long id) {
 		
 //		User user = null;
 		
 		// Try if user exists in database
 //		try { 
-		User user = userService.getUser(id);	
+		return service.getUser(id);	
 //		} 
 		// Catching no result exception and return response
 //		catch (NoResultException e) {
 //			return Response.status(Response.Status.NOT_FOUND).build();
 //		}
 		
-		return Response.ok().entity(user).build();
+		//return Response.ok().entity(user).build();
 	}
 	
 	
@@ -59,12 +63,11 @@ public class UserServiceRs {
 	 */
 	@POST
 	@Path("/add")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public Response addUser(User user) throws URISyntaxException {
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addUser(ConcreteUser user, @Context UriInfo uriInfo) throws URISyntaxException {
 		
-		userService.addUser(user);
-		return Response.status(201).contentLocation(new URI("users/getById/" + user.getId())).build();
+		return Response.created(new URI(uriInfo.getPath() + user.getId())).entity(service.addUser(user)).build();
 	}
 	
 	/**
@@ -74,11 +77,11 @@ public class UserServiceRs {
 	 */
 	@POST
 	@Path("/modifyUser")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public void modifyUser(long id, User newUser) {
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void modifyUser(long id, ConcreteUser newUser) {
 		
-		userService.modifyUser(id, newUser);
+		service.modifyUser(id, newUser);
 	}
 	
 	/**
@@ -88,11 +91,11 @@ public class UserServiceRs {
 	 */
 	@POST
 	@Path("/modifyProfilePicture")
-	@Consumes("application/json")
-	@Produces("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public void modifyUserProfilePicture(long id, Document newProfilePicture) {
 		
-		userService.modifyUserProfilePicture(id, newProfilePicture);
+		service.modifyUserProfilePicture(id, newProfilePicture);
 		
 	}
 	

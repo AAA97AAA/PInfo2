@@ -10,7 +10,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import dom.content.Comment;
 
@@ -25,18 +28,18 @@ import dom.content.Comment;
 public class CommentServiceRs {
 
 	@Inject
-	private CommentService commentService;
+	private CommentService service;
 	
 	@GET
 	@Path("/getById/{id}")
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getComment(@PathParam("id") long id) {
 		
 //		Comment comment = null;
 		
 		// Try if comment exists in database
 //		try {
-		Comment	comment = commentService.getComment(id);
+		Comment	comment = service.getComment(id);
 			
 //		}
 		// Catching no result exception and return response
@@ -52,12 +55,11 @@ public class CommentServiceRs {
 	// TODO Security : registered users alone can post new Threads
 	@POST
 	@Path("/add")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public Response addComent(Comment comment) throws URISyntaxException {
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addComment(Comment comment, @Context UriInfo uriInfo) throws URISyntaxException {
 		
-		commentService.addComment(comment);
-		return Response.status(201).contentLocation(new URI("comments/getById/" + comment.getId())).build();
+		return Response.created(new URI(uriInfo.getPath() + comment.getId())).entity(service.addComment(comment)).build();
 		
 	}
 	

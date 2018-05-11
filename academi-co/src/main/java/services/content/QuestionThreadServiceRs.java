@@ -10,8 +10,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
+import dom.content.ConcreteQuestionThread;
 import dom.content.QuestionThread;
 
 /**
@@ -34,7 +38,7 @@ public class QuestionThreadServiceRs {
 	 */
 	@GET
 	@Path("/getById/{id}")
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getQuestionThread(@PathParam("id") long id) {
 		
 //		QuestionThread questionThread = null;
@@ -47,7 +51,6 @@ public class QuestionThreadServiceRs {
 //		catch (NoResultException e) {
 //			return Response.status(Response.Status.NOT_FOUND).build();
 //		}
-		
 		return Response.ok().entity(questionThread).build();
 		
 	}
@@ -62,12 +65,11 @@ public class QuestionThreadServiceRs {
 	 */
 	@POST
 	@Path("/add")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public Response addQuestionThread(QuestionThread questionThread) throws URISyntaxException {
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addQuestionThread(ConcreteQuestionThread questionThread, @Context UriInfo uriInfo) throws URISyntaxException {
 		
-		questionThreadService.addQuestionThread(questionThread);
-		return Response.status(201).contentLocation(new URI("questionThreads/getById/" + questionThread.getId())).build();
+		return Response.created(new URI(uriInfo.getPath()+ questionThread.getId())).entity(questionThreadService.addQuestionThread(questionThread)).build();
 	}
 	
 	

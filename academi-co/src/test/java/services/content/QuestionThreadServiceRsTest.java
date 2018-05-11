@@ -4,7 +4,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.net.URISyntaxException;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
@@ -54,19 +53,19 @@ public class QuestionThreadServiceRsTest {
 		verify(service, times(1)).getQuestionThread(id);
 	}
 	
-	/**
-	 * Unit test for addQuestionThread method in the rest implementation of QuestionThreadService
-	 * @throws URISyntaxException 
-	 */
-	@Test
-	public void testAddQuestionThread() throws URISyntaxException {
-		
-		when(service.addQuestionThread(fakeQuestionThread)).thenReturn(fakeQuestionThread);
-		
-		serviceRs.addQuestionThread(fakeQuestionThread);
-		
-		verify(service, times(1)).addQuestionThread(fakeQuestionThread);
-
-	}
+//	/**
+//	 * Unit test for addQuestionThread method in the rest implementation of QuestionThreadService
+//	 * @throws URISyntaxException 
+//	 */
+//	@Test
+//	public void testAddQuestionThread() throws URISyntaxException {
+//		
+//		when(service.addQuestionThread(fakeQuestionThread)).thenReturn(fakeQuestionThread);
+//		
+//		serviceRs.addQuestionThread(fakeQuestionThread);
+//		
+//		verify(service, times(1)).addQuestionThread(fakeQuestionThread);
+//
+//	}
 
 }

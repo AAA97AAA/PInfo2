@@ -11,6 +11,6 @@ public interface CommentService extends Serializable{
 	
 	public Comment getComment(long id);
 	
-	public void addComment(Comment comment);
+	public Comment addComment(Comment comment);
 	
 }

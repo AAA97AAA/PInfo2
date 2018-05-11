@@ -13,10 +13,10 @@ public interface UserService extends Serializable {
 	
 	public User getUser(long id);
 	
-	public void addUser(@NotNull User user);
+	public User addUser(@NotNull User user);
 	
-	public void modifyUser(long id, User newUser);
+	public User modifyUser(long id, User newUser);
 
-	public void modifyUserProfilePicture(long id, Document newProfilePicture);
+	public User modifyUserProfilePicture(long id, Document newProfilePicture);
 
 }

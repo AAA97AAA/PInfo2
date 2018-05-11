@@ -1,6 +1,7 @@
 package services.content;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -19,6 +20,7 @@ import dom.content.QuestionThread;
  *
  */
 
+@Default
 @Stateless
 public class ConcreteCommentService implements CommentService {
 	
@@ -67,12 +69,13 @@ public class ConcreteCommentService implements CommentService {
 	 * Add a comment to a question
 	 */
 	@Override
-	public void addComment(Comment comment) {
+	public Comment addComment(Comment comment) {
 		
 		entityManager.persist(comment);
 		QuestionThread question = comment.getQuestion();
 		question.addAnswer(comment);
 		entityManager.persist(question);
+		return comment;
 		
 	}
 	
