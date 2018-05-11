@@ -15,12 +15,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import dom.tags.ConcreteMainTag;
 import dom.tags.ConcreteSecondaryTag;
 import dom.tags.ConcreteTag;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
+import services.utility.View;
 
 /**
  * REST API of the TagService.
@@ -37,6 +40,7 @@ public class TagServiceRs {
 	@GET
 	@Path("/languages/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.Base.class)
 	public Response getLanguageTag(@PathParam("id") long id) {
 		Tag tag = service.getLanguageTag(id);
 		return Response.ok(tag).build();

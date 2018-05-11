@@ -14,6 +14,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import services.utility.View;
+
 /**
  * Generic tag implementation
  * (Used for language tags)
@@ -34,10 +38,12 @@ public class ConcreteTag implements Tag, Serializable {
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(View.Base.class)
 	private long id;
 	
 	@NotNull
 	@Column(name = "NAME")
+	@JsonView(View.Base.class)
 	private String name;
 
 
