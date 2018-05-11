@@ -1,6 +1,6 @@
 FROM jboss/wildfly:latest
 
-ADD ./mysql-connector-java-5.1.32.jar ./config_wildfly.sh /opt/jboss/wildfly/
+ADD ./mysql-connector-java-5.1.45-bin.jar ./config_wildfly.sh /opt/jboss/wildfly/
 RUN  sed -i_back 's/\r//g' /opt/jboss/wildfly/config_wildfly.sh
 
 USER root

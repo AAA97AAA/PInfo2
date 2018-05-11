@@ -4,6 +4,19 @@ pipeline {
     environment {
         // Set max JVM heap size for maven
         MAVEN_OPTS = '-Xmx512m'
+        // Set all variables
+        ACADEMI_CO_NETWORK = 'academi_co_network'
+
+        IMAGE_DB = 'academi_co_mysql'
+        IMAGE_APPSERVER = 'academi_co_wildfly'
+        IMAGE_APPSERVER_IT = 'academi_co_wildfly_tests'
+
+        DOCKER_DB = 'concealed_cader'
+        DOCKER_DB_IT = 'shady_selimi'
+        DOCKER_APPSERVER = 'cheeky_binko'
+        DOCKER_APPSERVER_IT = 'bodacious_goren'
+
+        // Scripts: script.sh network image container [...]
     }
 
     stages {
@@ -29,43 +42,43 @@ pipeline {
                 }
             }
             steps {
-                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh'
+                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB_IT}'
                 sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh'
             }
         }
 
         // Launches the tests
-        stage('Tests') {
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
-            steps {
-                sh 'mvn -f academi-co/pom.xml test'
-            }
-            post {
-                always {
-                    junit 'academi-co/target/surefire-reports/*.xml'
-                }
-            }
-        }
-
-        // Deliver the project
-        stage('Deliver') {
-            agent {
-                docker {
-                    image 'docker'
-                    args '--net="host" --entrypoint="" -v /:/tmp/server'
-                }
-            }
-            steps {
-                sh 'sh Jenkins/Scripts/Database/runDatabase.sh'
-                sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
-                sh 'sh Jenkins/Scripts/deploy.sh'
-            }
-        }
+        // stage('Tests') {
+        //     agent {
+        //         docker {
+        //             image 'maven:3-alpine'
+        //             args '-v /root/.m2:/root/.m2'
+        //         }
+        //     }
+        //     steps {
+        //         sh 'mvn -f academi-co/pom.xml test'
+        //     }
+        //     post {
+        //         always {
+        //             junit 'academi-co/target/surefire-reports/*.xml'
+        //         }
+        //     }
+        // }
+        //
+        // // Deliver the project
+        // stage('Deliver') {
+        //     agent {
+        //         docker {
+        //             image 'docker'
+        //             args '--net="host" --entrypoint="" -v /:/tmp/server'
+        //         }
+        //     }
+        //     steps {
+        //         sh 'sh Jenkins/Scripts/Database/runDatabase.sh'
+        //         sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh'
+        //         sh 'sh Jenkins/Scripts/deploy.sh'
+        //     }
+        // }
     }
 
     post {
