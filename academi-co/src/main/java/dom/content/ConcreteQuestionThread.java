@@ -21,6 +21,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dom.tags.ConcreteMainTag;
 import dom.tags.ConcreteSecondaryTag;
 import dom.tags.ConcreteTag;
@@ -94,6 +96,7 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	 * 
 	 * @return: Collection with: subject -> language -> topic_1 -> topic_2 -> ...
 	 */
+	@JsonIgnore
 	@Override
 	public List<Tag> getAllTags() {
 		List<Tag> allTags = new ArrayList<Tag>();

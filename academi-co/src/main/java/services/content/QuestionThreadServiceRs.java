@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import dom.content.ConcreteQuestionThread;
 import dom.content.QuestionThread;
 
 /**
@@ -51,7 +50,7 @@ public class QuestionThreadServiceRs {
 //		catch (NoResultException e) {
 //			return Response.status(Response.Status.NOT_FOUND).build();
 //		}
-		return Response.ok().entity(questionThread).build();
+		return Response.ok(questionThread).build();
 		
 	}
 	
@@ -67,9 +66,11 @@ public class QuestionThreadServiceRs {
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addQuestionThread(ConcreteQuestionThread questionThread, @Context UriInfo uriInfo) throws URISyntaxException {
+	public Response addQuestionThread(QuestionThread questionThread, @Context UriInfo uriInfo) 
+			throws URISyntaxException {
 		
-		return Response.created(new URI(uriInfo.getPath()+ questionThread.getId())).entity(questionThreadService.addQuestionThread(questionThread)).build();
+		return Response.created(new URI(uriInfo.getPath() + questionThread.getId()))
+				.entity(questionThreadService.addQuestionThread(questionThread)).build();
 	}
 	
 	
