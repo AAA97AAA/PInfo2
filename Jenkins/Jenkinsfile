@@ -42,7 +42,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh' ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB_IT}
+                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB_IT}'
                 sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER_IT} ${DOCKER_APPSERVER_IT}'
             }
         }
