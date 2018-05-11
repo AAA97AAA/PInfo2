@@ -13,6 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import services.utility.View;
+
 /**
  * Main academic field tag implementation
  * 
@@ -31,6 +35,7 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 	@OneToMany(targetEntity = ConcreteSecondaryTag.class, mappedBy = "parent",
 			cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@MapKeyColumn(name = "ID")
+	@JsonView(View.ParentCentered.class)
 	private Map<Long, SecondaryTag> children;
 
 	

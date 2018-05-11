@@ -1,6 +1,7 @@
 package services.tags;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -16,6 +17,8 @@ import dom.tags.Tag;
  */
 @Local
 public interface TagService  extends Serializable {
+	
+	public List<MainTag> getAllSubjects();
 
 	public Tag getLanguageTag(long id);
 	

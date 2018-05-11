@@ -1,5 +1,7 @@
 package services.tags;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 
@@ -13,6 +15,12 @@ public class ConcreteTagService implements TagService {
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -3158603306727516329L;
+
+	@Override
+	public List<MainTag> getAllSubjects() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public Tag getLanguageTag(long id) {

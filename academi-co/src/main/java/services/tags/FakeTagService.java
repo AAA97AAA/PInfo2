@@ -1,5 +1,8 @@
 package services.tags;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 
@@ -20,6 +23,18 @@ public class FakeTagService implements TagService {
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -4020828114631350061L;
+
+	@Override
+	public List<MainTag> getAllSubjects() {
+		List<MainTag> allSubjects = new ArrayList<MainTag>();
+		for (int i = 0; i < 20; i++) {
+			allSubjects.add(TagFactory.createMainTag("subject-" + i));
+			for (int j = 0; j < 10; j++) {
+				TagFactory.createSecondaryTag("topic-" + i + "-" + j, allSubjects.get(i));
+			}
+		}
+		return allSubjects;
+	}
 
 	@Override
 	public Tag getLanguageTag(long id) {

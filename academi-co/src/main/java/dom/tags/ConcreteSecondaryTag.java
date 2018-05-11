@@ -10,7 +10,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import services.utility.View;
 
 /**
  * Specific topic tag implementation
@@ -27,10 +29,10 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -8774104979011662031L;
 
-	@JsonIgnore
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteMainTag.class)
 	@JoinColumn(name = "PARENT")
+	@JsonView(View.ChildCentered.class)
 	private MainTag parent;
 
 	
