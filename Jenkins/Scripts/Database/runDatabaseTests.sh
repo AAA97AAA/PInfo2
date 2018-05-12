@@ -9,7 +9,7 @@ fi
 
 printf "\n ---------------- Kill test Database container ---------------- \n\n"
 
-if [ "$(docker ps -q -f name=$3)" ]; then
+if [[ $(docker ps -f "name=$3" --format '{{.Names}}') != $3 ]]; then
 	docker rm -vf $3
 fi
 
