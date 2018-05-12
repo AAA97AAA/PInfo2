@@ -25,7 +25,9 @@ wait_for_server
 
 echo "=> Executing the commands"
 export ACADEMI_CO="java:/academi-co"
-export MYSQL_URI="jdbc:mysql://172.18.0.1:3306/ACADEMI_CO_DB"
+export MYSQL_URI="jdbc:mysql://172.18.0.4:3306/ACADEMI_CO_DB"
+export ACADEMI_CO_TESTS="java:/academi-co-tests"
+export MYSQL_URI_TESTS="jdbc:mysql://172.18.0.3:3306/ACADEMI_CO_DB"
 export MYSQL_USER="root"
 export MYSQL_PWD="admin"
 
@@ -49,6 +51,20 @@ data-source add --name=academi-co --driver-name=mysql --jndi-name=$ACADEMI_CO --
    :add(login-modules=[                                                                                      \
            {"code"=>"Database", "flag"=>"required",                                                          \
             "module-options"=>{"dsJndiName" => "$ACADEMI_CO",                                   \
+                               "principalsQuery" => "select passwd from ACADEMI_CO_DB.USERS username where username=?",    \
+                               "rolesQuery" => "select role, 'Roles' from ACADEMI_CO_DB.USER_ROLES where username=?", \
+			       "hashAlgorithm" => "SHA-256", \
+			       "hashEncoding" => "base64"}}])
+
+# Add the datasource for integration tests
+data-source add --name=academi-co-tests --driver-name=mysql --jndi-name=$ACADEMI_CO_TESTS --connection-url=$MYSQL_URI_TESTS?useUnicode=true&amp;characterEncoding=UTF-8 --user-name=$MYSQL_USER --password=$MYSQL_PWD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000
+
+# Add a realm based on a database for integration tests
+/subsystem=security/security-domain=academi-co-tests-realm:add(cache-type=default)
+/subsystem=security/security-domain=academi-co-tests-realm/authentication=classic                                         \
+   :add(login-modules=[                                                                                      \
+           {"code"=>"Database", "flag"=>"required",                                                          \
+            "module-options"=>{"dsJndiName" => "$ACADEMI_CO_TESTS",                                   \
                                "principalsQuery" => "select passwd from ACADEMI_CO_DB.USERS username where username=?",    \
                                "rolesQuery" => "select role, 'Roles' from ACADEMI_CO_DB.USER_ROLES where username=?", \
 			       "hashAlgorithm" => "SHA-256", \

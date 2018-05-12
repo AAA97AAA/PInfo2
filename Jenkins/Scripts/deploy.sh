@@ -2,6 +2,8 @@
 
 DOCKER_DEPLOY='/tmp/server/tmp/docker-deploy'
 
+printf "\n ---------------- Deploy .war files ---------------- \n\n"
+
 if [[ -e $DOCKER_DEPLOY/academi-co.war ]]; then
     rm -f $DOCKER_DEPLOY/academi-co.war
 fi

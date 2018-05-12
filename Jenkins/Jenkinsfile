@@ -9,17 +9,35 @@ pipeline {
 
         IMAGE_DB = 'academi_co_mysql'
         IMAGE_APPSERVER = 'academi_co_wildfly'
-        IMAGE_APPSERVER_IT = 'academi_co_wildfly_tests'
+        // IMAGE_APPSERVER_IT = 'academi_co_wildfly_tests'
 
-        DOCKER_DB = 'concealed_cader' // 172.18.0.1
+        DOCKER_DB = 'concealed_cader' // 172.18.0.4
         DOCKER_DB_IT = 'shady_selimi' // 172.18.0.3
         DOCKER_APPSERVER = 'cheeky_binko' // 172.18.0.2
-        DOCKER_APPSERVER_IT = 'bodacious_goren' // 172.18.0.4
+        // DOCKER_APPSERVER_IT = 'bodacious_goren' // 172.18.0.?
 
         // Scripts: script.sh network image container [...]
     }
 
     stages {
+        // Launch the containers
+        stage('Setup Containers') {
+            agent {
+                docker {
+                    image 'docker'
+                    args '--net="host" --entrypoint=""'
+                }
+            }
+            steps {
+                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh \
+                    ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB_IT}'
+                sh 'sh Jenkins/Scripts/Database/runDatabase.sh \
+                    ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB}'
+                sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh \
+                    ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER} ${DOCKER_APPSERVER} ${DOCKER_DB}'
+            }
+        }
+
         // Build the project
         stage('Build') {
             agent {
@@ -30,22 +48,6 @@ pipeline {
             }
             steps {
                 sh 'mvn -B -DskipTests -f academi-co/pom.xml clean package'
-            }
-        }
-
-        // Launches the containers used for testing
-        stage('RunTestsContainers') {
-            agent {
-                docker {
-                    image 'docker'
-                    args '--net="host" --entrypoint=""'
-                }
-            }
-            steps {
-                sh 'sh Jenkins/Scripts/Database/runDatabaseTests.sh \
-                    ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB_IT}'
-                sh 'sh Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh \
-                    ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER_IT} ${DOCKER_APPSERVER_IT}'
             }
         }
 
@@ -67,8 +69,8 @@ pipeline {
             }
         }
 
-        // Deliver the project
-        stage('Deliver') {
+        // Deploy the project
+        stage('Deploy') {
             agent {
                 docker {
                     image 'docker'
@@ -76,10 +78,6 @@ pipeline {
                 }
             }
             steps {
-                sh 'sh Jenkins/Scripts/Database/runDatabase.sh \
-                    ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB}'
-                sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh \
-                    ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER} ${DOCKER_APPSERVER} ${DOCKER_DB}'
                 sh 'sh Jenkins/Scripts/deploy.sh'
             }
         }
@@ -88,7 +86,6 @@ pipeline {
     post {
         // Kill all test containers
         always {
-            sh 'sh Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh ${DOCKER_APPSERVER_IT}'
             sh 'sh Jenkins/Scripts/Database/killDatabaseTests.sh ${DOCKER_DB_IT}'
         }
 

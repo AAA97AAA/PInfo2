@@ -21,6 +21,7 @@
 # Package Files #
 **/target
 *.jar
+!mysql-connector-java-5.1.45-bin.jar
 *.war
 *.nar
 *.ear
