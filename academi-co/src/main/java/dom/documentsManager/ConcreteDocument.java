@@ -108,14 +108,12 @@ public class ConcreteDocument implements Document, Serializable {
 			stream.read(buffer);
 		} catch (IOException e) {
 			logger.error("Could not read stream.", e);
-			e.printStackTrace();
 			return null;
 		}
 		try {
 			stream.close();
 		} catch (IOException e) {
 			logger.error("Could not close stream.", e);
-			e.printStackTrace();
 		}
 		return buffer;
 	}
