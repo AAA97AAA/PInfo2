@@ -9,7 +9,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import dom.content.Comment;
 import dom.content.ConcreteQuestionThread;
+import dom.content.Post;
 import dom.content.QuestionThread;
 
 /**
@@ -18,12 +20,13 @@ import dom.content.QuestionThread;
  * All methods should start with EntityManager.getTransaction().begin();
  * 
  * @author petrbinko
+ * @author kaikoveritch (rework)
  *
  */
 
 @Default
 @Stateless
-public class ConcreteQuestionThreadService implements QuestionThreadService {
+public class ConcretePostService implements PostService {
 	
 	
 	/******************* Attributes **********************/
@@ -70,6 +73,18 @@ public class ConcreteQuestionThreadService implements QuestionThreadService {
 		entityManager.persist(questionThread);
 		
 		return questionThread;
+	}
+
+	@Override
+	public Comment addComment(long questionId, Comment comment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Post setBan(long id, boolean banned) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

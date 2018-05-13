@@ -19,11 +19,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import dom.documentsManager.ConcreteDocument;
 import dom.documentsManager.Document;
 import dom.documentsManager.DocumentFactory;
 import dom.inbox.ConcreteInbox;
 import dom.inbox.Inbox;
+import services.utility.View;
 
 /**
  * Registered user implementation
@@ -41,48 +44,59 @@ public class ConcreteUser implements User, Serializable {
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(View.UserMinimal.class)
 	private long id;
 	
 	@NotNull
 	@Column(name = "USERNAME", unique = true)
+	@JsonView(View.UserName.class)
 	private String username;
 	
 	@NotNull
 	@Column(name = "EMAIL", unique = true)
+	@JsonView(View.UserContact.class)
 	private String email;
 	
 	@NotNull
 	@Column(name = "PASSWORD_HASH")
+	@JsonView(View.UserSecret.class)
 	private String password;
 	
 	@NotNull
 	@OneToOne(targetEntity = ConcreteDocument.class, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "PROFILE_PICTURE")
+	@JsonView(View.UserVisuals.class)
 	private Document profilePicture;
 	
 	@Column(name = "USER_TYPE")
+	@JsonView(View.UserType.class)
 	private int type;
 	
 	@NotNull
 	@Column(name = "BIO")
+	@JsonView(View.UserProfileModifiable.class)
 	private String bio;
 	
 	@Column(name = "CAN_BE_MODERATOR")
+	@JsonView(View.UserSessionModifiable.class)
 	private boolean canBeModerator;
 	
 	@NotNull
 	@OneToOne(targetEntity = ConcreteInbox.class, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "INBOX")
+	@JsonView(View.UserSession.class)
 	private Inbox inbox;
 	
 	@OneToMany(targetEntity = ConcretePost.class, mappedBy = "author")
 	@MapKey(name = "id")
+	@JsonView(View.UserProfile.class)
 	private Map<Long, Post> posts;
 	
 	@ManyToMany(targetEntity = ConcreteQuestionThread.class)
 	@JoinTable(name = "USERS_THREADS", joinColumns = @JoinColumn(name = "USER_ID"),
 			inverseJoinColumns = @JoinColumn(name = "THREAD_ID"))
 	@MapKey(name = "id")
+	@JsonView(View.UserProfile.class)
 	private Map<Long, QuestionThread> followedThreads;
 	
 	

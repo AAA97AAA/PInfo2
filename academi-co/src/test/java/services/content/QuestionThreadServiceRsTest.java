@@ -28,11 +28,11 @@ public class QuestionThreadServiceRsTest {
 	QuestionThread fakeQuestionThread;
 	
 	@Mock
-	ConcreteQuestionThreadService service;
+	ConcretePostService service;
 	
 	// Instance of QuestionThreadServiceRs in which mocks will be injected
 	@InjectMocks
-	QuestionThreadServiceRs serviceRs;
+	PostServiceRs serviceRs;
 	
 	/**
 	 * Unit test for getComment method in the rest implementation of QuestionThreadServices

@@ -12,6 +12,10 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import services.utility.View;
+
 /**
  * Comment (answer) attached to a thread (question) implementation
  * 
@@ -30,6 +34,7 @@ public class ConcreteComment extends ConcretePost implements Serializable, Comme
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteQuestionThread.class)
 	@JoinColumn(name = "QUESTION")
+	@JsonView(View.PostChildCentered.class)
 	private QuestionThread question;
 	
 	

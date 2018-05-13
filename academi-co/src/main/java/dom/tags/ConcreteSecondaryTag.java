@@ -32,7 +32,7 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteMainTag.class)
 	@JoinColumn(name = "PARENT")
-	@JsonView(View.ChildCentered.class)
+	@JsonView(View.TagChildCentered.class)
 	private MainTag parent;
 
 	

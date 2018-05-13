@@ -56,7 +56,7 @@ public class ConcreteQuestionThreadServiceTest {
 	private TypedQuery<ConcreteQuestionThread> fakeQuery;
 	
 	@InjectMocks
-	ConcreteQuestionThreadService questionThreadService;
+	ConcretePostService questionThreadService;
 	
 	/**
 	 * Tests the 'getQuestionThread' method

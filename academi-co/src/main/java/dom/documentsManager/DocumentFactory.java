@@ -16,6 +16,12 @@ public class DocumentFactory {
 		return ((ConcreteDocument) document).clone();
 	}
 	
+	/**
+	 * Creates a new document and loads its data from the given path.
+	 * 
+	 * @param path
+	 * @return
+	 */
 	static public Document loadDocument(String path) {
 		
 		// Create empty Document instance
@@ -26,5 +32,17 @@ public class DocumentFactory {
 		
 		// Return result
 		return doc;
+	}
+	
+	/**
+	 * Replaces the oldDocument data with the newDocument data.
+	 * 
+	 * @param oldDocument
+	 * @param newDocument
+	 */
+	static public void replaceDocument(Document oldDocument, Document newDocument) {
+		ConcreteDocument target = ((ConcreteDocument) oldDocument);
+		target.setName(newDocument.getName());
+		target.setData(newDocument.getData());
 	}
 }

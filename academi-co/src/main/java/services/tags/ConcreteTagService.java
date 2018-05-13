@@ -53,7 +53,7 @@ public class ConcreteTagService implements TagService {
 	}
 
 	@Override
-	public SecondaryTag addTag(SecondaryTag tag) {
+	public SecondaryTag addTag(long parentId, SecondaryTag tag) {
 		// TODO Auto-generated method stub
 		return null;
 	}

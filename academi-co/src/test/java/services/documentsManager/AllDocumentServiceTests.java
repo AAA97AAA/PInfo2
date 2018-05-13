@@ -11,7 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ ConcreteAdvertisementBannerServiceTest.class, ConcreteProfilePictureServiceTest.class, 
-	ProfilePictureServiceRsTest.class, AdvertisementBannerServiceRsTest.class })
+	AdvertisementBannerServiceRsTest.class })
 public class AllDocumentServiceTests {
 
 }

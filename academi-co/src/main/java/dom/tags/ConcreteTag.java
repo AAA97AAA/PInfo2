@@ -38,12 +38,12 @@ public class ConcreteTag implements Tag, Serializable {
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(View.Base.class)
+	@JsonView(View.TagMinimal.class)
 	private long id;
 	
 	@NotNull
 	@Column(name = "NAME")
-	@JsonView(View.Base.class)
+	@JsonView(View.TagBase.class)
 	private String name;
 
 

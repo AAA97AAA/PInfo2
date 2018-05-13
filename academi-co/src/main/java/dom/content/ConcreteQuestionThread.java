@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import dom.tags.ConcreteMainTag;
 import dom.tags.ConcreteSecondaryTag;
@@ -29,6 +30,7 @@ import dom.tags.ConcreteTag;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
+import services.utility.View;
 
 /**
  * Thread (question) implementation
@@ -47,26 +49,31 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 
 	@NotNull
 	@Column(name = "TITLE")
+	@JsonView(View.PostBase.class)
 	private String title;
 
 	@OneToMany(targetEntity = ConcreteComment.class, mappedBy = "question")
 	@MapKeyColumn(name = "ID")
+	@JsonView(View.PostParentCentered.class)
 	private Map<Long, Comment> answers;
 
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteMainTag.class)
 	@JoinColumn(name = "SUBJECT")
+	@JsonView(View.PostBase.class)
 	private MainTag subject;
 
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteTag.class)
 	@JoinColumn(name = "LANGUAGE")
+	@JsonView(View.TagBase.class)
 	private Tag language;
 
 	@ManyToMany(targetEntity = ConcreteSecondaryTag.class)
 	@JoinTable(name = "QUESTIONS_TOPICS", joinColumns = @JoinColumn(name = "QUESTION_ID"),
 		inverseJoinColumns = @JoinColumn(name = "TOPIC_ID"))
 	@MapKey(name = "id")
+	@JsonView(View.TagBase.class)
 	private Map<Long, SecondaryTag> topics;
 
 

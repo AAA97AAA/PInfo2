@@ -35,7 +35,7 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 	@OneToMany(targetEntity = ConcreteSecondaryTag.class, mappedBy = "parent",
 			cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@MapKeyColumn(name = "ID")
-	@JsonView(View.ParentCentered.class)
+	@JsonView(View.TagParentCentered.class)
 	private Map<Long, SecondaryTag> children;
 
 	

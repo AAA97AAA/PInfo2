@@ -1,7 +1,6 @@
 package services.tags;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,9 +43,9 @@ public class TagServiceRs {
 	 * @return List of all MainTag's in the DB
 	 */
 	@GET
-	@Path("/subjects")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	@JsonView(View.ParentCentered.class)
+	@JsonView(View.TagParentCentered.class)
 	public Response getAllSubjects() {
 		List<MainTag> result = service.getAllSubjects();
 		return Response.ok(result).build();
@@ -61,7 +60,7 @@ public class TagServiceRs {
 	@GET
 	@Path("/languages/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@JsonView(View.Base.class)
+	@JsonView(View.TagBase.class)
 	public Response getLanguageTag(@PathParam("id") long id) {
 		Tag tag = service.getLanguageTag(id);
 		return Response.ok(tag).build();
@@ -74,9 +73,9 @@ public class TagServiceRs {
 	 * @return The fetched tag
 	 */
 	@GET
-	@Path("/subjects/{id}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@JsonView(View.ParentCentered.class)
+	@JsonView(View.TagParentCentered.class)
 	public Response getMainTag(@PathParam("id") long id) {
 		MainTag tag = service.getMainTag(id);
 		return Response.ok(tag).build();
@@ -89,9 +88,9 @@ public class TagServiceRs {
 	 * @return The fetched tag
 	 */
 	@GET
-	@Path("/topics/{id}")
+	@Path("/{parentId}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@JsonView(View.ChildCentered.class)
+	@JsonView(View.TagChildCentered.class)
 	public Response getSecondaryTag(@PathParam("id") long id) {
 		SecondaryTag tag = service.getSecondaryTag(id);
 		return Response.ok(tag).build();
@@ -101,47 +100,50 @@ public class TagServiceRs {
 	 * Add a language tag (Tag) to the DB.
 	 * 
 	 * @param id
-	 * @return The fetched tag
+	 * @return The created tag
 	 */
 	@POST
 	@Path("/languages")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@JsonView(View.Base.class)
-	public Response addLanguageTag(ConcreteTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
+	@JsonView(View.TagBase.class)
+	public Response addLanguageTag(ConcreteTag tag, @Context UriInfo uriInfo) {
 		Tag result = service.addTag(tag);
-		return Response.created(new URI(uriInfo.getPath() + "/" + result.getId())).entity(result).build();
+		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
+		return Response.created(location).entity(result).build();
 	}
 	
 	/**
 	 * Add a subject (MainTag) to the DB.
 	 * 
 	 * @param id
-	 * @return The fetched tag
+	 * @return The created tag
 	 */
 	@POST
-	@Path("/subjects")
+	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@JsonView(View.ParentCentered.class)
-	public Response addMainTag(ConcreteMainTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
+	@JsonView(View.TagBase.class)
+	public Response addMainTag(ConcreteMainTag tag, @Context UriInfo uriInfo) {
 		MainTag result = service.addTag(tag);
-		return Response.created(new URI(uriInfo.getPath() + "/" + result.getId())).entity(result).build();
+		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
+		return Response.created(location).entity(result).build();
 	}
 	
 	/**
 	 * Add a topic (SecondaryTag) to the DB.
 	 * 
 	 * @param id
-	 * @return The fetched tag
+	 * @return The created tag
 	 */
 	@POST
-	@Path("/topics")
+	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@JsonView(View.ChildCentered.class)
-	public Response addSecondaryTag(ConcreteSecondaryTag tag, @Context UriInfo uriInfo) throws URISyntaxException {
-		SecondaryTag result = service.addTag(tag);
-		return Response.created(new URI(uriInfo.getPath() + "/" + result.getId())).entity(result).build();
+	@JsonView(View.TagBase.class)
+	public Response addSecondaryTag(@PathParam("id") long id, ConcreteSecondaryTag tag, @Context UriInfo uriInfo) {
+		SecondaryTag result = service.addTag(id, tag);
+		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
+		return Response.created(location).entity(result).build();
 	}
 }

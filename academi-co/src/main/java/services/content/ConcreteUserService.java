@@ -12,7 +12,6 @@ import javax.persistence.criteria.Root;
 
 import dom.content.ConcreteUser;
 import dom.content.User;
-import dom.documentsManager.Document;
 import services.documentsManager.ProfilePictureService;
 
 /**
@@ -49,20 +48,39 @@ public class ConcreteUserService implements UserService {
 		// Criteria query of return type QuestionThread
 		CriteriaQuery<ConcreteUser> criteriaQuery = criteriaBuilder.createQuery(ConcreteUser.class);
 		
-		
 		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
 		Root<ConcreteUser> variableRoot = criteriaQuery.from(ConcreteUser.class);
 		
 		// Condition statement -> Where
 		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("id"), id));
 		
+		// Creating typed query
+		TypedQuery<ConcreteUser> query = entityManager.createQuery(criteriaQuery);
+		
+		// Return of single result. If we want a list of results, we use getResultList
+		return query.getSingleResult();
+	}
+	
+	@Override
+	public User getUserByName(String username) {
+
+		// Creating criteria builder to create a criteria query
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		
+		// Criteria query of return type QuestionThread
+		CriteriaQuery<ConcreteUser> criteriaQuery = criteriaBuilder.createQuery(ConcreteUser.class);
+		
+		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
+		Root<ConcreteUser> variableRoot = criteriaQuery.from(ConcreteUser.class);
+		
+		// Condition statement -> Where
+		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("username"), username));
 		
 		// Creating typed query
 		TypedQuery<ConcreteUser> query = entityManager.createQuery(criteriaQuery);
 		
 		// Return of single result. If we want a list of results, we use getResultList
 		return query.getSingleResult();
-		
 	}
 	
 	/**
@@ -81,28 +99,16 @@ public class ConcreteUserService implements UserService {
 	@Override
 	public User modifyUser(long id, User newUser) {
 		
-		User oldUser = this.getUser(id);
+		User oldUser = getUser(id);
 				
 		oldUser.setBio(newUser.getBio());
 		oldUser.setCanBeModerator(newUser.isCanBeModerator());
 		oldUser.setEmail(newUser.getEmail());
 		oldUser.setPassword(newUser.getPassword());
-		oldUser.setProfilePicture(newUser.getProfilePicture());
+		profilePictureService.modifyProfilePicture(oldUser.getProfilePicture().getId(), newUser.getProfilePicture());
 		oldUser.setType(newUser.getType());
 		oldUser.setUsername(newUser.getUsername());
 		
 		return oldUser;
 	}
-	
-	@Override
-	public User modifyUserProfilePicture(long id, Document newProfilePicture) {
-	
-		User user = getUser(id);
-		Document oldProfilePicture = user.getProfilePicture();
-		user.setProfilePicture(profilePictureService.modifyProfilePicture(oldProfilePicture, newProfilePicture));
-		
-		return user;
-		
-	}
-	
 }

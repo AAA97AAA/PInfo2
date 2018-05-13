@@ -1,12 +1,12 @@
 package services.content;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,13 +15,17 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import dom.content.ConcreteUser;
 import dom.content.User;
-import dom.documentsManager.Document;
+import services.utility.View;
 
 /**
  * JAX RS annotated class for REST services, using UserService (@Inject annotation)
+ * 
  * @author petrbinko
+ * @author kaikoveritch (rework)
  *
  */
 
@@ -32,72 +36,64 @@ public class UserServiceRs {
 	private UserService service;
 		
 	/**
-	 * Get a user by his ID
-	 * @param id
+	 * Get a user's session information from his username
+	 * 
+	 * @param username
 	 * @return
 	 */
 	@GET
-	@Path("/getById/{id}")
+	@Path("/login/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getUser(@PathParam("id") long id) {
-		
-//		User user = null;
-		
-		// Try if user exists in database
-//		try { 
-		return service.getUser(id);	
-//		} 
-		// Catching no result exception and return response
-//		catch (NoResultException e) {
-//			return Response.status(Response.Status.NOT_FOUND).build();
-//		}
-		
-		//return Response.ok().entity(user).build();
+	@JsonView(View.UserSession.class)
+	public Response getUserForSession(@PathParam("username") String username) {
+		User result = service.getUserByName(username);
+		return Response.ok(result).build();
+	}
+	
+	/**
+	 * Get a user's profile by his ID
+	 * @param id
+	 * @return response
+	 */
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.UserProfile.class)
+	public Response getUser(@PathParam("id") long id) {
+		User result = service.getUser(id);
+		return Response.ok(result).build();
 	}
 	
 	
 	/**
 	 * Add user to database
 	 * @param user
-	 * @throws URISyntaxException 
+	 * @return response
 	 */
 	@POST
-	@Path("/add")
+	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addUser(ConcreteUser user, @Context UriInfo uriInfo) throws URISyntaxException {
-		
-		return Response.created(new URI(uriInfo.getPath() + user.getId())).entity(service.addUser(user)).build();
+	@JsonView(View.UserNew.class)
+	public Response addUser(ConcreteUser user, @Context UriInfo uriInfo) {
+		User result = service.addUser(user);
+		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
+		return Response.created(location).entity(result).build();
 	}
 	
 	/**
-	 * Modify picture
+	 * Modify user data
 	 * @param id
 	 * @param newUser
+	 * @return response
 	 */
-	@POST
-	@Path("/modifyUser")
+	@PUT
+	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void modifyUser(long id, ConcreteUser newUser) {
-		
-		service.modifyUser(id, newUser);
+	@JsonView(View.UserModifiable.class)
+	public Response modifyUser(@PathParam("id") long id, ConcreteUser newUser) {
+		User result = service.modifyUser(id, newUser);
+		return Response.ok(result).build();
 	}
-	
-	/**
-	 * Modify profile picture
-	 * @param id
-	 * @param newProfilePicture
-	 */
-	@POST
-	@Path("/modifyProfilePicture")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public void modifyUserProfilePicture(long id, Document newProfilePicture) {
-		
-		service.modifyUserProfilePicture(id, newProfilePicture);
-		
-	}
-	
-	
 }

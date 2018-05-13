@@ -22,6 +22,10 @@ import javax.persistence.MapKey;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import services.utility.View;
+
 /**
  * Generic post definition
  * (Thread or comment)
@@ -43,37 +47,45 @@ public class ConcretePost implements Post, Serializable {
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(View.PostMinimal.class)
 	private long id;
 	
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteUser.class)
 	@JoinColumn(name = "AUTHOR")
+	@JsonView(View.PostAuthor.class)
 	private User author;
 	
 	@NotNull
 	@Column(name = "CONTENT")
+	@JsonView(View.PostBase.class)
 	private String content;
 	
 	@NotNull
 	@Column(name = "CREATION_DATE")
+	@JsonView(View.PostBase.class)
 	private LocalDateTime creationDate;
 	
 	@ManyToMany(targetEntity = ConcreteUser.class)
 	@JoinTable(name = "UPVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
 		inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	@MapKey(name = "id")
+	@JsonView(View.PostBase.class)
 	private Map<Long, User> upvoters;
 	
 	@ManyToMany(targetEntity = ConcreteUser.class)
 	@JoinTable(name = "DOWNVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
 		inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	@MapKey(name = "id")
+	@JsonView(View.PostBase.class)
 	private Map<Long, User> downvoters;
 	
 	@Column(name = "SCORE")
+	@JsonView(View.PostBase.class)
 	private int score;
 	
 	@Column(name = "BANNED")
+	@JsonView(View.PostState.class)
 	private boolean banned;
 	
 	

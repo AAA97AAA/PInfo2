@@ -6,8 +6,7 @@
 	<alternatives>
 		<class>services.tags.FakeTagService</class>
 		<class>services.documentsManager.FakeProfilePictureService</class>
-		<class>services.content.FakeQuestionThreadService</class>
-		<class>services.content.FakeCommentService</class>
+		<class>services.content.FakePostService</class>
 		<class>services.content.FakeUserService</class>
 	</alternatives>
 </beans>

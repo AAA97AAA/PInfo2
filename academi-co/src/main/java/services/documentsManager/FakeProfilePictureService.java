@@ -3,6 +3,7 @@ package services.documentsManager;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 
+import dom.content.UserFactory;
 import dom.documentsManager.Document;
 import dom.documentsManager.DocumentFactory;
 
@@ -21,14 +22,13 @@ public class FakeProfilePictureService implements ProfilePictureService {
 
 	@Override
 	public Document getProfilePicture(long id) {
-		byte[] data = new byte[] {-119, 20, 50, 1};
-		return DocumentFactory.createDocument("picture.png", data);
+		Document picture = DocumentFactory.loadDocument(UserFactory.DEFAULT_PATH);
+		return picture;
 	}
 
 	@Override
-	public Document modifyProfilePicture(Document oldProfilePicture, Document newProfilePicture) {
-		// TODO Not implemented yet !
-		return null;
+	public Document modifyProfilePicture(long oldPictureId, Document newProfilePicture) {
+		return newProfilePicture;
 	}
 
 }

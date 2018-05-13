@@ -18,6 +18,6 @@ public interface ProfilePictureService extends Serializable {
 	
 	public Document getProfilePicture(long id);
 	
-	public Document modifyProfilePicture(Document oldProfilePicture, Document newProfilePicture);
+	public Document modifyProfilePicture(long oldPictureId, Document newProfilePicture);
 
 }

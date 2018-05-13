@@ -89,19 +89,19 @@ public class UserServiceRsTest {
 		
 	}
 	
-	/**
-	 * Unit test for modifyUserProfilePicture in the rest implementation of UserService
-	 */
-	@Test
-	public void testModifyProfilePicture() {
-		
-		// Random id generation
-		long id = ThreadLocalRandom.current().nextLong();
-		
-		serviceRs.modifyUserProfilePicture(id, fakeDocument);
-		
-		verify(service, times(1)).modifyUserProfilePicture(id, fakeDocument);
-		
-	}
+//	/**
+//	 * Unit test for modifyUserProfilePicture in the rest implementation of UserService
+//	 */
+//	@Test
+//	public void testModifyProfilePicture() {
+//		
+//		// Random id generation
+//		long id = ThreadLocalRandom.current().nextLong();
+//		
+//		serviceRs.modifyUserProfilePicture(id, fakeDocument);
+//		
+//		verify(service, times(1)).modifyUserProfilePicture(id, fakeDocument);
+//		
+//	}
 
 }

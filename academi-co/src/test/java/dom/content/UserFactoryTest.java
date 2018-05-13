@@ -21,7 +21,7 @@ import dom.inbox.InboxFactory;
  *
  */
 public class UserFactoryTest {
-
+	
 	/**
 	 * Only instantiates the factory (unimportant)
 	 */
@@ -56,7 +56,8 @@ public class UserFactoryTest {
 		
 		// Verify that the expected object was obtained
 		assertEquals("Object wrongly instantiated.",
-				new ConcreteUser(username, email, password, DocumentFactory.loadDocument(UserFactory.DEFAULT_PATH),
+				new ConcreteUser(username, email, password,
+						DocumentFactory.loadDocument(UserFactory.DEFAULT_PATH),
 						type, "", true, InboxFactory.createInbox(), new HashMap<Long, Post>(),
 						new HashMap<Long, QuestionThread>()), user);
 	}

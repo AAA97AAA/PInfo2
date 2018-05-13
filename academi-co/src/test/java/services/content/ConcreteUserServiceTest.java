@@ -148,46 +148,8 @@ public class ConcreteUserServiceTest {
 		order.verify(fakeUser, times(1)).setCanBeModerator(any(boolean.class));
 		order.verify(fakeUser, times(1)).setEmail(null);
 		order.verify(fakeUser, times(1)).setPassword(null);
-		order.verify(fakeUser, times(1)).setProfilePicture(null);
 		order.verify(fakeUser, times(1)).setType(any(int.class));
 		order.verify(fakeUser, times(1)).setUsername(null);
 		
 	}
-	
-	
-	/**
-	 * Unit test for modifyUserProfilePicture from service
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 */
-	@Test
-	public void testModifyUserProfilePicture() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-
-		long id = ThreadLocalRandom.current().nextLong();
-		
-		// Specifying behavior for mock objects related to calls in the service
-		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
-		when(fakeUser.getProfilePicture()).thenReturn(fakeDocument);
-		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);		
-		when(fakeCriteriaQuery.from(ConcreteUser.class)).thenReturn(fakeRoot);
-		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
-		when(fakeTypedQuery.getSingleResult()).thenReturn(fakeUser);
-		when(userService.getUser(id)).thenReturn(fakeUser);
-		when(profilePictureService.modifyProfilePicture(fakeDocument, fakeDocument)).thenReturn(fakeDocument);
-		//doNothing().when(fakeEntityManager).persist(fakeDocument);
-		
-		// Calling new user service
-		userService.modifyUserProfilePicture(id, fakeDocument);
-		
-
-		// Verifying right method calls on objects in the service's function
-		InOrder order = inOrder(fakeUser);
-		order.verify(fakeUser, times(1)).getProfilePicture();
-		order.verify(fakeUser, times(1)).setProfilePicture(fakeDocument);
-		verify(profilePictureService).modifyProfilePicture(fakeDocument, fakeDocument);
-
-	}
-	
 }
