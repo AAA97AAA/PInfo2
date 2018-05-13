@@ -100,7 +100,7 @@ public class ConcreteUserService implements UserService {
 	public User modifyUser(long id, User newUser) {
 		
 		User oldUser = getUser(id);
-				
+		
 		oldUser.setBio(newUser.getBio());
 		oldUser.setCanBeModerator(newUser.isCanBeModerator());
 		oldUser.setEmail(newUser.getEmail());

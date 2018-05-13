@@ -2,6 +2,7 @@ package services.content;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,6 +26,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import dom.content.ConcreteUser;
 import dom.content.User;
 import dom.documentsManager.ConcreteDocument;
+import dom.documentsManager.Document;
 import services.documentsManager.ConcreteProfilePictureService;
 
 /**
@@ -131,25 +133,30 @@ public class ConcreteUserServiceTest {
 	public void testModifyUser() {		
 		
 		long id = ThreadLocalRandom.current().nextLong();
+		long id2 = 42;
 
 		// Specifying behavior for mock objects related to calls in the service
+		User oldUser = mock(User.class);
+		Document fakePicture = mock(Document.class);
+		when(oldUser.getProfilePicture()).thenReturn(fakePicture);
+		when(fakePicture.getId()).thenReturn(id2);
 		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);		
 		when(fakeCriteriaBuilder.createQuery(any())).thenReturn(fakeCriteriaQuery);		
 		when(fakeCriteriaQuery.from(ConcreteUser.class)).thenReturn(fakeRoot);
 		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeTypedQuery);
-		when(userService.getUser(id)).thenReturn(fakeUser);
+		when(userService.getUser(id)).thenReturn(oldUser);
 		
 		// Calling method modify user on user service
 		userService.modifyUser(id, fakeUser);
 		
 		// Verifying right method calls on objects in the service's function
-		InOrder order = inOrder(fakeUser);
-		order.verify(fakeUser, times(1)).setBio(null);
-		order.verify(fakeUser, times(1)).setCanBeModerator(any(boolean.class));
-		order.verify(fakeUser, times(1)).setEmail(null);
-		order.verify(fakeUser, times(1)).setPassword(null);
-		order.verify(fakeUser, times(1)).setType(any(int.class));
-		order.verify(fakeUser, times(1)).setUsername(null);
+		InOrder order = inOrder(oldUser);
+		order.verify(oldUser, times(1)).setBio(null);
+		order.verify(oldUser, times(1)).setCanBeModerator(any(boolean.class));
+		order.verify(oldUser, times(1)).setEmail(null);
+		order.verify(oldUser, times(1)).setPassword(null);
+		order.verify(oldUser, times(1)).setType(any(int.class));
+		order.verify(oldUser, times(1)).setUsername(null);
 		
 	}
 }
