@@ -56,9 +56,12 @@ public class UserFactoryTest {
 			followedThreads.put(i, mock(ConcreteQuestionThread.class));
 		}
 		
+		// Mock of servlet context for local tests
 		ServletContext fakeContext = mock(ServletContext.class);
 		when(fakeContext.getRealPath(anyString())).thenReturn(UserFactoryTest.class.getClassLoader().getResource("defaultPP.png").getPath());
-		UserServiceRs.context = fakeContext;
+		if (UserServiceRs.context == null) {
+			UserServiceRs.context = fakeContext;
+		}
 		
 		// Call the construction method
 		User user = UserFactory.createUser(username, email, password, type);
