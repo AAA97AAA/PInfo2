@@ -59,7 +59,9 @@ public class UserFactoryTest {
 		
 		// Mock of servlet context for local tests
 		ServletContext fakeContext = mock(ServletContext.class);
-		when(fakeContext.getRealPath(anyString())).thenReturn(new File(UserFactoryTest.class.getClassLoader().getResource("defaultPP.png").getFile()).getAbsolutePath());
+		when(fakeContext.getRealPath(anyString()))
+//			.thenReturn(UserFactoryTest.class.getClassLoader().getResource("defaultPP.png").getPath());
+			.thenReturn(new File("src/test/resources").getAbsolutePath() + "/defaultPP.png");
 		if (UserServiceRs.context == null) {
 			UserServiceRs.context = fakeContext;
 		}
