@@ -60,7 +60,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -f academi-co/pom.xml test'
+                sh 'mvn -f academi-co/pom.xml -e test'
             }
             post {
                 always {
