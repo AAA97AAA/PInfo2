@@ -9,6 +9,6 @@ fi
 
 printf "\n ---------------- Launch Database container ---------------- \n\n"
 
-if [[ $(docker ps -f "name=$3" --format '{{.Names}}') != $3 ]]; then
+if [[ "$(docker ps -f "name=$3" --format '{{.Names}}')" == "" ]]; then
 	docker run --ip="172.18.0.4" --net=$1 -p 3306:3306 --name=$3 -e MYSQL_ROOT_PASSWORD=admin -d $2
 fi
