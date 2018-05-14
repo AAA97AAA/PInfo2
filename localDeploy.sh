@@ -24,11 +24,11 @@ if [ !"$(docker network ls -q -f name=$ACADEMI_CO_NETWORK)" ]; then
 fi
 
 # Launch the containers
-sh ./Jenkins/Scripts/Database/runDatabaseTests.sh \
+./Jenkins/Scripts/Database/runDatabaseTests.sh \
     $ACADEMI_CO_NETWORK $IMAGE_DB $DOCKER_DB_IT
-sh ./Jenkins/Scripts/Database/runDatabase.sh \
+./Jenkins/Scripts/Database/runDatabase.sh \
     $ACADEMI_CO_NETWORK $IMAGE_DB $DOCKER_DB
-sh ./Jenkins/Scripts/Appserver/runAppServer.sh \
+./Jenkins/Scripts/Appserver/runAppServer.sh \
     $ACADEMI_CO_NETWORK $IMAGE_APPSERVER $DOCKER_APPSERVER $DOCKER_DB
 
 printf "\n ---------------- Build Maven project ---------------- \n\n"
@@ -40,7 +40,7 @@ printf "\n ---------------- Launch Tests ---------------- \n\n"
 mvn -f academi-co/pom.xml test
 
 # Kill all test containers
-sh Jenkins/Scripts/Database/killDatabaseTests.sh $DOCKER_DB_IT
+./Jenkins/Scripts/Database/killDatabaseTests.sh $DOCKER_DB_IT
 
 printf "\n ---------------- Deploy the project ---------------- \n\n"
 
