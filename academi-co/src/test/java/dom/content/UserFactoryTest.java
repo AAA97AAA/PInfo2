@@ -7,6 +7,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -58,7 +59,7 @@ public class UserFactoryTest {
 		
 		// Mock of servlet context for local tests
 		ServletContext fakeContext = mock(ServletContext.class);
-		when(fakeContext.getRealPath(anyString())).thenReturn(UserFactoryTest.class.getClassLoader().getResource("defaultPP.png").getPath());
+		when(fakeContext.getRealPath(anyString())).thenReturn(new File(UserFactoryTest.class.getClassLoader().getResource("defaultPP.png").getFile()).getAbsolutePath());
 		if (UserServiceRs.context == null) {
 			UserServiceRs.context = fakeContext;
 		}
