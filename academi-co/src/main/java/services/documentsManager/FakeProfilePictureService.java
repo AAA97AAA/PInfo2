@@ -19,6 +19,7 @@ public class FakeProfilePictureService implements ProfilePictureService {
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -7094187279374862117L;
+	
 
 	@Override
 	public Document getProfilePicture(long id) {

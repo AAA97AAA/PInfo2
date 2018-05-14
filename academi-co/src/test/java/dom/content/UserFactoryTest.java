@@ -1,18 +1,23 @@
 package dom.content;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.servlet.ServletContext;
+
 import org.junit.Test;
 
 import dom.documentsManager.DocumentFactory;
 import dom.inbox.InboxFactory;
+import services.content.UserServiceRs;
 
 /**
  * Test class for UserFactory
@@ -21,7 +26,7 @@ import dom.inbox.InboxFactory;
  *
  */
 public class UserFactoryTest {
-	
+		
 	/**
 	 * Only instantiates the factory (unimportant)
 	 */
@@ -50,6 +55,10 @@ public class UserFactoryTest {
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
 			followedThreads.put(i, mock(ConcreteQuestionThread.class));
 		}
+		
+		ServletContext fakeContext = mock(ServletContext.class);
+		when(fakeContext.getRealPath(anyString())).thenReturn(UserFactoryTest.class.getClassLoader().getResource("defaultPP.png").getPath());
+		UserServiceRs.context = fakeContext;
 		
 		// Call the construction method
 		User user = UserFactory.createUser(username, email, password, type);

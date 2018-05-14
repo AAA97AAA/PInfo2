@@ -85,7 +85,7 @@ public class DocumentFactoryTest {
 		
 		// Apply method
 		Document documentMock = new ConcreteDocument("interestingName", data);
-		Document documentToTest = DocumentFactory.loadDocument(targetPath);
+		Document documentToTest = DocumentFactory.loadDocument(name);
 		
 		// Verify that the right data were founded in the file	
 		assertArrayEquals("Unexpected data in entity.", documentMock.getData(), documentToTest.getData());
