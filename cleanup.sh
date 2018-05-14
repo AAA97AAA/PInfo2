@@ -31,7 +31,8 @@ printf "\n ---------------- Delete all image ---------------- \n\n"
 docker rmi -f $IMAGE_DB
 docker rmi -f $IMAGE_APPSERVER
 
-# Delete .war files
+printf "\n ---------------- Delete all .war files ---------------- \n\n"
+
 if [[ -e /tmp/docker-deploy/academi-co.war ]]; then
     rm -f /tmp/docker-deploy/academi-co.war
 fi

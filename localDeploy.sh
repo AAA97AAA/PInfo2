@@ -17,6 +17,12 @@ DOCKER_APPSERVER='cheeky_binko' # 172.18.0.2
 
 
 
+printf "\n ---------------- Create /tmp/docker-deploy directory ---------------- \n\n"
+
+if [ ! -d /tmp/docker-deploy ]; then
+  mkdir /tmp/docker-deploy
+fi
+
 printf "\n ---------------- Launch network ---------------- \n\n"
 
 if [ !"$(docker network ls -q -f name=$ACADEMI_CO_NETWORK)" ]; then
