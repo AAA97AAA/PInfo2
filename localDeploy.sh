@@ -42,7 +42,8 @@ mvn -f academi-co/pom.xml test
 # Kill all test containers
 sh Jenkins/Scripts/Database/killDatabaseTests.sh $DOCKER_DB_IT
 
-# Deploy the project
+printf "\n ---------------- Deploy the project ---------------- \n\n"
+
 if [[ -e /tmp/docker-deploy/academi-co.war ]]; then
     rm -f /tmp/docker-deploy/academi-co.war
 fi
