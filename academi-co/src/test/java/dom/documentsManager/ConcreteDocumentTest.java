@@ -73,7 +73,7 @@ public class ConcreteDocumentTest {
 		// Setup expectation
 		long id = 4;
 		String filename = "testFile.txt";
-		int size = ThreadLocalRandom.current().nextInt(1, 1024);
+		int size = ThreadLocalRandom.current().nextInt(1, 128);
 		byte[] data = new byte[size];
 		new Random().nextBytes(data);
 		
