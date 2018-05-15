@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.invocation.InvocationOnMock;
@@ -37,6 +37,19 @@ import nl.jqno.equalsverifier.EqualsVerifier;
  */
 public class ConcreteDocumentTest {
 	
+	// Data to be infused in the test files
+	private static byte[] randomData;
+	
+	/**
+	 * Generates the data array for the test files
+	 */
+	@BeforeClass
+	static public void generateRandomData() {
+		int size = 128;
+		randomData = new byte[size];
+		new Random().nextBytes(randomData);
+	}
+	
 	/**
 	 * Tests that the constructors and getters/setters work as intended
 	 */
@@ -46,22 +59,20 @@ public class ConcreteDocumentTest {
 		// Setup data to be put in the entity
 		long id = 4;
 		String name = "Name";
-		byte[] data = new byte[ThreadLocalRandom.current().nextInt(1, 100)];
-		new Random().nextBytes(data);
 		
 		// Construct entity with full constructor call
-		ConcreteDocument document = new ConcreteDocument(name, data);
+		ConcreteDocument document = new ConcreteDocument(name, randomData);
 		assertEquals("Unexpected name in entity.", name, document.getName());
-		assertEquals("Unexpected data in entity.", data, document.getData());
+		assertEquals("Unexpected data in entity.", randomData, document.getData());
 		
 		// Construct entity with empty constructor call and setters
 		ConcreteDocument document2 = new ConcreteDocument();
 		document2.setId(id);
 		document2.setName(name);
-		document2.setData(data);
+		document2.setData(randomData);
 		assertEquals("Unexpected id in entity.", id, document2.getId());
 		assertEquals("Unexpected name in entity.", name, document2.getName());
-		assertEquals("Unexpected data in entity.", data, document2.getData());
+		assertEquals("Unexpected data in entity.", randomData, document2.getData());
 	}
 
 	/**
@@ -73,19 +84,16 @@ public class ConcreteDocumentTest {
 		// Setup expectation
 		long id = 4;
 		String filename = "testFile.txt";
-		int size = ThreadLocalRandom.current().nextInt(1, 128);
-		byte[] data = new byte[size];
-		new Random().nextBytes(data);
 		
 		// Construct comparison entity
-		ConcreteDocument document = new ConcreteDocument(filename, data);
+		ConcreteDocument document = new ConcreteDocument(filename, randomData);
 		document.setId(id);
 		
 		// Write temporary file to be read
 		File tmpfile = new File(filename);
 		tmpfile.deleteOnExit();
 		FileOutputStream stream = new FileOutputStream(filename);
-	    stream.write(data);
+	    stream.write(randomData);
 	    stream.close();
 		
 		// Call the method and fill the test entity
@@ -94,7 +102,7 @@ public class ConcreteDocumentTest {
 		// Control result
 		assertEquals("Unexpected id in entity.", id, document.getId());
 		assertEquals("Unexpected name in entity.", filename, document.getName());
-		assertArrayEquals("Unexpected data in entity.", data, document.getData());
+		assertArrayEquals("Unexpected data in entity.", randomData, document.getData());
 		
 		// Destroy test file
 		tmpfile.delete();
@@ -145,15 +153,12 @@ public class ConcreteDocumentTest {
 		
 		// Set test expectation
 		String filename = "spoofFile.txt";
-		int size = ThreadLocalRandom.current().nextInt(1, 1024);
-		byte[] data = new byte[size];
-		new Random().nextBytes(data);
 		
 		// Write temporary file to be read
 		File tmpfile = new File(filename);
 		tmpfile.deleteOnExit();
 		FileOutputStream outStream = new FileOutputStream(filename);
-		outStream.write(data);
+		outStream.write(randomData);
 		outStream.close();
 		
 		// Compute the expected result
@@ -185,16 +190,14 @@ public class ConcreteDocumentTest {
 	public void testGetBytes() throws IOException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		// Generate test data
-		int size = ThreadLocalRandom.current().nextInt(1, 100);
-		byte[] byteArray = new byte[size];
 		FileInputStream fakeStream = mock(FileInputStream.class);
 		
 		// Set stream behavior
 		doAnswer(new Answer<Object>() {
 			public Object answer(InvocationOnMock invocation) {
 				byte[] inputArray = invocation.getArgument(0);
-				for (int i = 0; i < size; i++) {
-					inputArray[i] = byteArray[i];
+				for (int i = 0; i < randomData.length; i++) {
+					inputArray[i] = randomData[i];
 				}
 				return null;
 			}
@@ -205,10 +208,10 @@ public class ConcreteDocumentTest {
 		ConcreteDocument testDocument = new ConcreteDocument();
 		Method getBytes = testDocument.getClass().getDeclaredMethod("getBytes", FileInputStream.class, int.class);
 		getBytes.setAccessible(true);
-		byte[] result = (byte[]) getBytes.invoke(testDocument, fakeStream, size);
+		byte[] result = (byte[]) getBytes.invoke(testDocument, fakeStream, randomData.length);
 		
 		// Control result
-		assertArrayEquals("Wrong byte array read.", byteArray, result);
+		assertArrayEquals("Wrong byte array read.", randomData, result);
 		
 		// Verify follow-up calls
 		InOrder order = inOrder(fakeStream);
@@ -217,7 +220,7 @@ public class ConcreteDocumentTest {
 		
 		// Control that failure to open returns null
 		doThrow(IOException.class).when(fakeStream).read(any(byte[].class));
-		assertNull("Returned non-null value with invalid file.", getBytes.invoke(testDocument, fakeStream, size));
+		assertNull("Returned non-null value with invalid file.", getBytes.invoke(testDocument, fakeStream, randomData.length));
 	}
 	
 	/**
@@ -237,12 +240,9 @@ public class ConcreteDocumentTest {
 		// Setup data to be put in the entity
 		long id = 4;
 		String name = "Name";
-		int size = 128 * 128;
-		byte[] data = new byte[size];
-		new Random().nextBytes(data);
 		
 		// Construct entity
-		ConcreteDocument document = new ConcreteDocument(name, data);
+		ConcreteDocument document = new ConcreteDocument(name, randomData);
 		
 		// Clone entity
 		ConcreteDocument documentClone = document.clone();
@@ -266,12 +266,9 @@ public class ConcreteDocumentTest {
 		// Setup data to be put in the entity (and mock 'toString' values)
 		long id = 4;
 		String name = "Name";
-		int size = 128 * 128;
-		byte[] data = new byte[size];
-		new Random().nextBytes(data);
 		
 		// Construct entity
-		ConcreteDocument document = new ConcreteDocument(name, data);
+		ConcreteDocument document = new ConcreteDocument(name, randomData);
 		document.setId(id);
 		
 		// Create expected result
