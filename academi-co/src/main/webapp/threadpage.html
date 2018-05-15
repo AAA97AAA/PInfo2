@@ -30,17 +30,23 @@
   <link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-profilePage.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-resize.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-searchbar.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
 
+  <link rel="stylesheet" type="text/css" href="CSS/style-resize-ad.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-profilePage.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-threadPage.css"/>
 
 
   <!-- Our Scripts TODO: add your personal js here -->
   <!--<script src="js/modules/allModules.js"></script>
   <script src="js/modules/getRESTCall.js"></script>
 -->
-  <script src="js/controllers/script-searchbar.js"></script>
-  <script src="js/modules/Selim.js"></script>
+<script src="js/modules/allModules.js"></script>
+<script src="js/modules/getRESTCall.js"></script>
+<script src="js/controllers/script-searchbar.js"></script>
+<script src="js/controllers/script-signInUp.js"></script>
 
   <!-- To have correct caracters for accented letters for example -->
   <meta charset="UTF-8">
@@ -59,49 +65,19 @@
     </a>
    <!-- + Button  -->
    <!-- TODO: add the corresponding link to add a thread -->
-   <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
-   <!-- Search Button -->
-         <input type="text" placeholder="Search..." name="search">
+<div id='searchBarHeader' >
+     <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
+     <!-- Search Button -->
+
+      <input type="text" placeholder="Search..." name="search">
       <button type="submit" style="background-color: white; border-radius: 7px;"><i class="fa fa-search"></i></button>
-   <button class="buttonHeader" style="font-size:23px;cursor:pointer; color:white;" onclick="openNav()">&#9660;</button>
-<!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
+      <button class="buttonHeader" style="font-size:23px;cursor:pointer; color:white;" onclick="openNav()">&#9660;</button>
+    </div>
 
- <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-<span style="position:absolute; left:1100px; width:200px; top:180px;">From date</span><br><input type="text" id="dateBegin" style="position:absolute; left:1230px; width:200px; top:180px;"></input>
-<span style="position:absolute; left:1500px; width:200px; top:180px;">To date</span><br><input type="text" id="dateBegin" style="position:absolute; left:1600px; width:200px; top:180px;"></input>
-<span style="position:absolute; left:1130px; width:200px; top:280px;">Author</span><br><input type="text" id="dateBegin" style="position:absolute; left:1230px; width:200px; top:280px;"></input>
-<input type="submit" value="Submit" id="popUpYes" style="border-radius: 7px; position: absolute; top: 700px; left:1500px; width: 200px; height:40px; hover:gray;">
-<div id="myDIV" class="header" style="background-color: #1f2c47;  width: 550px; margin-left:200px;">
-  <h2 style="margin:0px">Primary tag</h2>
-  <input type="text" id="myInput1" placeholder="">
-  <span onclick="newElement1()" class="addBtn" style="border-radius: 7px;">Add</span>
-</div>
-
-<ul id="myUL1" style="width: 550px; margin-left:200px;">
-</ul>
-
-<br><br> <br><br> 
-<div id="myDIV" class="header"  style="background-color: #263659; width: 550px; margin-left:200px;">
-  <h2 style="margin:0px">Secondary tags</h2>
-  <input type="text" id="myInput2" placeholder="">
-  <span onclick="newElement2()" class="addBtn" style="border-radius: 7px;">Add</span>
-</div>
-
-<ul id="myUL2" style="width: 550px; margin-left:200px;">
-</ul>
-
-</div>
-
-</div>
-  
-<!-- ENDING OF SLIDE-NAVIGATION SEARCH -->
 
    <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
    <!-- Inbox (Notifications) + profile pic logo -->
-   <div style="float:right">
+   <div id="rightComponent" style="float:right">
      <!-- Inbox in header -->
      <div class="inboxDropDown" ng-controller= "UserInbox">
        <!-- Inbox button with green number of notifications -->
@@ -119,42 +95,75 @@
       </a>
    </div>
 
-  
+
+   <!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
+
+    <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">
+
+   <div id="mySidenav" class="sidenav">
+     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+   <span style="position:absolute; left:1100px; width:200px; top:180px;">From date</span><br><input type="text" id="dateBegin" style="position:absolute; left:1230px; width:200px; top:180px;"></input>
+   <span style="position:absolute; left:1500px; width:200px; top:180px;">To date</span><br><input type="text" id="dateBegin" style="position:absolute; left:1600px; width:200px; top:180px;"></input>
+   <span style="position:absolute; left:1130px; width:200px; top:280px;">Author</span><br><input type="text" id="dateBegin" style="position:absolute; left:1230px; width:200px; top:280px;"></input>
+   <input type="submit" value="Submit" id="popUpYes" style="border-radius: 7px; position: absolute; top: 700px; left:1500px; width: 200px; height:40px; hover:gray;">
+   <div id="myDIV" class="header" style="background-color: #1f2c47;  width: 550px; margin-left:200px;">
+     <h2 style="margin:0px">Primary tag</h2>
+     <input type="text" id="myInput1" placeholder="">
+     <span onclick="newElement1()" class="addBtn" style="border-radius: 7px;">Add</span>
+   </div>
+
+   <ul id="myUL1" style="width: 550px; margin-left:200px;">
+   </ul>
+
+   <br><br> <br><br>
+   <div id="myDIV" class="header"  style="background-color: #263659; width: 550px; margin-left:200px;">
+     <h2 style="margin:0px">Secondary tags</h2>
+     <input type="text" id="myInput2" placeholder="">
+     <span onclick="newElement2()" class="addBtn" style="border-radius: 7px;">Add</span>
+   </div>
+
+   <ul id="myUL2" style="width: 550px; margin-left:200px;">
+   </ul>
+
+   </div>
+
+   </div>
+
+   <!-- ENDING OF SLIDE-NAVIGATION SEARCH -->
 
   </header>
    <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
 
 
-   <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+   <div class="w3-container w3-content" >
+
    <!-- The Grid -->
-   <div class="w3-row">
-   <!--     Left Column -->
-   <div class="w3-col m3">
-   </div>
-   <!--     End Left Column -->
+   <div class="w3-row"  >
+
    <!--     Middle Column -->
-   <div class="w3-col m7 otherpositions">
-   <p style="text-align:center;"><img src="images/logo2.png" style="height:70px;width:450px" alt="Logo2"></p>
+   <!-- TODO: ASLAM WORK HERE -->
+   <div class="w3-col m7 " style="width:100%;">
+   <!-- <p style="text-align:center;"><img src="images/logo2.png" style="height:70px;width:450px" alt="Logo2"></p> -->
    <br>
    <!--       <a href="https://www.bally.ch/de_ch/home/" target="_blank"> -->
-   <img src="images/forgoodui.jpg" alt="Add" style="width:800px; height:200px;">
+   <img src="images/forgoodui.jpg" class='topAd' alt="Advertisement" style="width:800px; height:200px; margin-left:70px">
    <!--       </a> -->
-   <div ng-app="myApp" ng-controller="myCtrl">
+   <div ng-controller="threadLoad">
       <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin ">
          <br>
          <!-- Show MainTag et Secondary tag -->
-         <div class="w3-row-padding" style="margin:0 -16px">
-            <button class="tag maintag">{{myWelcome.subject}}</button>
-            <button class="tag secondarytag" ng-repeat="topic in myWelcome.topics">{{topic.name}}</button>
+         <div class="w3-row-padding" style="margin:0 -12px">
+            <button class="tag maintag">{{thread.subject}}</button>
+            <button class="tag secondarytag" ng-repeat="topic in thread.topics">{{topic.name}}</button>
          </div>
          <!-- Show Thread -->
          <h3>
-         {{myWelcome.title}}
+         {{thread.title}}
          </h3>
          <hr>
-         <img ng-src="data:image/JPEG;base64,{{myWelcome.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
-         <span class="w3-right w3-opacity">{{myWelcome.creationDate}}</span>
-         <h4>{{myWelcome.author}}</h4>
+         <img ng-src="data:image/JPEG;base64,{{thread.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+         <span class="w3-right w3-opacity">{{thread.creationDate}}</span>
+         <h4>{{thread.author}}</h4>
          <br>
          <!-- <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">  -->
          <div style="width:5%; float:right">
@@ -164,17 +173,17 @@
                </like>
                <br>
                <!--       <span ng-model="like.votes">{{like.votes}}</span> -->
-               <span>{{myWelcome.score}}</span>
+               <span>{{thread.score}}</span>
                <br>
                <dislike href="#" ng-click="doDislike()">
                   <i class="glyphicon" ng-class="(light2 == 1) ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-download'"></i>
                </dislike>
             </div>
          </div>
-         <p>{{myWelcome.content}}</p>
+         <p>{{thread.content}}</p>
          <br>
          <!-- Show list of answers -->
-         <div class=" w3-container w3-card w3-white w3-round w3-margin" ng-repeat="answer in myWelcome.answers" >
+         <div class=" w3-container w3-card w3-white w3-round w3-margin" ng-repeat="answer in thread.answers" >
             <br>
             <img ng-src="data:image/JPEG;base64,{{answer.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
             <span class="w3-right w3-opacity">{{answer.creationDate}}</span>
@@ -194,8 +203,8 @@
                      <p>{{answer.content}}</p>
                   </div>
                   </div>
-                  
-            
+
+
             <!--         <img src="images/fakeprofilepic3.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px"> -->
             <!--         <span class="w3-right w3-opacity">Today 14:37</span> -->
             <!--         <h5>Jennifer Aniston -->
@@ -213,6 +222,7 @@
             <!--         <hr style="height: 3px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;"> -->
             <!--         <hr> -->
             </div>
+            <br>
             <!-- THERE START THE FAKE OF A POST -->
             <!-- <div id="foo" class=" w3-container w3-card w3-white w3-round w3-margin" style="visibility: hidden"><br> -->
             <!--          <img src="images/fakeprofilepic1.jpg" alt="Avatar" class="w3-left w3-margin-right" style="width:40px"> -->
@@ -248,10 +258,13 @@
                }
             </script>
             <!-- THERE STOPS THE FAKE OF A POST -->
+            <textarea  type="text" id="userInput" style="min-height:150px; width:96%;margin-left:16px"></textarea>
+
+            <input style="top:50%; left:5%; width:40%;margin-left:15px" value="Post a comment" type="submit" ng-app="myApp" ng-click="intake()"/>
+            <br><br>
          </div>
-         <textarea rows="4" cols="50" type="text" id="userInput"></textarea>
-         <input style="top:50%; left:5%; width:40%;" value="Post a comment" type="submit" ng-app="myApp" ng-click="intake()"/>
-         <br><br><br><br><br>
+
+        <br><br><br><br><br>
       </div>
    </div>
    </div>

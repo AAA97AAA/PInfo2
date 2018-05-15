@@ -1,0 +1,14 @@
+/* removing ad */
+@media only screen and (min-width:150px) and (max-width: 1150px) {
+  .pub {
+    display:none;
+  }
+
+}
+
+@media only screen and (min-width:150px) and (max-width:950px) {
+  .topAd {
+    display:none;
+  }
+
+}

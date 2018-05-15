@@ -2,14 +2,12 @@ function openNav() {
     document.getElementById("mySidenav").style.height = "800px";
     document.getElementById("main").style.marginTop = "800px";
     document.getElementById("mySidenav").style.display = "block";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.2)";
 }
 
 function closeNav() {
     document.getElementById("mySidenav").style.height = "0px";
     document.getElementById("main").style.marginTop= "0px";
     document.getElementById("mySidenav").style.display = "none";
-    document.body.style.backgroundColor = "white";
 }
 
 //Create a "close" button and append it to each list item

@@ -1,12 +1,13 @@
-body {
-  margin: auto;
-  min-width: 250px;
+/* Advertisement */
+.pub {
+    position: fixed;
+    top: 10%;
+    margin-top:50px;
+    right: 1%;
+    float:right;
+    width: auto;
 }
 
-/* Include the padding and border in an element's total width and height */
-* {
-  box-sizing: border-box;
-}
 
 /* Remove margins and padding from the list */
 ul {
@@ -23,7 +24,7 @@ ul li {
   background: #eee;
   font-size: 18px;
   transition: 0.2s;
-  
+
   /* make the list items unselectable */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -63,32 +64,19 @@ ul li.checked {
   color: white;
 }
 
-/* Style the header */
-.header {
-  background-color: grey;
-  padding: 30px 40px;
-  color: white;
-  text-align: center;
-}
-
-/* Clear floats after the header */
-.header:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+/* Conflict with header definition */
 
 /* Style the input */
-input {
+/*input {
   border: none;
   width: 75%;
   padding: 10px;
   float: left;
   font-size: 16px;
 }
-
+*/
 /* Style the "Add" button */
-.addBtn {
+/*.addBtn {
   padding: 10px;
   width: 25%;
   background: #d9d9d9;
@@ -102,34 +90,11 @@ input {
 
 .addBtn:hover {
   background-color: #bbb;
-}
+}*/
 
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
 
-div.otherpositions {
-	position: relative;
-    bottom: 0px;
-    right: 60px;
-    left: 270px;
-    top: 0px;
-    width: 200px;
-}
 
-div.pub {
-    position: fixed;
-    top: 60;
-    bottom: 140px;
-    right: 60px;
-    float:right;       
-    width: 200px;
-}
-
-.button {
+/* .button {
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -145,14 +110,14 @@ div.pub {
 .button:hover {
     background-color: #f44336;
     color: white;
-}
+} */
 
-.tab { 
-       display:inline-block; 
-       margin-left: 900px; 
+/* .tab {
+       display:inline-block;
+       margin-left: 900px;
        position:absolute;
        left:1200px;
-}
+} */
 
 #popUpYes
 {
@@ -166,4 +131,4 @@ div.pub {
 {
       background-color: white;
       color: black; /* SET COLOR IN BLACK */
-}    
+}

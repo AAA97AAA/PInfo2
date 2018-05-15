@@ -4,7 +4,7 @@
 <head>
   <!-- Title of the page -->
   <!-- TODO: add a title for the page -->
-  <title>Moderators Page - Academi-co</title>
+  <title>Post Thread Page - Academi-co</title>
 
   <!-- Useful scripts -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -13,6 +13,10 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/ui-bootstrap-tpls.min.js"></script>
   <script src="js/ng-grid.min.js"></script>
+
+  <!-- for text area formatted -->
+  <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
 
   <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
@@ -31,11 +35,10 @@
   <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-resize.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-resize-ad.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-searchbar.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-moderatorspage.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-searchbar.css"/>
-
+  <link rel="stylesheet" type="text/css" href="CSS/style-postthreadpage.css"/>
 
   <!-- Our Scripts TODO: add your personal js here -->
   <script src="js/modules/allModules.js"></script>
@@ -61,7 +64,7 @@
     </a>
    <!-- + Button  -->
    <!-- TODO: add the corresponding link to add a thread -->
-  <div id='searchBarHeader' >
+<div id='searchBarHeader' >
      <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
      <!-- Search Button -->
 
@@ -129,174 +132,88 @@
 
 
   </header>
-   <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
-
-   <div class="w3-container w3-content" style="width:auto;margin-top:auto">
-   <!-- The Grid -->
-   <div class="w3-row">
-
-      <div ng-app="academi-co" ng-controller="profilePageLoad">
-       <!--     Left Column -->
-      <div class="w3-col m3">
-         <!--       Profile -->
-         <div class="w3-card w3-round w3-white">
-
-         </div>
-         <br>
-         <div class="w3-card w3-round">
-            <div class="w3-white">
-            </div>
-         </div>
-         <br>
-         <!--     End Left Column -->
-      </div>
-
-
-
-         <!--     Middle Column -->
-         <div class="w3-col m7">
-            <!-- Biography of the user -->
-            <div class="w3-row-padding">
-               <div class="w3-col m12">
-
-                  </div>
-               </div>
-            </div>
-
-
-            <!-- Central column after MyPosts -->
-            <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin">
-               <h1><b>Flagged users</b></h1>
-
-               <!-- thread/posts -->
-               <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
-                  <br>
-                  <br>
-                  <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
-                  <h4>{{post.author}} <button class="tag ban w3-right">Ban user</button> </h4><br>
-
-               </div>
-               <!--     End Middle Column -->
-            </div>
-   <div class="w3-container w3-content" style="width:auto;margin-top:auto">
-   <!-- The Grid -->
-   <div class="w3-row">
-
-      <div ng-app="academi-co" ng-controller="profilePageLoad">
-       <!--     Left Column -->
-      <div class="w3-col m3">
-         <!--       Profile -->
-         <div class="w3-card w3-round w3-white">
-
-         </div>
-         <br>
-         <div class="w3-card w3-round">
-            <div class="w3-white">
-            </div>
-         </div>
-         <br>
-         <!--     End Left Column -->
-      </div>
-
-
-
-         <!--     Middle Column -->
-         <div class="w3-col m7">
-            <!-- Biography of the user -->
-            <div class="w3-row-padding">
-               <div class="w3-col m12">
-
-                  </div>
-               </div>
-            </div>
-
-
-            <!-- Central column after MyPosts -->
-            <br>
-            <div class="w3-container w3-card w3-theme-l5 w3-round" style=";width:100%;margin-top:auto;">
-               <h1><b>Flagged posts</b></h1>
-
-               <!-- thread/posts -->
-               <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
-                  <br>
-                  <br>
-                  <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
-                  <span class="w3-right w3-opacity">1 min</span>
-                  <h4>{{post.author}}<button class="tag ban w3-right">Delete Post</button></h4><br>
-
-                  <div class="content">
-                     <!-- score -->
-                     <hr>
-                     <div style="width:5%; float:right">
-                        <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
-                        <br> {{post.score}}
-                        <br>
-                        <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
-                     </div>
-                  </div>
-                  <!-- Posts -->
-                  <div id="post" class="w3-row-padding" style="width:90%; float:left" >
-                     <!-- this is not displayed if it is a reply (ng-if) -->
-                     <div id="postTitle" ng-if= post.title>
-                        <p><b>{{post.title}}</b> </p>
-                     </div>
-                     <p>{{post.content}}</p>
-
-                     <!-- Tags -->
-                     <!-- this is not displayed if it is a reply (ng-if) -->
-                     <div class="w3-row-padding" style="margin:0 -16px" ng-if= post.title>
-                     <hr style="height: 2px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">
-                        <button class="tag maintag">{{post.subject}}</button>
-                        <button class="tag secondarytag" ng-repeat="topic in post.topics">{{topic.name}}</button>
-                     </div>
-                     <br>
-                  </div>
-               </div>
-               <!--     End Middle Column -->
-            </div>
-         </div>
-         <!--     Right Column -->
-         <div class="w3-col m2">
-            <div class="w3-container">
-            </div>
-            <br>
-            <!--     End Right Column -->
-         </div>
-         <!-- End Page Container -->
-      </div>
-      <br>
-   </div>
-   </div>
-
-
-
- <!--     End Left Column -->
- </div>
-
- <!--     Middle Column -->
- <div class="w3-col m7">
-
-   </div>
-
-
- <!--     End Middle Column -->
-
+  <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
+  <br><br> <br><br><br> <br><br><br> <br> <br><br>
+  <div id="myDIV" class="header" style="background-color: #000000;  width: 500px;">
+    <h2 style="margin:5px">Primary tag</h2>
+    <input type="text" id="myInput1" placeholder="">
+    <span onclick="newElement1()" class="addBtn">Add</span>
   </div>
 
- <!--     Right Column -->
- <div class="w3-col m2">
+  <ul id="myUL1" style="width: 500px;">
+  </ul>
 
-     <div class="w3-container">
+  <br><br> <br><br> <br> <br>
+  <div id="myDIV" class="header"  style="width: 500px;">
+    <h2 style="margin:5px">Secondary tags</h2>
+    <input type="text" id="myInput2" placeholder="">
+    <span onclick="newElement2()" class="addBtn">Add</span>
+  </div>
 
-     </div>
+  <ul id="myUL2" style="width: 500px;">
+  </ul>
+      <div style="position: absolute; top: 300px; left: 750px; width: 1400px;">
+      <h2>Title:</h2>
+      <input type="text" id="userInput"></input><br>
+      </div>
+      <div style="position: absolute; top: 400px; left: 750px; width: 1540px;">
+      <h2>Content:</h2>
+      <div style="background-color:white;width:67.70%;">
+      <textarea rows="20" cols="100" type="text" id="userInput" style="resize:none;"></textarea>
+    </div>
+      </div>
+          <input type="submit" value="Submit" id="popUpYes" style="position: absolute; top: 1000px; left: 750px; width: 200px; height:40px; hover:gray;">
+  <!--     End Left Column -->
 
-   <br>
 
-   <br>
+  <!--     Middle Column -->
+      <div class="w3-col m7">
+
+        </div>
 
 
- <!--     End Right Column -->
- </div>
+  <!--     End Middle Column -->
+
+
+  <!--     Right Column -->
+      <div class="w3-col m2">
+
+          <div class="w3-container">
+
+          </div>
+
+        <br>
+
+        <br>
+
+             <div class="w3-card w3-center pub">
+                    <!--       <a href="https://www.rolex.com" target="_blank"> -->
+                    <img src="images/banAdNul.jpg" alt="Advertisement" style="width:200px; height:700px;">
+                    <!--       </a> -->
+             </div>
+  <!--     End Right Column -->
+      </div>
+
+  <!-- End Page Container -->
+
+  <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- - - - - - - - - - - - - - -  Footer  - - - - - - - - - - - - - - -->
   <footer class="footer">

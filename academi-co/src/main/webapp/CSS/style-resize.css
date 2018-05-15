@@ -1,0 +1,83 @@
+
+/* TODO: change scale when screen is too small */
+
+
+
+
+/* Responsive Website until Academi-co goes below */
+@media only screen and (min-width:150px) and (max-width: 788px) {
+
+  /* header */
+  .buttonHeader {
+    width: auto;
+    height: auto;
+    font-size: 160%;
+    border:none;
+    display: inline-block;
+    /*display: block; /* it a filled rectangle */
+    padding: 12px 24px; /* spacing  8 16*/
+    text-align: left;
+    background-color: #0b78d1;
+    color: #fff;
+    transition: 0.3s;
+
+  }
+
+
+
+}
+/* removing Academi-co because it creates a second line */
+@media only screen and (min-width:150px) and (max-width: 870px) {
+  /* .logoButton {
+    width:50%;
+    margin-left: auto;
+
+margin-right: auto;
+  } */
+  .logoButton {
+    width:100%;
+    text-align: center;
+    transition: 1s;
+  }
+
+
+
+}
+
+/* re-adapting for second lane and right component*/
+@media only screen and (min-width:150px) and (max-width: 615px) {
+  #searchBarHeader {
+      width:100%;
+      text-align: center;
+      transition: 0.3s;
+
+  }
+  #rightComponent {
+    width:100%;
+    text-align: center;
+    background-color: #0b78d1;
+    /* transition: 0.3s; */
+  }
+
+
+}
+
+/* changing footer when getting in two lines */
+
+@media only screen and (min-width:150px) and (max-width: 420px) {
+
+  .lastLineFooter {
+    width: 100%;
+    background-color: #0b78d1 ;
+    transition: 0.3s;
+  }
+  .footerCopyright {
+    display: none;
+    transition: 0.3s;
+  }
+
+
+
+
+
+}

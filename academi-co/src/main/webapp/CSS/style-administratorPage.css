@@ -15,3 +15,149 @@
   background-color: #ccc;
   transition: 0.3s;
 }
+
+
+/* MANAGE BANNERS  */
+#textManageAd {
+  font-size: 24px;
+  padding: 8px 16px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#textAddBanner {
+  font-size: 20px;
+  padding: 20px 26px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.BrowseButton {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #8B0000;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  position: relative;
+  bottom: 15px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#UploadBannerButton {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  position: relative;
+  bottom: 15px;
+  font-family: "Times New Roman", Times, serif;
+
+}
+
+.DefaultBrowseButton {
+  display: none;
+}
+
+.buttonAdd {
+    background-color: #4CAF50; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    width:100%;
+}
+
+{
+
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btn-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: #3e8e41;
+}
+
+
+
+/* ADD ADMINISTRATOR */
+.CreateAdminButton {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  position: relative;
+  bottom: 15px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#textCreateAdmin {
+  font-size: 24px;
+  padding: 20px 26px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.inputUsernameAdminAdd, .inputEmailAdminAdd {
+  margin-bottom: 20px;
+}
+
+
+/* COMMON THINGS FOR MODALS */
+form {
+  text-align: center;
+
+}
+/* The Modal (background) */
+.modalBackground {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background: rgba(71,78,93,0.85);
+    padding-top: 50px;
+}
+
+.closeButton {
+  position:absolute;
+  right: 20px;
+  top:0px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+}
+
+
+.modalContent {
+  background-color: white;
+  margin: 5% auto 15% auto;
+  border-radius: 5px;
+  width: 50%;
+}
