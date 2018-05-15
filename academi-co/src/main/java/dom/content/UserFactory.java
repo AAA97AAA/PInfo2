@@ -17,7 +17,6 @@ public class UserFactory {
 	static public String DEFAULT_PATH = UserServiceRs.context.getRealPath("WEB-INF/classes/defaultPP.png");
 	
 	static public User createUser(String username, String email, String password, int type) {
-		System.out.println(DEFAULT_PATH); //TODO remove when tests over
 		return new ConcreteUser(username, email, password, DocumentFactory.loadDocument(DEFAULT_PATH),
 				type, "", true, InboxFactory.createInbox(), new HashMap<Long, Post>(),
 				new HashMap<Long, QuestionThread>());
