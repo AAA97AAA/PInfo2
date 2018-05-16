@@ -9,6 +9,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -27,6 +28,7 @@ import services.utility.View;
 @Table(name = "MAIN_TAGS")
 @PrimaryKeyJoinColumn(name = "ID")
 @DiscriminatorValue("MAIN")
+@NamedQuery(name = "MainTag.getAll", query = "SELECT m FROM ConcreteMainTag m")
 public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializable {
 	
 	// Serial version (auto-generated)
@@ -81,9 +83,7 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((children == null) ? 0 : children.hashCode());
 		return result;
 	}
 
@@ -96,13 +96,6 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 			return false;
 		}
 		ConcreteMainTag other = (ConcreteMainTag) obj;
-		if (children == null) {
-			if (other.children != null) {
-				return false;
-			}
-		} else if (!children.equals(other.children)) {
-			return false;
-		}
 		if (getId() != other.getId()) {
 			return false;
 		}

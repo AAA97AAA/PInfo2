@@ -65,6 +65,7 @@ public class ConcreteMainTagTest {
 	public void testEqualsAndHashCode() {
 		EqualsVerifier.forClass(ConcreteMainTag.class)
 			.withRedefinedSuperclass()
+			.withIgnoredFields("children")
 			.verify();
 	}
 

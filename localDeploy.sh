@@ -38,13 +38,13 @@ fi
     $ACADEMI_CO_NETWORK $IMAGE_APPSERVER $DOCKER_APPSERVER $DOCKER_DB
 
 # Wait for database to be running
-IT_DB_BUILDING=true
+IT_DB_BUILDING=false
 while ! docker exec -it $DOCKER_DB_IT mysql -u root -padmin -e "USE ACADEMI_CO_DB" ; do
    echo "waiting for test database..."
-   IT_DB_BUILDING=false
+   IT_DB_BUILDING=true
    sleep 5
 done
-if IT_DB_BUILDING; then
+if [[ $IT_DB_BUILDING == true ]]; then
    echo "Building tables..."
    sleep 40
 fi
@@ -57,8 +57,14 @@ printf "\n ---------------- Launch Tests ---------------- \n\n"
 
 mvn -f academi-co/pom.xml test
 
-# Kill all test containers
-./Jenkins/Scripts/Database/killDatabaseTests.sh $DOCKER_DB_IT
+# Kill all test containers if required
+if [[ -n $1 ]]; then
+   if [[ $1 != "--no-kill" ]]; then
+      ./Jenkins/Scripts/Database/killDatabaseTests.sh $DOCKER_DB_IT
+   fi
+else
+   ./Jenkins/Scripts/Database/killDatabaseTests.sh $DOCKER_DB_IT
+fi
 
 printf "\n ---------------- Deploy the project ---------------- \n\n"
 

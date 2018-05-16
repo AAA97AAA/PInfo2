@@ -6,11 +6,9 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
+import dom.tags.ConcreteMainTag;
+import dom.tags.ConcreteSecondaryTag;
 import dom.tags.ConcreteTag;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
@@ -28,41 +26,22 @@ public class ConcreteTagService implements TagService {
 
 	@Override
 	public List<MainTag> getAllSubjects() {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createNamedQuery("MainTag.getAll", MainTag.class).getResultList();
 	}
 
 	@Override
 	public Tag getLanguageTag(long id) {
-		// Creating criteria builder to create a criteria query
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		
-		// Criteria query of return type QuestionThread
-		CriteriaQuery<ConcreteTag> criteriaQuery = criteriaBuilder.createQuery(ConcreteTag.class);
-		
-		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-		Root<ConcreteTag> variableRoot = criteriaQuery.from(ConcreteTag.class);
-		
-		// Condition statement -> Where
-		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("id"), id));
-		
-		// Creating typed query
-		TypedQuery<ConcreteTag> query = entityManager.createQuery(criteriaQuery);
-		
-		// Return of single result. If we want a list of results, we use getResultList
-		return query.getSingleResult();
+		return entityManager.find(ConcreteTag.class, id);
 	}
 
 	@Override
 	public MainTag getMainTag(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(ConcreteMainTag.class, id);
 	}
 
 	@Override
 	public SecondaryTag getSecondaryTag(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(ConcreteSecondaryTag.class, id);
 	}
 
 	@Override
@@ -73,14 +52,14 @@ public class ConcreteTagService implements TagService {
 
 	@Override
 	public MainTag addTag(MainTag tag) {
-		// TODO Auto-generated method stub
-		return null;
+		entityManager.persist(tag);
+		return tag;
 	}
 
 	@Override
-	public SecondaryTag addTag(long parentId, SecondaryTag tag) {
-		// TODO Auto-generated method stub
-		return null;
+	public SecondaryTag addTag(SecondaryTag tag) {
+		entityManager.persist(tag);
+		return tag;
 	}
 
 }
