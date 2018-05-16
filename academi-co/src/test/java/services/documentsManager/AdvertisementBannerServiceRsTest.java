@@ -5,7 +5,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.net.URISyntaxException;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,8 +37,8 @@ public class AdvertisementBannerServiceRsTest {
 	@Test
 	public void testGetAdvertisementBanner() {
 		
-		// Random id generation
-		long id = ThreadLocalRandom.current().nextLong();
+		// id generation
+		long id = 42;
 		
 		// Specifying behavior for mock objects related to calls in the service
 		when(service.getAdvertisementBanner(id)).thenReturn(fakeDocument);
@@ -73,8 +72,8 @@ public class AdvertisementBannerServiceRsTest {
 	@Test
 	public void testRemoveAdvertisementBanner() {
 		
-		// Random id generation
-		long id = ThreadLocalRandom.current().nextLong();
+		// id generation
+		long id = 42;
 				
 		serviceRs.removeAdvertisementBanner(id);
 		

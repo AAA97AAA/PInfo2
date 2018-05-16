@@ -37,6 +37,18 @@ fi
 ./Jenkins/Scripts/Appserver/runAppServer.sh \
     $ACADEMI_CO_NETWORK $IMAGE_APPSERVER $DOCKER_APPSERVER $DOCKER_DB
 
+# Wait for database to be running
+IT_DB_BUILDING=true
+while ! docker exec -it $DOCKER_DB_IT mysql -u root -padmin -e "USE ACADEMI_CO_DB" ; do
+   echo "waiting for test database..."
+   IT_DB_BUILDING=false
+   sleep 5
+done
+if IT_DB_BUILDING; then
+   echo "Building tables..."
+   sleep 40
+fi
+
 printf "\n ---------------- Build Maven project ---------------- \n\n"
 
 mvn -B -DskipTests -f academi-co/pom.xml clean package

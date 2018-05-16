@@ -2,8 +2,6 @@ package services.tags;
 
 import static org.junit.Assert.assertEquals;
 
-import java.lang.reflect.Field;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -60,17 +58,13 @@ public class ConcreteTagServiceIntegrationTest {
 	// Transaction to simulate the JTA automatic transactions
 	@Inject
 	UserTransaction transaction;
+	
+	@Inject
+	private TagService service;
 
 	@Test
-	public void testWithAStupidName() throws NoSuchFieldException, SecurityException, IllegalArgumentException,
-			IllegalAccessException, NotSupportedException, SystemException, IllegalStateException, RollbackException,
-			HeuristicMixedException, HeuristicRollbackException {
-		
-		// Insert the persistence context in the service
-		TagService service = new ConcreteTagService();
-		Field manager = service.getClass().getDeclaredField("entityManager");
-		manager.setAccessible(true);
-		manager.set(service, entityManager);
+	public void testWithAStupidName() throws NotSupportedException, SystemException, SecurityException,
+			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		
 		// Add an entity to the DB
 		transaction.begin();

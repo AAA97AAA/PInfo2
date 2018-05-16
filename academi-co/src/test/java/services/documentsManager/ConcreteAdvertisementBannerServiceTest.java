@@ -9,7 +9,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Field;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
@@ -18,10 +17,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -49,22 +48,9 @@ public class ConcreteAdvertisementBannerServiceTest {
 	@Mock
 	private TypedQuery<ConcreteDocument> fakeTypedQuery;
 	
+	@InjectMocks
 	private ConcreteAdvertisementBannerService service;
 	
-	@Before
-	public void testSomeShit() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		
-		// Instantiate an actual instance of the service to then modify and spy
-		ConcreteAdvertisementBannerService realService = new ConcreteAdvertisementBannerService();
-		
-		// Replace entityManager attribute with mock
-		Field attribute = realService.getClass().getDeclaredField("entityManager");
-		attribute.setAccessible(true);
-		attribute.set(realService, fakeEntityManager);
-		
-		// Set the spy-able entityManager
-		service = spy(realService);
-	}
 	
 	@Test
 	public void testAddAdvertisementBanner() {
@@ -112,13 +98,14 @@ public class ConcreteAdvertisementBannerServiceTest {
 		Document fetchedDocument = mock(Document.class);
 		
 		// Override the service's behavior
-		doReturn(fetchedDocument).when(service).getAdvertisementBanner(id);
+		ConcreteAdvertisementBannerService controlledService = spy(service);
+		doReturn(fetchedDocument).when(controlledService).getAdvertisementBanner(id);
 		
 		// Call method under test
-		service.removeAdvertisementBanner(id);
+		controlledService.removeAdvertisementBanner(id);
 		
 		// Verify follow-up calls
-		verify(service, times(1)).getAdvertisementBanner(id);
+		verify(controlledService, times(1)).getAdvertisementBanner(id);
 		verify(fakeEntityManager, times(1)).remove(fetchedDocument);
 	}
 }
