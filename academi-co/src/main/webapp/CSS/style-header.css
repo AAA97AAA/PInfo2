@@ -44,6 +44,7 @@ background-color: #0b78d1 ;
 .inboxButton {
   width: auto;
   transition: all .3s ease;
+  z-index:1;
 }
 
 /* this style allows to have inbox + profilepic (or signin/up) in the same line */

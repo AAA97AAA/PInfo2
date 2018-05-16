@@ -6,6 +6,7 @@
     right: 1%;
     float:right;
     width: auto;
+    z-index:-1;
 }
 
 /* Sort By button */
