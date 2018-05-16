@@ -158,7 +158,7 @@
          <br>
          <!-- Show MainTag et Secondary tag -->
          <div class="w3-row-padding" style="margin:0 -12px">
-            <button class="tag maintag">{{thread.subject}}</button>
+            <button class="tag maintag">{{thread.subject.name}}</button>
             <button class="tag secondarytag" ng-repeat="topic in thread.topics">{{topic.name}}</button>
          </div>
          <!-- Show Thread -->
@@ -166,9 +166,9 @@
          {{thread.title}}
          </h3>
          <hr>
-         <img ng-src="data:image/JPEG;base64,{{thread.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
-         <span class="w3-right w3-opacity">{{thread.creationDate}}</span>
-         <h4>{{thread.author}}</h4>
+         <img ng-src="data:image/JPEG;base64,{{thread.author.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+         <span class="w3-right w3-opacity">{{thread.creationDate | date:"dd/MM/yyyy 'at' h:mma"}}</span>
+         <h4>{{thread.author.username}}</h4>
          <br>
          <!-- <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">  -->
          <div style="width:5%; float:right">
@@ -178,6 +178,7 @@
                </like>
                <br>
                <!--       <span ng-model="like.votes">{{like.votes}}</span> -->
+               <!-- TODO: use ng-count -->
                <span>{{thread.score}}</span>
                <br>
                <dislike href="#" ng-click="doDislike()">
@@ -190,16 +191,16 @@
          <!-- Show list of answers -->
          <div class=" w3-container w3-card w3-white w3-round w3-margin" ng-repeat="answer in thread.answers" >
             <br>
-            <img ng-src="data:image/JPEG;base64,{{answer.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
-            <span class="w3-right w3-opacity">{{answer.creationDate}}</span>
-            <h5>
-               {{answer.author}} </h5>
+            <img ng-src="data:image/JPEG;base64,{{answer.author.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
+            <span class="w3-right w3-opacity">{{answer.creationDate |  date:"dd/MM/yyyy 'at' h:mma"}}</span>
+            <h5>{{answer.author.username}} </h5>
                <!--         <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; "> -->
                <div class="content">
                   <hr>
                   <div style="width:5%; float:right">
                      <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
                      <br>
+                     <!-- TODO: use ng-count -->
                      {{answer.score}}
                      <br>
                      <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
@@ -274,7 +275,7 @@
   <!--     End Left Column -->
 </div><br><br><br>
 </div>
-   
+
    <!--     End Middle Column -->
    <!--     Right Column -->
    <div class="w3-col m2">
