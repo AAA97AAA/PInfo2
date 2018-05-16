@@ -57,21 +57,24 @@
 <body class="body" ng-app="academi-co">
   <!-- - - - - - - - - - - - - - -  Header: Navigation bar at the top  - - - - - - - - - - - - - - -->
   <header class="mainheader">
+  <div>
+<!-- If there's a need to fix the header uncomment this and comment the precedent div declaration.  -->
+<!--   <div class="mainheader" style="position:fixed"> -->
     <!-- Academi-co logo -->
-
     <a href="index.html" class="logoButton buttonHeader" >
       <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
     </a>
    <!-- + Button  -->
    <!-- TODO: add the corresponding link to add a thread -->
-<div id='searchBarHeader' >
+<div id="searchBarHeader" >
      <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
+   </div>
      <!-- Search Button -->
 
       <input type="text" placeholder="Search..." name="search">
       <button type="submit" style="background-color: white; border-radius: 7px;"><i class="fa fa-search"></i></button>
       <button class="buttonHeader" style="font-size:23px;cursor:pointer; color:white;" onclick="openNav()">&#9660;</button>
-    </div>
+
 
 
    <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
@@ -93,7 +96,7 @@
         <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
       </a>
    </div>
-
+</div>
 
    <!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
 
@@ -129,7 +132,6 @@
    </div>
 
    <!-- ENDING OF SLIDE-NAVIGATION SEARCH -->
-
 
   </header>
   <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->

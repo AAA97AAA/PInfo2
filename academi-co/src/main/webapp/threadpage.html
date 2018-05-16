@@ -14,6 +14,9 @@
   <script src="js/ui-bootstrap-tpls.min.js"></script>
   <script src="js/ng-grid.min.js"></script>
 
+  <!-- for text area formatted -->
+  <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
   <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
   <!--<link rel="stylesheet" href="CSS/bootstrap.min.css" />
@@ -59,20 +62,24 @@
 <body class="body" ng-app="academi-co">
   <!-- - - - - - - - - - - - - - -  Header: Navigation bar at the top  - - - - - - - - - - - - - - -->
   <header class="mainheader">
+  <div>
+<!-- If there's a need to fix the header uncomment this and comment the precedent div declaration.  -->
+<!--   <div class="mainheader" style="position:fixed"> -->
     <!-- Academi-co logo -->
     <a href="index.html" class="logoButton buttonHeader" >
       <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
     </a>
    <!-- + Button  -->
    <!-- TODO: add the corresponding link to add a thread -->
-<div id='searchBarHeader' >
+<div id="searchBarHeader">
      <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
+   </div>
      <!-- Search Button -->
 
       <input type="text" placeholder="Search..." name="search">
       <button type="submit" style="background-color: white; border-radius: 7px;"><i class="fa fa-search"></i></button>
       <button class="buttonHeader" style="font-size:23px;cursor:pointer; color:white;" onclick="openNav()">&#9660;</button>
-    </div>
+
 
 
    <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
@@ -94,10 +101,9 @@
         <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
       </a>
    </div>
-
+</div>
 
    <!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
-
     <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">
 
    <div id="mySidenav" class="sidenav">
@@ -128,7 +134,6 @@
    </div>
 
    </div>
-
    <!-- ENDING OF SLIDE-NAVIGATION SEARCH -->
 
   </header>
@@ -258,8 +263,9 @@
                }
             </script>
             <!-- THERE STOPS THE FAKE OF A POST -->
-            <textarea  type="text" id="userInput" style="min-height:150px; width:96%;margin-left:16px"></textarea>
-
+      <div style="background-color:white;width:97.5%;">
+      <textarea rows="10" cols="100" type="text" id="userInput" style="resize:none;"></textarea>
+    </div>
             <input style="top:50%; left:5%; width:40%;margin-left:15px" value="Post a comment" type="submit" ng-app="myApp" ng-click="intake()"/>
             <br><br>
          </div>
