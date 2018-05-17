@@ -2,11 +2,14 @@ package services.tags;
 
 import static org.junit.Assert.assertEquals;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
@@ -23,6 +26,9 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import dom.tags.ConcreteTag;
+import dom.tags.MainTag;
+import dom.tags.SecondaryTag;
 import dom.tags.Tag;
 import dom.tags.TagFactory;
 import services.utility.View;
@@ -53,37 +59,87 @@ public class ConcreteTagServiceIntegrationTest {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 	
-	// Persistence context to be given to the service
 	@PersistenceContext
-	private EntityManager entityManager;
-	
-	// Transaction to simulate the JTA automatic transactions
+	EntityManager em;
 	@Inject
-	UserTransaction transaction;
+	UserTransaction trx;
+	
+	@Inject
+	private TagService service;
+	
 
 	@Test
-	public void testWithAStupidName() throws NoSuchFieldException, SecurityException, IllegalArgumentException,
-			IllegalAccessException, NotSupportedException, SystemException, IllegalStateException, RollbackException,
-			HeuristicMixedException, HeuristicRollbackException {
+	public void testGetAllSubjects() throws NotSupportedException, SystemException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		
-		// Insert the persistence context in the service
-		TagService service = new ConcreteTagService();
-		Field manager = service.getClass().getDeclaredField("entityManager");
-		manager.setAccessible(true);
-		manager.set(service, entityManager);
+		// Clear
+		trx.begin();
+		CriteriaDelete<ConcreteTag> query = em.getCriteriaBuilder().createCriteriaDelete(ConcreteTag.class);
+		query.from(ConcreteTag.class);
+		em.createQuery(query).executeUpdate();
+		trx.commit();
+		
+		// Fill and set expectation
+		List<MainTag> expected = new ArrayList<MainTag>();
+		for (int i = 0; i < 5; i++) {
+			MainTag subject = TagFactory.createMainTag("subject" + i);
+			trx.begin();
+			em.persist(subject);
+			trx.commit();
+			expected.add(subject);
+			for (int j = 0; j < 3; j++) {
+				SecondaryTag topic = TagFactory.createSecondaryTag("topic" + i + "-" + j, subject);
+				trx.begin();
+				em.persist(topic);
+				trx.commit();
+			}
+		}
+		
+		// Get list
+		List<MainTag> result = service.getAllSubjects();
+		
+		// Control expectation
+		assertEquals("Wrong subject list.", new HashSet<>(expected), new HashSet<>(result));
+	}
+	
+	@Test
+	public void testLanguageTagStorgae() {
 		
 		// Add an entity to the DB
-		transaction.begin();
 		Tag language = service.addTag(TagFactory.createTag("lol"));
-		transaction.commit();
 		
-		// Extract an entity with the same id
-		transaction.begin();
+		// Fetch an entity with the same id
 		Tag output = service.getLanguageTag(language.getId());
-		transaction.commit();
 		
 		// Control that they are the same (successful persisting and fetching)
 		assertEquals("Got the wrong tag.", language, output);
 	}
 
+	@Test
+	public void testMainTagStorage() {
+		
+		// Add entity to the DB
+		MainTag subject = service.addTag(TagFactory.createMainTag("pouloulou"));
+		
+		// Fetch an entity with the same id
+		MainTag output = service.getMainTag(subject.getId());
+		
+		// Control that they are the same (successful persisting and fetching)
+		assertEquals("Got the wrong tag.", subject, output);
+	}
+	
+	@Test
+	public void testSecondaryTagStorage() {
+
+		// Add parent to DB
+		MainTag subject = service.addTag(TagFactory.createMainTag("parent"));
+		
+		// Create a topic linked to the parent and store it
+		SecondaryTag topic = service.addTag(TagFactory.createSecondaryTag("huhu", subject));
+		
+		// Fetch an entity with the same id
+		SecondaryTag output = service.getSecondaryTag(topic.getId());
+		
+		// Control that they are the same (successful persisting and fetching)
+		assertEquals("Got the wrong tag.", topic, output);
+	}
 }

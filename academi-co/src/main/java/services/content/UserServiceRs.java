@@ -3,7 +3,6 @@ package services.content;
 import java.net.URI;
 
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -36,9 +35,7 @@ public class UserServiceRs {
 	@Inject
 	private UserService service;
 	
-	@Context
-	static public ServletContext context;
-		
+
 	/**
 	 * Get a user's session information from his username
 	 * 

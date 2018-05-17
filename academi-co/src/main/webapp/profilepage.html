@@ -39,9 +39,9 @@
   <script src="js/modules/allModules.js"></script>
   <script src="js/modules/getRESTCall.js"></script>
   <script src="js/controllers/script-searchbar.js"></script>
-  <script src="js/modules/Selim.js"></script>
+  <!-- <script src="js/modules/Selim.js"></script> -->
   <script src="js/controllers/script-signInUp.js"></script>
-  
+
   <!-- To have correct caracters for accented letters for example -->
   <meta charset="UTF-8">
 
@@ -136,19 +136,20 @@
    <!-- The Grid -->
    <div class="w3-row">
 
-      <div id="mainProfilePageContent" ng-app="academi-co" ng-controller="profilePageLoad">
+      <div id="mainProfilePageContent" ng-controller="profilePageLoad">
        <!--     Left Column -->
       <div class="w3-col m3">
          <!--       Profile -->
          <div class="w3-card w3-round w3-white">
             <div class="w3-container">
                <h4 class="w3-center">My Profile</h4>
-               <p class="w3-center"><img ng-src="data:image/JPEG;base64,{{myProfileData.profilePic}}" style="height:106px;width:106px" alt="Avatar"></p>
+               <p class="w3-center"><img ng-src="data:image/JPEG;base64,{{myProfileData.profilePicture.data}}" style="height:106px;width:106px" alt="Avatar"></p>
             </div>
          </div>
          <br>
          <div class="w3-card w3-round">
             <div class="w3-white">
+              <!-- TODO: display only if it his profile -->
                <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-cogs fa-fw"></i> Settings and preferences</button>
             </div>
          </div>
@@ -199,15 +200,16 @@
                <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
                   <br>
                   <br>
-                  <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
-                  <span class="w3-right w3-opacity">1 min</span>
-                  <h4>{{post.author}}</h4>
+                  <img ng-src="data:image/JPEG;base64,{{myProfileData.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+                  <span class="w3-right w3-opacity">{{post.creationDate | date:"dd/MM/yyyy 'at' h:mma"}}</span>
+                  <h4>{{myProfileData.username}}</h4>
 
                   <div class="content">
                      <!-- score -->
                      <hr>
                      <div style="width:5%; float:right">
                         <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+                        <!-- TODO: ng-count -->
                         <br> {{post.score}}
                         <br>
                         <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
@@ -225,7 +227,7 @@
                      <!-- this is not displayed if it is a reply (ng-if) -->
                      <div class="w3-row-padding" style="margin:0 - 16px" ng-if= post.title>
                      <hr style="height: 2px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">
-                        <button class="tag maintag">{{post.subject}}</button>
+                        <button class="tag maintag">{{post.subject.name}}</button>
                         <button class="tag secondarytag" ng-repeat="topic in post.topics">{{topic.name}}</button>
                      </div>
                      <br>
