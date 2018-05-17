@@ -8,6 +8,15 @@ package services.utility;
  */
 public interface View {
 	
+	/***** Document views *****/
+	
+	// Minimal discriminant data (id)
+	public static interface DocumentMinimal {};
+	
+	// Main information about the entity
+	public static interface DocumentBase {};
+	
+	
 	/***** Tag views *****/
 	
 	// Minimal discriminant data (id)
@@ -53,7 +62,7 @@ public interface View {
 	public static interface UserMinimal {};
 	
 	// User visual representation
-	public static interface UserVisuals {};
+	public static interface UserVisuals extends DocumentBase {};
 	
 	// User chosen identifier
 	public static interface UserName {};
@@ -87,4 +96,7 @@ public interface View {
 	
 	// Information about a user for profile pages
 	public static interface UserProfile extends UserPost, PostBase, UserProfileModifiable {};
+	
+	// Information that will (normally) not be sent with the user
+	public static interface UserExcessive {};
 }

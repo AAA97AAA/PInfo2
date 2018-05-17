@@ -51,7 +51,7 @@ public class ConcreteTagServiceIntegrationTest {
 	@Deployment
 	public static Archive<?> deploy(){
 		return ShrinkWrap.create(WebArchive.class, "test-academi-co-tags.war")
-				.addPackages(true, View.class.getPackage())
+				.addClass(View.class)
 				.addPackages(true, Tag.class.getPackage())
 				.addClass(TagService.class)
 				.addClass(ConcreteTagService.class)
@@ -60,9 +60,9 @@ public class ConcreteTagServiceIntegrationTest {
 	}
 	
 	@PersistenceContext
-	EntityManager em;
+	private EntityManager em;
 	@Inject
-	UserTransaction trx;
+	private UserTransaction trx;
 	
 	@Inject
 	private TagService service;

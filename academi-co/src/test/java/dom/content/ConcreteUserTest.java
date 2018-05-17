@@ -146,7 +146,9 @@ public class ConcreteUserTest {
 	 */
 	@Test
 	public void testEqualsAndHashCode() {
-		EqualsVerifier.forClass(ConcreteUser.class).verify();
+		EqualsVerifier.forClass(ConcreteUser.class)
+			.withIgnoredFields("profilePicture", "inbox", "posts", "followedThreads")
+			.verify();
 	}
 	
 	/**

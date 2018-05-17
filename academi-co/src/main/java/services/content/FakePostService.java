@@ -51,7 +51,7 @@ public class FakePostService implements PostService {
 		QuestionThread thread = PostFactory.createQuestionThread(author, "content", "title", mainTag, languageTag, topics);
 		
 		for (long i = 5; i >= 0; i--) {
-			User author2 = userProvider.getUserByName("commenter" + i);
+			User author2 = userProvider.getUser("commenter" + i);
 			Comment comment = PostFactory.createComment(author2, "comment" + i, thread);
 			thread.getAnswers().put(i, comment);
 		}

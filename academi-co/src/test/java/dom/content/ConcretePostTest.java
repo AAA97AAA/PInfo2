@@ -142,7 +142,9 @@ public class ConcretePostTest {
 	 */
 	@Test
 	public void testEqualsAndHashCode() {
-		EqualsVerifier.forClass(ConcretePost.class).verify();
+		EqualsVerifier.forClass(ConcretePost.class)
+			.withIgnoredFields("author", "upvoters", "downvoters")
+			.verify();
 	}
 	
 	/**

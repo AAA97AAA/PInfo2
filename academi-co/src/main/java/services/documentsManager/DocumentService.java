@@ -14,9 +14,9 @@ import dom.documentsManager.Document;
  *
  */
 @Local
-public interface ProfilePictureService extends Serializable {
+public interface DocumentService extends Serializable {
 	
-	public Document getProfilePicture(long id);
+	public Document getDocument(long id);
 	
 	public Document modifyProfilePicture(long oldPictureId, Document newProfilePicture);
 

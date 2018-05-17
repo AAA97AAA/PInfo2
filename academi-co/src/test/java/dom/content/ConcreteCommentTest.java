@@ -87,7 +87,9 @@ public class ConcreteCommentTest {
 	 */
 	@Test
 	public void testEqualsAndHashCode() {
-		EqualsVerifier.forClass(ConcreteComment.class).withIgnoredFields("question").verify();
+		EqualsVerifier.forClass(ConcreteComment.class)
+			.withIgnoredFields("author", "upvoters", "downvoters", "question")
+			.verify();
 	}
 	
 	/**

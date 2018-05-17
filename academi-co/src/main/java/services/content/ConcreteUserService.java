@@ -12,11 +12,14 @@ import javax.persistence.criteria.Root;
 
 import dom.content.ConcreteUser;
 import dom.content.User;
-import services.documentsManager.ProfilePictureService;
+import dom.content.UserFactory;
+import services.documentsManager.DocumentService;
 
 /**
  * Service class implementing services for users
+ * 
  * @author petrbinko
+ * @author kaikoveritch (rework)
  *
  */
 @Default
@@ -33,36 +36,19 @@ public class ConcreteUserService implements UserService {
 	private EntityManager entityManager;
 	
 	@Inject
-	private ProfilePictureService profilePictureService;
+	private DocumentService documentService;
 		
 	
 	
 	/******************** Services **********************/
-
+	
 	@Override
 	public User getUser(long id) {
-
-		// Creating criteria builder to create a criteria query
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		
-		// Criteria query of return type QuestionThread
-		CriteriaQuery<ConcreteUser> criteriaQuery = criteriaBuilder.createQuery(ConcreteUser.class);
-		
-		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-		Root<ConcreteUser> variableRoot = criteriaQuery.from(ConcreteUser.class);
-		
-		// Condition statement -> Where
-		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("id"), id));
-		
-		// Creating typed query
-		TypedQuery<ConcreteUser> query = entityManager.createQuery(criteriaQuery);
-		
-		// Return of single result. If we want a list of results, we use getResultList
-		return query.getSingleResult();
+		return entityManager.find(ConcreteUser.class, id);
 	}
 	
 	@Override
-	public User getUserByName(String username) {
+	public User getUser(String username) {
 
 		// Creating criteria builder to create a criteria query
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -88,9 +74,9 @@ public class ConcreteUserService implements UserService {
 	 */
 	@Override
 	public User addUser(User user) {
-		
-		entityManager.persist(user);
-		return user;
+		User builtUser = UserFactory.createUser(user.getUsername(), user.getEmail(), user.getPassword(), user.getType());
+		entityManager.persist(builtUser);
+		return builtUser;
 	}
 	
 	/**
@@ -103,9 +89,8 @@ public class ConcreteUserService implements UserService {
 		
 		oldUser.setBio(newUser.getBio());
 		oldUser.setCanBeModerator(newUser.isCanBeModerator());
-		oldUser.setEmail(newUser.getEmail());
 		oldUser.setPassword(newUser.getPassword());
-		profilePictureService.modifyProfilePicture(oldUser.getProfilePicture().getId(), newUser.getProfilePicture());
+		documentService.modifyProfilePicture(oldUser.getProfilePicture().getId(), newUser.getProfilePicture());
 		oldUser.setType(newUser.getType());
 		oldUser.setUsername(newUser.getUsername());
 		

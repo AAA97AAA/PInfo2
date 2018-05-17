@@ -19,6 +19,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -39,6 +41,12 @@ import services.utility.View;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "POST_TYPE")
 @DiscriminatorValue("POST")
+@NamedQueries({
+	@NamedQuery(name = "Post.fromAuthorByDate",
+			query = "SELECT p FROM ConcretePost p WHERE p.author = :author ORDER BY p.creationDate DESC, p.id ASC"),
+	@NamedQuery(name = "Post.fromAuthorByScore",
+			query = "SELECT p FROM ConcretePost p WHERE p.author = :author ORDER BY p.score DESC, p.creationDate DESC, p.id ASC")
+})
 public class ConcretePost implements Post, Serializable {
 
 	// Serial version (auto-generated)
@@ -224,14 +232,11 @@ public class ConcretePost implements Post, Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + author.hashCode();
 		result = prime * result + content.hashCode();
 		result = prime * result + creationDate.hashCode();
-		result = prime * result + ((downvoters == null) ? 0 : downvoters.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + (banned ? 1231 : 1237);
 		result = prime * result + score;
-		result = prime * result + ((upvoters == null) ? 0 : upvoters.hashCode());
 		return result;
 	}
 
@@ -247,20 +252,10 @@ public class ConcretePost implements Post, Serializable {
 			return false;
 		}
 		ConcretePost other = (ConcretePost) obj;
-		if (!author.equals(other.author)) {
-			return false;
-		}
 		if (!content.equals(other.content)) {
 			return false;
 		}
 		if (!creationDate.equals(other.creationDate)) {
-			return false;
-		}
-		if (downvoters == null) {
-			if (other.downvoters != null) {
-				return false;
-			}
-		} else if (!downvoters.equals(other.downvoters)) {
 			return false;
 		}
 		if (id != other.id) {
@@ -270,13 +265,6 @@ public class ConcretePost implements Post, Serializable {
 			return false;
 		}
 		if (score != other.score) {
-			return false;
-		}
-		if (upvoters == null) {
-			if (other.upvoters != null) {
-				return false;
-			}
-		} else if (!upvoters.equals(other.upvoters)) {
 			return false;
 		}
 		return true;

@@ -19,6 +19,10 @@ import javax.validation.constraints.NotNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import services.utility.View;
+
 /**
  * Document representation implementation
  * with: unique id, name, content (as bytes)
@@ -39,15 +43,18 @@ public class ConcreteDocument implements Document, Serializable {
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(View.DocumentMinimal.class)
 	private long id;
 	
 	@NotNull
 	@Column(name = "NAME")
+	@JsonView(View.DocumentBase.class)
 	private String name;
 	
 	@Lob
 	@NotNull
 	@Column(name = "DATA")
+	@JsonView(View.DocumentBase.class)
 	private byte[] data;
 
 	
