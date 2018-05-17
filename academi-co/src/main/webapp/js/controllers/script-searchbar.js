@@ -130,10 +130,12 @@ function newElementPTP2() {
 	  span.appendChild(txt);
 	  li.appendChild(span);
 
-	  for (i = 0; i < close.length; i++) {
+	  for (i = 0; i < close.length; i++) {x
 	    close[i].onclick = function() {
 	      var div = this.parentElement;
 	      div.style.display = "none";
 	    }
 	  }
 	}
+
+

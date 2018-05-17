@@ -14,6 +14,10 @@
   <script src="js/ui-bootstrap-tpls.min.js"></script>
   <script src="js/ng-grid.min.js"></script>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+
+<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 
   <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
   <!--<link rel="stylesheet" href="CSS/bootstrap.min.css" />
@@ -40,6 +44,8 @@
   <script src="js/modules/getRESTCall.js"></script>
   <script src="js/controllers/script-searchbar.js"></script>
   <script src="js/controllers/script-signInUp.js"></script>
+  <script src="js/modules/script-administratorpage.js"></script>
+  
   <!-- To have correct caracters for accented letters for example -->
   <meta charset="UTF-8">
 
@@ -135,7 +141,7 @@
 
    <!-- Modal for Manage Banners -->
    <div id="ManageBannersContent" class="modalBackground" method="post" enctype="multipart/form-data">
-     <span class="closeButton" onclick="document.getElementById('ManageBannersContent').style.display='none'">X</span>
+     <button class="closeButton" onclick="document.getElementById('ManageBannersContent').style.display='none'">&times;</button>
      <form class="modalContent">
        <h2 id="textManageAd">Manage Advertisement Banners</h2>
        <hr>
@@ -170,7 +176,7 @@
 
    <!-- Modal for Add Administrator -->
    <div id="AddAdministratorContent" class="modalBackground">
-     <span class="closeButton" onclick="document.getElementById('AddAdministratorContent').style.display='none'">X</span>
+     <button class="closeButton" onclick="document.getElementById('AddAdministratorContent').style.display='none'">&times;</button>
       <form class="modalContent">
         <h2 id="textCreateAdmin">Create Administrator</h2>
         <br>
@@ -201,13 +207,60 @@
    </div>
    <!-- END Displayed elements -->
 
+<!--BEGIN Manage Moderators and Requests -->
 
+<div ng-app="myApp" class="container-fluid">
+  <div class="w3-center">
+    <div class="col-md-6" ng-controller="demoController as demo">
+      <h3>Moderator requests</h3>
+      <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table demoTable" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
+        <colgroup>
+          <col width="95%" />
+          <col width="5%" />
+          <col width="0%" />
+          <col width="0%" />
+        </colgroup>
+        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
+          <td title="'Name'" filter="{name: 'text'}" sortable="'name'" ng-switch="row.isEditing" ng-class="name.$dirty ? 'bg-warning' : ''" ng-form="name" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.name}}</span>
+            <div class="controls" ng-class="name.$invalid && name.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="name" ng-model="row.name" class="editable-input form-control input-sm" required />
+            </div>
+          </td>
+          <td>
+            
+            <button class="btn btn-primary btn-sm" ng-click="demo.add(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-6" ng-controller="demoController as demo">
+      <h3>Actual Moderators</h3>
+      <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table demoTable" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
+        <colgroup>
+          <col width="100%" />
+          <col width="0%" />
+          <col width="0%" />
+          <col width="0%" />
+        </colgroup>
+        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
+          <td title="'Name'" filter="{name: 'text'}" sortable="'name'" ng-switch="row.isEditing" ng-class="name.$dirty ? 'bg-warning' : ''" ng-form="name" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.name}}</span>
+            <div class="controls" ng-class="name.$invalid && name.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="name" ng-model="row.name" class="editable-input form-control input-sm" required />
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 
-
-
-
-
-
+<!--END Manage Moderators and Requests -->
 
 
 

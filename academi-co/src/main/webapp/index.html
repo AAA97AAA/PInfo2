@@ -130,6 +130,49 @@
 
   </header>
  <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
+<script>app.
+  controller("AddLanguageJS", function($scope, $http) {
+
+    $scope.tag = { };
+
+    var req = {
+      method: 'POST',
+      url: 'http://localhost:8080/academi-co/resources/tags/languages/',
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+      data: $scope.tag
+    }
+
+    $scope.onSubmit = function() {
+      console.log("Hello");
+
+      $http(req).then(
+        function(){
+          console.log("Aslam c'est le meilleur");
+        },
+        function(){
+            console.log("ERROR POST mais Aslam reste le meilleur tout de même");
+        }
+
+      )};
+
+
+});
+</script>
+
+<div ng-app="academi-co" ng-controller="AddLanguageJS">
+  <form name="formName">
+    <p> NAME </p>
+    <input type="text" ng-model='tag.name' id="name" required/>
+
+    <button ng-click="onSubmit()" ng-disabled="formName.$invalid">Register</button>
+
+  </form>
+
+  <pre>{{tag | json}}</pre>
+</div>
 
  <div style="text-align:center">
       <img id="logoHelpPage" src="images/logo2.png"  alt="Logo" style="margin-top:5%">
