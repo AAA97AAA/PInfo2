@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Set max JVM heap size for maven
-        MAVEN_OPTS = '-Xmx128m'
+        MAVEN_OPTS = '-Xmx512m'
         // Set all variables
         ACADEMI_CO_NETWORK = 'academi_co_network'
 
