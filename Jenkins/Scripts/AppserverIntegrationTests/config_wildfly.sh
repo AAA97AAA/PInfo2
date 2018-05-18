@@ -36,9 +36,9 @@ batch
 echo "Connection URL: " $CONNECTION_URL
 
 # Add log4j2 dependencies
-module add --name=com.lmax.disruptor --resources=/opt/jboss/wildfly/standalone/lib/ext/disruptor-3.4.2.jar
-module add --name=org.apache.log4j2.core --resources=/opt/jboss/wildfly/standalone/lib/ext/log4j-core-2.11.0.jar --dependencies=com.lmax.disruptor
-module add --name=org.apache.log4j2 --resources=/opt/jboss/wildfly/standalone/lib/ext/log4j-api-2.11.0.jar --dependencies=org.apache.log4j2.core
+# module add --name=com.lmax.disruptor --resources=/opt/jboss/wildfly/standalone/lib/ext/disruptor-3.4.2.jar
+# module add --name=org.apache.log4j2.core --resources=/opt/jboss/wildfly/standalone/lib/ext/log4j-core-2.11.0.jar --dependencies=com.lmax.disruptor
+# module add --name=org.apache.log4j2 --resources=/opt/jboss/wildfly/standalone/lib/ext/log4j-api-2.11.0.jar --dependencies=org.apache.log4j2.core
 
 # Add the datasource
 data-source add --name=academi-co-tests --driver-name=h2 --jndi-name=$ACADEMI_CO_TESTS --connection-url=$H2_URI --user-name=$H2_USER --password=$H2_PWD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000
