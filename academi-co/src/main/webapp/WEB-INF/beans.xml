@@ -5,7 +5,7 @@
        bean-discovery-mode="all">
 	<alternatives>
 		<class>services.tags.FakeTagService</class>
-		<class>services.documentsManager.FakeProfilePictureService</class>
+		<class>services.documentsManager.FakeDocumentService</class>
 		<class>services.content.FakePostService</class>
 		<class>services.content.FakeUserService</class>
 	</alternatives>
