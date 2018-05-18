@@ -13,6 +13,8 @@ DOCKER_DB='concealed_cader' # 172.18.0.4
 DOCKER_DB_IT='shady_selimi' # 172.18.0.3
 DOCKER_APPSERVER='cheeky_binko' # 172.18.0.2
 
+DOCKER_DEPLOY='/tmp/docker-deploy'
+
 # Scripts: script.sh network image container [...]
 
 
@@ -39,13 +41,13 @@ fi
 
 # Wait for database to be running
 IT_DB_BUILDING=false
-while ! docker exec -it $DOCKER_DB_IT mysql -u root -padmin -e "USE ACADEMI_CO_DB" ; do
-   echo "waiting for test database..."
+while ! docker exec -it $5 mysql -u root -padmin -e "USE ACADEMI_CO_DB" ; do
+   printf "Waiting for test database...\n"
    IT_DB_BUILDING=true
    sleep 5
 done
 if [[ $IT_DB_BUILDING == true ]]; then
-   echo "Building tables..."
+   printf "Building tables...\n"
    sleep 40
 fi
 
@@ -66,18 +68,5 @@ else
    ./Jenkins/Scripts/Database/killDatabaseTests.sh $DOCKER_DB_IT
 fi
 
-printf "\n ---------------- Deploy the project ---------------- \n\n"
-
-if [[ -e /tmp/docker-deploy/academi-co.war ]]; then
-    rm -f /tmp/docker-deploy/academi-co.war
-fi
-if [[ -e /tmp/docker-deploy/academi-co.war.failed ]]; then
-    rm -f /tmp/docker-deploy/academi-co.war.failed
-fi
-if [[ -e /tmp/docker-deploy/academi-co.war.deployed ]]; then
-    rm -f /tmp/docker-deploy/academi-co.war.deployed
-fi
-
-if [[ -e academi-co/target/academi-co.war ]]; then
-    cp academi-co/target/academi-co.war /tmp/docker-deploy
-fi
+# Deploy the project
+Jenkins/Scripts/deploy.sh $DOCKER_DEPLOY

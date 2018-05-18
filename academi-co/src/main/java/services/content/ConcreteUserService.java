@@ -1,5 +1,7 @@
 package services.content;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -11,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import dom.content.ConcreteUser;
+import dom.content.Post;
 import dom.content.User;
 import dom.content.UserFactory;
 import services.documentsManager.DocumentService;
@@ -95,5 +98,10 @@ public class ConcreteUserService implements UserService {
 		oldUser.setUsername(newUser.getUsername());
 		
 		return oldUser;
+	}
+
+	@Override
+	public List<Post> getUserPosts(long id, String order) {
+		return null;
 	}
 }

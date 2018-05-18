@@ -16,6 +16,8 @@ pipeline {
         DOCKER_APPSERVER = 'cheeky_binko' // 172.18.0.2
         // DOCKER_APPSERVER_IT = 'bodacious_goren' // 172.18.0.?
 
+        DOCKER_DEPLOY = '/tmp/server/tmp/docker-deploy'
+
         // Scripts: script.sh network image container [...]
     }
 
@@ -35,6 +37,7 @@ pipeline {
                     ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB}'
                 sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh \
                     ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER} ${DOCKER_APPSERVER} ${DOCKER_DB}'
+                sleep 300
             }
         }
 
@@ -78,7 +81,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sh Jenkins/Scripts/deploy.sh'
+                sh 'sh Jenkins/Scripts/deploy.sh ${DOCKER_DEPLOY}'
             }
         }
     }
