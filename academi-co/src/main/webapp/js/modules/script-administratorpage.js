@@ -38,7 +38,7 @@ angular.module("myApp", ["ngTable", "ngTableDemos"]);
         }
       });
     }
-    
+
     function resetRow(row, rowForm){
       row.isEditing = false;
       rowForm.$setPristine();
@@ -93,7 +93,7 @@ angular.module("myApp", ["ngTable", "ngTableDemos"]);
       title: "",
       dataType: "command"
     }];
-    
+
     var originalData = angular.copy(simpleList);
 
     self.tableParams = new NgTableParams({}, {
@@ -123,7 +123,7 @@ angular.module("myApp", ["ngTable", "ngTableDemos"]);
         }
       });
     }
-    
+
     function resetRow(row, rowForm){
       row.isEditing = false;
       rowForm.$setPristine();
@@ -154,7 +154,7 @@ angular.module("myApp", ["ngTable", "ngTableDemos"]);
 })();
 
 /**********
-  The following directives are necessary in order to track dirty state and validity of the rows 
+  The following directives are necessary in order to track dirty state and validity of the rows
   in the table as the user pages within the grid
 ------------------------
 */
