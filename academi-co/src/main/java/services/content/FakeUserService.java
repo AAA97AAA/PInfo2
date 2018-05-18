@@ -1,11 +1,16 @@
 package services.content;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 
+import dom.content.Post;
 import dom.content.PostFactory;
 import dom.content.QuestionThread;
 import dom.content.User;
@@ -54,6 +59,11 @@ public class FakeUserService implements UserService {
 				topics.put(j, TagFactory.createSecondaryTag("topic" + i + "-" + j, subject));
 			}
 			user.getPosts().put(i, PostFactory.createQuestionThread(user, "text", "question" + i, subject, language, topics));
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		for (long i = 1; i < 20; i+=2) {
 			user.getPosts().put(i, PostFactory.createComment(user, "text", (QuestionThread) user.getPosts().get((long) 0)));
@@ -70,5 +80,48 @@ public class FakeUserService implements UserService {
 	@Override
 	public User modifyUser(long id, User newUser) {
 		return newUser;
+	}
+
+	@Override
+	public List<Post> getUserPosts(long id, String order) {
+		User user = getUser("username");
+		Comparator<Post> comparator;
+		if (order == "byDate") {
+			comparator = new Comparator<Post>() {
+				@Override
+				public int compare(Post p1, Post p2) {
+					int diffenrence = p2.getCreationDate().compareTo(p1.getCreationDate());
+					if (diffenrence != 0) {
+						return diffenrence;
+					}
+					return Long.compare(p1.getId(), p2.getId());
+				}
+			};
+		} else if (order == "byScore") {
+			comparator = new Comparator<Post>() {
+				@Override
+				public int compare(Post p1, Post p2) {
+					int difference = Integer.compare(p2.getScore(), p1.getScore());
+					if (difference != 0) {
+						return difference;
+					}
+					difference = p2.getCreationDate().compareTo(p1.getCreationDate());
+					if (difference != 0) {
+						return difference;
+					}
+					return Long.compare(p1.getId(), p2.getId());
+				}
+			};
+		} else {
+			comparator = new Comparator<Post>() {
+				@Override
+				public int compare(Post p1, Post p2) {
+					return Long.compare(p1.getId(), p2.getId());
+				}
+			};
+		}
+		List<Post> posts = new ArrayList<Post>(user.getPosts().values());
+		Collections.sort(posts, comparator);
+		return posts;
 	}
 }
