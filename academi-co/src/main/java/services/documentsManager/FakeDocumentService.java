@@ -15,14 +15,14 @@ import dom.documentsManager.DocumentFactory;
  */
 @Alternative
 @Stateless
-public class FakeProfilePictureService implements ProfilePictureService {
+public class FakeDocumentService implements DocumentService {
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -7094187279374862117L;
 	
 
 	@Override
-	public Document getProfilePicture(long id) {
+	public Document getDocument(long id) {
 		Document picture = DocumentFactory.loadDocument(UserFactory.DEFAULT_PATH);
 		return picture;
 	}

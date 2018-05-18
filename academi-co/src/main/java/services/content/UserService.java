@@ -12,7 +12,7 @@ public interface UserService extends Serializable {
 	
 	public User getUser(long id);
 	
-	public User getUserByName(String username);
+	public User getUser(String username);
 	
 	public User addUser(@NotNull User user);
 	

@@ -169,7 +169,8 @@ public class ConcreteQuestionThreadTest {
 	@Test
 	public void testEqualsAndHashCode() {
 		EqualsVerifier.forClass(ConcreteQuestionThread.class)
-			.withIgnoredFields("title", "answers", "subject", "language", "topics").verify();
+			.withIgnoredFields("author", "upvoters", "downvoters", "title", "answers", "subject", "language", "topics")
+			.verify();
 	}
 	
 	/**

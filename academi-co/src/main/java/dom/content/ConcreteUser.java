@@ -89,14 +89,14 @@ public class ConcreteUser implements User, Serializable {
 	
 	@OneToMany(targetEntity = ConcretePost.class, mappedBy = "author")
 	@MapKey(name = "id")
-	@JsonView(View.UserProfile.class)
+	@JsonView(View.UserExcessive.class)
 	private Map<Long, Post> posts;
 	
 	@ManyToMany(targetEntity = ConcreteQuestionThread.class)
 	@JoinTable(name = "USERS_THREADS", joinColumns = @JoinColumn(name = "USER_ID"),
 			inverseJoinColumns = @JoinColumn(name = "THREAD_ID"))
 	@MapKey(name = "id")
-	@JsonView(View.UserProfile.class)
+	@JsonView(View.UserExcessive.class)
 	private Map<Long, QuestionThread> followedThreads;
 	
 	
@@ -266,12 +266,8 @@ public class ConcreteUser implements User, Serializable {
 		result = prime * result + bio.hashCode();
 		result = prime * result + (canBeModerator ? 1231 : 1237);
 		result = prime * result + email.hashCode();
-		result = prime * result + ((followedThreads == null) ? 0 : followedThreads.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + inbox.hashCode();
 		result = prime * result + password.hashCode();
-		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
-		result = prime * result + profilePicture.hashCode();
 		result = prime * result + type;
 		result = prime * result + username.hashCode();
 		return result;
@@ -298,30 +294,10 @@ public class ConcreteUser implements User, Serializable {
 		if (!email.equals(other.email)) {
 			return false;
 		}
-		if (followedThreads == null) {
-			if (other.followedThreads != null) {
-				return false;
-			}
-		} else if (!followedThreads.equals(other.followedThreads)) {
-			return false;
-		}
 		if (id != other.id) {
 			return false;
 		}
-		if (!inbox.equals(other.inbox)) {
-			return false;
-		}
 		if (!password.equals(other.password)) {
-			return false;
-		}
-		if (posts == null) {
-			if (other.posts != null) {
-				return false;
-			}
-		} else if (!posts.equals(other.posts)) {
-			return false;
-		}
-		if (!profilePicture.equals(other.profilePicture)) {
 			return false;
 		}
 		if (type != other.type) {

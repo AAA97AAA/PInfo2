@@ -39,11 +39,11 @@ public class FakeUserService implements UserService {
 
 	@Override
 	public User getUser(long id) {
-		return getUserByName("username");
+		return getUser("username");
 	}
 	
 	@Override
-	public User getUserByName(String username) {
+	public User getUser(String username) {
 		User user = UserFactory.createUser(username, "email", "password", User.REGISTERED);
 		user.setBio("I'm such a cool guy...");
 		for (long i = 0; i < 20; i+=2) {

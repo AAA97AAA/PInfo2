@@ -47,7 +47,7 @@ public class UserServiceRs {
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.UserSession.class)
 	public Response getUserForSession(@PathParam("username") String username) {
-		User result = service.getUserByName(username);
+		User result = service.getUser(username);
 		return Response.ok(result).build();
 	}
 	
