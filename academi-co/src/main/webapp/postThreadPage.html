@@ -56,219 +56,94 @@
 <!-- This body is the container for all the content -->
 <body class="body" ng-app="academi-co">
   <!-- - - - - - - - - - - - - - -  Header: Navigation bar at the top  - - - - - - - - - - - - - - -->
-  <header class="mainheader">
-  <div>
-<!-- If there's a need to fix the header uncomment this and comment the precedent div declaration.  -->
-<!--   <div class="mainheader" style="position:fixed"> -->
-    <!-- Academi-co logo -->
-    <a href="index.html" class="logoButton buttonHeader" >
-      <img src="images/logo.png" style="height:30px;width:190px" alt="Logo">
-    </a>
-   <!-- + Button  -->
-   <!-- TODO: add the corresponding link to add a thread -->
-<div id="searchBarHeader" >
-     <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
-   </div>
-     <!-- Search Button -->
-
-      <input type="text" placeholder="Search..." name="search">
-      <button type="submit" style="background-color: white; border-radius: 7px;"><i class="fa fa-search"></i></button>
-      <button class="buttonHeader" style="font-size:23px;cursor:pointer; color:white;" onclick="openNav()">&#9660;</button>
-
-
-
-   <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
-   <!-- Inbox (Notifications) + profile pic logo -->
-   <div id="rightComponent" style="float:right">
-     <!-- Inbox in header -->
-     <div class="inboxDropDown" ng-controller= "UserInbox">
-       <!-- Inbox button with green number of notifications -->
-       <button class="buttonHeader inboxButton" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-red w3-small">{{userInbox.messages.length}}</span></button>
-       <div class=" inboxDropDownContent" style="right:0;" style="width:300px" >
-         <!-- TODO: add the corresponding link for each notification -->
-         <!-- content in inbox-->
-         <a href="#" class="inboxContent" ng-repeat="message in userInbox.messages">{{message.content}}</a>
-       </div>
-     </div>
-
-      <!-- Profile Pic -->
-      <a href="profilepage.html" class="buttonHeader profilePicButton" title="My Profile">
-        <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar">
-      </a>
-   </div>
-</div>
-
-   <!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
-
-    <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">
-
-   <div id="mySidenav" class="sidenav">
-     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-   <span style="position:absolute; left:1100px; width:200px; top:180px;">From date</span><br><input type="text" id="dateBegin" style="position:absolute; left:1230px; width:200px; top:180px;"></input>
-   <span style="position:absolute; left:1500px; width:200px; top:180px;">To date</span><br><input type="text" id="dateBegin" style="position:absolute; left:1600px; width:200px; top:180px;"></input>
-   <span style="position:absolute; left:1130px; width:200px; top:280px;">Author</span><br><input type="text" id="dateBegin" style="position:absolute; left:1230px; width:200px; top:280px;"></input>
-   <input type="submit" value="Submit" id="popUpYes" style="border-radius: 7px; position: absolute; top: 700px; left:1500px; width: 200px; height:40px; hover:gray;">
-   <div id="myDIV" class="header" style="background-color: #1f2c47;  width: 550px; margin-left:200px;">
-     <h2 style="margin:0px">Primary tag</h2>
-     <input type="text" id="myInput1" placeholder="">
-     <span onclick="newElement1()" class="addBtn" style="border-radius: 7px;">Add</span>
-   </div>
-
-   <ul id="myUL1" style="width: 550px; margin-left:200px;">
-   </ul>
-
-   <br><br> <br><br>
-   <div id="myDIV" class="header"  style="background-color: #263659; width: 550px; margin-left:200px;">
-     <h2 style="margin:0px">Secondary tags</h2>
-     <input type="text" id="myInput2" placeholder="">
-     <span onclick="newElement2()" class="addBtn" style="border-radius: 7px;">Add</span>
-   </div>
-
-   <ul id="myUL2" style="width: 550px; margin-left:200px;">
-   </ul>
-
-   </div>
-
-   </div>
-
-   <!-- ENDING OF SLIDE-NAVIGATION SEARCH -->
-
-  </header>
+    <header class='mainheader' ng-include="'header.html'"></header>
   <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
 
-   <div class="w3-container w3-content" style="width:auto;margin-top:auto">
-   <!-- The Grid -->
-   <div class="w3-row">
-
-      <div ng-app="academi-co" ng-controller="profilePageLoad">
-       <!--     Left Column -->
-      <div class="w3-col m3">
-         <!--       Profile -->
-         <div class="w3-card w3-round w3-white">
-
-         </div>
-         <br>
-         <div class="w3-card w3-round">
-            <div class="w3-white">
-            </div>
-         </div>
-         <br>
-         <!--     End Left Column -->
-      </div>
 
 
-
-         <!--     Middle Column -->
-         <div class="w3-col m7">
-            <!-- Biography of the user -->
-            <div class="w3-row-padding">
-               <div class="w3-col m12">
-
-                  </div>
-               </div>
-            </div>
-
-
-            <!-- Central column after MyPosts -->
-  <div class="w3-container w3-center w3-margin">
-  <div id="myDIVPTP1" class="header" style="background-color: #1f2c47; margin-left:20%; width: 60%;">
-    <h2 style="margin:5px">Primary tag</h2>
-    <input type="text" id="myInputPTP1" placeholder="" style="width:70%; height:50%">
-    <span onclick="newElementPTP1()" class="addBtn" style="width:20%; height:10%">Add</span>
-  </div>
-
-  <ul id="myULPTP1" style="margin-left:20%; width: 60%;">
-  </ul>
-
-  <br><br> <br><br> <br> <br>
-  <div id="myDIVPTP2" class="header"  style="background-color:#263659; margin-left:20%; width: 60%;">
-    <h2 style="margin:5px">Secondary tags</h2>
-    <input type="text" id="myInputPTP2" placeholder="" style="width:70%; height:50%">
-    <span onclick="newElementPTP2()" class="addBtn">Add</span>
-  </div>
-
-  <ul id="myULPTP2" style="margin-left:20%; width: 60%;">
-  </ul>
-      <div class="w3-left"><br><br>
-      <h2>Title:</h2>
-      <input type="text" id="userInput" style="width:70%; height:50%"></input><br>
-     <br><br>
-      <h2>Content:</h2>
-      <div style="background-color:white;width:100.0%;">
-      <textarea rows="20" cols="100" type="text" id="userInput" style="resize:none;"></textarea>
-    </div>
-    </div>
-      <br>
- <input type="submit" value="Submit" id="popUpYes" style="width: 200px; height:40px; hover:gray;"><br><br><br>
-  <!--     End Left Column -->
-</div><br><br><br>
+<div class="w3-container w3-content" style="width:auto;margin-top:auto">
+<!-- The Grid -->
+<div class="w3-row">
+	<div ng-app="academi-co" ng-controller="profilePageLoad">
+		<!--     Left Column -->
+		<div class="w3-col m3">
+			<!--       Profile -->
+			<div class="w3-card w3-round w3-white">
+			</div>
+			<br>
+			<div class="w3-card w3-round">
+				<div class="w3-white">
+				</div>
+			</div>
+			<br>
+			<!--     End Left Column -->
+		</div>
+		<!--     Middle Column -->
+		<div class="w3-col m7">
+			<!-- Biography of the user -->
+			<div class="w3-row-padding">
+				<div class="w3-col m12">
+				</div>
+			</div>
+		</div>
+		<!-- Central column after MyPosts -->
+		<div class="w3-container w3-center w3-margin">
+			<div id="myDIVPTP1" class="header" style="background-color: #1f2c47; margin-left:20%; width: 60%;">
+				<h2 style="margin:5px">Primary tag</h2>
+				<input type="text" id="myInputPTP1" placeholder="" style="width:70%; height:50%">
+				<span onclick="newElementPTP1()" class="addBtn" style="width:20%; height:10%">Add</span>
+			</div>
+			<ul id="myULPTP1" style="margin-left:20%; width: 60%;">
+			</ul>
+			<br><br> <br><br> <br> <br>
+			<div id="myDIVPTP2" class="header"  style="background-color:#263659; margin-left:20%; width: 60%;">
+				<h2 style="margin:5px">Secondary tags</h2>
+				<input type="text" id="myInputPTP2" placeholder="" style="width:70%; height:50%">
+				<span onclick="newElementPTP2()" class="addBtn">Add</span>
+			</div>
+			<ul id="myULPTP2" style="margin-left:20%; width: 60%;">
+			</ul>
+			<div class="w3-left">
+				<br><br>
+				<h2>Title:</h2>
+				<input type="text" id="userInput" style="width:70%; height:50%"></input><br>
+				<br><br>
+				<h2>Content:</h2>
+				<div style="background-color:white;width:100.0%;">
+					<textarea rows="20" cols="100" type="text" id="userInput" style="resize:none;"></textarea>
+				</div>
+			</div>
+			<br>
+			<input type="submit" value="Submit" id="popUpYes" style="width: 200px; height:40px; hover:gray;"><br><br><br>
+			<!--     End Left Column -->
+		</div>
+		<br><br><br>
+	</div>
+	<!--     Middle Column -->
+	<div class="w3-col m7">
+	</div>
+	<!--     End Middle Column -->
 </div>
-  <!--     Middle Column -->
-      <div class="w3-col m7">
-
-        </div>
-
-
-  <!--     End Middle Column -->
+<!--     Right Column -->
+<div class="w3-col m2">
+	<div class="w3-container">
+	</div>
+	<br>
+	<br>
+	<div class="w3-card w3-center pub">
+		<!--       <a href="https://www.rolex.com" target="_blank"> -->
+		<img src="images/banAdNul.jpg" alt="Advertisement" style="width:200px; height:700px;"></img>
+		<!--       </a> -->
+	</div>
+	<!--     End Right Column -->
 </div>
-
-  <!--     Right Column -->
-      <div class="w3-col m2">
-
-          <div class="w3-container">
-
-          </div>
-
-        <br>
-
-        <br>
-
-             <div class="w3-card w3-center pub">
-                    <!--       <a href="https://www.rolex.com" target="_blank"> -->
-                    <img src="images/banAdNul.jpg" alt="Advertisement" style="width:200px; height:700px;">
-                    <!--       </a> -->
-             </div>
-  <!--     End Right Column -->
-      </div>
-
-  <!-- End Page Container -->
-
-  <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- End Page Container -->
+<br>
 
 
 
   <!-- - - - - - - - - - - - - - -  Footer  - - - - - - - - - - - - - - -->
-  <footer class="footer">
-    <div class="w3-dropdown-hover w3-hide-small">
-      <button class="w3-button w3-padding-large w3-blue-gray w3-hover-gray" title="Language">Language</button>
-   <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-white " style="width:300px">
-     <a href="#" class="w3-bar-item w3-button">English</a>
-   </div>
-    </div>
-     <p><a href="helpPage.html" class="helpPage w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-info-circle"> Help page</i></a></p>
-
-  <div class="lastLineFooter w3-container">
-    <h5 class="footerCopyright" style="float:left">Academi-co  &copy; All Rights Reserved</h5>
-    <h5 class="footerCopyright" style="float:right">Powered by SoftAware</h5>
-  </div>
-
-  </footer>
-
+  <footer class="footer" ng-include="'footer.html'"></footer>
 
 </body>
 
