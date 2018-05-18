@@ -16,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -52,6 +53,9 @@ public class UserServiceRs {
 	@JsonView(View.UserSession.class)
 	public Response getUserForSession(@PathParam("username") String username) {
 		User result = service.getUser(username);
+		if (result == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
 		return Response.ok(result).build();
 	}
 	
@@ -66,6 +70,9 @@ public class UserServiceRs {
 	@JsonView(View.UserProfile.class)
 	public Response getUser(@PathParam("id") long id) {
 		User result = service.getUser(id);
+		if (result == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
 		return Response.ok(result).build();
 	}
 	
@@ -108,6 +115,9 @@ public class UserServiceRs {
 	@JsonView(View.PostBase.class)
 	public Response getUserPosts(@PathParam("id") long id, @QueryParam("order") @DefaultValue("byDate") String order) {
 		List<Post> posts = service.getUserPosts(id, order);
+		if (posts == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
 		return Response.ok(posts).build();
 	}
 }

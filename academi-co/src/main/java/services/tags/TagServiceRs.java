@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -64,6 +65,9 @@ public class TagServiceRs {
 	@JsonView(View.TagBase.class)
 	public Response getLanguageTag(@PathParam("id") long id) {
 		Tag tag = service.getLanguageTag(id);
+		if (tag == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
 		return Response.ok(tag).build();
 	}
 	
@@ -79,6 +83,9 @@ public class TagServiceRs {
 	@JsonView(View.TagParentCentered.class)
 	public Response getMainTag(@PathParam("id") long id) {
 		MainTag tag = service.getMainTag(id);
+		if (tag == null) {
+			Response.status(Status.NOT_FOUND).build();
+		}
 		return Response.ok(tag).build();
 	}
 	
@@ -94,6 +101,9 @@ public class TagServiceRs {
 	@JsonView(View.TagChildCentered.class)
 	public Response getSecondaryTag(@PathParam("id") long id) {
 		SecondaryTag tag = service.getSecondaryTag(id);
+		if (tag == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
 		return Response.ok(tag).build();
 	}
 	

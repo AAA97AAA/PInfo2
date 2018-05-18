@@ -5,6 +5,13 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -34,14 +41,20 @@ import org.junit.runner.RunWith;
 
 import com.lmax.disruptor.ExceptionHandler;
 
+import dom.content.Comment;
 import dom.content.ConcreteUser;
 import dom.content.Post;
+import dom.content.PostFactory;
+import dom.content.QuestionThread;
 import dom.content.User;
 import dom.content.UserFactory;
 import dom.documentsManager.Document;
 import dom.documentsManager.DocumentFactory;
 import dom.inbox.Inbox;
+import dom.tags.MainTag;
+import dom.tags.SecondaryTag;
 import dom.tags.Tag;
+import dom.tags.TagFactory;
 import services.documentsManager.ConcreteDocumentService;
 import services.documentsManager.DocumentService;
 import services.utility.ContextHandler;
@@ -170,4 +183,113 @@ public class ConcreteUserServiceIntegrationTest {
 			);
 	}
 
+	@Test
+	public void testGetUserPosts() throws NotSupportedException, SystemException, SecurityException,
+			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		
+		// Create another user
+		User author = UserFactory.createUser("patrick", "p.brunschwick@ponpon.com", "ppp", User.REGISTERED);
+		trx.begin();
+		em.persist(author);
+		trx.commit();
+		
+		// Create a few threads
+		MainTag subject = TagFactory.createMainTag("subject");
+		Tag languageTag = TagFactory.createTag("language");
+		trx.begin();
+		em.persist(subject);
+		em.persist(languageTag);
+		trx.commit();
+		SecondaryTag topic1 = TagFactory.createSecondaryTag("topic1", subject);
+		SecondaryTag topic2 = TagFactory.createSecondaryTag("topic2", subject);
+		trx.begin();
+		em.persist(topic1);
+		em.persist(topic2);
+		trx.commit();
+		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
+		topics.put(topic1.getId(), topic1);
+		topics.put(topic2.getId(), topic2);
+		QuestionThread thread1 = PostFactory.createQuestionThread(author, "content1", "title1", subject, languageTag, topics);
+		QuestionThread thread2 = PostFactory.createQuestionThread(sampleUser, "content2", "title2", subject, languageTag, topics);
+		QuestionThread thread3 = PostFactory.createQuestionThread(author, "content3", "title3", subject, languageTag, topics);
+		thread2.addDownvoter(author);
+		trx.begin();
+		em.persist(thread1);
+		em.persist(thread2);
+		em.persist(thread3);
+		trx.commit();
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Comment comment1 = PostFactory.createComment(sampleUser, "answer1", thread1);
+		comment1.addUpvoter(author);
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Comment comment2 = PostFactory.createComment(sampleUser, "answer2", thread3);
+		trx.begin();
+		em.persist(comment1);
+		em.persist(comment2);
+		trx.commit();
+		
+		// Group expectation
+		List<Post> expected = new ArrayList<Post>();
+		expected.add(thread2);
+		expected.add(comment1);
+		expected.add(comment2);
+		
+		// Test fetching by date
+		orderPosts(expected, "byDate");
+		List<Post> result = service.getUserPosts(sampleUser.getId(), "byDate");
+		assertEquals("Wrong posts fetched.", new HashSet<Post>(expected), new HashSet<Post>(result));
+		assertEquals("Wrong order (by date).", expected, result);
+		
+		// Test fetching by score
+		orderPosts(expected, "byScore");
+		result = service.getUserPosts(sampleUser.getId(), "byScore");
+		assertEquals("Wrong order (by score).", expected, result);
+	}
+	
+	private void orderPosts(List<Post> list, String order) {
+		Comparator<Post> comparator;
+		if (order == "byDate") {
+			comparator = new Comparator<Post>() {
+				@Override
+				public int compare(Post p1, Post p2) {
+					int diffenrence = p2.getCreationDate().compareTo(p1.getCreationDate());
+					if (diffenrence != 0) {
+						return diffenrence;
+					}
+					return Long.compare(p1.getId(), p2.getId());
+				}
+			};
+		} else if (order == "byScore") {
+			comparator = new Comparator<Post>() {
+				@Override
+				public int compare(Post p1, Post p2) {
+					int difference = Integer.compare(p2.getScore(), p1.getScore());
+					if (difference != 0) {
+						return difference;
+					}
+					difference = p2.getCreationDate().compareTo(p1.getCreationDate());
+					if (difference != 0) {
+						return difference;
+					}
+					return Long.compare(p1.getId(), p2.getId());
+				}
+			};
+		} else {
+			comparator = new Comparator<Post>() {
+				@Override
+				public int compare(Post p1, Post p2) {
+					return Long.compare(p1.getId(), p2.getId());
+				}
+			};
+		}
+		Collections.sort(list, comparator);
+	}
 }

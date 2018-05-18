@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -69,7 +70,11 @@ public class ConcreteUserService implements UserService {
 		TypedQuery<ConcreteUser> query = entityManager.createQuery(criteriaQuery);
 		
 		// Return of single result. If we want a list of results, we use getResultList
-		return query.getSingleResult();
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	/**
@@ -102,6 +107,23 @@ public class ConcreteUserService implements UserService {
 
 	@Override
 	public List<Post> getUserPosts(long id, String order) {
-		return null;
+		
+		// Fetch the target user and fail if it does not exist
+		User user = getUser(id);
+		if (user == null) {
+			return null;
+		}
+		
+		// Fetch the user's posts in given order
+		TypedQuery<Post> query;
+		if (order == "byDate") {
+			query = entityManager.createNamedQuery("Post.fromAuthorByDate", Post.class);
+		} else if (order == "byScore") {
+			query = entityManager.createNamedQuery("Post.fromAuthorByScore", Post.class);
+		} else {
+			throw new IllegalArgumentException("Unrecognized order " + order);
+		}
+		query.setParameter("author", user);
+		return query.getResultList();
 	}
 }
