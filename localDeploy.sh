@@ -37,7 +37,19 @@ fi
 ./Jenkins/Scripts/Database/runDatabase.sh \
     $ACADEMI_CO_NETWORK $IMAGE_DB $DOCKER_DB
 ./Jenkins/Scripts/Appserver/runAppServer.sh \
-    $ACADEMI_CO_NETWORK $IMAGE_APPSERVER $DOCKER_APPSERVER $DOCKER_DB $DOCKER_DB_IT
+    $ACADEMI_CO_NETWORK $IMAGE_APPSERVER $DOCKER_APPSERVER $DOCKER_DB
+
+# Wait for database to be running
+IT_DB_BUILDING=false
+while ! docker exec -it $5 mysql -u root -padmin -e "USE ACADEMI_CO_DB" ; do
+   printf "Waiting for test database...\n"
+   IT_DB_BUILDING=true
+   sleep 5
+done
+if [[ $IT_DB_BUILDING == true ]]; then
+   printf "Building tables...\n"
+   sleep 40
+fi
 
 printf "\n ---------------- Build Maven project ---------------- \n\n"
 
