@@ -18,7 +18,7 @@ if [[ -e academi-co/target/academi-co.war ]]; then
 fi
 
 IS_DEPLOYED=false
-while ! IS_DEPLOYED ; do
+while ! $IS_DEPLOYED ; do
    sleep 5
    if [[ -e $1/academi-co.war.deployed ]]; then
        printf "Deployment sucessful\n"
