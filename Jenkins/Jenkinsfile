@@ -37,7 +37,7 @@ pipeline {
                     ${ACADEMI_CO_NETWORK} ${IMAGE_DB} ${DOCKER_DB}'
                 sh 'sh Jenkins/Scripts/Appserver/runAppServer.sh \
                     ${ACADEMI_CO_NETWORK} ${IMAGE_APPSERVER} ${DOCKER_APPSERVER} ${DOCKER_DB}'
-                sleep 120
+                sleep 300
             }
         }
 
