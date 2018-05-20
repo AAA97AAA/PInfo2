@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import dom.content.Comment;
 import dom.content.Post;
 import dom.content.QuestionThread;
+import dom.content.Vote;
 
 /**
  * Service definition for posts (threads and comments).
@@ -20,9 +21,11 @@ public interface PostService extends Serializable {
 	
 	public QuestionThread getQuestionThread(long id);
 	
-	public QuestionThread addQuestionThread(QuestionThread questionThread);
+	public QuestionThread addPost(QuestionThread questionThread);
 	
-	public Comment addComment(long questionId, Comment comment);
+	public Comment addPost(Comment comment);
 	
 	public Post setBan(long id, boolean banned);
+	
+	public Post vote(long id, Vote vote);
 }

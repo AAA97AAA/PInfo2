@@ -2,8 +2,11 @@ package dom.content;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -18,15 +21,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKey;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import services.utility.View;
+import services.utility.VotersMarshaller;
 
 /**
  * Generic post definition
@@ -77,19 +81,19 @@ public class ConcretePost implements Post, Serializable {
 	@ManyToMany(targetEntity = ConcreteUser.class)
 	@JoinTable(name = "UPVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
 		inverseJoinColumns = @JoinColumn(name = "USER_ID"))
-	@MapKey(name = "id")
-	@JsonView(View.PostBase.class)
-	private Map<Long, User> upvoters;
+	@JsonView(View.PostVote.class)
+	@JsonSerialize(using = VotersMarshaller.class)
+	private Set<User> upvoters;
 	
 	@ManyToMany(targetEntity = ConcreteUser.class)
 	@JoinTable(name = "DOWNVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
 		inverseJoinColumns = @JoinColumn(name = "USER_ID"))
-	@MapKey(name = "id")
-	@JsonView(View.PostBase.class)
-	private Map<Long, User> downvoters;
+	@JsonView(View.PostVote.class)
+	@JsonSerialize(using = VotersMarshaller.class)
+	private Set<User> downvoters;
 	
 	@Column(name = "SCORE")
-	@JsonView(View.PostBase.class)
+	@JsonView(View.PostVote.class)
 	private int score;
 	
 	@Column(name = "BANNED")
@@ -101,14 +105,14 @@ public class ConcretePost implements Post, Serializable {
 
 	ConcretePost() {
 		score = 0;
-		upvoters = new HashMap<Long, User>();
-		downvoters = new HashMap<Long, User>();
+		upvoters = new HashSet<User>();
+		downvoters = new HashSet<User>();
 		banned = false;
 		creationDate = LocalDateTime.now();
 	}
 	
-	ConcretePost(User author, String content, LocalDateTime creationDate, Map<Long, User> upvoters,
-			Map<Long, User> downvoters, int score, boolean banned) {
+	ConcretePost(User author, String content, LocalDateTime creationDate, Set<User> upvoters,
+			Set<User> downvoters, int score, boolean banned) {
 		this.author = author;
 		this.content = content;
 		this.creationDate = creationDate;
@@ -123,25 +127,25 @@ public class ConcretePost implements Post, Serializable {
 
 	@Override
 	public void addUpvoter(User upvoter) {
-		upvoters.put(upvoter.getId(), upvoter);
+		upvoters.add(upvoter);
 		score += 1;
 	}
 
 	@Override
-	public void removeUpvoter(long id) {
-		upvoters.remove(id);
+	public void removeUpvoter(User upvoter) {
+		upvoters.remove(upvoter);
 		score -= 1;
 	}
 
 	@Override
 	public void addDownvoter(User downvoter) {
-		downvoters.put(downvoter.getId(), downvoter);
+		downvoters.add(downvoter);
 		score -= 1;
 	}
 
 	@Override
-	public void removeDownvoter(long id) {
-		downvoters.remove(id);
+	public void removeDownvoter(User downvoter) {
+		downvoters.remove(downvoter);
 		score += 1;
 	}
 
@@ -184,20 +188,20 @@ public class ConcretePost implements Post, Serializable {
 	}
 
 	@Override
-	public Map<Long, User> getUpvoters() {
+	public Set<User> getUpvoters() {
 		return upvoters;
 	}
 
-	void setUpvoters(Map<Long, User> upvoters) {
+	void setUpvoters(Set<User> upvoters) {
 		this.upvoters = upvoters;
 	}
 
 	@Override
-	public Map<Long, User> getDownvoters() {
+	public Set<User> getDownvoters() {
 		return downvoters;
 	}
 
-	void setDownvoters(Map<Long, User> downvoters) {
+	void setDownvoters(Set<User> downvoters) {
 		this.downvoters = downvoters;
 	}
 
@@ -224,8 +228,8 @@ public class ConcretePost implements Post, Serializable {
 
 	@Override
 	protected ConcretePost clone() {
-		return new ConcretePost(author, content, creationDate, new HashMap<Long, User>(upvoters),
-				new HashMap<Long, User> (downvoters), score, banned);
+		return new ConcretePost(author, content, creationDate, new HashSet<User>(upvoters),
+				new HashSet<User>(downvoters), score, banned);
 	}
 
 	@Override
@@ -272,8 +276,9 @@ public class ConcretePost implements Post, Serializable {
 
 	@Override
 	public String toString() {
-		String upvotersText = upvoters.toString();
-		String downvotersText = downvoters.toString();
+		Collector<User, ?, Map<Long, String>> collector = Collectors.toMap(User::getId, User::getUsername);
+		String upvotersText = getUpvoters().stream().collect(collector).toString();
+		String downvotersText = getDownvoters().stream().collect(collector).toString();
 		return "ConcretePost [id=" + id + ", author=" + author + ", content=" + content + ", creationDate="
 				+ creationDate + ", upvoters={" + upvotersText.substring(1, upvotersText.length()-1)
 				+ "}, downvoters={" + downvotersText.substring(1, downvotersText.length()-1) + "}, score="

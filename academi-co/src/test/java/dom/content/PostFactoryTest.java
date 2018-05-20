@@ -7,7 +7,10 @@ import static org.mockito.Mockito.verify;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
@@ -45,13 +48,13 @@ public class PostFactoryTest {
 		User author = mock(ConcreteUser.class);
 		String content = "content";
 		long min = 1; long max = 100;
-		Map<Long, User> upvoters = new HashMap<Long, User>();
+		Set<User> upvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			upvoters.put(i, mock(ConcreteUser.class));
+			upvoters.add(mock(ConcreteUser.class));
 		}
-		Map<Long, User> downvoters = new HashMap<Long, User>();
+		Set<User> downvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			downvoters.put(i, mock(ConcreteUser.class));
+			downvoters.add(mock(ConcreteUser.class));
 		}
 		String title = "title";
 		Map<Long, Comment> answers = new HashMap<Long, Comment>();
@@ -72,8 +75,8 @@ public class PostFactoryTest {
 		
 		// Verify that the expected object was obtained
 		assertEquals("Object wrongly instantiated.",
-				new ConcreteQuestionThread(author, content, date, new HashMap<Long, User>(),
-						new HashMap<Long, User>(), 0, false, title, new HashMap<Long, Comment>(),
+				new ConcreteQuestionThread(author, content, date, new HashSet<User>(),
+						new HashSet<User>(), 0, false, title, new LinkedList<Comment>(),
 						subject, language, topics), thread);
 	}
 	
@@ -102,13 +105,13 @@ public class PostFactoryTest {
 		String content = "content";
 		LocalDateTime date = LocalDateTime.now();
 		long min = 1; long max = 100;
-		Map<Long, User> upvoters = new HashMap<Long, User>();
+		Set<User> upvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			upvoters.put(i, mock(ConcreteUser.class));
+			upvoters.add(mock(ConcreteUser.class));
 		}
-		Map<Long, User> downvoters = new HashMap<Long, User>();
+		Set<User> downvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			downvoters.put(i, mock(ConcreteUser.class));
+			downvoters.add(mock(ConcreteUser.class));
 		}
 		QuestionThread question = mock(ConcreteQuestionThread.class);
 		
@@ -118,8 +121,8 @@ public class PostFactoryTest {
 		
 		// Verify that the expected object was obtained
 		assertEquals("Object wrongly instantiated.",
-				new ConcreteComment(author, content, date, new HashMap<Long, User>(),
-						new HashMap<Long, User>(), 0, false, question), comment);
+				new ConcreteComment(author, content, date, new HashSet<User>(),
+						new HashSet<User>(), 0, false, question), comment);
 	}
 	
 	/**

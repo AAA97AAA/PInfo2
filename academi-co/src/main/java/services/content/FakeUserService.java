@@ -66,7 +66,7 @@ public class FakeUserService implements UserService {
 			}
 		}
 		for (long i = 1; i < 20; i+=2) {
-			user.getPosts().put(i, PostFactory.createComment(user, "text", (QuestionThread) user.getPosts().get((long) 0)));
+			user.getPosts().put(i, PostFactory.createComment(user, "text", (QuestionThread) user.getPosts().get(2L)));
 		}
 		return user;
 	}
@@ -83,7 +83,7 @@ public class FakeUserService implements UserService {
 	}
 
 	@Override
-	public List<Post> getUserPosts(long id, String order) {
+	public List<Post> getUserPosts(long id, String order, int from, int length) {
 		User user = getUser("username");
 		Comparator<Post> comparator;
 		if (order == "byDate") {

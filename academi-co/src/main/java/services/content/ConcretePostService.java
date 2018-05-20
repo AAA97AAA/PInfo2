@@ -4,15 +4,15 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import dom.content.Comment;
+import dom.content.ConcretePost;
 import dom.content.ConcreteQuestionThread;
+import dom.content.ConcreteUser;
 import dom.content.Post;
 import dom.content.QuestionThread;
+import dom.content.User;
+import dom.content.Vote;
 
 /**
  * 
@@ -45,46 +45,69 @@ public class ConcretePostService implements PostService {
 	 */
 	@Override
 	public QuestionThread getQuestionThread(long id) {
-				
-		entityManager.getTransaction().begin();
-		
-		// Creating criteria builder to create a criteria query
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		
-		// Criteria query of return type QuestionThread
-		CriteriaQuery<ConcreteQuestionThread> criteriaQuery = criteriaBuilder.createQuery(ConcreteQuestionThread.class);
-		
-		// Roots define the basis from which all joins, paths and attributes are available in the query -> c.f. table from
-		Root<ConcreteQuestionThread> variableRoot = criteriaQuery.from(ConcreteQuestionThread.class);
-		
-		// Condition statement -> Where
-		criteriaQuery.where(criteriaBuilder.equal(variableRoot.get("id"), id));
-		
-		// Creating typed query
-		TypedQuery<ConcreteQuestionThread> query = entityManager.createQuery(criteriaQuery);
-		
-		// Return of single result. If we want a list of results, we use getResultList
-		return query.getSingleResult();
+		return entityManager.find(ConcreteQuestionThread.class, id);
 	}
 	
 	@Override
-	public QuestionThread addQuestionThread(QuestionThread questionThread) {
-		
+	public QuestionThread addPost(QuestionThread questionThread) {
 		entityManager.persist(questionThread);
-		
 		return questionThread;
 	}
 
 	@Override
-	public Comment addComment(long questionId, Comment comment) {
-		// TODO Auto-generated method stub
-		return null;
+	public Comment addPost(Comment comment) {
+		entityManager.persist(comment);
+		return comment;
 	}
 
 	@Override
 	public Post setBan(long id, boolean banned) {
-		// TODO Auto-generated method stub
-		return null;
+		Post post = entityManager.find(ConcretePost.class, id);
+		if (post == null) {
+			return null;
+		}
+		post.setBanned(banned);
+		return post;
 	}
-	
+
+	@Override
+	public Post vote(long id, Vote vote) {
+		
+		// Fetch the target post
+		Post post = entityManager.find(ConcretePost.class, id);
+		if (post == null) {
+			return null;
+		}
+		
+		// Fetch upvoter/downvoter
+		User voter = entityManager.find(ConcreteUser.class, vote.getVoterId());
+		if (voter == null) {
+			return null;
+		}
+		
+		// Apply vote
+		if (vote.isUp()) { // upvote
+			if (post.getUpvoters().contains(voter)) {
+				post.removeUpvoter(voter);
+				post.getDownvoters().size(); // dirty way to force the set to load
+			} else {
+				post.addUpvoter(voter);
+				if (post.getDownvoters().contains(voter)) {
+					post.removeDownvoter(voter);
+				}
+			}
+		} else { // downvote
+			if (post.getDownvoters().contains(voter)) {
+				post.removeDownvoter(voter);
+				post.getUpvoters().size(); // dirty way to force the set to load
+			} else {
+				post.addDownvoter(voter);
+				if (post.getUpvoters().contains(voter)) {
+					post.removeUpvoter(voter);
+				}
+			}
+		}
+		
+		return post;
+	}
 }

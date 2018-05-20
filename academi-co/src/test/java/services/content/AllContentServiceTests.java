@@ -11,7 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ConcreteQuestionThreadServiceTest.class, ConcreteUserServiceTest.class,
+@SuiteClasses({ ConcretePostServiceTest.class, ConcreteUserServiceTest.class,
 	QuestionThreadServiceRsTest.class, UserServiceRsTest.class})
 public class AllContentServiceTests {
 

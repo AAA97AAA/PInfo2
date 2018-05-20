@@ -311,11 +311,11 @@ public class ConcreteUser implements User, Serializable {
 
 	@Override
 	public String toString() {
-		String postsText = posts.toString();
-		String followedThreadsText = followedThreads.toString();
+		String postsText = posts.keySet().toString();
+		String followedThreadsText = followedThreads.keySet().toString();
 		return "ConcreteUser [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", profilePicture=" + profilePicture + ", type=" + type + ", bio=" + bio + ", canBeModerator="
-				+ canBeModerator + ", inbox=" + inbox + ", posts={" + postsText.substring(1, postsText.length()-1)
+				+ ", profilePicture=" + profilePicture.getId() + ", type=" + type + ", bio=" + bio + ", canBeModerator="
+				+ canBeModerator + ", inbox=" + inbox.getId() + ", posts={" + postsText.substring(1, postsText.length()-1)
 				+ "}, followedThreads={" + followedThreadsText.substring(1, followedThreadsText.length()-1) + "}]";
 	}
 	

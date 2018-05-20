@@ -113,8 +113,9 @@ public class UserServiceRs {
 	@Path("/{id}/posts")
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.PostBase.class)
-	public Response getUserPosts(@PathParam("id") long id, @QueryParam("order") @DefaultValue("byDate") String order) {
-		List<Post> posts = service.getUserPosts(id, order);
+	public Response getUserPosts(@PathParam("id") long id, @QueryParam("order") @DefaultValue("byDate") String order,
+			@QueryParam("from") @DefaultValue("0") int from, @QueryParam("len") @DefaultValue("0") int length) {
+		List<Post> posts = service.getUserPosts(id, order, from, length);
 		if (posts == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}

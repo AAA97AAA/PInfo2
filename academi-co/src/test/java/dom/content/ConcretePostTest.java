@@ -7,9 +7,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -35,13 +38,13 @@ public class ConcretePostTest {
 		String content = "content";
 		LocalDateTime date = LocalDateTime.now();
 		long min = 1; long max = 100;
-		Map<Long, User> upvoters = new HashMap<Long, User>();
+		Set<User> upvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			upvoters.put(i, mock(ConcreteUser.class));
+			upvoters.add(mock(ConcreteUser.class));
 		}
-		Map<Long, User> downvoters = new HashMap<Long, User>();
+		Set<User> downvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			downvoters.put(i, mock(ConcreteUser.class));
+			downvoters.add(mock(ConcreteUser.class));
 		}
 		int score = 3;
 		boolean banned = false;
@@ -120,7 +123,7 @@ public class ConcretePostTest {
 		int removedUpvotersNumber = ThreadLocalRandom.current().nextInt(min, upvotersSize);
 		actualScore -= removedUpvotersNumber;
 		for (long i = 0; i < removedUpvotersNumber; i++) {
-			post.removeUpvoter(i);
+			post.removeUpvoter(post.getUpvoters().iterator().next());
 		}
 		assertEquals("Wrong number of upvoters removed.",
 				upvotersSize - removedUpvotersNumber, post.getUpvoters().size());
@@ -130,7 +133,7 @@ public class ConcretePostTest {
 		int removedDownvotersNumber = ThreadLocalRandom.current().nextInt(min, downvotersSize);
 		actualScore += removedDownvotersNumber;
 		for (long i = 0; i < removedDownvotersNumber; i++) {
-			post.removeDownvoter(i);
+			post.removeDownvoter(post.getDownvoters().iterator().next());
 		}
 		assertEquals("Wrong number of downvoters removed.",
 				downvotersSize - removedDownvotersNumber, post.getDownvoters().size());
@@ -159,13 +162,13 @@ public class ConcretePostTest {
 		String content = "content";
 		LocalDateTime date = LocalDateTime.now();
 		long min = 1; long max = 100;
-		Map<Long, User> upvoters = new HashMap<Long, User>();
+		Set<User> upvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			upvoters.put(i, mock(ConcreteUser.class));
+			upvoters.add(mock(ConcreteUser.class));
 		}
-		Map<Long, User> downvoters = new HashMap<Long, User>();
+		Set<User> downvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			downvoters.put(i, mock(ConcreteUser.class));
+			downvoters.add(mock(ConcreteUser.class));
 		}
 		int score = 3;
 		boolean banned = false;
@@ -200,15 +203,19 @@ public class ConcretePostTest {
 		String content = "content";
 		LocalDateTime date = LocalDateTime.now();
 		long min = 1; long max = 100;
-		Map<Long, User> upvoters = new HashMap<Long, User>();
+		Set<User> upvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			upvoters.put(i, mock(ConcreteUser.class));
-			when(upvoters.get(i).toString()).thenReturn("upvoter" + i);
+			User fakeUser = mock(ConcreteUser.class);
+			when(fakeUser.getId()).thenReturn(i);
+			when(fakeUser.getUsername()).thenReturn("upvoter" + i);
+			upvoters.add(fakeUser);
 		}
-		Map<Long, User> downvoters = new HashMap<Long, User>();
+		Set<User> downvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			downvoters.put(i, mock(ConcreteUser.class));
-			when(downvoters.get(i).toString()).thenReturn("downvoter" + i);
+			User fakeUser = mock(ConcreteUser.class);
+			when(fakeUser.getId()).thenReturn(i);
+			when(fakeUser.getUsername()).thenReturn("downvoter" + i);
+			downvoters.add(fakeUser);
 		}
 		int score = 3;
 		boolean banned = false;
@@ -219,8 +226,9 @@ public class ConcretePostTest {
 		post.setId(id);
 		
 		// Create expected result
-		String upvotersText = upvoters.toString();
-		String downvotersText = downvoters.toString();
+		Collector<User, ?, Map<Long, String>> collector = Collectors.toMap(User::getId, User::getUsername);
+		String upvotersText = upvoters.stream().collect(collector).toString();
+		String downvotersText = downvoters.stream().collect(collector).toString();
 		String expected = "ConcretePost [id=" + id + ", author=" + author
 				+ ", content=" + content + ", creationDate=" + date + ", upvoters={"
 				+ upvotersText.substring(1, upvotersText.length()-1) + "}, downvoters={"

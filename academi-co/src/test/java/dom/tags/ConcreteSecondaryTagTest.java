@@ -98,9 +98,9 @@ public class ConcreteSecondaryTagTest {
 		
 		// Setup data to be put in the entity
 		String name = "Law";
-		String parentName = "University";
+		long parentId = 22;
 		MainTag parent = mock(MainTag.class);
-		when(parent.getName()).thenReturn(parentName);		
+		when(parent.getId()).thenReturn(parentId);		
 		long id = 42;
 		
 		// Construct entity
@@ -108,7 +108,7 @@ public class ConcreteSecondaryTagTest {
 		secondaryTag.setId(id);
 		
 		// Create expected result
-		String expected = "ConcreteMainTag [id=" + id + ", name=" + name + ", parent=" + parentName+ "]";
+		String expected = "ConcreteMainTag [id=" + id + ", name=" + name + ", parent=" + parentId + "]";
 
 		// Control result
 		assertEquals("Incorrect conversion to string.", expected, secondaryTag.toString());

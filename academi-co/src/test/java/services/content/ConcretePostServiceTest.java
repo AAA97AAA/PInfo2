@@ -11,7 +11,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -35,7 +34,7 @@ import dom.content.QuestionThread;
  *
  */
 @RunWith(MockitoJUnitRunner.class)
-public class ConcreteQuestionThreadServiceTest {
+public class ConcretePostServiceTest {
 	
 	@Mock
 	private EntityManagerFactory fakeEntityManagerFactory;
@@ -56,7 +55,7 @@ public class ConcreteQuestionThreadServiceTest {
 	private TypedQuery<ConcreteQuestionThread> fakeQuery;
 	
 	@InjectMocks
-	ConcretePostService questionThreadService;
+	ConcretePostService postService;
 	
 	/**
 	 * Tests the 'getQuestionThread' method
@@ -64,29 +63,16 @@ public class ConcreteQuestionThreadServiceTest {
 	@Test
 	public void testGetQuestionThread() {
 		
-		// Additional mocks
+		// Test parameters
 		ConcreteQuestionThread thread = mock(ConcreteQuestionThread.class);
-		
-		// Add behavior to the mocks
-		when(fakeEntityManager.getCriteriaBuilder()).thenReturn(fakeCriteriaBuilder);
-		when(fakeEntityManager.getTransaction()).thenReturn(mock(EntityTransaction.class));
-		when(fakeCriteriaBuilder.createQuery(ConcreteQuestionThread.class)).thenReturn(fakeCriteriaQuery);
-		when(fakeCriteriaQuery.from(ConcreteQuestionThread.class)).thenReturn(fakeRoot);
-		when(fakeEntityManager.createQuery(fakeCriteriaQuery)).thenReturn(fakeQuery);
-		when(fakeQuery.getSingleResult()).thenReturn(thread);
-		
-		// Set parameters for the test and send method call
 		long id = ThreadLocalRandom.current().nextLong();
-		QuestionThread result = questionThreadService.getQuestionThread(id);
+		when(fakeEntityManager.find(ConcreteQuestionThread.class, id)).thenReturn(thread);
+
+		// Call method under test
+		QuestionThread result = postService.getQuestionThread(id);
 		
 		// Control the follow-up calls triggered
-		InOrder order = inOrder(fakeEntityManager);
-		order.verify(fakeEntityManager, times(1)).getCriteriaBuilder();
-		verify(fakeCriteriaBuilder, times(1)).createQuery(ConcreteQuestionThread.class);
-		verify(fakeCriteriaQuery, times(1)).from(ConcreteQuestionThread.class);
-		verify(fakeCriteriaQuery, times(1)).where(fakeCriteriaBuilder.equal(fakeRoot.get("ID"), id));
-		order.verify(fakeEntityManager, times(1)).createQuery(fakeCriteriaQuery);
-		verify(fakeQuery, times(1)).getSingleResult();
+		verify(fakeEntityManager, times(1)).find(ConcreteQuestionThread.class, id);
 		
 		// Control the result
 		assertSame("Wrong result received.", thread, result);
@@ -102,7 +88,7 @@ public class ConcreteQuestionThreadServiceTest {
 		QuestionThread thread = mock(QuestionThread.class);
 		
 		// Call method
-		QuestionThread result = questionThreadService.addQuestionThread(thread);
+		QuestionThread result = postService.addPost(thread);
 		
 		// Control the follow-up calls triggered
 		InOrder order = inOrder(fakeEntityManager);

@@ -1,7 +1,9 @@
 package dom.content;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.Set;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Generic post definition
@@ -9,6 +11,7 @@ import java.util.Map;
  * @author kaikoveritch
  *
  */
+@JsonDeserialize(as = ConcretePost.class)
 public interface Post {
 
 	public long getId();
@@ -19,17 +22,17 @@ public interface Post {
 
 	public LocalDateTime getCreationDate();
 
-	public Map<Long, User> getUpvoters();
+	public Set<User> getUpvoters();
 
 	public void addUpvoter(User upvoter);
 	
-	public void removeUpvoter(long id);
+	public void removeUpvoter(User upvoter);
 
-	public Map<Long, User> getDownvoters();
+	public Set<User> getDownvoters();
 
 	public void addDownvoter(User downvoter);
 	
-	public void removeDownvoter(long id);
+	public void removeDownvoter(User downvoter);
 
 	public int getScore();
 

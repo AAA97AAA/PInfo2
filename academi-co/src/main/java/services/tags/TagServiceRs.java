@@ -154,6 +154,9 @@ public class TagServiceRs {
 	@JsonView(View.TagBase.class)
 	public Response addSecondaryTag(@PathParam("id") long parentId, ConcreteSecondaryTag tag, @Context UriInfo uriInfo) {
 		MainTag parent = service.getMainTag(parentId);
+		if (parent == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
 		SecondaryTag result = service.addTag(TagFactory.createSecondaryTag(tag.getName(), parent));
 		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
 		return Response.created(location).entity(result).build();

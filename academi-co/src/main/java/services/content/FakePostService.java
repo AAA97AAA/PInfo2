@@ -10,6 +10,7 @@ import dom.content.Post;
 import dom.content.PostFactory;
 import dom.content.QuestionThread;
 import dom.content.User;
+import dom.content.Vote;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
@@ -42,10 +43,10 @@ public class FakePostService implements PostService {
 	@Override
 	public QuestionThread getQuestionThread(long id) {
 		
-		User author = userProvider.getUser(0);
+		User author = userProvider.getUser(0L);
 		
 		Tag languageTag = TagFactory.createTag("language");
-		MainTag mainTag = tagProvider.getMainTag(0);
+		MainTag mainTag = tagProvider.getMainTag(0L);
 		Map<Long, SecondaryTag> topics = mainTag.getChildren();
 		
 		QuestionThread thread = PostFactory.createQuestionThread(author, "content", "title", mainTag, languageTag, topics);
@@ -53,19 +54,21 @@ public class FakePostService implements PostService {
 		for (long i = 5; i >= 0; i--) {
 			User author2 = userProvider.getUser("commenter" + i);
 			Comment comment = PostFactory.createComment(author2, "comment" + i, thread);
-			thread.getAnswers().put(i, comment);
+			thread.getAnswers().add(comment);
 		}
+		
+		thread.addUpvoter(author);
 		
 		return thread;
 	}
 
 	@Override
-	public QuestionThread addQuestionThread(QuestionThread questionThread) {
+	public QuestionThread addPost(QuestionThread questionThread) {
 		return questionThread;
 	}
 
 	@Override
-	public Comment addComment(long questionId, Comment comment) {
+	public Comment addPost(Comment comment) {
 		return comment;
 	}
 
@@ -73,6 +76,17 @@ public class FakePostService implements PostService {
 	public Post setBan(long id, boolean banned) {
 		Post post = PostFactory.createComment(null, "content", null);
 		post.setBanned(banned);
+		return post;
+	}
+
+	@Override
+	public Post vote(long id, Vote vote) {
+		Post post = getQuestionThread(id);
+		if (vote.isUp()) {
+			post.addUpvoter(userProvider.getUser(0L));
+		} else {
+			post.addDownvoter(userProvider.getUser(0L));
+		}
 		return post;
 	}
 }

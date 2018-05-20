@@ -3,20 +3,24 @@ package dom.content;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
-import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -52,10 +56,10 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	@JsonView(View.PostBase.class)
 	private String title;
 
-	@OneToMany(targetEntity = ConcreteComment.class, mappedBy = "question")
-	@MapKeyColumn(name = "ID")
+	@OneToMany(targetEntity = ConcreteComment.class, mappedBy = "question", fetch = FetchType.EAGER)
+	@OrderBy("creationDate ASC, id ASC")
 	@JsonView(View.PostParentCentered.class)
-	private Map<Long, Comment> answers;
+	private List<Comment> answers;
 
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteMainTag.class)
@@ -66,14 +70,14 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteTag.class)
 	@JoinColumn(name = "LANGUAGE")
-	@JsonView(View.TagBase.class)
+	@JsonView(View.PostBase.class)
 	private Tag language;
 
-	@ManyToMany(targetEntity = ConcreteSecondaryTag.class)
+	@ManyToMany(targetEntity = ConcreteSecondaryTag.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "QUESTIONS_TOPICS", joinColumns = @JoinColumn(name = "QUESTION_ID"),
 		inverseJoinColumns = @JoinColumn(name = "TOPIC_ID"))
 	@MapKey(name = "id")
-	@JsonView(View.TagBase.class)
+	@JsonView(View.PostBase.class)
 	private Map<Long, SecondaryTag> topics;
 
 
@@ -81,11 +85,11 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 
 	ConcreteQuestionThread() {
 		super();
-		answers = new HashMap<Long, Comment>();
+		answers = new LinkedList<Comment>();
 	}
 
-	ConcreteQuestionThread(User author, String content, LocalDateTime creationDate, Map<Long, User> upvoters,
-			Map<Long, User> downvoters, int score, boolean isBanned, String title, Map<Long, Comment> answers,
+	ConcreteQuestionThread(User author, String content, LocalDateTime creationDate, Set<User> upvoters,
+			Set<User> downvoters, int score, boolean isBanned, String title, List<Comment> answers,
 			MainTag subject, Tag languageTag, Map<Long, SecondaryTag> topics) {
 		super(author, content, creationDate, upvoters, downvoters, score, isBanned);
 		this.title = title;
@@ -115,7 +119,7 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	
 	@Override
 	public void addAnswer(Comment answer) {
-		answers.put(answer.getId(), answer);
+		answers.add(answer);
 	}
 
 	/***** Getters/Setters *****/
@@ -130,11 +134,11 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	}
 
 	@Override
-	public Map<Long, Comment> getAnswers() {
+	public List<Comment> getAnswers() {
 		return answers;
 	}
 
-	void setAnswers(Map<Long, Comment> answers) {
+	void setAnswers(List<Comment> answers) {
 		this.answers = answers;
 	}
 
@@ -178,10 +182,11 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	public String toString() {
 		String answersText = answers.toString();
 		String topicsText = topics.toString();
-		String upvotersText = getUpvoters().toString();
-		String downvotersText = getDownvoters().toString();
+		Collector<User, ?, Map<Long, String>> collector = Collectors.toMap(User::getId, User::getUsername);
+		String upvotersText = getUpvoters().stream().collect(collector).toString();
+		String downvotersText = getDownvoters().stream().collect(collector).toString();
 		return "ConcreteQuestionThread [title=" + title + ", answers={" + answersText.substring(1, answersText.length()-1)
-				+ "}, subject=" + subject + ", language=" + language + ", topics={"
+				+ "}, subject=" + subject.getId() + ", language=" + language.getId() + ", topics={"
 				+ topicsText.substring(1, topicsText.length()-1) + "}, id=" + getId() + ", author=" + getAuthor()
 				+ ", content=" + getContent() + ", creationdate=" + getCreationDate() + ", upvoters={"
 				+ upvotersText.substring(1, upvotersText.length()-1) + "}, downvoters={"

@@ -20,7 +20,7 @@ public interface QuestionThread extends Post {
 
 	public String getTitle();
 
-	public Map<Long, Comment> getAnswers();
+	public List<Comment> getAnswers();
 
 	public MainTag getSubject();
 

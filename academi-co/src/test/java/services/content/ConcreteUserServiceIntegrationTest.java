@@ -31,7 +31,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.resteasy.spi.LoggableFailure;
-import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -70,7 +69,7 @@ import services.utility.View;
 public class ConcreteUserServiceIntegrationTest {
 	
 	@Deployment
-	static public Archive<?> deploy() {
+	static public WebArchive deploy() {
 		return ShrinkWrap.create(WebArchive.class, "test-academi-co-users.war")
 				.addClass(ConcreteUserService.class)
 				.addClass(UserService.class)
@@ -231,9 +230,11 @@ public class ConcreteUserServiceIntegrationTest {
 			e.printStackTrace();
 		}
 		Comment comment2 = PostFactory.createComment(sampleUser, "answer2", thread3);
+		QuestionThread thread4 = PostFactory.createQuestionThread(sampleUser, "content4", "title4", subject, languageTag, topics);
 		trx.begin();
 		em.persist(comment1);
 		em.persist(comment2);
+		em.persist(thread4);
 		trx.commit();
 		
 		// Group expectation
@@ -241,17 +242,29 @@ public class ConcreteUserServiceIntegrationTest {
 		expected.add(thread2);
 		expected.add(comment1);
 		expected.add(comment2);
+		expected.add(thread4);
+		
+		// Test boundaries for pagination
+		int from = 1; int length = 2;
 		
 		// Test fetching by date
 		orderPosts(expected, "byDate");
-		List<Post> result = service.getUserPosts(sampleUser.getId(), "byDate");
+		List<Post> result = service.getUserPosts(sampleUser.getId(), "byDate", 0, 0);
 		assertEquals("Wrong posts fetched.", new HashSet<Post>(expected), new HashSet<Post>(result));
 		assertEquals("Wrong order (by date).", expected, result);
+		trx.begin();
+		result = service.getUserPosts(sampleUser.getId(), "byDate", from, length);
+		assertEquals("Wrong subset fetched (by date).", expected.subList(from, from + length), result);
+		trx.commit();
 		
 		// Test fetching by score
 		orderPosts(expected, "byScore");
-		result = service.getUserPosts(sampleUser.getId(), "byScore");
+		result = service.getUserPosts(sampleUser.getId(), "byScore", 0, 0);
 		assertEquals("Wrong order (by score).", expected, result);
+		trx.begin();
+		result = service.getUserPosts(sampleUser.getId(), "byScore", from, length);
+		assertEquals("Wrong subset fetched (by score)", expected.subList(from, from + length), result);
+		trx.commit();
 	}
 	
 	private void orderPosts(List<Post> list, String order) {

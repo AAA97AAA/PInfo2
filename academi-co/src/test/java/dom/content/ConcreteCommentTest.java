@@ -7,9 +7,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -36,13 +39,13 @@ public class ConcreteCommentTest {
 		String content = "content";
 		LocalDateTime date = LocalDateTime.now();
 		long min = 1; long max = 100;
-		Map<Long, User> upvoters = new HashMap<Long, User>();
+		Set<User> upvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			upvoters.put(i, mock(ConcreteUser.class));
+			upvoters.add(mock(ConcreteUser.class));
 		}
-		Map<Long, User> downvoters = new HashMap<Long, User>();
+		Set<User> downvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			downvoters.put(i, mock(ConcreteUser.class));
+			downvoters.add(mock(ConcreteUser.class));
 		}
 		int score = 3;
 		boolean banned = false;
@@ -104,13 +107,13 @@ public class ConcreteCommentTest {
 		String content = "content";
 		LocalDateTime date = LocalDateTime.now();
 		long min = 1; long max = 100;
-		Map<Long, User> upvoters = new HashMap<Long, User>();
+		Set<User> upvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			upvoters.put(i, mock(ConcreteUser.class));
+			upvoters.add(mock(ConcreteUser.class));
 		}
-		Map<Long, User> downvoters = new HashMap<Long, User>();
+		Set<User> downvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			downvoters.put(i, mock(ConcreteUser.class));
+			downvoters.add(mock(ConcreteUser.class));
 		}
 		int score = 3;
 		boolean banned = false;
@@ -146,15 +149,19 @@ public class ConcreteCommentTest {
 		String content = "content";
 		LocalDateTime date = LocalDateTime.now();
 		long min = 1; long max = 100;
-		Map<Long, User> upvoters = new HashMap<Long, User>();
+		Set<User> upvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			upvoters.put(i, mock(ConcreteUser.class));
-			when(upvoters.get(i).toString()).thenReturn("upvoter" + i);
+			User fakeUser = mock(ConcreteUser.class);
+			when(fakeUser.getId()).thenReturn(i);
+			when(fakeUser.getUsername()).thenReturn("upvoter" + i);
+			upvoters.add(fakeUser);
 		}
-		Map<Long, User> downvoters = new HashMap<Long, User>();
+		Set<User> downvoters = new HashSet<User>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			downvoters.put(i, mock(ConcreteUser.class));
-			when(downvoters.get(i).toString()).thenReturn("downvoter" + i);
+			User fakeUser = mock(ConcreteUser.class);
+			when(fakeUser.getId()).thenReturn(i);
+			when(fakeUser.getUsername()).thenReturn("downvoter" + i);
+			downvoters.add(fakeUser);
 		}
 		int score = 3;
 		boolean banned = false;
@@ -167,9 +174,10 @@ public class ConcreteCommentTest {
 		comment.setId(id);
 		
 		// Create expected result
-		String upvotersText = upvoters.toString();
-		String downvotersText = downvoters.toString();
-		String expected = "ConcreteComment [question=" + question + ", id=" + id + ", author=" + author
+		Collector<User, ?, Map<Long, String>> collector = Collectors.toMap(User::getId, User::getUsername);
+		String upvotersText = upvoters.stream().collect(collector).toString();
+		String downvotersText = downvoters.stream().collect(collector).toString();
+		String expected = "ConcreteComment [question=" + question.getId() + ", id=" + id + ", author=" + author.getId()
 				+ ", content=" + content + ", creationDate=" + date + ", upvoters={"
 				+ upvotersText.substring(1, upvotersText.length()-1) + "}, downvoters={"
 				+ downvotersText.substring(1, downvotersText.length()-1) + "}, score=" + score

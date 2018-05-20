@@ -229,11 +229,11 @@ public class ConcreteUserTest {
 		user.setId(id);
 		
 		// Create expected result
-		String postsText = posts.toString();
-		String followedThreadsText = followedThreads.toString();
+		String postsText = posts.keySet().toString();
+		String followedThreadsText = followedThreads.keySet().toString();
 		String expected = "ConcreteUser [id=" + id + ", username=" + username + ", email=" + email + ", password="
-				+ password + ", profilePicture=" + profilePicture + ", type=" + type + ", bio=" + bio
-				+ ", canBeModerator=" + canBeModerator + ", inbox=" + inbox + ", posts={"
+				+ password + ", profilePicture=" + profilePicture.getId() + ", type=" + type + ", bio=" + bio
+				+ ", canBeModerator=" + canBeModerator + ", inbox=" + inbox.getId() + ", posts={"
 				+ postsText.substring(1, postsText.length()-1) + "}, followedThreads={"
 				+ followedThreadsText.substring(1, followedThreadsText.length()-1) + "}]";
 		

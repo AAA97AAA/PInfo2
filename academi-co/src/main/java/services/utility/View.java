@@ -40,20 +40,26 @@ public interface View {
 	// Information about the state of the post
 	public static interface PostState {}
 	
+	// Information about the post's votes
+	public static interface PostVote extends UserMinimal {};
+	
+	// Base non-discriminant data on the post
+	public static interface PostBase {};
+	
 	// Main information about the post
-	public static interface PostBase extends PostMinimal, PostState, TagBase {};
+	public static interface PostCore extends PostMinimal, PostBase, PostVote, PostState, TagBase {};
 	
 	// Information about the author
-	public static interface PostAuthor extends UserPost {};
+	public static interface PostAuthor extends UserMinimal {};
 	
 	// Data required for creating a new post
-	public static interface PostNew extends PostBase, PostAuthor, UserMinimal {};
+	public static interface PostNew extends PostBase, PostAuthor, UserMinimal, TagMinimal {};
 	
 	// Shows full parent and partial children
-	public static interface PostParentCentered extends PostBase, PostAuthor {};
+	public static interface PostParentCentered extends PostCore, PostAuthor, UserPost {};
 	
 	// Shows full child and partial parent
-	public static interface PostChildCentered extends PostBase, PostAuthor {};
+	public static interface PostChildCentered extends PostCore, PostAuthor, UserPost {};
 	
 	
 	/***** User views *****/
@@ -95,7 +101,7 @@ public interface View {
 	public static interface UserSession extends UserPost, UserType, UserSessionModifiable {};
 	
 	// Information about a user for profile pages
-	public static interface UserProfile extends UserPost, PostBase, UserProfileModifiable {};
+	public static interface UserProfile extends UserPost, PostCore, UserProfileModifiable {};
 	
 	// Information that will (normally) not be sent with the user
 	public static interface UserExcessive {};

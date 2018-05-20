@@ -48,7 +48,10 @@ public class ConcreteUserService implements UserService {
 	
 	@Override
 	public User getUser(long id) {
-		return entityManager.find(ConcreteUser.class, id);
+		User user = entityManager.find(ConcreteUser.class, id);
+		user.getPosts().size();
+		user.getFollowedThreads().size();
+		return user;
 	}
 	
 	@Override
@@ -106,7 +109,7 @@ public class ConcreteUserService implements UserService {
 	}
 
 	@Override
-	public List<Post> getUserPosts(long id, String order) {
+	public List<Post> getUserPosts(long id, String order, int from, int length) {
 		
 		// Fetch the target user and fail if it does not exist
 		User user = getUser(id);
@@ -123,7 +126,10 @@ public class ConcreteUserService implements UserService {
 		} else {
 			throw new IllegalArgumentException("Unrecognized order " + order);
 		}
-		query.setParameter("author", user);
+		query.setParameter("author", user).setFirstResult(from);
+		if (length > 0) {
+			query.setMaxResults(length);
+		}
 		return query.getResultList();
 	}
 }

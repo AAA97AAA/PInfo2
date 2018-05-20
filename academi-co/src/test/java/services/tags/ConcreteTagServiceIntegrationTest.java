@@ -19,7 +19,6 @@ import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -49,7 +48,7 @@ public class ConcreteTagServiceIntegrationTest {
 	 * @return
 	 */
 	@Deployment
-	public static Archive<?> deploy(){
+	public static WebArchive deploy(){
 		return ShrinkWrap.create(WebArchive.class, "test-academi-co-tags.war")
 				.addClass(View.class)
 				.addPackages(true, Tag.class.getPackage())
@@ -61,6 +60,7 @@ public class ConcreteTagServiceIntegrationTest {
 	
 	@PersistenceContext
 	private EntityManager em;
+	
 	@Inject
 	private UserTransaction trx;
 	
