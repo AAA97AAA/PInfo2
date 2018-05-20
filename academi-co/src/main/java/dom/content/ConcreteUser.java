@@ -68,9 +68,10 @@ public class ConcreteUser implements User, Serializable {
 	@JsonView(View.UserVisuals.class)
 	private Document profilePicture;
 	
+	@NotNull
 	@Column(name = "USER_TYPE")
 	@JsonView(View.UserType.class)
-	private int type;
+	private String type;
 	
 	@NotNull
 	@Column(name = "BIO")
@@ -108,7 +109,7 @@ public class ConcreteUser implements User, Serializable {
 	}
 
 
-	ConcreteUser(String username, String email, String password, Document profilePicture, int type, String bio,
+	ConcreteUser(String username, String email, String password, Document profilePicture, String type, String bio,
 			boolean canBeModerator, Inbox inbox, Map<Long, Post> posts, Map<Long, QuestionThread> followedThreads) {
 		this.username = username;
 		this.email = email;
@@ -193,12 +194,12 @@ public class ConcreteUser implements User, Serializable {
 	}
 
 	@Override
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
 	@Override
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -268,10 +269,11 @@ public class ConcreteUser implements User, Serializable {
 		result = prime * result + email.hashCode();
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + password.hashCode();
-		result = prime * result + type;
+		result = prime * result + type.hashCode();
 		result = prime * result + username.hashCode();
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -300,7 +302,7 @@ public class ConcreteUser implements User, Serializable {
 		if (!password.equals(other.password)) {
 			return false;
 		}
-		if (type != other.type) {
+		if (!type.equals(other.type)) {
 			return false;
 		}
 		if (!username.equals(other.username)) {
@@ -308,6 +310,7 @@ public class ConcreteUser implements User, Serializable {
 		}
 		return true;
 	}
+
 
 	@Override
 	public String toString() {

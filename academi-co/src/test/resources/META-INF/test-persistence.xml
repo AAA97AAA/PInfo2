@@ -18,6 +18,8 @@
   	<class>dom.tags.ConcreteSecondaryTag</class>
   	<class>dom.tags.ConcreteTag</class>
   	<class>dom.content.ConcreteUser</class>
+  	<class>dom.moderatorsManager.ConcreteModeratorPromotionRequest</class>
+  	<class>dom.documentsManger.ConcreteAdvertisement</class>
 
     <properties>
         <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />

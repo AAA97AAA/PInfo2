@@ -17,10 +17,10 @@ import dom.inbox.Inbox;
 public interface User {
 	
 	/***** Constants *****/
-	static public int BANNED = -1;
-	static public int REGISTERED = 0;
-	static public int MODERATOR = 1;
-	static public int ADMINISTRATOR = 2;
+	static public String BANNED = "BANNED";
+	static public String REGISTERED = "REGISTERED";
+	static public String MODERATOR = "MODERATOR";
+	static public String ADMINISTRATOR = "ADMINISTRATOR";
 
 	public long getId();
 
@@ -40,9 +40,9 @@ public interface User {
 
 	public void setProfilePicture(Document profilePicture);
 
-	public int getType();
+	public String getType();
 
-	public void setType(int type);
+	public void setType(String type);
 
 	public String getBio();
 

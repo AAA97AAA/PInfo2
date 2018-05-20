@@ -46,7 +46,7 @@ public class UserFactoryTest {
 		String username = "Patrik Brunschwick";
 		String email = "email@domain.com";
 		String password = "supersecret";
-		int type = ConcreteUser.REGISTERED;
+		String type = ConcreteUser.REGISTERED;
 		long min = 1; long max = 100;
 		Map<Long, Post> posts = new HashMap<Long, Post>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {

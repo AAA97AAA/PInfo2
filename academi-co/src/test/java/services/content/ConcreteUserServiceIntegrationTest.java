@@ -155,7 +155,7 @@ public class ConcreteUserServiceIntegrationTest {
 		String username = "mirobolous";
 		String email = "frivolous@outrageous.ous";
 		String password = "dubious";
-		int type = User.ADMINISTRATOR;
+		String type = User.ADMINISTRATOR;
 		String bio = "Scrumptious";
 		boolean canBeModerator = false;
 		Document profilePicture = DocumentFactory.createDocument("spontaneous.jpg", new byte[] {1, 2, 3});

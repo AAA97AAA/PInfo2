@@ -85,7 +85,7 @@ public class ConcreteUserServiceTest {
 		String name = "name";
 		String email = "email";
 		String password = "password";
-		int type = User.REGISTERED;
+		String type = User.REGISTERED;
 		
 		// Adding behavior
 		when(fakeUser.getUsername()).thenReturn(name);
@@ -162,7 +162,7 @@ public class ConcreteUserServiceTest {
 		order.verify(oldUser, times(1)).setBio(null);
 		order.verify(oldUser, times(1)).setCanBeModerator(any(boolean.class));
 		order.verify(oldUser, times(1)).setPassword(null);
-		order.verify(oldUser, times(1)).setType(any(int.class));
+		order.verify(oldUser, times(1)).setType(null);
 		order.verify(oldUser, times(1)).setUsername(null);
 		
 	}
