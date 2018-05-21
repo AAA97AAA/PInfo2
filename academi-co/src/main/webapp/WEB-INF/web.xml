@@ -89,16 +89,12 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
-	</security-constraint>
+	</security-constraint> -->
 
 	<security-constraint>
 		<display-name>ADMINISTRATOR Realm</display-name>
 		<web-resource-collection>
 			<web-resource-name>ADMINISTRATOR Realm</web-resource-name>
-			<url-pattern>/profilepage.html</url-pattern>
-			<url-pattern>/settingsPreferences.html</url-pattern>
-			<url-pattern>/postThreadPage.html</url-pattern>
-			<url-pattern>/moderatorspage.html</url-pattern>
 			<url-pattern>/administratorPage.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
@@ -111,7 +107,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
-	</security-constraint> -->
+	</security-constraint>
 
 	<session-config>
 		<cookie-config>
