@@ -1,11 +1,11 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<display-name>academi-co-Service-RS</display-name>
-<!--
-	<servlet>
+
+	<!-- <servlet>
 		<display-name>Academi-co JAX-RS Servlet</display-name>
 		<servlet-name>Academi-co_JAX-RS_Servlet</servlet-name>
 		<init-param>
@@ -25,7 +25,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<servlet-mapping>
 		<servlet-name>DefaultServlet</servlet-name>
 		<url-pattern>/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 
 
 	<login-config>
@@ -50,7 +50,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<role-name>ADMINISTRATOR</role-name>
 	</security-role>
 
-	<security-constraint>
+	<!-- <security-constraint>
 		<display-name>REGISTERED Realm</display-name>
 		<web-resource-collection>
 			<web-resource-name>REGISTERED Realm</web-resource-name>
@@ -111,7 +111,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
-	</security-constraint>
+	</security-constraint> -->
 
 	<session-config>
 		<cookie-config>
@@ -121,4 +121,4 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
 
-</web-app> -->
+</web-app>
