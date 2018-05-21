@@ -12,7 +12,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ ConcreteDocumentTest.class, DocumentFactoryTest.class, ConcreteAdvertisementTest.class,
-	AdvertisementPointer.class })
+	AdvertisementPointerTest.class })
 public class AllDocumentTests {
 	
 }
