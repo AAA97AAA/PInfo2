@@ -1,15 +1,3 @@
-function openNav() {
-    document.getElementById("mySidenav").style.height = "800px";
-    document.getElementById("main").style.marginTop = "800px";
-    document.getElementById("mySidenav").style.display = "block";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.height = "0px";
-    document.getElementById("main").style.marginTop= "0px";
-    document.getElementById("mySidenav").style.display = "none";
-}
-
 //Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;

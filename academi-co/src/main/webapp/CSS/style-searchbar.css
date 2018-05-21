@@ -35,13 +35,14 @@ body {
     height: 0;
     width: 100%;
     position: fixed;
-    z-index: 1;
+    /*z-index: 1;*/
     top: 5%;
     display: none;
     background-color: #314672;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
     transition: 0.5s;
     padding-top: 0px;
+
 }
 
 .sidenav a {
@@ -138,7 +139,7 @@ ul li.checked {
 /* Style the header */
 .header {
   background-color: grey;
-  padding: 30px 40px;
+  padding: 10px 60px;
   color: white;
   text-align: center;
   margin-left: -200px;
@@ -154,7 +155,7 @@ ul li.checked {
 
 /* Style the "Add" button */
 .addBtn {
-  padding: 10px;
+  padding: 5px;
   width: 25%;
   background: #d9d9d9;
   color: #555;
@@ -184,7 +185,6 @@ ul li.checked {
 }
 
 input[type="text"], textarea {
-border-radius: 7px;
-color : #333333;
-
+    border: 3px solid #d3d7cf;
+	  z-index: 1;
 }

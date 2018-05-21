@@ -7,6 +7,38 @@
 background-color: #0b78d1 ;
 }
 
+.collapsible {
+  width: auto;
+  height: auto;
+  font-size: 160%;
+  border:none;
+  display: inline-block;
+  /*display: block; /* it a filled rectangle */
+  padding: 12px 24px; /* spacing  8 16*/
+  text-align: left;
+  background-color: #0b78d1;
+  color: #fff;
+  z-index: 1;
+  overflow-x: hidden;
+  transition: 0.3s;
+     
+}
+.collapsible:hover {
+  background-color: #ccc;
+  transition: 0.3s;
+}
+.active, .collapsible:hover {
+  background-color: #ccc;
+  transition: 0.3s;
+}
+
+.searchnav {
+    padding: 0 2%;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    transition: 0.3s;
+}
 
 #searchBarHeader {
   width: auto;
@@ -18,7 +50,7 @@ background-color: #0b78d1 ;
   padding: 0px 10px; /* spacing  8 16*/
   text-align: left;
   background-color: #0b78d1;
-  color: #fff;
+  color: #3465a4;
 }
 
 /* Header buttons */
@@ -44,7 +76,6 @@ background-color: #0b78d1 ;
 .inboxButton {
   width: auto;
   transition: all .3s ease;
-  z-index:1;
 }
 
 /* this style allows to have inbox + profilepic (or signin/up) in the same line */
@@ -59,6 +90,7 @@ background-color: #0b78d1 ;
   background-color: #ccc;
   border-radius: 5px;
   position:absolute;
+  z-index:3;
 }
 
 /* styling the content of the inbox */
