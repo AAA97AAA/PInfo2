@@ -214,7 +214,7 @@ public class ConcretePostServiceIntegrationTest {
 		
 		// Create and persist a comment
 		Comment comment = PostFactory.createComment(sampleThread.getAuthor(), "answer2", sampleThread);
-		Comment result = service.addPost(comment);
+		Comment result = service.addPost(comment.getQuestion().getId(), comment);
 		
 		// Control that the correct data was input and returned
 		assertNotNull("Could not store comment.", result);

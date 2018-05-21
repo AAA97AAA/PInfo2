@@ -24,7 +24,6 @@ import dom.tags.ConcreteTag;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
-import dom.tags.TagFactory;
 import services.utility.View;
 
 /**
@@ -153,11 +152,10 @@ public class TagServiceRs {
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.TagBase.class)
 	public Response addSecondaryTag(@PathParam("id") long parentId, ConcreteSecondaryTag tag, @Context UriInfo uriInfo) {
-		MainTag parent = service.getMainTag(parentId);
-		if (parent == null) {
+		SecondaryTag result = service.addTag(parentId, tag);
+		if (result == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
-		SecondaryTag result = service.addTag(TagFactory.createSecondaryTag(tag.getName(), parent));
 		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
 		return Response.created(location).entity(result).build();
 	}

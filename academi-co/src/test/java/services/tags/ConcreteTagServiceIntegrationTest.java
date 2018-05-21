@@ -134,7 +134,7 @@ public class ConcreteTagServiceIntegrationTest {
 		MainTag subject = service.addTag(TagFactory.createMainTag("parent"));
 		
 		// Create a topic linked to the parent and store it
-		SecondaryTag topic = service.addTag(TagFactory.createSecondaryTag("huhu", subject));
+		SecondaryTag topic = service.addTag(subject.getId(), TagFactory.createSecondaryTag("huhu", subject));
 		
 		// Fetch an entity with the same id
 		SecondaryTag output = service.getSecondaryTag(topic.getId());

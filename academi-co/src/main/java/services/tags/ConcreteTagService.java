@@ -13,6 +13,7 @@ import dom.tags.ConcreteTag;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
+import dom.tags.TagFactory;
 
 @Default
 @Stateless
@@ -57,9 +58,20 @@ public class ConcreteTagService implements TagService {
 	}
 
 	@Override
-	public SecondaryTag addTag(SecondaryTag tag) {
-		entityManager.persist(tag);
-		return tag;
+	public SecondaryTag addTag(long id, SecondaryTag tag) {
+		
+		// Fetch and detach parent (if exists)
+		MainTag parent = getMainTag(id);
+		if (parent == null) {
+			return null;
+		}
+		entityManager.detach(parent);
+		
+		// Create and store new dependency
+		SecondaryTag entity = TagFactory.createSecondaryTag(tag.getName(), parent);
+		entityManager.persist(entity);
+		
+		return entity;
 	}
 
 }

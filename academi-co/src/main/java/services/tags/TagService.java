@@ -30,5 +30,5 @@ public interface TagService  extends Serializable {
 	
 	public MainTag addTag(MainTag tag);
 	
-	public SecondaryTag addTag(SecondaryTag tag);
+	public SecondaryTag addTag(long parentId, SecondaryTag tag);
 }

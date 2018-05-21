@@ -1,7 +1,11 @@
 package services.content;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -10,9 +14,14 @@ import dom.content.ConcretePost;
 import dom.content.ConcreteQuestionThread;
 import dom.content.ConcreteUser;
 import dom.content.Post;
+import dom.content.PostFactory;
 import dom.content.QuestionThread;
 import dom.content.User;
 import dom.content.Vote;
+import dom.tags.MainTag;
+import dom.tags.SecondaryTag;
+import dom.tags.Tag;
+import services.tags.TagService;
 
 /**
  * 
@@ -36,6 +45,12 @@ public class ConcretePostService implements PostService {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Inject
+	UserService userService;
+	
+	@Inject
+	TagService tagService;
 
 	
 	/********************* Services **********************/
@@ -50,14 +65,52 @@ public class ConcretePostService implements PostService {
 	
 	@Override
 	public QuestionThread addPost(QuestionThread questionThread) {
-		entityManager.persist(questionThread);
-		return questionThread;
+		
+		// Fetch (and detach) the thread's attributes
+		User author = userService.getUser(questionThread.getAuthor().getId());
+		MainTag subject = tagService.getMainTag(questionThread.getSubject().getId());
+		Tag language = tagService.getLanguageTag(questionThread.getLanguage().getId());
+		entityManager.detach(author);
+		entityManager.detach(subject);
+		entityManager.detach(language);
+		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>(subject.getChildren());
+		topics.keySet().retainAll(questionThread.getTopics().keySet());
+		
+		// Control attributes' existence and validity
+		if (author == null || subject == null || language == null) {
+			return null;
+		}
+		if (topics.size() < questionThread.getTopics().size()) {
+			throw new IllegalArgumentException("Wrong topics for the given subject"); // topics were wrong => semantic error
+		}
+		
+		// Generate full entity to be stored
+		QuestionThread entity = PostFactory.createQuestionThread(author, questionThread.getContent(),
+						questionThread.getTitle(), subject, language, topics);
+		
+		// Store and return
+		entityManager.persist(entity);
+		return entity;
 	}
 
 	@Override
-	public Comment addPost(Comment comment) {
-		entityManager.persist(comment);
-		return comment;
+	public Comment addPost(long parentId, Comment comment) {
+		
+		// Try to fetch the parent thread
+		QuestionThread thread = getQuestionThread(parentId);
+		User author = userService.getUser(comment.getAuthor().getId());
+		if (thread == null || author == null) {
+			return null;
+		}
+		entityManager.detach(thread);
+		entityManager.detach(thread);
+		
+		// Construct the full entity
+		Comment entity = PostFactory.createComment(author, comment.getContent(), thread);
+		
+		// Store and return
+		entityManager.persist(entity);
+		return entity;
 	}
 
 	@Override

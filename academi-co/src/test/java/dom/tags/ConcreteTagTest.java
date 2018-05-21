@@ -105,8 +105,5 @@ public class ConcreteTagTest {
 		// Create expected result
 		String expected = "ConcreteTag [id=" + id + ", name=" + name + "]";
 		assertEquals("Incorrect conversion to string.", expected, tag.toString());
-		
 	}
-	
-
 }

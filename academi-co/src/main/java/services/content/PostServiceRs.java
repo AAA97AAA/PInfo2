@@ -1,8 +1,6 @@
 package services.content;
 
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -22,14 +20,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import dom.content.Comment;
 import dom.content.Post;
-import dom.content.PostFactory;
 import dom.content.QuestionThread;
-import dom.content.User;
 import dom.content.Vote;
-import dom.tags.MainTag;
-import dom.tags.SecondaryTag;
-import dom.tags.Tag;
-import services.tags.TagService;
 import services.utility.View;
 
 /**
@@ -46,11 +38,6 @@ public class PostServiceRs {
 	@Inject
 	private PostService postService;
 	
-	@Inject
-	private UserService userService;
-	
-	@Inject
-	private TagService tagService;
 	
 	/**
 	 * Get question thread by ID
@@ -82,29 +69,15 @@ public class PostServiceRs {
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.PostNew.class)
 	public Response addQuestionThread(QuestionThread questionThread, @Context UriInfo uriInfo) {
-		
-		// Fetch the thread's attributes
-		User author = userService.getUser(questionThread.getAuthor().getId());
-		MainTag subject = tagService.getMainTag(questionThread.getSubject().getId());
-		Tag language = tagService.getLanguageTag(questionThread.getLanguage().getId());
-		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>(subject.getChildren());
-		topics.keySet().retainAll(questionThread.getTopics().keySet());
-		System.out.println(subject);
-		
-		// Control attributes' existence and validity
-		if (author == null || subject == null || language == null) {
-			return Response.status(Status.NOT_FOUND).build();
+		QuestionThread result;
+		try {
+			result = postService.addPost(questionThread);
+		} catch (IllegalArgumentException e) {
+			return Response.status(422).build(); // Illegal topics for given subject
 		}
-		if (topics.size() < questionThread.getTopics().size()) {
-			return Response.status(422).build(); // topics were wrong => semantic error
+		if (result == null) {
+			return Response.status(Status.NOT_FOUND).build(); // Parent not found
 		}
-		
-		// Build and store thread
-		QuestionThread result = postService.addPost(
-				PostFactory.createQuestionThread(author, questionThread.getContent(),
-						questionThread.getTitle(), subject, language, topics));
-		
-		// Respond
 		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
 		return Response.created(location).entity(result).build();
 	}
@@ -123,18 +96,10 @@ public class PostServiceRs {
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.PostNew.class)
 	public Response addComment(@PathParam("id") long threadId, Comment comment, @Context UriInfo uriInfo) {
-		
-		// Try to fetch the parent thread
-		QuestionThread thread = postService.getQuestionThread(threadId);
-		User author = userService.getUser(comment.getAuthor().getId());
-		if (thread == null || author == null) {
+		Comment result = postService.addPost(threadId, comment);
+		if (result == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
-		
-		// Build and store comment
-		Comment result = postService.addPost(PostFactory.createComment(author, comment.getContent(), thread));
-		
-		// Respond
 		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
 		return Response.created(location).entity(result).build();
 	}

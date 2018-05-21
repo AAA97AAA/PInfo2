@@ -23,7 +23,7 @@ public interface PostService extends Serializable {
 	
 	public QuestionThread addPost(QuestionThread questionThread);
 	
-	public Comment addPost(Comment comment);
+	public Comment addPost(long parentId, Comment comment);
 	
 	public Post setBan(long id, boolean banned);
 	

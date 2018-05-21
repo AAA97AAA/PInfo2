@@ -45,4 +45,10 @@ public class DocumentFactory {
 		target.setName(newDocument.getName());
 		target.setData(newDocument.getData());
 	}
+	
+	static public Advertisement createAdvertisement(String horizontalName, byte[] horizontalData,
+			String verticalName, byte[] verticalData) {
+		return new ConcreteAdvertisement(createDocument(horizontalName, horizontalData),
+				createDocument(verticalName, verticalData));
+	}
 }

@@ -19,6 +19,8 @@
   	<class>dom.tags.ConcreteTag</class>
   	<class>dom.content.ConcreteUser</class>
   	<class>dom.moderatorsManager.ConcreteModeratorPromotionRequest</class>
+  	<class>dom.documentsManager.AdvertisementPointer</class>
+  	<class>dom.documentsManager.ConcreteAdvertisement</class>
 
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

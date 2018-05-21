@@ -69,7 +69,7 @@ public class FakeTagService implements TagService {
 	}
 
 	@Override
-	public SecondaryTag addTag(SecondaryTag tag) {
+	public SecondaryTag addTag(long parentId, SecondaryTag tag) {
 		return tag;
 	}
 

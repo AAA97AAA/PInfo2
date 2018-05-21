@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -21,6 +22,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "ADVERTISEMENTS")
+@NamedQuery(name = "Advertisement.fetchAll", query = "SELECT a FROM ConcreteAdvertisement a ORDER BY a.id ASC")
 public class ConcreteAdvertisement implements Advertisement, Serializable {
 
 	// Serial version (auto-generated)
@@ -44,9 +46,9 @@ public class ConcreteAdvertisement implements Advertisement, Serializable {
 	
 	/***** Constructors *****/
 	
-	public ConcreteAdvertisement() {}
+	ConcreteAdvertisement() {}
 
-	public ConcreteAdvertisement(Document horizontalImage, Document verticalImage) {
+	ConcreteAdvertisement(Document horizontalImage, Document verticalImage) {
 		this.horizontalImage = horizontalImage;
 		this.verticalImage = verticalImage;
 	}
@@ -54,27 +56,30 @@ public class ConcreteAdvertisement implements Advertisement, Serializable {
 	
 	/***** Getters/Setters *****/
 
+	@Override
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	void setId(long id) {
 		this.id = id;
 	}
 
+	@Override
 	public Document getHorizontalImage() {
 		return horizontalImage;
 	}
 
-	public void setHorizontalImage(Document horizontalImage) {
+	void setHorizontalImage(Document horizontalImage) {
 		this.horizontalImage = horizontalImage;
 	}
 
+	@Override
 	public Document getVerticalImage() {
 		return verticalImage;
 	}
 
-	public void setVerticalImage(Document verticalImage) {
+	void setVerticalImage(Document verticalImage) {
 		this.verticalImage = verticalImage;
 	}
 	

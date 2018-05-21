@@ -68,7 +68,7 @@ public class FakePostService implements PostService {
 	}
 
 	@Override
-	public Comment addPost(Comment comment) {
+	public Comment addPost(long parentId, Comment comment) {
 		return comment;
 	}
 

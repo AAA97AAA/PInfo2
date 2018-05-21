@@ -48,8 +48,6 @@ public class TagFactoryTest {
 		
 		// Verify that the expected object was obtained
 		assertEquals("Object wrongly instantiated.", tag, new ConcreteMainTag(name, new HashMap<Long, SecondaryTag>()));
-	
-		
 	}
 
 	@Test
@@ -63,8 +61,6 @@ public class TagFactoryTest {
 		
 		// Verify that the expected object was obtained
 		assertEquals("Object wrongly instantiated.", tag, new ConcreteSecondaryTag(name, parent));
-	
-		
 	}
 
 }

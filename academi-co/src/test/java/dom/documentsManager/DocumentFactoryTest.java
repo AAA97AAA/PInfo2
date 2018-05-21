@@ -9,7 +9,6 @@ import static org.mockito.Mockito.verify;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Random;
 
 import org.junit.Test;
 
@@ -37,9 +36,7 @@ public class DocumentFactoryTest {
 		
 		// Setup data to be put in the entity
 		String name = "Name";
-		int size = 128 * 128;
-		byte[] data = new byte[size];
-		new Random().nextBytes(data);
+		byte[] data = new byte[] {43, -2, 100, -42};
 		
 		// Call the construction method
 		ConcreteDocument document = (ConcreteDocument) DocumentFactory.createDocument(name, data);
@@ -65,15 +62,12 @@ public class DocumentFactoryTest {
 	/**
 	 * Tests the call for copying a file into a document
 	 */
-	
 	@Test
 	public void testLoadDocument() throws IOException  {
 		
 		// Create expected result
 		String name = "testLoadDocument.png";
-		int size = 128 * 128;
-		byte[] data = new byte[size];
-		new Random().nextBytes(data);
+		byte[] data = new byte[] {120, -22, -1, 0, -97};
 		
 		// Create file
 		String targetPath = "./" + name;
@@ -94,4 +88,24 @@ public class DocumentFactoryTest {
 		file.delete();
 	}
 	
+	/**
+	 * Test the instantiation of an advertisement banner
+	 */
+	@Test
+	public void testCreateAdvertisement() {
+		
+		// Setup data to be put in the entity
+		String nameh = "horizontal.png";
+		byte[] datah = new byte[] {43, -2, 100, -42};
+		String namev = "vertical.png";
+		byte[] datav = new byte[] {3, 22, -111, -2};
+		
+		// Call the construction method
+		Advertisement ad = DocumentFactory.createAdvertisement(nameh, datah, namev, datav);
+		
+		// Verify that the expected object was obtained
+		assertEquals("Advertisement wrongly instantiated.",
+				new ConcreteAdvertisement(new ConcreteDocument(nameh, datah),
+						new ConcreteDocument(namev, datav)), ad);
+	}
 }

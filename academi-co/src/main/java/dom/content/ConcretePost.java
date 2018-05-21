@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -78,14 +79,14 @@ public class ConcretePost implements Post, Serializable {
 	@JsonView(View.PostBase.class)
 	private LocalDateTime creationDate;
 	
-	@ManyToMany(targetEntity = ConcreteUser.class)
+	@ManyToMany(targetEntity = ConcreteUser.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "UPVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
 		inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	@JsonView(View.PostVote.class)
 	@JsonSerialize(using = VotersMarshaller.class)
 	private Set<User> upvoters;
 	
-	@ManyToMany(targetEntity = ConcreteUser.class)
+	@ManyToMany(targetEntity = ConcreteUser.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "DOWNVOTERS", joinColumns = @JoinColumn(name = "POST_ID"),
 		inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	@JsonView(View.PostVote.class)
