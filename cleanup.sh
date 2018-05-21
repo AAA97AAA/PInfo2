@@ -40,6 +40,9 @@ fi
 if [[ -e /tmp/docker-deploy/academi-co.war.failed ]]; then
     rm -f /tmp/docker-deploy/academi-co.war.failed
 fi
+if [[ -e /tmp/docker-deploy/academi-co.war.undeployed ]]; then
+    rm -f /tmp/docker-deploy/academi-co.war.undeployed
+fi
 if [[ -e /tmp/docker-deploy/academi-co.war.deployed ]]; then
     rm -f /tmp/docker-deploy/academi-co.war.deployed
 fi

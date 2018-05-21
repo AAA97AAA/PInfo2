@@ -10,5 +10,5 @@ fi
 printf "\n ---------------- Launch AppServer container ---------------- \n\n"
 
 if [[ "$(docker ps -f "name=$3" --format '{{.Names}}')" == "" ]]; then
-	docker run --ip="172.18.0.2" --net=$1 --link $4:db -p 8080:8080 -p 9990:9990 -p 8787:8787 -v "/tmp/docker-deploy:/opt/jboss/wildfly/standalone/deployments/:rw" --name=$3 -d $2
+	docker run --ip="172.18.0.2" --net=$1 --link $4:db -p 8080:8080  -p 8443:8443 -p 8787:8787 -p 9990:9990 -v "/tmp/docker-deploy:/opt/jboss/wildfly/standalone/deployments/:rw" --name=$3 -d $2
 fi

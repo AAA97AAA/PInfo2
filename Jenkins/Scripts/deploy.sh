@@ -9,6 +9,9 @@ fi
 if [[ -e $1/academi-co.war.failed ]]; then
     rm -f $1/academi-co.war.failed
 fi
+if [[ -e $1/academi-co.war.undeployed ]]; then
+    rm -f $1/academi-co.war.undeployed
+fi
 if [[ -e $1/academi-co.war.deployed ]]; then
     rm -f $1/academi-co.war.deployed
 fi

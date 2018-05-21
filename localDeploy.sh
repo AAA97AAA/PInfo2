@@ -34,8 +34,15 @@ if [ !"$(docker network ls -q -f name=$ACADEMI_CO_NETWORK)" ]; then
 fi
 
 # Launch the containers
-./Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh \
-    $IMAGE_APPSERVER_IT $DOCKER_APPSERVER_IT
+if [[ -n $1 ]]; then
+   if [[ $1 != "--skipTests" ]]; then
+       ./Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh \
+           $IMAGE_APPSERVER_IT $DOCKER_APPSERVER_IT
+   fi
+else
+    ./Jenkins/Scripts/AppserverIntegrationTests/runAppServerTests.sh \
+        $IMAGE_APPSERVER_IT $DOCKER_APPSERVER_IT
+fi
 ./Jenkins/Scripts/Database/runDatabase.sh \
     $ACADEMI_CO_NETWORK $IMAGE_DB $DOCKER_DB
 ./Jenkins/Scripts/Appserver/runAppServer.sh \
@@ -59,11 +66,17 @@ mvn -B -DskipTests -f academi-co/pom.xml clean package
 
 printf "\n ---------------- Launch Tests ---------------- \n\n"
 
-mvn -f academi-co/pom.xml test
+if [[ -n $1 ]]; then
+   if [[ $1 != "--skipTests" ]]; then
+       mvn -f academi-co/pom.xml test
+   fi
+else
+    mvn -f academi-co/pom.xml test
+fi
 
 # Kill all test containers if required
 if [[ -n $1 ]]; then
-   if [[ $1 != "--no-kill" ]]; then
+   if [[ $1 != "--no-kill" || $1 != "--skipTests" ]]; then
       ./Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh $DOCKER_APPSERVER_IT
    fi
 else
