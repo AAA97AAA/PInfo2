@@ -29,8 +29,8 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
 
 	<login-config>
-		<realm-name>academi-co-realm</realm-name>
 		<auth-method>BASIC</auth-method>
+		<realm-name>academi-co-realm</realm-name>
 		<form-login-config>
 			<form-login-page>/nope.html</form-login-page>
 			<form-error-page>/nope.html</form-error-page>
