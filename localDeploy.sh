@@ -45,20 +45,25 @@ else
 fi
 ./Jenkins/Scripts/Database/runDatabase.sh \
     $ACADEMI_CO_NETWORK $IMAGE_DB $DOCKER_DB
+
+if [[ -n $1 ]]; then
+   if [[ $1 == "--skipTests" ]]; then
+      # Wait for database to be running
+      IT_DB_BUILDING=false
+      while ! docker exec -it $DOCKER_DB mysql -u root -padmin -e "USE ACADEMI_CO_DB" ; do
+         echo "Waiting for database..."
+         IT_DB_BUILDING=true
+         sleep 5
+      done
+      if [[ $IT_DB_BUILDING == true ]]; then
+         echo "Building tables..."
+         sleep 40
+      fi
+   fi
+fi;
+
 ./Jenkins/Scripts/Appserver/runAppServer.sh \
     $ACADEMI_CO_NETWORK $IMAGE_APPSERVER $DOCKER_APPSERVER $DOCKER_DB
-
-# # Wait for database to be running
-# IT_DB_BUILDING=false
-# while ! docker exec -it $5 mysql -u root -padmin -e "USE ACADEMI_CO_DB" ; do
-#    printf "Waiting for test database...\n"
-#    IT_DB_BUILDING=true
-#    sleep 5
-# done
-# if [[ $IT_DB_BUILDING == true ]]; then
-#    printf "Building tables...\n"
-#    sleep 40
-# fi
 
 printf "\n ---------------- Build Maven project ---------------- \n\n"
 
@@ -76,7 +81,7 @@ fi
 
 # Kill all test containers if required
 if [[ -n $1 ]]; then
-   if [[ $1 != "--no-kill" || $1 != "--skipTests" ]]; then
+   if [[ $1 != "--no-kill" && $1 != "--skipTests" ]]; then
       ./Jenkins/Scripts/AppserverIntegrationTests/killAppServerTests.sh $DOCKER_APPSERVER_IT
    fi
 else
