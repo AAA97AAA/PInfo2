@@ -1,0 +1,27 @@
+/* Homepage stylesheet */
+/* Divisions */
+div.logoHomePage {
+    text-align: center;
+}
+
+div.advertisementHome {
+    text-align: center;
+}
+
+/* Images */
+#logoHome {
+    display: block;
+    max-width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+#topAdHome {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 200px;
+}
+  

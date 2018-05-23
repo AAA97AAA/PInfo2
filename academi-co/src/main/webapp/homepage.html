@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+<head>
+    <!-- Title of the page -->
+    <!-- TODO: add a title for the page -->
+    <title>HomePage - Academi-co</title>
+
+    <!-- Useful scripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-resource.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/ng-grid.min.js"></script>
+
+
+    <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
+    <!--<link rel="stylesheet" href="CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="CSS/ng-grid.min.css" />
+    -->
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Our stylesheet -->
+    <link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-resize.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-searchbar.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-homepage.css"/>
+
+    <!-- Our Scripts TODO: add your personal js here -->
+    <!--<script src="script/person.js"></script> -->
+    <script src="js/modules/allModules.js"></script>
+    <script src="js/modules/getRESTCall.js"></script>
+    <script src="js/controllers/script-searchbar.js"></script>
+    <script src="js/controllers/script-signInUp.js"></script>
+
+    <!-- To have correct caracters for accented letters for example -->
+    <meta charset="UTF-8">
+
+    <!-- This is for the Responsive Website -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<!-- Body -->
+<body class="body" ng-app="academi-co">  
+
+    <!-- Header at the top of browser window -->
+    <header class='mainheader' ng-include="'header.html'"></header>
+     
+    <div class="logoHomePage">
+        <img id="logoHome" src="images/logo2.png"  alt="Logo">
+    </div>
+    <br>
+    <br>
+    <div class="advertisementHome">
+        <!-- Change id to class="topAd" if we ever "clean" styles from html -->
+        <img id="topAdHome" src="images/forgoodui.jpg" alt="Advertisement">
+    </div>
+
+
+
+    <!-- Footer at the bottom of browser window -->
+    <footer class="footer" ng-include="'footer.html'"></footer>
+        
+</body>
+</html>

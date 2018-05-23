@@ -1,0 +1,36 @@
+/* Stylesheet for login page */
+/* Full-width inputs */
+input[type=logintext], input[type=password], input[type=confirmpasswd] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 5px solid #ffffff;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+#submitButton {
+    background-color: #2392e8;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+/* Add a hover effect for buttons */
+#submitButton:hover {
+    opacity: 0.8;
+}
+
+/* Add padding to containers */
+div.logincontainer {
+    background: #549bd1a4;
+    border-radius: 25px;
+    width: 20%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px;
+}
