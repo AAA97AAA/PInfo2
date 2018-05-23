@@ -40,13 +40,26 @@
     
     <!-- Advanced Research -->
     <div id="advancedResearchContent" class="searchnav w3-theme-d5">
+        <span style="position:absolute; left:35%; width:200px; top:100px;">Keywords</span><br><input type="text" id="keyword" style="position:absolute; left:42%; width:200px; top:100px;"></input>
         <span style="position:absolute; left:49%; width:200px; top:180px;">From date</span><br><input type="text" id="dateBegin" style="position:absolute; left:57%; width:200px; top:180px;"></input>
-        <span style="position:absolute; left:75%; width:200px; top:180px;">To date</span><br><input type="text" id="dateBegin" style="position:absolute; left:80%; width:200px; top:180px;"></input>
-        <span style="position:absolute; left:50%; width:200px; top:280px;">Author</span><br><input type="text" id="dateBegin" style="position:absolute; left:57%; width:200px; top:280px;"></input>
+        <span style="position:absolute; left:75%; width:200px; top:180px;">To date</span><br><input type="text" id="dateEnd" style="position:absolute; left:80%; width:200px; top:180px;"></input>
+        <span style="position:absolute; left:50%; width:200px; top:280px;">Author</span><br><input type="text" id="author" style="position:absolute; left:57%; width:200px; top:280px;"></input>
         <input type="submit" value="Submit" id="popUpYes" style="border-radius: 5px; position: absolute; top: 280px; left:80%; width: 200px; height:40px; hover:gray;"></input>
         <div id="myDIV" class="header" style="background-color: #1f2c47; height:80px;  width: 510px; margin-left:7%;">
             <h5 style="margin:0px">Primary tag</h5>
-            <input type="text" id="myInput1" placeholder="" style="z-index:1"></input>
+<select id="primarytag">
+<!--   <select id="primarytag"> -->
+    <option value="0">Select primarytag:</option>
+    <option value="Mathematics">Mathematics</option>
+    <option value="Physics">Physics</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Biology">Biology</option>
+    <option value="Philosophy">Philosophy</option>
+    <option value="History">History</option>
+    <option value="Geography">Geography</option>
+  </select>    
+
+<!--             <input type="text" id="myInput1" placeholder="" style="z-index:1"></input> -->
             <span onclick="newElement1()" class="addBtn" style="border-radius: 0px; height:30px">Add</span>
         </div>
         <ul id="myUL1" style="width: 510px; margin-left:7%;">
@@ -54,7 +67,17 @@
         <br><br>
         <div id="myDIV" class="header"  style="background-color: #263659; height:80px;  width: 510px; margin-left:7%;">
             <h5 style="margin:0px">Secondary tags</h5>
-            <input type="text" id="myInput2" placeholder="">
+  <select id="secondarytag">
+    <option value="0">Select primarytag:</option>
+    <option value="Mathematics">Mathematics</option>
+    <option value="Physics">Physics</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Biology">Biology</option>
+    <option value="Philosophy">Philosophy</option>
+    <option value="History">History</option>
+    <option value="Geography">Geography</option>
+  </select> 
+<!--             <input type="text" id="myInput2" placeholder=""> -->
             <span onclick="newElement2()" class="addBtn" style="border-radius: 0px; height:30px">Add</span>
         </div>
         <ul id="myUL2" style="width: 510px; margin-left:7%;">

@@ -24,15 +24,15 @@ close[i].onclick = function() {
 //Create a new list item when clicking on the "Add" button
 function newElementPTP1() {
 var li = document.createElement("li");
-var inputValue = document.getElementById("myInputPTP1").value;
+var inputValue = document.getElementById("primarytagPTP").value; 
 var t = document.createTextNode(inputValue);
 li.appendChild(t);
 if (inputValue === '') {
-alert("You must write something!");
+alert("You must select something!");
 } else {
 document.getElementById("myULPTP1").appendChild(li);
 }
-document.getElementById("myInputPTP1").value = "";
+document.getElementById("primarytagPTP").value = "";
 
 var span = document.createElement("SPAN");
 var txt = document.createTextNode("\u00D7");
@@ -50,15 +50,15 @@ close[i].onclick = function() {
 
 function newElementPTP2() {
 	  var li = document.createElement("li");
-	  var inputValue = document.getElementById("myInputPTP2").value;
+	  var inputValue = document.getElementById("secondarytagPTP").value; 
 	  var t = document.createTextNode(inputValue);
 	  li.appendChild(t);
 	  if (inputValue === '') {
-	    alert("You must write something!");
+	    alert("You must select something!");
 	  } else {
 	    document.getElementById("myULPTP2").appendChild(li);
 	  }
-	  document.getElementById("myInputPTP2").value = "";
+	  document.getElementById("secondarytagPTP").value = "";
 
 	  var span = document.createElement("SPAN");
 	  var txt = document.createTextNode("\u00D7");
