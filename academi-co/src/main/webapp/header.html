@@ -39,7 +39,7 @@
     <!--  <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">-->
     
     <!-- Advanced Research -->
-    <div class="searchnav w3-theme-d5">
+    <div id="advancedResearchContent" class="searchnav w3-theme-d5">
         <span style="position:absolute; left:49%; width:200px; top:180px;">From date</span><br><input type="text" id="dateBegin" style="position:absolute; left:57%; width:200px; top:180px;"></input>
         <span style="position:absolute; left:75%; width:200px; top:180px;">To date</span><br><input type="text" id="dateBegin" style="position:absolute; left:80%; width:200px; top:180px;"></input>
         <span style="position:absolute; left:50%; width:200px; top:280px;">Author</span><br><input type="text" id="dateBegin" style="position:absolute; left:57%; width:200px; top:280px;"></input>
@@ -68,7 +68,8 @@ var i;
 for (i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
         this.classList.toggle("active");
-        var content = this.nextElementSibling;
+        var content = document.getElementById("advancedResearchContent");
+        // var content = this.nextElementSibling;
         if (content.style.display === "block") {
             content.style.display = "none";
         } else {
