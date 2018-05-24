@@ -70,8 +70,22 @@ function newElement2() {
 	      div.style.display = "none";
 	    }
 	  }
+}
+
+
+function showAdvancedSearch() {
+
+	var researchBar = document.getElementById("advancedResearchContent");
+	
+
+	if(researchBar.style.display == "none") {
+		researchBar.style.display = "block";
+		
+	} else {
+		researchBar.style.display = "none";
 	}
 
+}
 
 
 

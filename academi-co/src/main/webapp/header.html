@@ -13,7 +13,7 @@
       <a href="#" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></a>
       <input type="text" placeholder="Search..." name="search"></input>
       <button type="submit" style="background-color: white; border-radius: 0px;"><i class="fa fa-search"></i></button>
-      <button class="collapsible" style="font-size:23px;cursor:pointer; color:white;">&#9660;</button>
+      <button class="collapsible" style="font-size:23px;cursor:pointer; color:white;" onclick="showAdvancedSearch()">&#9660;</button>
    </div>
    <!-- Search Button -->
    
@@ -39,17 +39,18 @@
     <!--  <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">-->
     
     <!-- Advanced Research -->
-    <div id="advancedResearchContent" class="searchnav w3-theme-d5">
+    <div id="advancedResearchContent" class="searchnav w3-theme-d5" style="display:none">
         <span style="position:absolute; left:35%; width:200px; top:100px;">Keywords</span><br><input type="text" id="keyword" style="position:absolute; left:42%; width:200px; top:100px;"></input>
         <span style="position:absolute; left:49%; width:200px; top:180px;">From date</span><br><input type="text" id="dateBegin" style="position:absolute; left:57%; width:200px; top:180px;"></input>
         <span style="position:absolute; left:75%; width:200px; top:180px;">To date</span><br><input type="text" id="dateEnd" style="position:absolute; left:80%; width:200px; top:180px;"></input>
         <span style="position:absolute; left:50%; width:200px; top:280px;">Author</span><br><input type="text" id="author" style="position:absolute; left:57%; width:200px; top:280px;"></input>
-        <input type="submit" value="Submit" id="popUpYes" style="border-radius: 5px; position: absolute; top: 280px; left:80%; width: 200px; height:40px; hover:gray;"></input>
+        <input type="submit" value="Submit" id="popUpYes" style="border-radius: 5px; position: absolute; top: 280px; left:80%; width: 200px; height:40px;"></input>
         <div id="myDIV" class="header" style="background-color: #1f2c47; height:80px;  width: 510px; margin-left:7%;">
             <h5 style="margin:0px">Primary tag</h5>
+            
 <select id="primarytag">
 <!--   <select id="primarytag"> -->
-    <option value="0">Select primarytag:</option>
+    <option selected disabled>Select primarytag:</option>
     <option value="Mathematics">Mathematics</option>
     <option value="Physics">Physics</option>
     <option value="Chemistry">Chemistry</option>
@@ -68,7 +69,7 @@
         <div id="myDIV" class="header"  style="background-color: #263659; height:80px;  width: 510px; margin-left:7%;">
             <h5 style="margin:0px">Secondary tags</h5>
   <select id="secondarytag">
-    <option value="0">Select primarytag:</option>
+    <option selected disabled>Select primarytag:</option>
     <option value="Mathematics">Mathematics</option>
     <option value="Physics">Physics</option>
     <option value="Chemistry">Chemistry</option>
@@ -85,20 +86,4 @@
         <br><br> 
     </div>
 </div>
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
-for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = document.getElementById("advancedResearchContent");
-        // var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
-    });
-}
-</script>
 <!-- ENDING OF SLIDE-NAVIGATION SEARCH -->
