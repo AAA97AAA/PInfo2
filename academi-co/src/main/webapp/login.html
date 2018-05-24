@@ -70,20 +70,34 @@
     </div>
 
     <!-- Login Form -->
-    <div class="logincontainer">
-        <br>
-        <label for="uname"><b>Username</b></label>
-        <input type="logintext" placeholder="Enter Username" name="uname" required>
-        <br>
-        <br>
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-        <br>
-        <br>
-        <br>
-        <button id="submitButton" type="submit">Login</button>
-        <br>
-    </div>
+<!--     <div class="logincontainer"> -->
+<!--         <br> -->
+<!--         <label for="uname"><b>Username</b></label> -->
+<!--         <input type="logintext" placeholder="Enter Username" name="uname" required> -->
+<!--         <br> -->
+<!--         <br> -->
+<!--         <label for="psw"><b>Password</b></label> -->
+<!--         <input type="password" placeholder="Enter Password" name="psw" required> -->
+<!--         <br> -->
+<!--         <br> -->
+<!--         <br> -->
+<!--         <button id="submitButton" type="submit">Login</button> -->
+<!--         <br> -->
+<!--     </div> -->
+<form method=post action="j_security_check" >
+    <input type="text"  name= "j_username" >
+    <input type="password"  name= "j_password" >
+</form>    
+   
+<form action="j_security_check" method=post>
+    <p><strong>Please Enter Your User Name: </strong>
+    <input type="text" name="j_username" size="25">
+    <p><p><strong>Please Enter Your Password: </strong>
+    <input type="password" size="15" name="j_password">
+    <p><p>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+</form>
 
     <!-- Footer at the bottom of browser window -->
     <footer class="footer" ng-include="'footer.html'"></footer>
