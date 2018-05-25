@@ -1,7 +1,7 @@
 package services.content;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -73,8 +73,9 @@ public class ConcretePostService implements PostService {
 		entityManager.detach(author);
 		entityManager.detach(subject);
 		entityManager.detach(language);
-		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>(subject.getChildren());
-		topics.keySet().retainAll(questionThread.getTopics().keySet());
+		Set<SecondaryTag> topics = new HashSet<SecondaryTag>(subject.getChildren());
+		topics.retainAll(questionThread.getTopics());
+//		topics.keySet().retainAll(questionThread.getTopics().stream().map(t -> t.getId()).collect(Collectors.toSet()));
 		
 		// Control attributes' existence and validity
 		if (author == null || subject == null || language == null) {

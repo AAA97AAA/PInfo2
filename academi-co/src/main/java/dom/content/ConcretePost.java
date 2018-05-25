@@ -27,6 +27,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.SortableField;
+import org.hibernate.search.annotations.Store;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -67,6 +74,7 @@ public class ConcretePost implements Post, Serializable {
 	@ManyToOne(targetEntity = ConcreteUser.class)
 	@JoinColumn(name = "AUTHOR")
 	@JsonView(View.PostAuthor.class)
+	@IndexedEmbedded(targetElement = ConcreteUser.class)
 	private User author;
 	
 	@NotNull
@@ -77,6 +85,8 @@ public class ConcretePost implements Post, Serializable {
 	@NotNull
 	@Column(name = "CREATION_DATE")
 	@JsonView(View.PostBase.class)
+	@Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
+	@SortableField
 	private LocalDateTime creationDate;
 	
 	@ManyToMany(targetEntity = ConcreteUser.class, fetch = FetchType.EAGER)
@@ -95,6 +105,8 @@ public class ConcretePost implements Post, Serializable {
 	
 	@Column(name = "SCORE")
 	@JsonView(View.PostVote.class)
+	@Field(index = Index.NO, analyze = Analyze.NO, store = Store.NO)
+	@SortableField
 	private int score;
 	
 	@Column(name = "BANNED")

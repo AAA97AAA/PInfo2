@@ -18,12 +18,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilterFactory;
+import org.apache.lucene.analysis.pattern.PatternReplaceCharFilterFactory;
+import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
+import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.AnalyzerDefs;
+import org.hibernate.search.annotations.CharFilterDef;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Parameter;
+import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.TokenizerDef;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -46,6 +64,38 @@ import services.utility.View;
 @Table(name = "QUESTION_THREADS")
 @PrimaryKeyJoinColumn(name = "ID")
 @DiscriminatorValue("THREAD")
+@Indexed
+@AnalyzerDefs({
+	@AnalyzerDef(name = "keyword_analyzer", // Hibernate search analyzer definition
+		charFilters = { // remove any punctuation (non-alphanumeric characters)
+				@CharFilterDef(factory = PatternReplaceCharFilterFactory.class, params = {
+						@Parameter(name = "pattern", value = "[^A-Za-z0-9]+"),
+						@Parameter(name = "replacement", value = " ")
+				})
+		},
+		tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class), // standard tokenizer
+		filters = {
+				@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class), // turn all characters to ASCII
+				@TokenFilterDef(factory = LowerCaseFilterFactory.class), // turn all characters to lowercase
+				@TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = { // take the keywords' radical
+						@Parameter(name = "language", value = "English")
+				})
+		}
+	),
+	@AnalyzerDef(name = "base_analyzer", // Hibernate search analyzer definition
+		charFilters = { // remove any punctuation (non-alphanumeric characters)
+				@CharFilterDef(factory = PatternReplaceCharFilterFactory.class, params = {
+						@Parameter(name = "pattern", value = "[^A-Za-z0-9]+"),
+						@Parameter(name = "replacement", value = " ")
+				})
+		},
+		tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class), // standard tokenizer
+		filters = {
+				@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class), // turn all characters to ASCII
+				@TokenFilterDef(factory = LowerCaseFilterFactory.class) // turn all characters to lowercase
+		}
+	)
+})
 public class ConcreteQuestionThread extends ConcretePost implements Serializable, QuestionThread {
 
 	// Serial version (auto-generated
@@ -54,6 +104,8 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	@NotNull
 	@Column(name = "TITLE")
 	@JsonView(View.PostBase.class)
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+	@Analyzer(definition = "keyword_analyzer")
 	private String title;
 
 	@OneToMany(targetEntity = ConcreteComment.class, mappedBy = "question", fetch = FetchType.EAGER)
@@ -65,20 +117,23 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	@ManyToOne(targetEntity = ConcreteMainTag.class)
 	@JoinColumn(name = "SUBJECT")
 	@JsonView(View.PostBase.class)
+	@IndexedEmbedded(targetElement = ConcreteMainTag.class)
 	private MainTag subject;
 
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteTag.class)
 	@JoinColumn(name = "LANGUAGE")
 	@JsonView(View.PostBase.class)
+	@IndexedEmbedded(targetElement = ConcreteTag.class)
 	private Tag language;
 
 	@ManyToMany(targetEntity = ConcreteSecondaryTag.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "QUESTIONS_TOPICS", joinColumns = @JoinColumn(name = "QUESTION_ID"),
 		inverseJoinColumns = @JoinColumn(name = "TOPIC_ID"))
-	@MapKey(name = "id")
+	@OrderBy
 	@JsonView(View.PostBase.class)
-	private Map<Long, SecondaryTag> topics;
+	@IndexedEmbedded(targetElement = ConcreteSecondaryTag.class)
+	private Set<SecondaryTag> topics;
 
 
 	/***** Constructors *****/
@@ -90,7 +145,7 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 
 	ConcreteQuestionThread(User author, String content, LocalDateTime creationDate, Set<User> upvoters,
 			Set<User> downvoters, int score, boolean isBanned, String title, List<Comment> answers,
-			MainTag subject, Tag languageTag, Map<Long, SecondaryTag> topics) {
+			MainTag subject, Tag languageTag, Set<SecondaryTag> topics) {
 		super(author, content, creationDate, upvoters, downvoters, score, isBanned);
 		this.title = title;
 		this.answers = answers;
@@ -113,7 +168,7 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 		List<Tag> allTags = new ArrayList<Tag>();
 		allTags.add(subject);
 		allTags.add(language);
-		allTags.addAll(topics.values());
+		allTags.addAll(topics);
 		return allTags;
 	}
 	
@@ -161,11 +216,11 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	}
 
 	@Override
-	public Map<Long, SecondaryTag> getTopics() {
+	public Set<SecondaryTag> getTopics() {
 		return topics;
 	}
 
-	void setTopics(Map<Long, SecondaryTag> topics) {
+	void setTopics(Set<SecondaryTag> topics) {
 		this.topics = topics;
 	}
 

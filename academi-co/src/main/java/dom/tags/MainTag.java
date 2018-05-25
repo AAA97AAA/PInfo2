@@ -1,6 +1,6 @@
 package dom.tags;
 
-import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(as = ConcreteMainTag.class)
 public interface MainTag extends Tag {
 
-	public Map<Long, SecondaryTag> getChildren();
+	public Set<SecondaryTag> getChildren();
 
 	public void addChild(SecondaryTag newChild);
 }

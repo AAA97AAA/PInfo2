@@ -7,8 +7,8 @@ import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
@@ -31,11 +31,11 @@ public class ConcreteMainTagTest {
 		// Setup data to be put in the entity
 		String name = "Bio";
 		long id = 42;
-		Map<Long, SecondaryTag> children = new HashMap<Long, SecondaryTag>();
 		long min = 1;
 		long max = 50;
+		Set<SecondaryTag> children = new HashSet<SecondaryTag>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			children.put(i, mock(SecondaryTag.class));
+			children.add(mock(ConcreteSecondaryTag.class));
 		}
 		
 		// Construct entity with full constructor call
@@ -78,11 +78,11 @@ public class ConcreteMainTagTest {
 		// Setup data to be put in the entity
 		String name = "Astronomy";
 		long newId = 43;
-		Map<Long, SecondaryTag> children = new HashMap<Long, SecondaryTag>();
 		long min = 1;
 		long max = 50;
+		Set<SecondaryTag> children = new HashSet<SecondaryTag>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			children.put(i, mock(SecondaryTag.class));
+			children.add(mock(ConcreteSecondaryTag.class));
 		}
 		
 		// Construct entity
@@ -114,11 +114,11 @@ public class ConcreteMainTagTest {
 		// Setup data to be put in the entity (and mock 'toString' values)
 		String name = "Economy";
 		long id = 42;
-		Map<Long, SecondaryTag> children = new HashMap<Long, SecondaryTag>();
 		long min = 1;
 		long max = 50;
+		Set<SecondaryTag> children = new HashSet<SecondaryTag>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			children.put(i, mock(SecondaryTag.class));
+			children.add(mock(ConcreteSecondaryTag.class));
 		}
 		when(children.toString()).thenReturn("ok");
 		
@@ -144,11 +144,11 @@ public class ConcreteMainTagTest {
 		
 		// Setup data to be put in the entity
 		String name = "Economy";
-		Map<Long, SecondaryTag> children = new HashMap<Long, SecondaryTag>();
 		long min = 1;
 		long max = 50;
+		Set<SecondaryTag> children = new HashSet<SecondaryTag>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			children.put(i, mock(SecondaryTag.class));
+			children.add(mock(ConcreteSecondaryTag.class));
 		}
 		when(children.toString()).thenReturn("ok");
 		
@@ -162,7 +162,7 @@ public class ConcreteMainTagTest {
 		
 		// adding to the entity and to our children
 		mainTag.addChild(newChild);
-		children.put(null, newChild);
+		children.add(newChild);
 		
 		// Control result
 		assertEquals("Unexpected added Children.", mainTag.getChildren(), children);

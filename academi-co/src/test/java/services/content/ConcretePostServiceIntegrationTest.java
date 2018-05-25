@@ -7,11 +7,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -74,7 +74,6 @@ public class ConcretePostServiceIntegrationTest {
 		return ShrinkWrap.create(WebArchive.class, "test-academi-co-users.war")
 				.addClass(ConcreteUserService.class)
 				.addClass(UserService.class)
-				.addPackage(User.class.getPackage())
 				.addPackage(Inbox.class.getPackage())
 				.addClass(ConcretePostService.class)
 				.addClass(PostService.class)
@@ -126,13 +125,13 @@ public class ConcretePostServiceIntegrationTest {
 			em.persist(subject);
 			em.persist(languageTag);
 			trx.commit();
-			Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
+			Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
 			for (int i = 0; i < 3; i++) {
 				SecondaryTag topic = TagFactory.createSecondaryTag("topic" + i, subject);
 				trx.begin();
 				em.persist(topic);
 				trx.commit();
-				topics.put(topic.getId(), topic);
+				topics.add(topic);
 			}
 			sampleThread = PostFactory.createQuestionThread(author, "text", "question", subject, languageTag, topics);
 			trx.begin();

@@ -14,6 +14,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 import services.utility.View;
@@ -44,6 +50,8 @@ public class ConcreteTag implements Tag, Serializable {
 	@NotNull
 	@Column(name = "NAME")
 	@JsonView(View.TagBase.class)
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+	@Analyzer(definition = "base_analyzer")
 	private String name;
 
 

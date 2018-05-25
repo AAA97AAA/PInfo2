@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
        bean-discovery-mode="all">
 	<alternatives>
-		<class>services.tags.FakeTagService</class>
-		<class>services.documentsManager.FakeDocumentService</class>
-		<class>services.content.FakePostService</class>
-		<class>services.content.FakeUserService</class>
+<!-- 		<class>services.tags.FakeTagService</class> -->
+<!-- 		<class>services.documentsManager.FakeDocumentService</class> -->
+<!-- 		<class>services.content.FakePostService</class> -->
+<!-- 		<class>services.content.FakeUserService</class> -->
 	</alternatives>
 </beans>

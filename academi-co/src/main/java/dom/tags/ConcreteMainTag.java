@@ -1,16 +1,18 @@
 package dom.tags;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.MapKeyColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -36,19 +38,19 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 	
 	@OneToMany(targetEntity = ConcreteSecondaryTag.class, mappedBy = "parent",
 			cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	@MapKeyColumn(name = "ID")
+	@OrderBy
 	@JsonView(View.TagParentCentered.class)
-	private Map<Long, SecondaryTag> children;
+	private Set<SecondaryTag> children;
 
 	
 	/***** Constructors *****/
 	
 	ConcreteMainTag() {
 		super();
-		children = new HashMap<Long, SecondaryTag>();
+		children = new HashSet<SecondaryTag>();
 	}
 
-	ConcreteMainTag(String name, Map<Long, SecondaryTag> children) {
+	ConcreteMainTag(String name, Set<SecondaryTag> children) {
 		super(name);
 		this.children = children;
 	}
@@ -58,18 +60,18 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 	
 	@Override
 	public void addChild(SecondaryTag newChild) {
-		children.put(newChild.getId(), newChild);
+		children.add(newChild);
 	}
 	
 	
 	/***** Getters/Setters *****/
 
 	@Override
-	public Map<Long, SecondaryTag> getChildren() {
+	public Set<SecondaryTag> getChildren() {
 		return children;
 	}
 
-	void setChildren(Map<Long, SecondaryTag> children) {
+	void setChildren(Set<SecondaryTag> children) {
 		this.children = children;
 	}
 	

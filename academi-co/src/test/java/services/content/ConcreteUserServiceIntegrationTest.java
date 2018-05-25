@@ -8,10 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -75,7 +74,6 @@ public class ConcreteUserServiceIntegrationTest {
 				.addClass(UserService.class)
 				.addPackage(User.class.getPackage())
 				.addPackage(Inbox.class.getPackage())
-				.addPackage(Post.class.getPackage())
 				.addPackage(Tag.class.getPackage())
 				.addClass(ConcreteDocumentService.class)
 				.addClass(DocumentService.class)
@@ -205,9 +203,9 @@ public class ConcreteUserServiceIntegrationTest {
 		em.persist(topic1);
 		em.persist(topic2);
 		trx.commit();
-		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
-		topics.put(topic1.getId(), topic1);
-		topics.put(topic2.getId(), topic2);
+		Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
+		topics.add(topic1);
+		topics.add(topic2);
 		QuestionThread thread1 = PostFactory.createQuestionThread(author, "content1", "title1", subject, languageTag, topics);
 		QuestionThread thread2 = PostFactory.createQuestionThread(sampleUser, "content2", "title2", subject, languageTag, topics);
 		QuestionThread thread3 = PostFactory.createQuestionThread(author, "content3", "title3", subject, languageTag, topics);

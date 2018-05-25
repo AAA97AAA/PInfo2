@@ -23,9 +23,14 @@
   	<class>dom.documentsManager.ConcreteAdvertisement</class>
 
     <properties>
-        <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-        <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-        <property name="hibernate.show_sql" value="false" />
+		<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+		<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+		<property name="hibernate.show_sql" value="false" />
+		
+		<!-- Hibernate-search properties -->
+		<property name="jboss.as.jpa.providerModule" value="org.hibernate:main"/>
+		<property name="wildfly.jpa.hibernate.search.module" value="org.hibernate.search.orm:main"/>
+		<property name="hibernate.search.default.directory_provider" value="ram"/>
     </properties>
 
   </persistence-unit>

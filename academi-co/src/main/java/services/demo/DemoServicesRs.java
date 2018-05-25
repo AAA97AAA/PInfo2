@@ -2,10 +2,10 @@ package services.demo;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
@@ -62,30 +62,50 @@ public class DemoServicesRs {
 		int nTopics = 5;
 		int nPosts = 20;
 		
+		// Add users
 		List<User> users = new ArrayList<User>();
 		for (int i = 0; i < nUsers; i++) {
 			users.add(userService.addUser(UserFactory.createUser("user" + i, "mail" + i + "@mail.com", "secret", User.REGISTERED)));
 		}
+		
+		// Add tags
 		List<MainTag> subjects = new ArrayList<MainTag>();
 		for (int i = 0; i < nSubjects; i++) {
-			subjects.add(tagService.addTag(TagFactory.createMainTag("subject" + i)));
+			MainTag tmpSubject = tagService.addTag(TagFactory.createMainTag("subject" + i));
 			for (int j = 0; j < nTopics; j++) {
-				tagService.addTag(subjects.get(i).getId(), TagFactory.createSecondaryTag("topic" + i + "-" + j, subjects.get(i)));
+				tagService.addTag(tmpSubject.getId(), TagFactory.createSecondaryTag("topic" + i + "-" + j, tmpSubject));
 			}
+			subjects.add(tagService.getMainTag(tmpSubject.getId()));
+			int it = 0;
+			Set<Long> keys = new HashSet<Long>();
+			for (SecondaryTag topic: subjects.get(i).getChildren()) {
+				if (it < 3) {
+					keys.add(topic.getId());
+				}
+				it++;
+			}
+			subjects.get(i).getChildren().stream()
+				.filter(topic -> keys.stream().anyMatch(k -> k == topic.getId())).collect(Collectors.toList());
 		}
 		Tag lang = tagService.addTag(TagFactory.createTag("english"));
+		
+		// Add threads
 		List<QuestionThread> threads = new ArrayList<QuestionThread>();
 		for (int i = 0; i < nPosts; i++) {
 			int u = i % nUsers;
 			int s = i % nSubjects;
-			Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
-			Iterator<SecondaryTag> it = subjects.get(s).getChildren().values().iterator();
-			for (int t = 0; t < 3; t++) {
-				
+			threads.add(postService.addPost(
+					PostFactory.createQuestionThread(users.get(u), "text" + i, "thread" + i,
+							subjects.get(s), lang, subjects.get(s).getChildren()))
+					);
+			try {
+				Thread.sleep(40);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-//			threads.add(PostFactory.createQuestionThread(users.get(u), "text" + i, "thread" + i, subjects.get(s), languageTag, topics));
 		}
 		
+		// Finalize
 		return Response.ok().build();
 	}
 

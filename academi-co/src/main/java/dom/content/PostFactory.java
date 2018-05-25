@@ -3,7 +3,7 @@ package dom.content;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
+import java.util.Set;
 
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
@@ -18,7 +18,7 @@ import dom.tags.Tag;
 public class PostFactory {
 
 	static public QuestionThread createQuestionThread(User author, String content, String title,
-										MainTag subject, Tag languageTag, Map<Long, SecondaryTag> topics) {
+										MainTag subject, Tag languageTag, Set<SecondaryTag> topics) {
 		QuestionThread thread = new ConcreteQuestionThread(author, content, LocalDateTime.now(), new HashSet<User>(),
 				new HashSet<User>(), 0, false, title, new LinkedList<Comment>(),
 				subject, languageTag, topics);

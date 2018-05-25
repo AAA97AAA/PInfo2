@@ -78,7 +78,7 @@ public class UserServiceRs {
 	
 	
 	/**
-	 * Add user to database
+	 * Add user to database (basic user version)
 	 * @param user
 	 * @return response
 	 */
@@ -88,13 +88,30 @@ public class UserServiceRs {
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.UserNew.class)
 	public Response addUser(ConcreteUser user, @Context UriInfo uriInfo) {
+		user.setType(User.REGISTERED); // only for basic users
 		User result = service.addUser(user);
 		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
 		return Response.created(location).entity(result).build();
 	}
 	
 	/**
-	 * Modify user data
+	 * Add user to database (administrator-only version)
+	 * @param user
+	 * @return response
+	 */
+	@POST
+	@Path("/administrator")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.UserNew.class)
+	public Response addUserByAdministrator(ConcreteUser user, @Context UriInfo uriInfo) {
+		User result = service.addUser(user);
+		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
+		return Response.created(location).entity(result).build();
+	}
+	
+	/**
+	 * Modify user data (basic user version)
 	 * @param id
 	 * @param newUser
 	 * @return response
@@ -105,6 +122,23 @@ public class UserServiceRs {
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.UserModifiable.class)
 	public Response modifyUser(@PathParam("id") long id, ConcreteUser newUser) {
+		newUser.setType(User.REGISTERED); // basic user only
+		User result = service.modifyUser(id, newUser);
+		return Response.ok(result).build();
+	}
+	
+	/**
+	 * Modify user data (basic user version)
+	 * @param id
+	 * @param newUser
+	 * @return response
+	 */
+	@PUT
+	@Path("/{id}/administrator")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.UserModifiable.class)
+	public Response modifyUserByAdministrator(@PathParam("id") long id, ConcreteUser newUser) {
 		User result = service.modifyUser(id, newUser);
 		return Response.ok(result).build();
 	}

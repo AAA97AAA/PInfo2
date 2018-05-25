@@ -1,6 +1,6 @@
 package services.content;
 
-import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
@@ -47,7 +47,7 @@ public class FakePostService implements PostService {
 		
 		Tag languageTag = TagFactory.createTag("language");
 		MainTag mainTag = tagProvider.getMainTag(0L);
-		Map<Long, SecondaryTag> topics = mainTag.getChildren();
+		Set<SecondaryTag> topics = mainTag.getChildren();
 		
 		QuestionThread thread = PostFactory.createQuestionThread(author, "content", "title", mainTag, languageTag, topics);
 		

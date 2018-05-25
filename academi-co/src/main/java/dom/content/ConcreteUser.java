@@ -19,6 +19,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 import dom.documentsManager.ConcreteDocument;
@@ -50,6 +56,8 @@ public class ConcreteUser implements User, Serializable {
 	@NotNull
 	@Column(name = "USERNAME", unique = true)
 	@JsonView(View.UserName.class)
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+	@Analyzer(definition = "base_analyzer")
 	private String username;
 	
 	@NotNull

@@ -31,7 +31,7 @@ public class FakeTagService implements TagService {
 			allSubjects.add(TagFactory.createMainTag("subject-" + i));
 			for (long j = 9; j >= 0; j--) {
 				SecondaryTag topic = TagFactory.createSecondaryTag("topic-" + i + "-" + j, allSubjects.get(i));
-				allSubjects.get(i).getChildren().put(j, topic);
+				allSubjects.get(i).getChildren().add(topic);
 			}
 		}
 		return allSubjects;
@@ -46,7 +46,6 @@ public class FakeTagService implements TagService {
 	public MainTag getMainTag(long id) {
 		MainTag mainTag = TagFactory.createMainTag("Subject");
 		TagFactory.createSecondaryTag("topic1", mainTag);
-		mainTag.getChildren().put((long) 1, mainTag.getChildren().get((long) 0)); 
 		TagFactory.createSecondaryTag("topic2", mainTag);
 		return mainTag;
 	}

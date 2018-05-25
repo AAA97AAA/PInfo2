@@ -3,9 +3,9 @@ package services.content;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
@@ -54,9 +54,9 @@ public class FakeUserService implements UserService {
 		for (long i = 0; i < 20; i+=2) {
 			MainTag subject = TagFactory.createMainTag("subject" + i);
 			Tag language = TagFactory.createTag("EnglishMotherFucker");
-			Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
+			Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
 			for (long j = 0; j < 3; j++) {
-				topics.put(j, TagFactory.createSecondaryTag("topic" + i + "-" + j, subject));
+				topics.add(TagFactory.createSecondaryTag("topic" + i + "-" + j, subject));
 			}
 			user.getPosts().put(i, PostFactory.createQuestionThread(user, "text", "question" + i, subject, language, topics));
 			try {

@@ -49,8 +49,10 @@ public class ConcreteUserService implements UserService {
 	@Override
 	public User getUser(long id) {
 		User user = entityManager.find(ConcreteUser.class, id);
-		user.getPosts().size();
-		user.getFollowedThreads().size();
+		if (user != null) {
+			user.getPosts().size();
+			user.getFollowedThreads().size();
+		}
 		return user;
 	}
 	
@@ -119,9 +121,9 @@ public class ConcreteUserService implements UserService {
 		
 		// Fetch the user's posts in given order
 		TypedQuery<Post> query;
-		if (order == "byDate") {
+		if (order.equals("byDate")) {
 			query = entityManager.createNamedQuery("Post.fromAuthorByDate", Post.class);
-		} else if (order == "byScore") {
+		} else if (order.equals("byScore")) {
 			query = entityManager.createNamedQuery("Post.fromAuthorByScore", Post.class);
 		} else {
 			throw new IllegalArgumentException("Unrecognized order " + order);

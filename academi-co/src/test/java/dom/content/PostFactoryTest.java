@@ -63,9 +63,9 @@ public class PostFactoryTest {
 		}
 		MainTag subject = mock(ConcreteMainTag.class);
 		Tag language = mock(ConcreteTag.class);
-		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
+		Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			topics.put(i, mock(ConcreteSecondaryTag.class));
+			topics.add(mock(ConcreteSecondaryTag.class));
 		}
 		LocalDateTime date = LocalDateTime.now();
 		

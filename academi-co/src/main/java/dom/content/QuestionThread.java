@@ -1,7 +1,7 @@
 package dom.content;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -26,7 +26,7 @@ public interface QuestionThread extends Post {
 
 	public Tag getLanguage();
 
-	public Map<Long, SecondaryTag> getTopics();
+	public Set<SecondaryTag> getTopics();
 	
 	public List<Tag> getAllTags();
 	

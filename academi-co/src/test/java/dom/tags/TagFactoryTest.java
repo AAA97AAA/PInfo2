@@ -3,7 +3,7 @@ package dom.tags;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 import org.junit.Test;
 
@@ -47,7 +47,7 @@ public class TagFactoryTest {
 		ConcreteMainTag tag = (ConcreteMainTag) TagFactory.createMainTag(name);
 		
 		// Verify that the expected object was obtained
-		assertEquals("Object wrongly instantiated.", tag, new ConcreteMainTag(name, new HashMap<Long, SecondaryTag>()));
+		assertEquals("Object wrongly instantiated.", tag, new ConcreteMainTag(name, new HashSet<SecondaryTag>()));
 	}
 
 	@Test

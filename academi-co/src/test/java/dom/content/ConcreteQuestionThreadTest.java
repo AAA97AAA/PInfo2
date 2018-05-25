@@ -7,7 +7,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,9 +63,9 @@ public class ConcreteQuestionThreadTest {
 		}
 		MainTag subject = mock(ConcreteMainTag.class);
 		Tag language = mock(ConcreteTag.class);
-		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
+		Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			topics.put(i, mock(ConcreteSecondaryTag.class));
+			topics.add(mock(ConcreteSecondaryTag.class));
 		}
 		
 		// Construct entity with full constructor call
@@ -124,12 +123,12 @@ public class ConcreteQuestionThreadTest {
 		// Create tags to be put in the entity
 		MainTag subject = mock(ConcreteMainTag.class);
 		Tag language = mock(ConcreteTag.class);
-		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
 		int min = 1; int max = 100;
-		for (long i = 0; i < ThreadLocalRandom.current().nextInt(min, max); i++) {
-			topics.put(i, mock(ConcreteSecondaryTag.class));
+		Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
+		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
+			topics.add(mock(ConcreteSecondaryTag.class));
 		}
-		Set<Tag> allTags = new HashSet<Tag>(topics.values());
+		Set<Tag> allTags = new HashSet<Tag>(topics);
 		allTags.add(subject);
 		allTags.add(language);
 		
@@ -205,9 +204,9 @@ public class ConcreteQuestionThreadTest {
 		}
 		MainTag subject = mock(ConcreteMainTag.class);
 		Tag language = mock(ConcreteTag.class);
-		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
+		Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			topics.put(i, mock(ConcreteSecondaryTag.class));
+			topics.add(mock(ConcreteSecondaryTag.class));
 		}
 		
 		// Construct entity
@@ -266,10 +265,11 @@ public class ConcreteQuestionThreadTest {
 		when(subject.toString()).thenReturn("subject");
 		Tag language = mock(ConcreteTag.class);
 		when(language.toString()).thenReturn("language");
-		Map<Long, SecondaryTag> topics = new HashMap<Long, SecondaryTag>();
-		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			topics.put(i, mock(ConcreteSecondaryTag.class));
-			when(topics.get(i).toString()).thenReturn("topics" + i);
+		Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
+		for (int i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
+			ConcreteSecondaryTag fake = mock(ConcreteSecondaryTag.class);
+			when(fake.toString()).thenReturn("topics" + i);
+			topics.add(fake);
 		}
 		
 		// Construct entity

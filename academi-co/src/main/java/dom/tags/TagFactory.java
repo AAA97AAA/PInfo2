@@ -1,6 +1,6 @@
 package dom.tags;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Instantiator for Tag, MainTag and SecondaryTag
@@ -15,7 +15,7 @@ public class TagFactory {
 	}
 	
 	static public MainTag createMainTag(String name) {
-		return new ConcreteMainTag(name, new HashMap<Long, SecondaryTag>());
+		return new ConcreteMainTag(name, new HashSet<SecondaryTag>());
 	}
 	
 	static public SecondaryTag createSecondaryTag(String name, MainTag parent) {

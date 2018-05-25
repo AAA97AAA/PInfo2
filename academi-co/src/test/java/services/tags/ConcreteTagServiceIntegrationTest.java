@@ -17,6 +17,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
+import org.apache.logging.log4j.LogManager;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -25,7 +26,13 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import dom.tags.ConcreteTag;
+import com.lmax.disruptor.ExceptionHandler;
+
+import dom.content.QuestionThread;
+import dom.documentsManager.Document;
+import dom.inbox.Inbox;
+import dom.tags.ConcreteMainTag;
+import dom.tags.ConcreteSecondaryTag;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
@@ -51,10 +58,16 @@ public class ConcreteTagServiceIntegrationTest {
 	public static WebArchive deploy(){
 		return ShrinkWrap.create(WebArchive.class, "test-academi-co-tags.war")
 				.addClass(View.class)
-				.addPackages(true, Tag.class.getPackage())
+				.addPackage(Tag.class.getPackage())
 				.addClass(TagService.class)
 				.addClass(ConcreteTagService.class)
+				.addPackage(QuestionThread.class.getPackage())
+				.addPackage(Inbox.class.getPackage())
+				.addPackage(Document.class.getPackage())
+				.addPackages(true, LogManager.class.getPackage())
+				.addPackages(true, ExceptionHandler.class.getPackage())
 				.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
+				.addAsResource("log4j2-test.xml", "log4j2.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 	
@@ -73,9 +86,14 @@ public class ConcreteTagServiceIntegrationTest {
 		
 		// Clear
 		trx.begin();
-		CriteriaDelete<ConcreteTag> query = em.getCriteriaBuilder().createCriteriaDelete(ConcreteTag.class);
-		query.from(ConcreteTag.class);
-		em.createQuery(query).executeUpdate();
+		CriteriaDelete<ConcreteSecondaryTag> rmTopics = em.getCriteriaBuilder().createCriteriaDelete(ConcreteSecondaryTag.class);
+		rmTopics.from(ConcreteSecondaryTag.class);
+		em.createQuery(rmTopics).executeUpdate();
+		trx.commit();
+		trx.begin();
+		CriteriaDelete<ConcreteMainTag> rmTags = em.getCriteriaBuilder().createCriteriaDelete(ConcreteMainTag.class);
+		rmTags.from(ConcreteMainTag.class);
+		em.createQuery(rmTags).executeUpdate();
 		trx.commit();
 		
 		// Fill and set expectation
