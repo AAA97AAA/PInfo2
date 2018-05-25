@@ -39,9 +39,18 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
 	<error-page>
         <error-code>403</error-code>
-        <location>/nope.html</location>
+        <location>/forbidden.html</location>
     </error-page>
 
+	<error-page>
+		<error-code>404</error-code>
+		<location>/notFound.html</location>
+	</error-page>
+
+	<error-page>
+        <error-code>500</error-code>
+        <location>/internalServerError.html</location>
+    </error-page>
 
 	<security-role>
 		<description/>
