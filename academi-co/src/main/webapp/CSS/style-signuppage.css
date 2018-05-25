@@ -1,6 +1,6 @@
 /* Stylesheet for signup page */
 /* Full-width inputs */
-input[type=logintext], input[type=password], input[type=confirmpasswd], input[type=email] {
+input[type=logintext], input[type=password], input[type=confirmpasswd], input[type=emailtext] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -46,4 +46,12 @@ div.signupcontainer {
     float: right;
     width: 50%;
     padding: 10px;
+}
+
+#logoHome {
+    display: block;
+    max-width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
 }
