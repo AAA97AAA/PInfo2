@@ -62,56 +62,47 @@
 <!-- Body -->
 <body class="body" ng-app="academi-co">
 
-        <!-- Header at the top of browser window -->
-        <header class='mainheader' ng-include="'header.html'"></header>
+    <!-- Header at the top of browser window -->
+    <header class='mainheader' ng-include="'header.html'"></header>
 
-        <!-- Logo -->
-        <div class="logoHomePage">
-                <img id="logoHome" src="images/logo2.png"  alt="Logo">
-        </div>
+    <!-- Logo -->
+    <div class="logoHomePage">
+            <img id="logoHome" src="images/logo2.png"  alt="Logo">
+    </div>
 
-                <!-- Login Form -->
-                <div class="signupcontainer" ng-controller="signUpController"> 
-                    <form  name="signUpForm">
-        
-                        <!-- Left column -->
-                        <!-- <div class="leftcolumn"> -->
-                            <br>
-                            <label for="uname"><b>Username</b></label>
-                            <input id="username" type="logintext" placeholder="Enter Username" name="uname" ng-model="user.username" required>
-                            <br>
-                            <br>
-                            <label for="email"><b>E-mail</b></label>
-                            <input id="email" type="email" placeholder="Enter E-mail" name="email" ng-model="user.email" required>
-                            <br>
-                        <!-- </div> -->
-        
-                        <!-- Right column -->
-                        <!-- <div class="rightcolumn"> -->
-                            <br>
-                            <label for="psw"><b>Password</b></label>
-                            <input id="password" type="password" placeholder="Enter Password" name="psw" required>
-                            <br>
-                            <br>
-                            <label for="psw"><b>Confirm password</b></label>
-                            <input id="password2" type="password" placeholder="Re-enter Password" name="psw" required>
-                            <br>
-                        <!-- </div> -->
-                        <br>
-                        <br>
-                        <button id="submitButton" type="submit" ng-click="onSubmit()" ng-disabled="signUpForm.$invalid">Sign Up</button>
-                        <br>
-                    </form>
-                </div>
-                <br><br>
-                <pre>{{ user | json }}</pre>
-                <br><br><br><br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <!-- Footer at the bottom of browser window -->
-        <footer class="footer" ng-include="'footer.html'"></footer>
+    <!-- Login Form -->
+    <div class="signupcontainer" ng-controller="signUpController"> 
+        <form  name="signUpForm">
+
+            <br>
+            <label for="uname"><b>Username</b></label>
+            <input id="username" type="logintext" placeholder="Enter Username" name="uname" ng-model="user.username" required>
+            <br>
+            <br>
+            <label for="email"><b>E-mail</b></label>
+            <input id="email" type="email" placeholder="Enter E-mail" name="email" ng-model="user.email" required>
+            <br>
+            <br>
+            <label for="psw"><b>Password</b></label>
+            <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+            <br>
+            <br>
+            <label for="psw"><b>Confirm password</b></label>
+            <input id="password2" type="password" placeholder="Re-enter Password" name="psw" required>
+            <br>
+            <br>
+            <br>
+            <button id="submitButton" type="submit" ng-click="onSubmit()" ng-disabled="signUpForm.$invalid">Sign Up</button>
+            <br>
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
     
+    <!-- Footer at the bottom of browser window -->
+    <footer class="footer" ng-include="'footer.html'"></footer>
+
 </body>
 </html>

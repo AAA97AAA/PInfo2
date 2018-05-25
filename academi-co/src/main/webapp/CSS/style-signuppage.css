@@ -1,6 +1,6 @@
 /* Stylesheet for signup page */
 /* Full-width inputs */
-input[type=logintext], input[type=password], input[type=confirmpasswd], input[type=emailtext] {
+input[type=logintext], input[type=password], input[type=confirmpasswd], input[type=email] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
