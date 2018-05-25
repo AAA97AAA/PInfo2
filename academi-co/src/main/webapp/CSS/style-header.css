@@ -155,7 +155,7 @@ background-color: #0b78d1 ;
 /* at the beginning the connected one is not displayed */
 #rightConnectedComponent {
   float:right;
-  display: none;
+  /* display: none; */
 }
 
 #rightNonConnectedComponent {
