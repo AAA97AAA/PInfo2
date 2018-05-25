@@ -25,7 +25,7 @@ var li = document.createElement("li");
 var inputValue = document.getElementById("primarytag").value; 
 var t = document.createTextNode(inputValue);
 li.appendChild(t);
-if (inputValue === '0') {
+if (inputValue === 'Select primarytag:') {
  alert("You must select something!");
 } else {
  document.getElementById("myUL1").appendChild(li);
@@ -51,12 +51,12 @@ function newElement2() {
 	  var inputValue = document.getElementById("secondarytag").value;
 	  var t = document.createTextNode(inputValue);
 	  li.appendChild(t);
-	  if (inputValue === '') {
+	  if (inputValue === 'Select secondarytag:') {
 	    alert("You must select something!");
 	  } else {
 	    document.getElementById("myUL2").appendChild(li);
 	  }
-	  document.getElementById("secondarytag").value = "";
+	  document.getElementById("secondarytag").value;
 
 	  var span = document.createElement("SPAN");
 	  var txt = document.createTextNode("\u00D7");
@@ -86,6 +86,5 @@ function showAdvancedSearch() {
 	}
 
 }
-
 
 

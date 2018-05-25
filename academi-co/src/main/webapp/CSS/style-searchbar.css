@@ -92,7 +92,7 @@ ul li {
   position: relative;
   padding: 12px 8px 12px 20px;
   list-style-type: none;
-  background: #4e6db1; /*TO CHANGE*/
+  background: #729fcf; /*TO CHANGE*/
   font-size: 18px;
   transition: 0.2s;
 
@@ -105,7 +105,7 @@ ul li {
 
 /* Set all odd list items to a different color (zebra-stripes) */
 ul li:nth-child(odd) {
-  background:  #4e6db1; /*TO CHANGE*/
+  background:  #729fcf; /*TO CHANGE*/
 }
 
 /* Darker background-color on hover */
@@ -187,7 +187,9 @@ ul li.checked {
 input[type="text"], textarea {
     border: 3px solid #babdb6;
 	z-index: 1;
+    background-color: #eeeeec;
+    color: black;
 }
-
+}
 
 
