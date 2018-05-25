@@ -108,6 +108,36 @@ background-color: #0b78d1 ;
   display: block;
   border-radius: 5px;
 }
+
+.profilePicDropDown {
+  display: inline-block;
+  border-radius: 5px;
+}
+
+/* display the logout button when hover the profilePic */
+.profilePicDropDown:hover .profilePicDropDownContent {
+  display: block;
+  border-radius: 5px;
+}
+
+/* hide the dropdown of the profilePic */
+.profilePicDropDownContent {
+  display: none;
+  background-color: #ccc;
+  border-radius: 5px;
+  position:absolute;
+  z-index:3;
+}
+
+.logoutButton {
+  width:auto;
+  display:block;
+  padding:8px 16px;
+  text-align:left;
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
 /* **** */
 /* + Button*/
 .plusButton {
@@ -119,6 +149,19 @@ background-color: #0b78d1 ;
      transition: 0.3s;
     color: #fff;
 }
+
+
+
+/* at the beginning the connected one is not displayed */
+#rightConnectedComponent {
+  float:right;
+  /* display: none; */
+}
+
+#rightNonConnectedComponent {
+  float:right;
+}
+
 
 /* logo Button
 

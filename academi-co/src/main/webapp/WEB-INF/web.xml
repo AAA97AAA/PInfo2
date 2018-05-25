@@ -29,13 +29,28 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
 
 	<login-config>
-		<auth-method>BASIC</auth-method>
+		<auth-method>FORM</auth-method>
 		<realm-name>academi-co-realm</realm-name>
 		<form-login-config>
-			<form-login-page>/nope.html</form-login-page>
-			<form-error-page>/nope.html</form-error-page>
+			<form-login-page>/login.html</form-login-page>
+			<form-error-page>/loginError.html</form-error-page>
 		</form-login-config>
 	</login-config>
+
+	<error-page>
+        <error-code>403</error-code>
+        <location>/forbidden.html</location>
+    </error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/notFound.html</location>
+	</error-page>
+
+	<error-page>
+        <error-code>500</error-code>
+        <location>/internalServerError.html</location>
+    </error-page>
 
 	<security-role>
 		<description/>
@@ -50,20 +65,48 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<role-name>ADMINISTRATOR</role-name>
 	</security-role>
 
-	<!-- <security-constraint>
-		<display-name>REGISTERED Realm</display-name>
+	<security-constraint>
+		<display-name>Unprotected Methods</display-name>
 		<web-resource-collection>
-			<web-resource-name>REGISTERED Realm</web-resource-name>
-			<url-pattern>/profilepage.html</url-pattern>
-			<url-pattern>/settingsPreferences.html</url-pattern>
-			<url-pattern>/postThreadPage.html</url-pattern>
+			<web-resource-name>Unprotected Posts Methods</web-resource-name>
+			<url-pattern>/resources/posts/*</url-pattern>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Unprotected Users Methods</web-resource-name>
+			<url-pattern>/resources/users/*</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Unprotected Advertisements Methods</web-resource-name>
+			<url-pattern>/resources/advertisements/*</url-pattern>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Unprotected Tags Methods</web-resource-name>
+			<url-pattern>/resources/tags/*</url-pattern>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Users Rest Facade</display-name>
+		<web-resource-collection>
+			<web-resource-name>Posts Services</web-resource-name>
+			<url-pattern>/resources/posts/*</url-pattern>
+			<http-method>POST</http-method>
 			<http-method>PUT</http-method>
-			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Users Services</web-resource-name>
+			<url-pattern>/resources/users/*</url-pattern>
+			<http-method>PUT</http-method>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>REGISTERED</role-name>
+			<role-name>MODERATOR</role-name>
+			<role-name>ADMINISTRATOR</role-name>
 		</auth-constraint>
 		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
@@ -71,13 +114,75 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	</security-constraint>
 
 	<security-constraint>
-		<display-name>MODERATOR Realm</display-name>
+		<display-name>Moderators Rest Facade</display-name>
 		<web-resource-collection>
-			<web-resource-name>MODERATOR Realm</web-resource-name>
-			<url-pattern>/profilepage.html</url-pattern>
+			<web-resource-name>Post Service</web-resource-name>
+			<url-pattern>/resources/posts/*/ban</url-pattern>
+			<http-method>PUT</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>MODERATOR</role-name>
+			<role-name>ADMINISTRATOR</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Administrators Rest Facade</display-name>
+		<web-resource-collection>
+			<web-resource-name>Advertisements Services</web-resource-name>
+			<url-pattern>/resources/advertisements/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Advertisements GET Services</web-resource-name>
+			<url-pattern>/resources/advertisements/all</url-pattern>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Tags Services</web-resource-name>
+			<url-pattern>/resources/tags/*</url-pattern>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMINISTRATOR</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Users Realm</display-name>
+		<web-resource-collection>
+			<web-resource-name>Users Realm</web-resource-name>
 			<url-pattern>/settingsPreferences.html</url-pattern>
-			<url-pattern>/postThreadPage.html</url-pattern>
-			<url-pattern>/moderatorspage.html</url-pattern>
+			<url-pattern>/postThread.html</url-pattern>
+			<url-pattern>/login.jsp</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>REGISTERED</role-name>
+			<role-name>MODERATOR</role-name>
+			<role-name>ADMINISTRATOR</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Moderators Realm</display-name>
+		<web-resource-collection>
+			<web-resource-name>Moderators Realm</web-resource-name>
+			<url-pattern>/moderation.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 			<http-method>PUT</http-method>
@@ -85,17 +190,18 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>MODERATOR</role-name>
+			<role-name>ADMINISTRATOR</role-name>
 		</auth-constraint>
 		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
-	</security-constraint> -->
+	</security-constraint>
 
 	<security-constraint>
-		<display-name>ADMINISTRATOR Realm</display-name>
+		<display-name>Administrators Realm</display-name>
 		<web-resource-collection>
-			<web-resource-name>ADMINISTRATOR Realm</web-resource-name>
-			<url-pattern>/administratorPage.html</url-pattern>
+			<web-resource-name>Administrators Realm</web-resource-name>
+			<url-pattern>/administration.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 			<http-method>PUT</http-method>

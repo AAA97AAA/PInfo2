@@ -22,15 +22,15 @@ close[i].onclick = function() {
 //Create a new list item when clicking on the "Add" button
 function newElement1() {
 var li = document.createElement("li");
-var inputValue = document.getElementById("myInput1").value;
+var inputValue = document.getElementById("primarytag").value; 
 var t = document.createTextNode(inputValue);
 li.appendChild(t);
-if (inputValue === '') {
- alert("You must write something!");
+if (inputValue === 'Select primarytag:') {
+ alert("You must select something!");
 } else {
  document.getElementById("myUL1").appendChild(li);
 }
-document.getElementById("myInput1").value = "";
+document.getElementById("primarytag").value;
 
 var span = document.createElement("SPAN");
 var txt = document.createTextNode("\u00D7");
@@ -48,15 +48,15 @@ for (i = 0; i < close.length; i++) {
 
 function newElement2() {
 	  var li = document.createElement("li");
-	  var inputValue = document.getElementById("myInput2").value;
+	  var inputValue = document.getElementById("secondarytag").value;
 	  var t = document.createTextNode(inputValue);
 	  li.appendChild(t);
-	  if (inputValue === '') {
-	    alert("You must write something!");
+	  if (inputValue === 'Select secondarytag:') {
+	    alert("You must select something!");
 	  } else {
 	    document.getElementById("myUL2").appendChild(li);
 	  }
-	  document.getElementById("myInput2").value = "";
+	  document.getElementById("secondarytag").value;
 
 	  var span = document.createElement("SPAN");
 	  var txt = document.createTextNode("\u00D7");
@@ -70,8 +70,21 @@ function newElement2() {
 	      div.style.display = "none";
 	    }
 	  }
+}
+
+
+function showAdvancedSearch() {
+
+	var researchBar = document.getElementById("advancedResearchContent");
+	
+
+	if(researchBar.style.display == "none") {
+		researchBar.style.display = "block";
+		
+	} else {
+		researchBar.style.display = "none";
 	}
 
-
+}
 
 

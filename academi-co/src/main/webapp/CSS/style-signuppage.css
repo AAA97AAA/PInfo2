@@ -1,9 +1,9 @@
-/* Stylesheet for login page */
+/* Stylesheet for signup page */
 /* Full-width inputs */
-input[type=logintext], input[type=password] {
+input[type=logintext], input[type=password], input[type=confirmpasswd], input[type=email] {
     width: 100%;
     padding: 12px 20px;
-    margin: 10px 0;
+    margin: 8px 0;
     display: inline-block;
     background: #ffffff;
     border: 2px solid #e0e0e0;
@@ -11,7 +11,7 @@ input[type=logintext], input[type=password] {
 }
 
 /* Set a style for all buttons */
-.submitButton {
+#submitButton {
     background-color: #2392e8;
     color: white;
     padding: 12px 24px;
@@ -21,20 +21,31 @@ input[type=logintext], input[type=password] {
 }
 
 /* Add a hover effect for buttons */
-.submitButton:hover {
+#submitButton:hover {
     opacity: 0.8;
 }
 
-
-/* Add padding to login container */
-div.logincontainer {
+/* Add padding to signup container */
+div.signupcontainer {
     background: #549bd1a4;
     border-radius: 25px;
-    width: 20%;
+    width: 30%;
     margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
     padding: 16px;
+}
+
+.leftcolumn {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.rightcolumn {
+    float: right;
+    width: 50%;
+    padding: 10px;
 }
 
 #logoHome {

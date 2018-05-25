@@ -50,10 +50,16 @@ data-source add --name=academi-co --driver-name=mysql --jndi-name=$ACADEMI_CO \
     --max-pool-size=25 --blocking-timeout-wait-millis=5000
 
 # Add a realm based on a database
-/subsystem=security/security-domain=academi-co-realm:add
-/subsystem=security/security-domain=academi-co-realm/authentication=classic:add
-#/subsystem=security/security-domain=academi-co-realm/authentication=classic/login-modules=Database:add(code=Database,flag=required,module-options=[("dsJndiName"=>"$ACADEMI_CO"),("principalsQuery"=>"select PASSWORD_HASH from USERS where USERNAME=?"),("rolesQuery" => "select USER_TYPE, 'Roles' from USERS where USERNAME=?"),("hashAlgorithm"=>"SHA-256"),("hashEncoding"=>"base64")])
-/subsystem=security/security-domain=academi-co-realm/authentication=classic/login-module=UsersRoles:add(code=UsersRoles,flag=required,module-options=[("usersProperties"=>"${JBOSS_HOME}/academi-co-realm-users.properties"),("rolesProperties"=>"${JBOSS_HOME}/academi-co-realm-roles.properties")])
+/subsystem=security/security-domain=academi-co-realm:add(cache-type=default)
+/subsystem=security/security-domain=academi-co-realm/authentication=classic \
+    :add(login-modules=[ \
+        {"code"=>"Database", "flag"=>"required", \
+        "module-options"=>{"dsJndiName" => "$ACADEMI_CO", \
+            "principalsQuery" => "select PASSWORD_HASH from ACADEMI_CO_DB.USERS where USERNAME=?", \
+            "rolesQuery" => "select USER_TYPE, 'Roles' from ACADEMI_CO_DB.USERS where USERNAME=?", \
+            "hashAlgorithm" => "SHA-256", "hashEncoding" => "hex"}}])
+
+#/subsystem=security/security-domain=academi-co-realm/authentication=classic/login-module=UsersRoles:add(code=UsersRoles,flag=required,module-options=[("usersProperties"=>"${JBOSS_HOME}/academi-co-realm-users.properties"),("rolesProperties"=>"${JBOSS_HOME}/academi-co-realm-roles.properties")])
 
 #/subsystem=logging/console-handler=CONSOLE:write-attribute(name=level,value=TRACE)
 

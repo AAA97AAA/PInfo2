@@ -15,6 +15,7 @@
     <script src="js/ng-grid.min.js"></script>
 
 
+
     <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
     <!--<link rel="stylesheet" href="CSS/bootstrap.min.css" />
     <link rel="stylesheet" href="CSS/ng-grid.min.css" />
@@ -33,8 +34,7 @@
     <link rel="stylesheet" type="text/css" href="CSS/style-resize.css"/>
     <link rel="stylesheet" type="text/css" href="CSS/style-searchbar.css"/>
     <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
-    <link rel="stylesheet" type="text/css" href="CSS/style-loginpage.css"/>
-    <link rel="stylesheet" type="text/css" href="CSS/style-homepage.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-resultpage.css"/>
 
     <!-- Our Scripts TODO: add your personal js here -->
     <!--<script src="script/person.js"></script> -->
@@ -56,26 +56,8 @@
     <!-- Header at the top of browser window -->
     <header class='mainheader' ng-include="'header.html'"></header>
 
-    <!-- Logo -->
-    <div class="logoHomePage">
-            <img id="logoHome" src="images/logo2.png"  alt="Logo">
-    </div>
+    <h1>Search Results</h1>
 
-    <!-- Login Form -->
-    <div class="logincontainer">
-        <br>
-        <label for="uname"><b>Username</b></label>
-        <input type="logintext" placeholder="Enter Username" name="uname" required>
-        <br>
-        <br>
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-        <br>
-        <br>
-        <br>
-        <button id="submitButton" type="submit">Login</button>
-        <br>
-    </div>
 
     <!-- Footer at the bottom of browser window -->
     <footer class="footer" ng-include="'footer.html'"></footer>
