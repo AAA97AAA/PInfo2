@@ -7,12 +7,13 @@
     <title>Signup - Academi-co</title>
 
     <!-- Useful scripts -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/angular-resource.min.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/ui-bootstrap-tpls.min.js"></script>
     <script src="js/ng-grid.min.js"></script>
+    <script src="//www.bichlmeier.info/sha256.js"></script>
 
 
     <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
@@ -68,38 +69,43 @@
         <div class="logoHomePage">
                 <img id="logoHome" src="images/logo2.png"  alt="Logo">
         </div>
-    
-        <!-- Login Form -->
-        <div class="signupcontainer">
 
-            <!-- Left column -->
-            <!-- <div class="leftcolumn"> -->
-                <br>
-                <label for="uname"><b>Username</b></label>
-                <input type="logintext" placeholder="Enter Username" name="uname" required>
-                <br>
-                <br>
-                <label for="email"><b>E-mail</b></label>
-                <input type="emailtext" placeholder="Enter E-mail" name="email" required>
-                <br>
-            <!-- </div> -->
-
-            <!-- Right column -->
-            <!-- <div class="rightcolumn"> -->
-                <br>
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                <br>
-                <br>
-                <label for="psw"><b>Confirm password</b></label>
-                <input type="confirmpasswd" placeholder="Re-enter Password" name="psw" required>
-                <br>
-            <!-- </div> -->
-            <br>
-            <br>
-            <button id="submitButton" type="submit">Sign Up</button>
-            <br>
-        </div>
+                <!-- Login Form -->
+                <div class="signupcontainer" ng-controller="signUpController"> 
+                    <form  name="signUpForm">
+        
+                        <!-- Left column -->
+                        <!-- <div class="leftcolumn"> -->
+                            <br>
+                            <label for="uname"><b>Username</b></label>
+                            <input id="username" type="logintext" placeholder="Enter Username" name="uname" ng-model="user.username" required>
+                            <br>
+                            <br>
+                            <label for="email"><b>E-mail</b></label>
+                            <input id="email" type="email" placeholder="Enter E-mail" name="email" ng-model="user.email" required>
+                            <br>
+                        <!-- </div> -->
+        
+                        <!-- Right column -->
+                        <!-- <div class="rightcolumn"> -->
+                            <br>
+                            <label for="psw"><b>Password</b></label>
+                            <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+                            <br>
+                            <br>
+                            <label for="psw"><b>Confirm password</b></label>
+                            <input id="password2" type="password" placeholder="Re-enter Password" name="psw" required>
+                            <br>
+                        <!-- </div> -->
+                        <br>
+                        <br>
+                        <button id="submitButton" type="submit" ng-click="onSubmit()" ng-disabled="signUpForm.$invalid">Sign Up</button>
+                        <br>
+                    </form>
+                </div>
+                <br><br>
+                <pre>{{ user | json }}</pre>
+                <br><br><br><br>
         <br>
         <br>
         <br>

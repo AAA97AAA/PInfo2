@@ -45,3 +45,50 @@ app
 		$scope.thread = response.data;
 	})
 });
+
+
+/* POST User */
+
+app.controller('signUpController', function($scope, $http) {
+  $scope.user = {};
+
+  $scope.onSubmit = function() {
+
+
+    if(document.getElementById("password").value != document.getElementById("password2").value) {
+      alert("Those passwords didn't match. Try again.");
+    } else {
+      $scope.user.type = 'REGISTERED';
+      // alert(sha256_digest($scope.user.password));
+      $scope.user.password = sha256_digest(document.getElementById("password").value);
+      
+
+      var req = {
+        method: 'POST',
+        url: 'http://localhost:8080/academi-co/resources/users/',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+        data: $scope.user
+      }
+      
+      $http(req).then(
+        function(){
+          console.log("Aslam c'est le meilleur");
+        },
+        function(){
+            console.log("ERROR POST mais Aslam reste le meilleur tout de même");
+        }
+
+      )
+
+      // window.location.href = "login.jsp"
+      // alert("Welcome " + $scope.user.username + "! Please login.");
+    }
+    
+  }
+
+})
+
+
