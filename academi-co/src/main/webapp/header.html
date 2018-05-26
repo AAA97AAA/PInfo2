@@ -17,7 +17,8 @@
    
    <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
    <!-- Inbox (Notifications) + profile pic logo -->
-   <div id="rightComponent" style="float:right">
+   <!-- <div id="rightConnectedComponent" style="float:right;display:none;"> -->
+     <div id="rightConnectedComponent" style="float:right;">
       <!-- Inbox in header -->
       <div class="inboxDropDown" ng-controller= "UserInbox">
          <!-- Inbox button with green number of notifications -->
@@ -29,10 +30,22 @@
          </div>
       </div>
       <!-- Profile Pic -->
-      <a href="profilepage.html" class="buttonHeader profilePicButton" title="My Profile">
-      <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar"></img>
-      </a>
+      <div class="profilePicDropDown">
+          <a href="profile.html" class="buttonHeader profilePicButton" title="My Profile">
+          <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar"></img>
+          </a>
+   
+          <div class="profilePicDropDownContent" style="right:0;width:100px">
+            <a class="logoutButton" href="logout.jsp">Logout</a>
+          </div>
+      </div>
    </div>
+
+   <!-- <div id="rightNonConnectedComponent"> 
+      <a href="login.jsp" id="loginButton" class="buttonHeader logInButton">Login</a>
+      <a href="signUp.html" id="signupButton" class="buttonHeader signUpButton">Sign up</a>
+     
+   </div> -->
     <!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
     <!--  <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">-->
     
