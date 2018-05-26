@@ -1,3 +1,10 @@
+<script src="js/angular-resource.min.js"></script>
+<script src="js/modules/allModules.js"></script>
+<script src="js/modules/getRESTCall.js"></script>
+<script src="js/controllers/script-searchbar.js"></script>
+<script src="js/controllers/script-signInUp.js"></script>
+
+
 <div>
    <!-- If there's a need to fix the header uncomment this and comment the precedent div declaration.  -->
    <!--   <div class="mainheader" style="position:fixed"> -->
@@ -17,10 +24,12 @@
    
    <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
    <!-- Inbox (Notifications) + profile pic logo -->
+   <div id="rightComponent" style="float:right;" ng-controller="isConnectHeader">
    <!-- <div id="rightConnectedComponent" style="float:right;display:none;"> -->
-     <div id="rightConnectedComponent" style="float:right;">
+     <div id="rightConnectedComponent" style="float:right;display:none;">
       <!-- Inbox in header -->
-      <div class="inboxDropDown" ng-controller= "UserInbox">
+      <!-- <div class="inboxDropDown" ng-controller= "UserInbox"> -->
+      <div class="inboxDropDown">
          <!-- Inbox button with green number of notifications -->
          <button class="buttonHeader inboxButton" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-red w3-small">{{userInbox.messages.length}}</span></button>
          <div class=" inboxDropDownContent" style="right:0;width:300px" >
@@ -39,13 +48,13 @@
             <a class="logoutButton" href="logout.jsp">Logout</a>
           </div>
       </div>
-   </div>
-
-   <!-- <div id="rightNonConnectedComponent"> 
+    </div>
+  
+   <div id="rightNonConnectedComponent"> 
       <a href="login.jsp" id="loginButton" class="buttonHeader logInButton">Login</a>
       <a href="signUp.html" id="signupButton" class="buttonHeader signUpButton">Sign up</a>
-     
-   </div> -->
+   </div>
+
     <!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
     <!--  <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">-->
     

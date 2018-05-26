@@ -18,27 +18,6 @@ app
 
 
 app
-.controller('UserInbox', function($scope, $http) {
-	$scope.userInbox = {
-  "messages": [
-    {
-      "id": "1",
-      "content": "Someone commented your thread: What is the..."
-    },
-    {
-      "id": "2",
-      "content": "Someone upvoted your thread: How to make flat bread"
-    },
-    {
-      "id": "3",
-      "content": "Someone asked a question with the tag Maths"
-    }
-  ]
-};
-});
-
-
-app
 .controller('threadLoad', function($scope, $http) {
 	$http.get("http://localhost:8080/academi-co/resources/posts/2")
 	.then(function(response) {
@@ -47,7 +26,8 @@ app
 });
 
 
-/* POST User */
+
+/* POST User (create an account) */
 
 app.controller('signUpController', function($scope, $http) {
   $scope.user = {};
@@ -61,7 +41,7 @@ app.controller('signUpController', function($scope, $http) {
       $scope.user.type = 'REGISTERED';
       // alert(sha256_digest($scope.user.password));
       $scope.user.password = sha256_digest(document.getElementById("password").value);
-      
+
 
       var req = {
         method: 'POST',
@@ -72,23 +52,97 @@ app.controller('signUpController', function($scope, $http) {
           },
         data: $scope.user
       }
-      
+
       $http(req).then(
-        function(){
-          console.log("Aslam c'est le meilleur");
+        function(response){
+          console.log("account created perfectly");
         },
-        function(){
-            console.log("ERROR POST mais Aslam reste le meilleur tout de même");
+        function(response){
+            console.log("ERROR : account cannot be created!");
+            console.log(response.data);
+            console.log("End error message");
         }
 
       )
 
-      // window.location.href = "login.jsp"
+      // window.location.href = "login.jsp";
       // alert("Welcome " + $scope.user.username + "! Please login.");
     }
-    
+
   }
 
-})
+});
 
+/* controller for the header to check if the user is connected or not and display the correct one */
+
+app.controller('isConnectHeader', function($scope, $http){
+  if(getCookie('username') == 'null'){
+    document.getElementById("rightConnectedComponent").style.display = 'none';
+    document.getElementById("rightNonConnectedComponent").style.display = 'block';
+    // alert("not Connected Angular");
+  } else {
+    document.getElementById("rightNonConnectedComponent").style.display = 'none';
+    document.getElementById("rightConnectedComponent").style.display = 'block';
+    $scope.userInbox = {
+      "messages": [
+        {
+          "id": "1",
+          "content": "Someone commented your thread: What is the..."
+        },
+        {
+          "id": "2",
+          "content": "Someone upvoted your thread: How to make flat bread"
+        },
+        {
+          "id": "3",
+          "content": "Someone asked a question with the tag Maths"
+        }
+      ]
+    };
+    // alert("Connected Angular");
+  }
+});
+
+/* controller that allow only connected user to reply a thread */
+app.controller('threadTextAreaConnected', function($scope, $http) {
+
+  if(getCookie('username') == 'null'){
+    document.getElementById("textAreaThread").style.display = 'none';
+  } else {
+    document.getElementById("textAreaThread").style.display = 'block';
+
+  }
+  
+
+});
+
+
+/* COOKIE */
+
+function setCookie(name,value) {
+  document.cookie = name + "=" + (value || "")  + "; path=/";
+}
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}
+function eraseCookie(name) {   
+  document.cookie = name+'=; Max-Age=-99999999;';  
+};
+
+
+// This function creates/sets the cookie username with the corresponding one
+// username if logged in 
+// null if not
+function setUser(username) {
+  // window.userContenu = username;
+  setCookie('username', username);
+  // alert(username);
+};
 
