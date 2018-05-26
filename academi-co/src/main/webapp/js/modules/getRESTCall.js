@@ -76,13 +76,20 @@ app.controller('signUpController', function($scope, $http) {
 /* controller for the header to check if the user is connected or not and display the correct one */
 
 app.controller('isConnectHeader', function($scope, $http){
-  if(getCookie('username') == 'null'){
+  var notConnected = getCookie('username') == 'null';
+  var notDefined = getCookie('username') == null;
+
+  if(notConnected){
     document.getElementById("rightConnectedComponent").style.display = 'none';
     document.getElementById("rightNonConnectedComponent").style.display = 'block';
     // alert("not Connected Angular");
-  } else {
+  } else if(notDefined) {
+    document.getElementById("rightConnectedComponent").style.display = 'none';
+    document.getElementById("rightNonConnectedComponent").style.display = 'block';
+  } else { // connected
     document.getElementById("rightNonConnectedComponent").style.display = 'none';
     document.getElementById("rightConnectedComponent").style.display = 'block';
+    console.log("message 3");
     $scope.userInbox = {
       "messages": [
         {
