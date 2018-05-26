@@ -68,24 +68,25 @@
    	<img id="logoHelpPage" style="text-align:center;vertical-align:middle; margin-top:5%" src="images/logo2.png"  alt="Logo">
    	<br>
    	<button id="OurPoliciesButton"  type="button" class="button blueButton" onclick="document.getElementById('OurPolicies').style.display='block'">Our policies</button>
-   	<br>
-   	<button id="WannaBeModeratorButton" type="button" class="button blueButton" onclick="document.getElementById('WannaBeModerator').style.display='block'">I want to be moderator</button>
-   	<br>
+    <br>
+    <!-- Uncomment when adding moderators features -->
+   	<!-- <button id="WannaBeModeratorButton" type="button" class="button blueButton" onclick="document.getElementById('WannaBeModerator').style.display='block'">I want to be moderator</button>
+   	<br> -->
    	<button id="QAButton" type="button" class="button blueButton" onclick="document.getElementById('QA').style.display='block'">Questions &amp; Answers</button>
    </div>
    <!-- Hidden element that appears when the corresponding button is clicked -->
    <div id="OurPolicies" class="modalBackground scrollModal">
-   	<span class="closeButton" onclick="document.getElementById('OurPolicies').style.display='none'">X</span>
+    <button class="closeButton" onclick="document.getElementById('OurPolicies').style.display='none'">&times;</button>
    	<form class="modalContent">
    	</form>
    </div>
    <div id="WannaBeModerator" class="modalBackground scrollModal">
-   	<span class="closeButton" onclick="document.getElementById('WannaBeModerator').style.display='none'">X</span>
-   	<form class="modalContent">
-   	</form>
+    <button class="closeButton" onclick="document.getElementById('WannaBeModerator').style.display='none'">&times;</button>
+    <!-- <form class="modalContent">
+   	</form> -->
    </div>
    <div id="QA" class="modalBackground scrollModal">
-   	<span class="closeButton" onclick="document.getElementById('QA').style.display='none'">X</span>
+    <button class="closeButton" onclick="document.getElementById('QA').style.display='none'">&times;</button>
    	<form class="modalContent">
    		<h1 class="titleHP"> Questions &amp; Answers </h1>
    		<div style="text-align:left">

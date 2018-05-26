@@ -68,3 +68,14 @@ transition: 0.3s;
   height: 100%;
   overflow: scroll;
 }
+
+.closeButton {
+  position:absolute;
+  right: 20px;
+  top:0px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  background-color: transparent;
+  border-color: transparent;
+}
