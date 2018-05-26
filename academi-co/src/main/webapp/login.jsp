@@ -1,5 +1,5 @@
 <!-- Redirection to home page -->
 <%
-    String redirectURL = "user.jsp";
+    String redirectURL = "login.jsp";
     response.sendRedirect(redirectURL);
 %>
