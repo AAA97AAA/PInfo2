@@ -4,7 +4,7 @@
 <script src="js/controllers/script-searchbar.js"></script>
 <script src="js/controllers/script-signInUp.js"></script>
 
-
+  <link rel="stylesheet" type="text/css" href="CSS/style-growl.css"/> 
 <div>
    <!-- If there's a need to fix the header uncomment this and comment the precedent div declaration.  -->
    <!--   <div class="mainheader" style="position:fixed"> -->
@@ -24,12 +24,10 @@
    
    <!--<a href="searchPage.html" class="buttonHeader plusButton" title="Search"><i class="fa fa-search"></i></a> -->
    <!-- Inbox (Notifications) + profile pic logo -->
-   <div id="rightComponent" style="float:right;" ng-controller="isConnectHeader">
    <!-- <div id="rightConnectedComponent" style="float:right;display:none;"> -->
-     <div id="rightConnectedComponent" style="float:right;display:none;">
+     <div id="rightConnectedComponent" style="float:right;">
       <!-- Inbox in header -->
-      <!-- <div class="inboxDropDown" ng-controller= "UserInbox"> -->
-      <div class="inboxDropDown">
+      <div class="inboxDropDown" ng-controller= "UserInbox">
          <!-- Inbox button with green number of notifications -->
          <button class="buttonHeader inboxButton" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-red w3-small">{{userInbox.messages.length}}</span></button>
          <div class=" inboxDropDownContent" style="right:0;width:300px" >
@@ -48,13 +46,13 @@
             <a class="logoutButton" href="logout.jsp">Logout</a>
           </div>
       </div>
-    </div>
-  
-   <div id="rightNonConnectedComponent" style="display:block;"> 
-      <a href="login.jsp" id="loginButton" class="buttonHeader logInButton">Login</a>
-      <a href="signUp.html" id="signupButton" class="buttonHeader signUpButton">Sign up</a>
    </div>
 
+   <!-- <div id="rightNonConnectedComponent"> 
+      <a href="login.jsp" id="loginButton" class="buttonHeader logInButton">Login</a>
+      <a href="signUp.html" id="signupButton" class="buttonHeader signUpButton">Sign up</a>
+     
+   </div> -->
     <!-- BEGGINING OF SLIDE-NAVIGATION SEARCH with the header-->
     <!--  <div id="main" class="w3-top w3-bar w3-theme-d2 w3-xlarge">-->
     
@@ -65,7 +63,7 @@
 <!--         <input type="text" id="dateBegin" style="position:absolute; left:57%; width:200px; top:180px;"></input> -->
 	<div class="form-group" ><!-- style="width:20px" -->
         <div class='input-group date' id='datetimepicker1'style="position:absolute; left:57%; width:220px; top:180px;">
-          <input type='text' class="form-control" />
+          <input id="fromDate" type='text' class="form-control" />
           <span class="input-group-addon" >
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -75,7 +73,7 @@
 <!--         <input type="text" id="dateEnd" style="position:absolute; left:80%; width:200px; top:180px;"></input> -->
 	<div class="form-group">
         <div class='input-group date' id='datetimepicker2'style="position:absolute; left:80%; width:220px; top:180px;">
-          <input type='text' class="form-control" />
+          <input id="toDate" type='text' class="form-control" />
           <span class="input-group-addon" >
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -96,7 +94,6 @@
 </script>
 
         <span style="position:absolute; left:50%; width:200px; top:280px;">Author</span><br><input type="text" id="author" style="position:absolute; left:57%; width:200px; top:280px;"></input>
-        <input type="submit" value="Submit" id="popUpYes" style="border-radius: 5px; position: absolute; top: 280px; left:80%; width: 200px; height:40px;"></input>
         <div id="myDIV" class="header" style="background-color: #1f2c47; height:80px;  width: 510px; margin-left:7%;">
             <h4 style="margin:0px">Primary tag</h4>
             
@@ -133,9 +130,10 @@
             <span onclick="newElement2()" class="addBtn" style="border-radius: 0px; height:30px">Add</span>
         </div>
         <ul id="myUL2" style="width: 510px; margin-left:7%;"></ul>
-        
-        
+                <button onclick="GrowlAdvancedSearchBar()" type="submit" value="Submit" id="popUpYes" style="border-radius: 5px; position: absolute; top: 280px; left:80%; width: 200px; height:40px;">Submit</button>
+        	<script type="text/javascript" src="js/modules/script-growl.js"></script>
         <br><br> 
     </div>
+    
 </div>
 <!-- ENDING OF SLIDE-NAVIGATION SEARCH -->

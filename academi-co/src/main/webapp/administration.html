@@ -38,6 +38,7 @@
   <link rel="stylesheet" type="text/css" href="CSS/style-searchbar.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
   <link rel="stylesheet" type="text/css" href="CSS/style-administratorPage.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style-growl.css"/> 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
@@ -80,15 +81,14 @@
  		<div>
  			<label for="profile_pic" class="BrowseButton">Choose Ad</label>
  			<input type="file" id="profile_pic" name="profile_pic" class="BrowseButton" accept=".jpg, .jpeg, .png" style="z-index:-1"></input>
- 			<button id="UploadBannerButton">Upload Ad</button>
+ 			<button id="UploadBannerButton" onclick="GrowlAdBanner()">Upload Ad</button>
 <!--  			HERE IS THE ID OF THE ENCODED IMAGE -->
 <!--  			<p id="b64"></p> -->
  			<br>
  			<hr>
  		</div>
-
 <script type="text/javascript" src="js/modules/script-administratorpage.js"></script>
-
+<script type="text/javascript" src="js/modules/script-growl.js"></script>
  		<!-- Active Banner -->
  	</form>
  </div>
