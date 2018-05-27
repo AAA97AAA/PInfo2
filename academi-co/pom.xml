@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.unige.softaware</groupId>
     <artifactId>academi-co</artifactId>
@@ -131,7 +132,7 @@
 		<dependency>
 			<groupId>org.jacoco</groupId>
 			<artifactId>org.jacoco.core</artifactId>
-			<version>0.7.4.201502262128</version>
+			<version>0.7.8</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
@@ -164,11 +165,48 @@
     
     <build>
         <finalName>academi-co</finalName>
+        
+        <plugins>
+        	<plugin>
+			    <groupId>org.jacoco</groupId>
+			    <artifactId>jacoco-maven-plugin</artifactId>
+			    <version>0.7.8</version>
+			    <configuration>
+			    	<excludes>
+			    		<exclude>**/*Test.java</exclude>
+			    		<exclude>**/*.js</exclude>
+			    		<exclude>**/*.html</exclude>
+			    		<exclude>**/*.css</exclude>
+			    		<exclude>**/demo/**</exclude>
+			    		<exclude>**/*.xml</exclude>
+			    		<exclude>**/Fake*.java</exclude>
+			    	</excludes>
+			    </configuration>
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>prepare-agent</goal>
+			            </goals>
+			        </execution>
+			        <execution>
+			            <id>report</id>
+			            <phase>prepare-package</phase>
+			            <goals>
+			                <goal>report</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
+		</plugins>
+            
     </build>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sonar.core.codeCoveragePlugin>jacoco </sonar.core.codeCoveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
     </properties>
 </project>

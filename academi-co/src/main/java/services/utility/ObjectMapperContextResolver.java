@@ -17,9 +17,10 @@ import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 @Provider
 public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper> {
 
-    final ObjectMapper mapper = new ObjectMapper();
+    final ObjectMapper mapper;
 
     public ObjectMapperContextResolver() {
+    	mapper = new ObjectMapper();
         mapper.registerModule(new JSR310Module());
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }

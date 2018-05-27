@@ -7,6 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 import dom.AllDomTests;
 import jaxrsConfig.JAXRSConfigurationTest;
 import services.AllServicesTests;
+import services.search.AllSearchTests;
+import services.utility.AllUtilityTests;
 
 /**
  * Main test suite: Launches all the tests in the project.
@@ -15,7 +17,8 @@ import services.AllServicesTests;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({AllDomTests.class, AllServicesTests.class, JAXRSConfigurationTest.class})
+@SuiteClasses({AllDomTests.class, AllServicesTests.class, JAXRSConfigurationTest.class, AllSearchTests.class,
+	AllUtilityTests.class})
 public class AllUnitTests {
 
 }

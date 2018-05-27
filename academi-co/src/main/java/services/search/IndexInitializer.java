@@ -19,7 +19,7 @@ public class IndexInitializer implements ServletContextListener {
 	private SearchService searchService;
 
 	@Override
-	public void contextDestroyed(ServletContextEvent arg0) {
+	public void contextInitialized(ServletContextEvent arg0) {
 		try {
 			searchService.initIndex();
 			System.out.println("Lucene indexes initialized.");
@@ -29,7 +29,7 @@ public class IndexInitializer implements ServletContextListener {
 	}
 
 	@Override
-	public void contextInitialized(ServletContextEvent arg0) {
+	public void contextDestroyed(ServletContextEvent arg0) {
 		// No action required at shutdown
 	}
 

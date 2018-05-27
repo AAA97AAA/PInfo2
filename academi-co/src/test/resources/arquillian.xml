@@ -18,8 +18,8 @@
 		
 	</container>
 	
-<!-- 	<extension qualifier="jacoco"> -->
-<!-- 		<property name="includes">services.*</property> -->
-<!-- 	</extension> -->
+	<extension qualifier="jacoco">
+		<property name="includes">*</property>
+	</extension>
 
 </arquillian>
