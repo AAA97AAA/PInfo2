@@ -1,0 +1,50 @@
+<!-- Title of the page -->
+<!-- <title>Sign Up- Academi-co</title> -->
+
+<!-- Include JS scripts-->
+
+<!-- Include CSS stylesheet-->
+<link rel="stylesheet" type="text/css" href="CSS/style-signuppage.css"/>
+
+
+<!-- Content of the page -->
+
+ <!-- Logo -->
+ <div class="logoHomePage">
+        <img id="logoHome" src="images/logo2.png"  alt="Logo">
+</div>
+
+<!-- Login Form -->
+<div class="signupcontainer" ng-controller="signUpController"> 
+    <form  name="signUpForm">
+
+        <br>
+        <label for="uname"><b>Username</b></label>
+        <input id="username" type="logintext" placeholder="Enter Username" name="uname" ng-model="user.username" required>
+        <br>
+        <br>
+        <label for="email"><b>E-mail</b></label>
+        <input id="email" type="email" placeholder="Enter E-mail" name="email" ng-model="user.email" required>
+        <br>
+        <br>
+        <label for="psw"><b>Password</b></label>
+        <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+        <br>
+        <br>
+        <label for="psw"><b>Confirm password</b></label>
+        <input id="password2" type="password" placeholder="Re-enter Password" name="psw" required>
+        <br>
+        <br>
+        <br>
+        <button id="submitButton" type="submit" ng-click="onSubmit()" ng-disabled="signUpForm.$invalid">Sign Up</button>
+        <br>
+    </form>
+</div>
+<br>
+<br>
+<br>
+<br>    
+<br>
+<br>
+<br>
+<br>

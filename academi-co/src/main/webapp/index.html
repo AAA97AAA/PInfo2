@@ -2,97 +2,73 @@
 <html lang="en">
 
 <head>
-  <!-- Title of the page -->
-  <!-- TODO: add a title for the page -->
-  <title>Index - Academi-co</title>
+    <!-- HTML 5 thing-->
+    <!-- <base href="/academi-co/"> -->
 
-  <!-- Useful scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="js/angular.min.js"></script>
-  <script src="js/angular-resource.min.js"></script>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/ui-bootstrap-tpls.min.js"></script>
-  <script src="js/ng-grid.min.js"></script>
+    <!-- To have correct caracters for accented letters for example -->
+    <meta charset="UTF-8">
+
+    <!-- This is for the Responsive Website -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Useful scripts -->
+    <!-- JQuery : JS library for webapp (interaction with user, HTML/CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="js/jquery.min.js"></script> -->
+
+    <!-- AngularJS -->
+    <!-- <script src="js/angular.min.js"></script>
+    <script src="js/angular-resource.min.js"></script> -->
+    <!-- We can use these scripts instead of the two above -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-resource.js"></script>
+
+    <!-- AngularJS Road -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-route.js"></script>
+
+    <!-- Bootstrap: HTML, CSS, javascript framework -->
+    <script src="/academi-co/js/ui-bootstrap-tpls.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+  
+    <script src="/academi-co/js/ng-grid.min.js"></script>
 
 
-  <!-- Imported Stylesheet CSS dependencies TODO: put them in correct folder -->
-  <!--<link rel="stylesheet" href="CSS/bootstrap.min.css" />
-  <link rel="stylesheet" href="CSS/ng-grid.min.css" />
--->
+    <!-- CSS libraries (stylesheet)-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <!-- Our CSS stylesheet -->
+    <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-resize-ad.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/style-resize.css"/>
 
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Our Scripts -->
+    <!-- Angular Academi-co module -->
+    <script src="/academi-co/js/modules/allModules.js"></script>
+    <!-- All controllers -->
+    <script src="/academi-co/js/controllers/allPageControllers.js"></script>
+    <!-- Routing Configuration -->
+    <script src="/academi-co/js/route/routeConfig.js"></script>
+    <!-- Cookie controller -->
+    <script src="/academi-co/js/controllers/cookieController.js"></script>
 
-  <!-- Our stylesheet -->
-  <link rel="stylesheet" type="text/css" href="CSS/style-header.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-body.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-footer.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-resize.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-searchbar.css"/>
-  <link rel="stylesheet" type="text/css" href="CSS/style-signInUp.css"/>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
-
-  <!-- Our Scripts TODO: add your personal js here -->
-  <!--<script src="script/person.js"></script> -->
-  <script src="js/modules/allModules.js"></script>
-  <script src="js/modules/getRESTCall.js"></script>
-  <script src="js/controllers/script-searchbar.js"></script>
-  <script src="js/controllers/script-signInUp.js"></script>
-
-  <!-- To have correct caracters for accented letters for example -->
-  <meta charset="UTF-8">
-
-  <!-- This is for the Responsive Website -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
-<!-- This body is the container for all the content -->
+
 <body class="body" ng-app="academi-co">
-  <!-- - - - - - - - - - - - - - -  Header: Navigation bar at the top  - - - - - - - - - - - - - - -->
-  <header class='mainheader' ng-include="'header.html'"></header>
- <!-- - - - - - - - - - - - - - -  Content  - - - - - - - - - - - - - - -->
 
- <div style="text-align:center">
-      <img id="logoHelpPage" src="images/logo2.png"  alt="Logo" style="margin-top:5%">
-      <br>
-      <br>
-   <a href="nonConnecteTemplate.html"> Template User non connected</a>
-   <br>
-   <a href="connecteTemplate.html"> Template User connected</a>
-   <br>
-    <a href="index.html" >index</a>
-    <br>
-    <a href="administration.html" >administratorPage</a>
-    <br>
-    <a href="help.html"> help page </a>
-    <br>
-    <a href="profile.html"> profile page </a>
-    <br>
-    <a href="thread.html"> thread page </a>
-    <br>
-    <a href="moderation.html"> moderator page </a>
-    <br>
-    <a href="postThread.html"> post thread page</a>
-    <br>
-    <a href="settingsPreferences.html"> settings preferences </a>
-    <br>
+    <!-- Header -->
+    <header class='mainheader' ng-include="'header.html'"></header>
 
- </div>
-
-  <!-- - - - - - - - - - - - - - -  Footer  - - - - - - - - - - - - - - -->
-  <footer class="footer" ng-include="'footer.html'"></footer>
-
+    <!-- Injected Content with ng-view -->
+    <div ng-view></div>
+    
+    <!-- Footer -->
+    <footer class="footer" ng-include="'footer.html'"></footer>
 
 </body>
-
-</html>

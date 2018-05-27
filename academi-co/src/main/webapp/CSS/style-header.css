@@ -153,14 +153,11 @@ background-color: #0b78d1 ;
 
 
 /* at the beginning the connected one is not displayed */
-#rightConnectedComponent {
+#rightComponent {
   float:right;
   /* display: none; */
 }
 
-#rightNonConnectedComponent {
-  float:right;
-}
 
 
 /* logo Button

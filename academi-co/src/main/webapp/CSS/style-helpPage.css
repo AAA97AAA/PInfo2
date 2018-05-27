@@ -79,3 +79,12 @@ transition: 0.3s;
   background-color: transparent;
   border-color: transparent;
 }
+
+#logoHelpPage {
+  text-align:center;
+  vertical-align:middle; 
+  max-width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:5%;
+}
