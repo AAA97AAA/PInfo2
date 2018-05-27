@@ -5,7 +5,7 @@
     <artifactId>academi-co</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    
+
     <dependencies>
    		<dependency>
             <groupId>org.jboss.arquillian</groupId>
@@ -160,8 +160,13 @@
 		    </exclusions>
 		    <scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.bitbucket.b_c</groupId>
+            <artifactId>jose4j</artifactId>
+            <version>0.5.0</version>
+        </dependency>
     </dependencies>
-    
+
     <build>
         <finalName>academi-co</finalName>
     </build>
