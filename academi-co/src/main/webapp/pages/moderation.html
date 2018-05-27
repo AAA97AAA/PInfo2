@@ -1,0 +1,148 @@
+<!-- Title of the page -->
+<title>Moderator - Academi-co</title>
+
+<!-- Include JS scripts-->
+
+<!-- Include CSS stylesheet-->
+<link rel="stylesheet" type="text/css" href="CSS/style-moderatorspage.css"/>
+ 
+
+
+<!-- Content of the page -->
+<div class="w3-container w3-content" style="width:auto;margin-top:auto">
+    <!-- The Grid -->
+    <div style="margin-top:30%">
+        <div class="w3-row">
+            <div ng-app="academi-co" ng-controller="profilePageLoad">
+                <!--     Left Column -->
+                <div class="w3-col m3">
+                    <!--       Profile -->
+                    <div class="w3-card w3-round w3-white">
+                    </div>
+                    <br>
+                    <div class="w3-card w3-round">
+                        <div class="w3-white">
+                        </div>
+                    </div>
+                    <br>
+                    <!--     End Left Column -->
+                </div>
+                <!--     Middle Column -->
+                <div class="w3-col m7">
+                    <!-- Biography of the user -->
+                    <div class="w3-row-padding">
+                        <div class="w3-col m12">
+                        </div>
+                    </div>
+                </div>
+                <!-- Central column after MyPosts -->
+                <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin">
+                    <h1><b>Flagged users</b></h1>
+                    <!-- thread/posts -->
+                    <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
+                        <br>
+                        <br>
+                        <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+                        <h4>{{post.author}} <button class="tag ban w3-right">Ban user</button> </h4>
+                        <br>
+                    </div>
+                    <!--     End Middle Column -->
+                </div>
+                <div class="w3-container w3-content" style="width:auto;margin-top:auto">
+                    <!-- The Grid -->
+                    <div class="w3-row">
+                        <div ng-app="academi-co" ng-controller="profilePageLoad">
+                            <!--     Left Column -->
+                            <div class="w3-col m3">
+                                <!--       Profile -->
+                                <div class="w3-card w3-round w3-white">
+                                </div>
+                                <br>
+                                <div class="w3-card w3-round">
+                                    <div class="w3-white">
+                                    </div>
+                                </div>
+                                <br>
+                                <!--     End Left Column -->
+                            </div>
+                            <!--     Middle Column -->
+                            <div class="w3-col m7">
+                                <!-- Biography of the user -->
+                                <div class="w3-row-padding">
+                                    <div class="w3-col m12">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Central column after MyPosts -->
+                            <br>
+                            <div class="w3-container w3-card w3-theme-l5 w3-round" style="width:100%;margin-top:auto;">
+                                <h1><b>Flagged posts</b></h1>
+                                <!-- thread/posts -->
+                                <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
+                                    <br>
+                                    <br>
+                                    <img ng-src="data:image/JPEG;base64,{{post.profilePic}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+                                    <span class="w3-right w3-opacity">1 min</span>
+                                    <h4>{{post.author}}<button class="tag ban w3-right">Delete Post</button></h4>
+                                    <br>
+                                    <div class="content">
+                                        <!-- score -->
+                                        <hr>
+                                        <div style="width:5%; float:right">
+                                            <span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+                                            <br> {{post.score}}
+                                            <br>
+                                            <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- Posts -->
+                                    <div id="post" class="w3-row-padding" style="width:90%; float:left" >
+                                        <!-- this is not displayed if it is a reply (ng-if) -->
+                                        <div id="postTitle" ng-if= post.title>
+                                            <p><b>{{post.title}}</b> </p>
+                                        </div>
+                                        <p>{{post.content}}</p>
+                                        <!-- Tags -->
+                                        <!-- this is not displayed if it is a reply (ng-if) -->
+                                        <div class="w3-row-padding" style="margin:0 -16px" ng-if= post.title>
+                                            <hr style="height: 2px; color: #A9A9A9; background-color: #A9A9A9; width: 100%; border: none;">
+                                            <button class="tag maintag">{{post.subject}}</button>
+                                            <button class="tag secondarytag" ng-repeat="topic in post.topics">{{topic.name}}</button>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                                <!--     End Middle Column -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--     Right Column -->
+            <div class="w3-col m2">
+                <div class="w3-container">
+                </div>
+                <br>
+                <!--     End Right Column -->
+            </div>
+            <!-- End Page Container -->
+        </div>
+        <br>
+    </div>
+</div>
+<!--     End Left Column -->
+</div>
+<!--     Middle Column -->
+<div class="w3-col m7">
+</div>
+<!--     End Middle Column -->
+</div>
+<!--     Right Column -->
+<div class="w3-col m2">
+    <div class="w3-container">
+    </div>
+    <br>
+    <br>
+    <!--     End Right Column -->
+</div>
+

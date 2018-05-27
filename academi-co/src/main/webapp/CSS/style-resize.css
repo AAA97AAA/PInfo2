@@ -26,7 +26,7 @@
 
 
 }
-/* removing Academi-co because it creates a second line */
+/* Academi-co because it creates a second line */
 @media only screen and (min-width:150px) and (max-width: 870px) {
   /* .logoButton {
     width:50%;
@@ -54,7 +54,19 @@ margin-right: auto;
   }
   #rightComponent {
     width:100%;
-    text-align: center;
+    float: center;
+    background-color: #0b78d1;
+    /* transition: 0.3s; */
+  }
+  #rightConnectedComponent {
+    width:100%;
+    float: center;
+    background-color: #0b78d1;
+    /* transition: 0.3s; */
+  }
+  #rightNonConnectedComponent {
+    width:100%;
+    float: center;
     background-color: #0b78d1;
     /* transition: 0.3s; */
   }
