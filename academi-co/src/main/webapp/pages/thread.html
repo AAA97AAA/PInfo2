@@ -10,3 +10,124 @@
 
 
 <!-- Content of the page -->
+
+
+<div class="w3-container w3-content" style="width:auto;margin-top:auto">
+	<!-- The Grid -->
+	<div class="w3-row"  >
+		<!--     Middle Column -->
+		<!-- TODO: ASLAM WORK HERE -->
+		<div class="w3-col m7 " style="width:100%;">
+			<!-- <p style="text-align:center;"><img src="images/logo2.png" style="height:70px;width:450px" alt="Logo2"></p> -->
+			<br>
+			<!--       <a href="https://www.bally.ch/de_ch/home/" target="_blank"> -->
+			<img src="images/forgoodui.jpg" class='topAd' alt="Advertisement" style="width:800px; height:200px; margin-left:70px">
+			<!--       </a> -->
+			<div >
+				<div class="w3-container w3-card w3-theme-l5 w3-round w3-margin ">
+					<br>
+					<!-- Show MainTag et Secondary tag -->
+					<div class="w3-row-padding" style="margin:0 -12px">
+						<button class="tag maintag">{{thread.subject.name}}</button>
+						<button class="tag secondarytag" ng-repeat="topic in thread.topics">{{topic.name}}</button>
+					</div>
+					<!-- Show Thread -->
+					<h3>
+						{{thread.title}}
+					</h3>
+					<hr>
+					<img ng-src="data:image/JPEG;base64,{{thread.author.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+					<span class="w3-right w3-opacity">{{thread.creationDate | date:"dd/MM/yyyy 'at' h:mma"}}</span>
+					<h4>{{thread.author.username}}</h4>
+					<br>
+					<!-- <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">  -->
+					<div style="width:5%; float:right">
+						<div class="content">
+							<like href="#" ng-click="doLike()">
+								<i class="glyphicon" ng-class="(light1 == 1)? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-upload'"></i>
+							</like>
+							<br>
+							<!--       <span ng-model="like.votes">{{like.votes}}</span> -->
+							<!-- TODO: use ng-count -->
+							<span>{{thread.score}}</span>
+							<br>
+							<dislike href="#" ng-click="doDislike()">
+								<i class="glyphicon" ng-class="(light2 == 1) ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-download'"></i>
+							</dislike>
+						</div>
+					</div>
+					<p>{{thread.content}}</p>
+					<br>
+					<br>
+					<!-- Show list of answers -->
+					<div class=" w3-container w3-card w3-white w3-round w3-margin" ng-repeat="answer in thread.answers" >
+						<br>
+						<img ng-src="data:image/JPEG;base64,{{answer.author.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:40px">
+						<span class="w3-right w3-opacity">{{answer.creationDate |  date:"dd/MM/yyyy 'at' h:mma"}}</span>
+						<h5>{{answer.author.username}} </h5>
+						<!--         <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; "> -->
+						<div class="content">
+							<hr>
+							<div style="width:5%; float:right">
+								<span style="color:gray"><i class="glyphicon glyphicon-upload"></i></span>
+								<br>
+								<!-- TODO: use ng-count -->
+								{{answer.score}}
+								<br>
+								<span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
+							</div>
+							<div style="width:95%; float:left">
+								<p>{{answer.content}}</p>
+								<br><br>
+							</div>
+						</div>
+
+					</div>
+					<br>
+					<output id="output"></output>
+					<script>
+						function toggle(anId)
+						{
+							node = document.getElementById(anId);
+							if (node.style.visibility=="hidden")
+							{
+								// Contenu caché, le montrer
+								node.style.visibility = "visible";
+								node.style.height = "auto";			// Optionnel rétablir la hauteur
+							}
+							else
+							{
+								// Contenu visible, le cacher
+								node.style.visibility = "hidden";
+								node.style.height = "0";			// Optionnel libérer l'espace
+							}
+						}
+					</script>
+					<!-- THERE STOPS THE FAKE OF A POST -->
+					<div id="textAreaThread">
+						<br><br>
+						<div style="background-color:white;width:67.70%;" >
+							<textarea rows="10" cols="100" type="text" id="userInput" style="resize:none;"></textarea>
+						</div>
+						<input type="submit" value="Submit" id="popUpYes" style="width: 200px; height:40px;"><br><br>
+						<br>
+					</div>
+				</div>
+				<!--     End Left Column -->
+			</div>
+			<br><br><br><br><br><br><br>
+		</div>
+		<!--     End Middle Column -->
+		<!--     Right Column -->
+		<div class="w3-col m2">
+			<div class="w3-card w3-center pub">
+				<!--       <a href="https://www.rolex.com" target="_blank"> -->
+				<img src="images/adRightChicken.jpg" alt="Add" style="width:200px; height:700px;">
+				<!--       </a> -->
+			</div>
+			<br>
+			<!--     End Right Column -->
+		</div>
+	</div>
+</div>
+
