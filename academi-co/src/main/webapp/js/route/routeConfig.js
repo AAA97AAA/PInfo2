@@ -28,7 +28,7 @@ route.run(['$rootScope', '$route', function($rootScope, $route) {
 route.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
 
     /* We change the hashPrefix to '' to remove the dash in the URL */
-    $locationProvider.hashPrefix('');
+    // $locationProvider.hashPrefix('');
     /* 
     How to remove the hash from the URL:
     -   uncomment the following line
