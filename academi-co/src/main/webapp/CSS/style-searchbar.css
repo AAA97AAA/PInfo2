@@ -185,11 +185,10 @@ ul li.checked {
 }
 
 input[type="text"], textarea {
-    border: 3px solid #babdb6;
-	z-index: 1;
-    background-color: #eeeeec;
+    border: 3px solid #e0e0e0;
+	  z-index: 1;
+    background-color: #ffffff;
     color: black;
-}
 }
 
 
