@@ -1,3 +1,9 @@
+<!-- Include js scripts -->
+    <!-- js functions for searchbar -->
+    <script src="/academi-co/js/controllers/searchBarFunctions.js"></script>
+    <!-- Cookie controller -->
+    <script src="/academi-co/js/controllers/cookieController.js"></script>
+
 <!-- Include CSS stylesheet -->
     <!-- External stylesheet for growl -->
     <link rel="stylesheet" type="text/css" href="CSS/style-growl.css"/> 
@@ -65,8 +71,8 @@
 
         <!-- NON CONNECTED RIGHT COMPONENT -->
         <div id="rightNonConnectedComponent" style="display:block"> 
-            <a href="/academi-co/#!/login" id="loginButton" class="buttonHeader logInButton">Login</a>
-            <a href="/academi-co/#!/signUp" id="signupButton" class="buttonHeader signUpButton">Sign up</a>
+            <button id="loginButton" class="buttonHeader logInButton" ng-click="login()">Login</a>
+            <button id="signupButton" class="buttonHeader signUpButton" ng-click="signUp()">Sign up</a>
         </div>
     </div>
 

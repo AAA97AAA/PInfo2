@@ -71,13 +71,8 @@ app.controller('profileController', function($scope, $http){
   // conditional display: settings button displayed only for the corresponding user
   
   // get the ressource (the user n° id)
-  // first, we retrieve the domain //
-  var oldurl = window.location.href;
-  var arr = oldurl.split("/");
-  var domain = arr[0] + "//" + arr[2];
-
   // we construct the url that we want to get
-  var urlToGET = domain + '/academi-co/resources/users/' + $routeParams.id;
+  var urlToGET = getDomain() + '/academi-co/resources/users/' + $routeParams.id;
 
   // console.log(urlToGET);
   $http({
@@ -168,13 +163,9 @@ app.controller('signUpController', function($scope, $http) {
 /* Controller for thread page */
 app.controller('threadController', function($scope, $http, $routeParams){
   // get the ressource (the thread n° id)
-  // first, we retrieve the domain //
-  var oldurl = window.location.href;
-  var arr = oldurl.split("/");
-  var domain = arr[0] + "//" + arr[2];
 
   // we construct the url that we want to get
-  var urlToGET = domain + '/academi-co/resources/posts/' + $routeParams.id;
+  var urlToGET = getDomain() + '/academi-co/resources/posts/' + $routeParams.id;
 
   // console.log(urlToGET);
   $http({
@@ -257,6 +248,39 @@ app.controller('isConnectHeader', function($scope, $http){
     };
     // alert("Connected Angular");
   }
+  // login function 
+  $scope.login = function() {
+
+    // we construct the url that we want to get
+    var urlToGET = getDomain() + '/academi-co/resources/auth';
+
+    // console.log(urlToGET);
+    $http({
+      method: 'GET',
+      url: urlToGET,
+      headers: {
+        'Accept': 'application/json',
+        // 'Content-Type': 'application/json'
+      },
+    }).then(function(response) {
+      alert("oklm");
+    }, function(response) {
+      alert("error " + response.status);
+      // if there is error
+      if(response.status == 404){
+        window.location.replace("/academi-co/#!/notFound");
+      } else if(response.status == 403) {
+        window.location.replace("/academi-co/#!/forbidden");
+      } else if(response.status == 405) {
+        window.location.replace("/academi-co/#!/internalServerError");
+      } else {
+        // alert("error " + response.status);
+      }
+    });
+    
+
+  };
+
 });
 
 // TODO: one or two controller for search
