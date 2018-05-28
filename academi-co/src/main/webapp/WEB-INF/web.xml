@@ -105,7 +105,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		</web-resource-collection>
 		<web-resource-collection>
 			<web-resource-name>Token Services</web-resource-name>
-			<url-pattern>/resources/auth/ddd</url-pattern>
+			<url-pattern>/resources/auth/*</url-pattern>
 			<http-method>GET</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
