@@ -53,7 +53,6 @@ public class ConcreteAdvertisementService implements AdvertisementService {
 	 */
 	@Override
 	public long nextAdvertisement() {
-		System.out.println("called");
 		
 		// Fetch entries list
 		List<Advertisement> allAds = getAllAdvertisements();

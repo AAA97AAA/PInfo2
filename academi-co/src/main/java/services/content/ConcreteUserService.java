@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,6 +19,8 @@ import dom.content.Post;
 import dom.content.User;
 import dom.content.UserFactory;
 import services.documentsManager.DocumentService;
+import services.security.HashProvider;
+import services.utility.ValidationHandling;
 
 /**
  * Service class implementing services for users
@@ -41,7 +44,9 @@ public class ConcreteUserService implements UserService {
 	
 	@Inject
 	private DocumentService documentService;
-		
+
+	@Inject
+	private HashProvider hasher;
 	
 	
 	/******************** Services **********************/
@@ -84,28 +89,45 @@ public class ConcreteUserService implements UserService {
 	
 	/**
 	 * Adding new user to database
+	 * @throws Throwable 
 	 */
 	@Override
-	public User addUser(User user) {
-		User builtUser = UserFactory.createUser(user.getUsername(), user.getEmail(), user.getPassword(), user.getType());
-		entityManager.persist(builtUser);
+	public User addUser(User user) throws Throwable {
+		
+		// Build user for storage
+		User builtUser = UserFactory.createUser(user.getUsername(), user.getEmail(),
+				hasher.hash(user.getPassword()), user.getType());
+		
+		// Attempt to persist and forward eventual constraint violation
+		try {
+			entityManager.persist(builtUser);
+		} catch (PersistenceException e) {
+			throw ValidationHandling.getExceptionRootCause(e);
+		}
+		
+		// Return if success
 		return builtUser;
 	}
 	
 	/**
 	 * Service to modify User in database
+	 * @throws Throwable 
 	 */
 	@Override
-	public User modifyUser(long id, User newUser) {
+	public User modifyUser(long id, User newUser) throws Throwable {
 		
 		User oldUser = getUser(id);
 		
-		oldUser.setBio(newUser.getBio());
-		oldUser.setCanBeModerator(newUser.isCanBeModerator());
-		oldUser.setPassword(newUser.getPassword());
-		documentService.modifyProfilePicture(oldUser.getProfilePicture().getId(), newUser.getProfilePicture());
-		oldUser.setType(newUser.getType());
-		oldUser.setUsername(newUser.getUsername());
+		try {
+			oldUser.setBio(newUser.getBio());
+			oldUser.setCanBeModerator(newUser.isCanBeModerator());
+			oldUser.setPassword(newUser.getPassword());
+			documentService.modifyProfilePicture(oldUser.getProfilePicture().getId(), newUser.getProfilePicture());
+			oldUser.setType(newUser.getType());
+			oldUser.setUsername(newUser.getUsername());
+		} catch (PersistenceException e) {
+			throw ValidationHandling.getExceptionRootCause(e);
+		}
 		
 		return oldUser;
 	}
@@ -132,6 +154,7 @@ public class ConcreteUserService implements UserService {
 		if (length > 0) {
 			query.setMaxResults(length);
 		}
+		
 		return query.getResultList();
 	}
 }

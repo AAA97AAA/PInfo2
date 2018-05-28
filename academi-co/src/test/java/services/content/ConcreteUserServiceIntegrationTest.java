@@ -55,6 +55,8 @@ import dom.tags.Tag;
 import dom.tags.TagFactory;
 import services.documentsManager.ConcreteDocumentService;
 import services.documentsManager.DocumentService;
+import services.security.ConcreteHashProvider;
+import services.security.HashProvider;
 import services.utility.ContextProvider;
 import services.utility.View;
 
@@ -78,6 +80,8 @@ public class ConcreteUserServiceIntegrationTest {
 				.addClass(ConcreteDocumentService.class)
 				.addClass(DocumentService.class)
 				.addPackage(Document.class.getPackage())
+				.addClass(ConcreteHashProvider.class)
+				.addClass(HashProvider.class)
 				.addPackage(View.class.getPackage())
 				.addPackages(true, ServletContext.class.getPackage())
 				.addPackages(true, LoggableFailure.class.getPackage())
@@ -137,8 +141,7 @@ public class ConcreteUserServiceIntegrationTest {
 	}
 
 	@Test
-	public void testAddUser() throws NotSupportedException, SystemException, SecurityException,
-			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+	public void testAddUser() throws Throwable {
 		User newUser = service.addUser(UserFactory.createUser("imaginativeName", "puf@pouf.paf", "secret", User.REGISTERED));
 		trx.begin();
 		User inMemory = em.find(ConcreteUser.class, newUser.getId());
@@ -147,7 +150,7 @@ public class ConcreteUserServiceIntegrationTest {
 	}
 
 	@Test
-	public void testModifyUser() {
+	public void testModifyUser() throws Throwable {
 		
 		// Test parameters
 		String username = "mirobolous";
