@@ -1,6 +1,7 @@
 package services.security;
 
 import java.io.IOException;
+import java.security.KeyStoreException;
 import java.security.Principal;
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
@@ -8,7 +9,6 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import org.jose4j.jwk.RsaJsonWebKey;
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.consumer.InvalidJwtException;
 import org.jose4j.jwt.consumer.JwtConsumer;
@@ -76,21 +76,26 @@ public class JWTAuthFilter implements ContainerRequestFilter {
 
     private String validate(String jwt) throws InvalidJwtException {
         String subject = null;
-        RsaJsonWebKey rsaJsonWebKey = RsaKeyProducer.produce();
 
-        JwtConsumer jwtConsumer = new JwtConsumerBuilder()
-                .setRequireSubject() // the JWT must have a subject claim
-                .setVerificationKey(rsaJsonWebKey.getKey()) // verify the signature with the public key
-                .build(); // create the JwtConsumer instance
+        JwtConsumer jwtConsumer;
+		try {
+			jwtConsumer = new JwtConsumerBuilder()
+			        .setRequireSubject() // the JWT must have a subject claim
+			        .setVerificationKey(KeytoolUtility.getPublicKey()) // verify the signature with the public key
+			        .build(); // create the JwtConsumer instance
+			try {
+	            //  Validate the JWT and process it to the Claims
+	            JwtClaims jwtClaims = jwtConsumer.processToClaims(jwt);
+	            subject = (String) jwtClaims.getClaimValue("sub");
+	        } catch (InvalidJwtException e) {
+	            e.printStackTrace(); //on purpose
+	            throw e;
+	        }
+		} catch (KeyStoreException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
-        try {
-            //  Validate the JWT and process it to the Claims
-            JwtClaims jwtClaims = jwtConsumer.processToClaims(jwt);
-            subject = (String) jwtClaims.getClaimValue("sub");
-        } catch (InvalidJwtException e) {
-            e.printStackTrace(); //on purpose
-            throw e;
-        }
         return subject;
     }
 }
