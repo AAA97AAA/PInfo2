@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import dom.documentsManager.DocumentFactory;
 import dom.inbox.InboxFactory;
-import services.utility.ContextHandler;
+import services.utility.ContextProvider;
 
 /**
  * Test class for UserFactory
@@ -61,7 +61,7 @@ public class UserFactoryTest {
 		ServletContext fakeContext = mock(ServletContext.class);
 		when(fakeContext.getRealPath(anyString()))
 			.thenReturn(new File("src/test/resources").getAbsolutePath() + "/defaultPP.png");
-		ContextHandler.setContext(fakeContext);
+		ContextProvider.setContext(fakeContext);
 		
 		// Call the construction method
 		User user = UserFactory.createUser(username, email, password, type);

@@ -17,14 +17,14 @@ public class ContextHandlerTest {
 	
 	@Test
 	public void testConstructor() {
-		new ContextHandler();
+		new ContextProvider();
 	}
 	
 	@Test
 	public void testGetSet() {
 		ServletContext context = mock(ServletContext.class);
-		ContextHandler.setContext(context);
-		assertEquals("Wrong context.", context, ContextHandler.getContext());
+		ContextProvider.setContext(context);
+		assertEquals("Wrong context.", context, ContextProvider.getContext());
 	}
 
 }

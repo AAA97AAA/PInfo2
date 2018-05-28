@@ -57,7 +57,7 @@ import services.documentsManager.ConcreteDocumentService;
 import services.documentsManager.DocumentService;
 import services.tags.ConcreteTagService;
 import services.tags.TagService;
-import services.utility.ContextHandler;
+import services.utility.ContextProvider;
 import services.utility.View;
 
 /**
@@ -112,7 +112,7 @@ public class ConcretePostServiceIntegrationTest {
 	@Before
 	public void setup() throws NotSupportedException, SystemException, SecurityException,
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
-		ContextHandler.setContext(context);
+		ContextProvider.setContext(context);
 		if (sampleThread == null) {
 			byte[] buffer = new byte[10];
 			new Random().nextBytes(buffer);

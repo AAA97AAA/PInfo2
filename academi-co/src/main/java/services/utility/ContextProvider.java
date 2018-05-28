@@ -1,17 +1,14 @@
 package services.utility;
 
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.servlet.ServletContext;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
+/**
+ * Service class providing ServletContext for file finding.
+ * 
+ * @author kaikoveritch
+ *
+ */
+public class ContextProvider {
 
-@Path("context")
-@Startup
-@Singleton
-public class ContextHandler {
-
-	@Context
 	static private ServletContext context;
 	
 	static public ServletContext getContext() {
@@ -19,6 +16,6 @@ public class ContextHandler {
 	}
 	
 	static public void setContext(ServletContext context) {
-		ContextHandler.context = context;
+		ContextProvider.context = context;
 	}
 }

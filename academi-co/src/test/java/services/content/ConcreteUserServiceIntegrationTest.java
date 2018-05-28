@@ -55,7 +55,7 @@ import dom.tags.Tag;
 import dom.tags.TagFactory;
 import services.documentsManager.ConcreteDocumentService;
 import services.documentsManager.DocumentService;
-import services.utility.ContextHandler;
+import services.utility.ContextProvider;
 import services.utility.View;
 
 /**
@@ -108,7 +108,7 @@ public class ConcreteUserServiceIntegrationTest {
 	public void setup() throws NotSupportedException, SystemException, SecurityException,
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		// Set context (for path navigation)
-		ContextHandler.setContext(context);
+		ContextProvider.setContext(context);
 		// Clear table
 		trx.begin();
 		CriteriaBuilder cb = em.getCriteriaBuilder();

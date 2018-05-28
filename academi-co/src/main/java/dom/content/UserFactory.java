@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import dom.documentsManager.DocumentFactory;
 import dom.inbox.InboxFactory;
-import services.utility.ContextHandler;
+import services.utility.ContextProvider;
 
 /**
  * Instantiator for registered users
@@ -14,7 +14,7 @@ import services.utility.ContextHandler;
  */
 public class UserFactory {
 
-	static public String DEFAULT_PATH = ContextHandler.getContext().getRealPath("WEB-INF/classes/defaultPP.png");
+	static public String DEFAULT_PATH = ContextProvider.getContext().getRealPath("WEB-INF/classes/defaultPP.png");
 	
 	static public User createUser(String username, String email, String password, String type) {
 		return new ConcreteUser(username, email, password, DocumentFactory.loadDocument(DEFAULT_PATH),

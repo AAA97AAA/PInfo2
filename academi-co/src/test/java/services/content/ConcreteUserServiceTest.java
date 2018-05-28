@@ -30,7 +30,7 @@ import dom.content.User;
 import dom.documentsManager.ConcreteDocument;
 import dom.documentsManager.Document;
 import services.documentsManager.ConcreteDocumentService;
-import services.utility.ContextHandler;
+import services.utility.ContextProvider;
 
 /**
  * Unit test for user service class
@@ -97,7 +97,7 @@ public class ConcreteUserServiceTest {
 		ServletContext fakeContext = mock(ServletContext.class);
 		when(fakeContext.getRealPath(anyString()))
 			.thenReturn(new File("src/test/resources").getAbsolutePath() + "/defaultPP.png");
-		ContextHandler.setContext(fakeContext);
+		ContextProvider.setContext(fakeContext);
 
 		// Calling user service method					
 		userService.addUser(fakeUser);
