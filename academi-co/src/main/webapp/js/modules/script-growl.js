@@ -308,12 +308,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 function GrowlAdBanner() {
-    var x, text;
+    var x;
     x = document.getElementById("profile_pic").value;
 
 
     if (!x) {
-        text = "Input not valid";
         $.growl.error({ message: "You need to add a picture!" });
     } 
 }
@@ -331,3 +330,4 @@ function GrowlAdvancedSearchBar() {
         $.growl.warning({ message: "Tip: <br>You need to fill more fields to have better results for your search." });
     } 
 }
+
