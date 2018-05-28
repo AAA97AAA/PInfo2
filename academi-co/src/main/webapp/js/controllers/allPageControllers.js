@@ -107,8 +107,7 @@ app.controller('profileController', function($scope, $http){
 app.controller('resultController', function($scope, $http){
   // TODO: 
   // result of request
-  // do the path param
- 
+  // do the path param 
 
 });
 
@@ -132,7 +131,7 @@ app.controller('signUpController', function($scope, $http) {
       $scope.user.type = 'REGISTERED';
     // alert(sha256_digest($scope.user.password));
       // password encryption
-      $scope.user.password = sha256_digest(document.getElementById("password").value);
+      $scope.user.password = document.getElementById("password").value;
     
       var req = {
                   method: 'POST',
