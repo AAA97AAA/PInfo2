@@ -26,7 +26,6 @@ app.controller('forbiddenController', function($scope, $http){
 /* Controller for help page */
 app.controller('helpController', function($scope, $http){
 
-
 });
 
 /* Controller for internal Server Error page */
