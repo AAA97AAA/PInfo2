@@ -1,21 +1,18 @@
 package services.security;
 
+import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+
+import javax.ejb.Local;
+
 /**
- * Service class for hashing strings (passwords).
+ * Definition of a hashing service.
  * 
  * @author kaikoveritch
  *
  */
-public abstract class HashProvider {
+@Local
+public interface HashProvider extends Serializable {
 
-//	static public String hash(String message) {
-//		
-//	}
-//	
-//	private String bytesToHex(byte[] digest) {
-//		StringBuffer buffer = new StringBuffer();
-//		for (int i = 0; i < digest.length; i++) {
-//			
-//		}
-//	}
+	public String hash(String message) throws NoSuchAlgorithmException;
 }

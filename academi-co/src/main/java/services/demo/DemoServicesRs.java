@@ -54,7 +54,7 @@ public class DemoServicesRs {
 	
 	@POST
 	@Path("/")
-	public Response fillDB() {
+	public Response fillDB() throws Throwable {
 		
 		// Parameters
 		int nUsers = 5;
@@ -65,7 +65,8 @@ public class DemoServicesRs {
 		// Add users
 		List<User> users = new ArrayList<User>();
 		for (int i = 0; i < nUsers; i++) {
-			users.add(userService.addUser(UserFactory.createUser("user" + i, "mail" + i + "@mail.com", "secret", User.REGISTERED)));
+			users.add(userService.addUser(
+					UserFactory.createUser("user" + i, "mail" + i + "@mail.com", "secret", User.REGISTERED)));
 		}
 		
 		// Add tags

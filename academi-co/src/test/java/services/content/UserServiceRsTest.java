@@ -73,9 +73,10 @@ public class UserServiceRsTest {
 	
 	/**
 	 * Unit test for modifyUser method in the rest implementation of UserService
+	 * @throws Throwable 
 	 */
 	@Test
-	public void testModifyUser() {
+	public void testModifyUser() throws Throwable {
 		
 		// Random id generation
 		long id = ThreadLocalRandom.current().nextLong();

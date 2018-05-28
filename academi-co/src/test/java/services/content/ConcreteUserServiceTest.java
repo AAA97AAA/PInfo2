@@ -30,6 +30,7 @@ import dom.content.User;
 import dom.documentsManager.ConcreteDocument;
 import dom.documentsManager.Document;
 import services.documentsManager.ConcreteDocumentService;
+import services.security.HashProvider;
 import services.utility.ContextProvider;
 
 /**
@@ -69,7 +70,10 @@ public class ConcreteUserServiceTest {
 	private ConcreteDocument fakeDocument;
 	
 	@Mock
-	ConcreteDocumentService profilePictureService;
+	private ConcreteDocumentService profilePictureService;
+	
+	@Mock
+	private HashProvider hasher;
 	
 	@InjectMocks
 	ConcreteUserService userService;
@@ -77,21 +81,24 @@ public class ConcreteUserServiceTest {
 
 	/**
 	 * Unit tests for addUser method from service.	
+	 * @throws Throwable 
 	 */
 	@Test
-	public void testAdduser() {
+	public void testAdduser() throws Throwable {
 		
 		// Test parameters
 		String name = "name";
 		String email = "email";
 		String password = "password";
 		String type = User.REGISTERED;
+		String digest = "nksdfgjpot323lkjlk";
 		
 		// Adding behavior
 		when(fakeUser.getUsername()).thenReturn(name);
 		when(fakeUser.getEmail()).thenReturn(email);
 		when(fakeUser.getPassword()).thenReturn(password);
 		when(fakeUser.getType()).thenReturn(type);
+		when(hasher.hash(anyString())).thenReturn(digest);
 		
 		// Mock of servlet context for local tests
 		ServletContext fakeContext = mock(ServletContext.class);
@@ -103,9 +110,7 @@ public class ConcreteUserServiceTest {
 		userService.addUser(fakeUser);
 		
 		// Verifying right method calls on objects in the service's function
-		verify(fakeEntityManager, times(1)).persist(any(User.class));	
-
-		
+		verify(fakeEntityManager, times(1)).persist(any(User.class));
 	}
 	
 	/**
@@ -139,9 +144,10 @@ public class ConcreteUserServiceTest {
 	
 	/**
 	 * Unit tests for modifyUser from service
+	 * @throws Throwable 
 	 */
 	@Test
-	public void testModifyUser() {		
+	public void testModifyUser() throws Throwable {		
 		
 		// Test parameters
 		long id = 2;

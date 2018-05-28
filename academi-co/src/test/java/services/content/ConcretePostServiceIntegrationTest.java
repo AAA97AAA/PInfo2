@@ -55,6 +55,8 @@ import dom.tags.Tag;
 import dom.tags.TagFactory;
 import services.documentsManager.ConcreteDocumentService;
 import services.documentsManager.DocumentService;
+import services.security.ConcreteHashProvider;
+import services.security.HashProvider;
 import services.tags.ConcreteTagService;
 import services.tags.TagService;
 import services.utility.ContextProvider;
@@ -84,6 +86,8 @@ public class ConcretePostServiceIntegrationTest {
 				.addClass(ConcreteDocumentService.class)
 				.addClass(DocumentService.class)
 				.addPackage(Document.class.getPackage())
+				.addClass(ConcreteHashProvider.class)
+				.addClass(HashProvider.class)
 				.addPackage(View.class.getPackage())
 				.addPackages(true, ServletContext.class.getPackage())
 				.addPackages(true, LoggableFailure.class.getPackage())

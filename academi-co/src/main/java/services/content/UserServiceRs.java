@@ -1,7 +1,10 @@
 package services.content;
 
 import java.net.URI;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -20,6 +23,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import dom.content.ConcreteUser;
 import dom.content.Post;
@@ -81,31 +85,55 @@ public class UserServiceRs {
 	 * Add user to database (basic user version)
 	 * @param user
 	 * @return response
+	 * @throws NoSuchAlgorithmException 
 	 */
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.UserNew.class)
-	public Response addUser(ConcreteUser user, @Context UriInfo uriInfo) {
-		user.setType(User.REGISTERED); // only for basic users
-		User result = service.addUser(user);
-		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
-		return Response.created(location).entity(result).build();
+	public Response addUser(ConcreteUser user, @Context UriInfo uriInfo) throws NoSuchAlgorithmException {
+		
+		// only for basic users
+		user.setType(User.REGISTERED);
+		
+		return addUserByAdministrator(user, uriInfo);
 	}
 	
 	/**
 	 * Add user to database (administrator-only version)
 	 * @param user
 	 * @return response
+	 * @throws NoSuchAlgorithmException 
 	 */
 	@POST
 	@Path("/administrator")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.UserNew.class)
-	public Response addUserByAdministrator(ConcreteUser user, @Context UriInfo uriInfo) {
-		User result = service.addUser(user);
+	public Response addUserByAdministrator(ConcreteUser user, @Context UriInfo uriInfo) throws NoSuchAlgorithmException {
+		
+		// Attempt to store new user
+		User result;
+		try {
+			result = service.addUser(user);
+		} catch (Throwable e) {
+			
+			// Code 400 if constraint violation
+			if (e.getClass().toString().equals(MySQLIntegrityConstraintViolationException.class.toString())) {
+				String fault = new String();
+				Matcher match = Pattern.compile("for key '(.+)'").matcher(e.getMessage());
+				if (match.find()) {
+					fault = match.group(1);
+				}
+				return Response.status(Status.BAD_REQUEST).entity(fault).build();
+			}
+			
+			// Else code 500
+			return Response.serverError().build();
+		}
+		
+		// If success give code 201 with new entity
 		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
 		return Response.created(location).entity(result).build();
 	}
@@ -122,9 +150,11 @@ public class UserServiceRs {
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.UserModifiable.class)
 	public Response modifyUser(@PathParam("id") long id, ConcreteUser newUser) {
-		newUser.setType(User.REGISTERED); // basic user only
-		User result = service.modifyUser(id, newUser);
-		return Response.ok(result).build();
+		
+		// basic user only
+		newUser.setType(User.REGISTERED);
+		
+		return modifyUserByAdministrator(id, newUser);
 	}
 	
 	/**
@@ -139,7 +169,28 @@ public class UserServiceRs {
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.UserModifiable.class)
 	public Response modifyUserByAdministrator(@PathParam("id") long id, ConcreteUser newUser) {
-		User result = service.modifyUser(id, newUser);
+		
+		// Attempt to modify user
+		User result;
+		try {
+			result = service.modifyUser(id, newUser);
+		} catch (Throwable e) {
+			
+			// Code 400 if constraint violation
+			if (e.getClass().toString().equals(MySQLIntegrityConstraintViolationException.class.toString())) {
+				String fault = new String();
+				Matcher match = Pattern.compile("for key '(.+)'").matcher(e.getMessage());
+				if (match.find()) {
+					fault = match.group(1);
+				}
+				return Response.status(Status.BAD_REQUEST).entity(fault).build();
+			}
+			
+			// Else code 500
+			return Response.serverError().build();
+		}
+		
+		// If success give code 200 with new entity
 		return Response.ok(result).build();
 	}
 	

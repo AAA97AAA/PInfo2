@@ -16,13 +16,14 @@ import javax.ws.rs.core.SecurityContext;
  * @source https://github.com/abhirockzz/jaxrs-with-jwt
  * 
  */
-@Path("auth")
+@Path("/auth")
 public class AuthResource {
 	
 	@Context
     SecurityContext sctx;
 
     @GET
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response auth() {
     		String authenticatedUser = sctx.getUserPrincipal().getName();
