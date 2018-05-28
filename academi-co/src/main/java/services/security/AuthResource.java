@@ -4,7 +4,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
@@ -23,11 +23,11 @@ public class AuthResource {
     SecurityContext sctx;
 
     @GET
-    @Produces("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response auth() {
     		String authenticatedUser = sctx.getUserPrincipal().getName();
     		String jwt = JWTokenUtility.buildJWT(authenticatedUser);
-    		Response resp = Response.ok(authenticatedUser + " authenticated with: " + jwt)
+    		Response resp = Response.ok(jwt)
     				.header("jwt", jwt)
     				.build();
     		return resp;
