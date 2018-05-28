@@ -10,6 +10,12 @@ app.controller('adminController', function($scope, $http){
   //  var arr = url.split("/");
   //   var result = arr[0] + "//" + arr[2];
   //  console.log(result); 
+
+  // TODO: 
+  // PUT ADD ADMIN
+  // PUT ADD LANGUAGE TAG 
+  // PUT ADD BANNER
+  // DISPLAY BANNERS, PUT/DELETE BANNER
 });
 
 /* Controller for forbidden page */
@@ -64,8 +70,37 @@ app.controller('postThreadController', function($scope, $http){
 app.controller('profileController', function($scope, $http){
   // TODO: 
   // conditional display: settings button displayed only for the corresponding user
-  // display correct user
+  
+  // get the ressource (the user n° id)
+  // first, we retrieve the domain //
+  var oldurl = window.location.href;
+  var arr = oldurl.split("/");
+  var domain = arr[0] + "//" + arr[2];
 
+  // we construct the url that we want to get
+  var urlToGET = domain + '/academi-co/resources/users/' + $routeParams.id;
+
+  // console.log(urlToGET);
+  $http({
+    method: 'GET',
+    url: urlToGET,
+    headers: {
+      'Accept': 'application/json',
+      // 'Content-Type': 'application/json'
+    },
+  }).then(function(response) {
+    // if we correctly have the result, we just take the data
+     $scope.myProfileData = response.data;
+  }, function(response) {
+    // if there is error
+    if(response.status == 404){
+      window.location.replace("/academi-co/#!/notFound");
+    } else if(response.status == 403) {
+      window.location.replace("/academi-co/#!/forbidden");
+    } else if(response.status == 405) {
+      window.location.replace("/academi-co/#!/internalServerError");
+    }
+  });
 
 });
 
@@ -82,6 +117,7 @@ app.controller('resultController', function($scope, $http){
 app.controller('settingsPreferencesController', function($scope, $http){
   // TODO:
   // PUT / (Use JWT to be sure of the user)
+  // here many put
 });
 
 /* Controller for signUp page */
@@ -111,23 +147,24 @@ app.controller('signUpController', function($scope, $http) {
     
       $http(req).then(
         function(response){
-          // console.log("account created perfectly");
+          console.log("account created perfectly");
                           },
         function(response){
-          // console.log("ERROR : account cannot be created!");
-          // console.log(response.data);
+          console.log("ERROR : account cannot be created!");
+          console.log(response.statusText);
+          console.log(response.status);
           // console.log("End error message");
           }
     
         )
     
-    //       // window.location.href = "login.jsp";
-    //       // alert("Welcome " + $scope.user.username + "! Please login.");
+    // window.location.href = "login.jsp";
+    // alert("Welcome " + $scope.user.username + "! Please login.");
     }
   
   }
   // TODO: hash will change 
-  //       redirect to correct page when error  
+  //       redirect to correct page when error  (waiting for Kaïko to prepare the error)
 });
 
 /* Controller for thread page */
@@ -172,6 +209,7 @@ app.controller('threadController', function($scope, $http, $routeParams){
 
 /* Controller for home page */
 app.controller('homeController', function($scope, $http){
+  // DISPLAY THE TAGS + if click on TAG, search result for tag
 
   // $scope.message = "DUSK TILL DAWN";
   // console.log("baby I'm right here!");
@@ -187,6 +225,8 @@ app.controller('previewController', function($scope, $http){
 /* HEADER : controller for the header to check if the user is connected or not and display the correct one */
 
 app.controller('isConnectHeader', function($scope, $http){
+
+  // TODO: if connected, need to displ
   var notConnected = getCookie('username') == 'null';
   var notDefined = getCookie('username') == null;
 
@@ -220,6 +260,9 @@ app.controller('isConnectHeader', function($scope, $http){
     // alert("Connected Angular");
   }
 });
+
+// TODO: one or two controller for search
+//      if the user has opened advanced search, will he be able to write something in the normal search bar
 
 // /* controller that allow only connected user to reply a thread */
 // app.controller('threadTextAreaConnected', function($scope, $http) {
