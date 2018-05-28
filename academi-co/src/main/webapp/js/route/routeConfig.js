@@ -79,11 +79,6 @@ route.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
         })
         .when('/login', {
             title       : 'Login - Academi-co',
-            templateUrl : 'pages/login.jsp',
-            controller  : 'loginController'
-        })
-        .when('/login.html', {
-            title       : 'Login - Academi-co',
             templateUrl : 'pages/login.html',
             controller  : 'loginController'
         })
@@ -146,9 +141,9 @@ route.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
             templateUrl : 'pages/home.html',
             controller  : 'homeController'
         })
-        // .otherwise({
-        //     redirectTo: '/preview'
-        //     });
+        .otherwise({
+            redirectTo: '/notFound'
+        });
 
         
 }]);

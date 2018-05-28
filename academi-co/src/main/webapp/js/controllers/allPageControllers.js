@@ -108,7 +108,7 @@ app.controller('resultController', function($scope, $http){
   // TODO: 
   // result of request
   // do the path param 
-
+  
 });
 
 /* Controller for settings and preferences page */
