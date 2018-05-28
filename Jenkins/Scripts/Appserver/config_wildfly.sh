@@ -57,7 +57,7 @@ data-source add --name=academi-co --driver-name=mysql --jndi-name=$ACADEMI_CO \
         "module-options"=>{"dsJndiName" => "$ACADEMI_CO", \
             "principalsQuery" => "select PASSWORD_HASH from ACADEMI_CO_DB.USERS where USERNAME=?", \
             "rolesQuery" => "select USER_TYPE, 'Roles' from ACADEMI_CO_DB.USERS where USERNAME=?", \
-            "hashUserPassword" => "false", "hashStorePassword" => "true", \
+            "hashUserPassword" => "true", "hashStorePassword" => "false", \
             "hashAlgorithm" => "SHA-256", "hashEncoding" => "hex"}}])
 
 #/subsystem=security/security-domain=academi-co-realm/authentication=classic/login-module=UsersRoles:add(code=UsersRoles,flag=required,module-options=[("usersProperties"=>"${JBOSS_HOME}/academi-co-realm-users.properties"),("rolesProperties"=>"${JBOSS_HOME}/academi-co-realm-roles.properties")])
