@@ -53,39 +53,27 @@
 
 /* like unlike button */
 
-like{
+#like{
 	font-size: 1.2em;
-      color: gray;
-      text-decoration: none !important;
-      .glyphicon{
-        transition: all .5s;
-        &.glyphicon-circle-arrow-up{
-          color: #33cc33;
-        }
-        &.glyphicon glyphicon-upload{
-          &:hover{
-            transform:scale(1.1);
-          }
-        }
-      }
-    }
+    color: gray;
+    text-decoration: none !important;
+}
 
-dislike{
-	font-size: 1.2em;
-      color: gray;
-      text-decoration: none !important;
-      .glyphicon{
-        transition: all .5s;
-        &.glyphicon-circle-arrow-down{
-          color: #ff3333;
-        }
-        &.glyphicon glyphicon-download{
-          &:hover{
-            transform:scale(1.1);
-          }
-        }
-      }
-    }
+#dislike{
+    font-size: 1.2em;
+    color: gray;
+    text-decoration: none !important;
+}
+
+.glyphicon{
+    transition: all .5s;
+}
+.glyphicon-circle-arrow-up{
+    color: #33cc33;
+}
+.glyphicon-circle-arrow-down{
+    color: #ff3333;
+}
 
 
 /* TAGS */

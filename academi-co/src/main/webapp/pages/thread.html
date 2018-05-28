@@ -43,17 +43,16 @@
 					<!-- <div class="container" ng-app="app" ng-controller="Main" style="text-align: right; ">  -->
 					<div style="width:5%; float:right">
 						<div class="content">
-							<like href="#" ng-click="doLike()">
+							<div id="like" href="#" ng-click="doLike()">
 								<i class="glyphicon" ng-class="(light1 == 1)? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-upload'"></i>
-							</like>
-							<br>
-							<!--       <span ng-model="like.votes">{{like.votes}}</span> -->
+							</div>
+							<!-- <span ng-model="like.votes">{{like.votes}}</span> -->
 							<!-- TODO: use ng-count -->
 							<span>{{thread.score}}</span>
-							<br>
-							<dislike href="#" ng-click="doDislike()">
+
+							<div id="dislike" href="#" ng-click="doDislike()">
 								<i class="glyphicon" ng-class="(light2 == 1) ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-download'"></i>
-							</dislike>
+							</div>
 						</div>
 					</div>
 					<p>{{thread.content}}</p>
