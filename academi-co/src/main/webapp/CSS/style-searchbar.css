@@ -170,16 +170,14 @@ ul li.checked {
   background-color: #bbb;
 }
 
-#popUpYes
-{
+#popUpYes {
       width: 60px;
       height: 30px;
       background-color: #172136;
       color: white; /* SET COLOR IN WHITE */
 }
 
-#popUpYes:hover
-{
+#popUpYes:hover {
       background-color: #bbb;
       color: black; /* SET COLOR IN BLACK */
 }
@@ -190,5 +188,3 @@ input[type="text"], textarea {
     background-color: #ffffff;
     color: black;
 }
-
-

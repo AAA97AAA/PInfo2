@@ -111,14 +111,25 @@
   font-family: "Times New Roman", Times, serif;
 }
 
+
 #textCreateAdmin {
   font-size: 24px;
   padding: 20px 26px;
   font-family: "Times New Roman", Times, serif;
 }
 
-.inputUsernameAdminAdd, .inputEmailAdminAdd {
+#inputUsernameAdminAdd {
+  border: 3px solid #e0e0e0;
   margin-bottom: 20px;
+  background-color: #ffffff;
+  color: #0000;
+}
+
+#inputEmailAdminAdd {
+  border: 3px solid #e0e0e0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  color: #0000;
 }
 
 
