@@ -1,12 +1,12 @@
 //Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
+var myNodelist1 = document.getElementById("myUL1").getElementsByTagName("LI");
 var i;
-for (i = 0; i < myNodelist.length; i++) {
-var span = document.createElement("SPAN");
+for (i = 0; i < myNodelist1.length; i++) {
+var spanPrimaryTag = document.createElement("SPAN");
 var txt = document.createTextNode("\u00D7");
-span.className = "closePrimaryTag";
-span.appendChild(txt);
-myNodelist[i].appendChild(span);
+spanPrimaryTag.className = "closePrimaryTag";
+spanPrimaryTag.appendChild(txt);
+myNodelist1[i].appendChild(spanPrimaryTag);
 }
 
 //Click on a close button to hide the current list item
@@ -17,6 +17,17 @@ for (i = 0; i < closePrimaryTag.length; i++) {
  var div = this.parentElement;
  div.style.display = "none";
 }
+}
+
+//Create a "close" button and append it to each list item
+var myNodelist2 = document.getElementById("myUL2").getElementsByTagName("LI");
+var j;
+for (j = 0; j < myNodelist2.length; j++) {
+var spanSecondaryTag = document.createElement("SPAN");
+var txt = document.createTextNode("\u00D7");
+spanSecondaryTag.className = "closeSecondaryTag";
+spanSecondaryTag.appendChild(txt);
+myNodelist2[j].appendChild(spanSecondaryTag);
 }
 
 //Click on a close button to hide the current list item
@@ -38,7 +49,7 @@ function newElement1() {
 	li.appendChild(t);
 	var containerPrimaryTag = document.getElementById("myUL1")
 	var size1 = containerPrimaryTag.getElementsByTagName("li").length;
-	
+
 	if (inputValue === 'Select primarytag:') {
 		alert("You must select something!");
 	} 
@@ -51,16 +62,15 @@ function newElement1() {
 
 	document.getElementById("primarytag").value;
 
-	var span = document.createElement("SPAN");
+	var spanPrimaryTag = document.createElement("SPAN");
 	var txt = document.createTextNode("\u00D7");
-	span.className = "close";
-	span.appendChild(txt);
-	li.appendChild(span);
+	spanPrimaryTag.className = "close";
+	spanPrimaryTag.appendChild(txt);
+	li.appendChild(spanPrimaryTag);
 	
-	for (i = 0; i < closePrimaryTag.length; i++) {
-		closePrimaryTag[i].onclick = function() { 
-			containerPrimaryTag.removeChild(containerPrimaryTag.childNodes[i]);
-		}
+	spanPrimaryTag.onclick = function() { 
+	containerPrimaryTag.removeChild(containerPrimaryTag.childNodes);
+
 	}
 }
 
@@ -71,14 +81,14 @@ function newElement2() {
 	var inputValue = document.getElementById("secondarytag").value; 
 	var t = document.createTextNode(inputValue);
 	li.appendChild(t);
-	
-	var size2 = document.getElementById("myUL2").getElementsByTagName("li").length;
+	var containerSecondaryTag = document.getElementById("myUL2")	
+	var size2 = containerSecondaryTag.getElementsByTagName("li").length;
 	
 	if (inputValue === 'Select secondarytag:') {
 		alert("You must select something!");
 	} 
 	else if (size2 < 3) {		
-		document.getElementById("myUL2").appendChild(li);
+		containerSecondaryTag.appendChild(li);
 	} 
 	else {
 		alert("You can't add more than 3 secondary tag");
@@ -86,17 +96,15 @@ function newElement2() {
 
 	document.getElementById("secondarytag").value;
 
-	var span = document.createElement("SPAN");
+	var spanSecondaryTag = document.createElement("SPAN");
 	var txt = document.createTextNode("\u00D7");
-	span.className = "close";
-	span.appendChild(txt);
-	li.appendChild(span);
-	
-	for (j = 0; j < closeSecondaryTag.length; j++) {
-		closeSecondaryTag[j].onclick = function() { 
-			var div = this.parentElement;
-			document.getElementById("myUL2").removeChild(document.getElementById("myUL2").childNodes[j]);
-		}
+	spanSecondaryTag.className = "close";
+	spanSecondaryTag.appendChild(txt);
+	li.appendChild(spanSecondaryTag);
+
+	spanSecondaryTag.onclick = function() { 
+	containerSecondaryTag.removeChild(containerSecondaryTag.childNodes);
+
 	}
 }
 
