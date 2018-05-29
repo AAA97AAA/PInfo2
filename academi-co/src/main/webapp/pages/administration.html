@@ -67,7 +67,7 @@
 		<h2 id="textCreateMainTag">Create primary tag</h2>
 		<br>
 		<strong>Primary Tag: </strong> <br>
-		<input type="text" id="MainTagAdd" name="MainTagEntry" placeholder="Primary Tag" ng-model="maintag.*" required>
+		<input type="text" id="MainTagAdd" name="MainTagEntry" placeholder="Primary Tag" ng-model="MainTag.name" required>
 		<br>
 		<br>
 		<br>
@@ -85,7 +85,10 @@
 		<h2 id="textCreateSecondTag">Create secondary tag</h2>
 		<br>
 		<strong>Secondary Tag: </strong> <br>
-		<input type="text" id="SecondTagAdd" name="SecondTagEntry" placeholder="Second Tag" ng-model="maintag.*" required>
+		<input type="text" id="SecondTagAdd" name="SecondTagEntry1" placeholder="Second Tag name" ng-model="SecondTag.name" required>
+		<br>
+		<strong>Id of primary Tag: </strong> <br>
+		<input type="text" id="SecondTagAddID" name="SecondTagEntry2" placeholder="Second Tag id" ng-model="SecondTag.id" required>
 		<br>
 		<br>
 		<br>
@@ -103,7 +106,7 @@
 		<h2 id="textCreateLangTag">Create language tag</h2>
 		<br>
 		<strong>Language Tag: </strong> <br>
-		<input type="text" id="LangTagAdd" name="LangTagEntry" placeholder="Lang Tag" ng-model="maintag.*" required>
+		<input type="text" id="LangTagAdd" name="LangTagEntry" placeholder="Lang Tag" ng-model="LangTag.name" required>
 		<br>
 		<br>
 		<br>

@@ -7,10 +7,196 @@
 /* Controller for Administrator page */
 app.controller('adminController', function($scope, $http){
 
+	
+	$scope.AddAdministrator = function() {
+	
+	$scope.admin.type = 'ADMINISTRATOR';
+	
   // TODO: 
-  // PUT ADD ADMIN
-  // PUT ADD LANGUAGE TAG 
-  // PUT ADD BANNER
+  // POST ADD ADMIN
+
+    var urlToGET = getDomain() + '/academi-co/resources/users/administrator';
+    var req = {
+                method: 'POST',
+                url: urlToGET,
+                headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json'
+                        },
+                data: $scope.admin
+              };
+	
+    
+    $http(req).then(
+            function(response){
+              console.log("account created perfectly");
+                             },
+            function(response){
+              console.log("ERROR : account cannot be created!");
+              // console.log(response.statusText);
+              // console.log(response.status);
+              // console.log("End error message");
+              alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+               switch(response.status){
+                 case 400:
+                   alert(response.data + " invalid!");
+                 case 403:
+                   window.location.replace("/academi-co/#!/forbidden");
+                   break;
+                 case 404:
+                   window.location.replace("/academi-co/#!/notFound");
+                   break;
+                 case 405:
+                   window.location.replace("/academi-co/#!/internalServerError");
+                   break;
+               }
+              }
+       
+            )
+	}
+	
+	
+	//POST ADD TAG
+	
+	$scope.AddLangTag = function() {
+
+	    $scope.name = { };
+
+	    var urlToGET = getDomain() + '/academi-co/resources/tags/languages/';
+	    var req = {
+	      method: 'POST',
+	      url: urlToGET,
+	      headers: {
+	          'Content-Type': 'application/json',
+	          'Accept': 'application/json'
+	        },
+	      data: $scope.LangTag
+	    }
+
+
+
+	    $http(req).then(
+	            function(response){
+	              console.log("language tag created perfectly");
+	                             },
+	            function(response){
+	              console.log("ERROR : language tag cannot be created!");
+	              // console.log(response.statusText);
+	              // console.log(response.status);
+	              // console.log("End error message");
+	              alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+	               switch(response.status){
+	                 case 400:
+	                   alert(response.data + " invalid!");
+	                 case 403:
+	                   window.location.replace("/academi-co/#!/forbidden");
+	                   break;
+	                 case 404:
+	                   window.location.replace("/academi-co/#!/notFound");
+	                   break;
+	                 case 405:
+	                   window.location.replace("/academi-co/#!/internalServerError");
+	                   break;
+	               }
+	              }
+	       
+	            )};
+
+
+	
+	
+  // POST ADD MAINTAG 
+	$scope.AddMainTag = function() {
+		
+	$scope.name = { };
+
+
+    var urlToGET = getDomain() + '/academi-co/resources/tags/';
+    var req = {
+                method: 'POST',
+                url: urlToGET,
+                headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json'
+                        },
+                data: $scope.MainTag
+              };
+	
+    
+    $http(req).then(
+            function(response){
+              console.log("maintag created perfectly");
+                             },
+            function(response){
+              console.log("ERROR : maintag cannot be created!");
+              // console.log(response.statusText);
+              // console.log(response.status);
+              // console.log("End error message");
+              alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+               switch(response.status){
+                 case 400:
+                   alert(response.data + " invalid!");
+                 case 403:
+                   window.location.replace("/academi-co/#!/forbidden");
+                   break;
+                 case 404:
+                   window.location.replace("/academi-co/#!/notFound");
+                   break;
+                 case 405:
+                   window.location.replace("/academi-co/#!/internalServerError");
+                   break;
+               }
+              }
+       
+            )
+	}
+	
+	  // POST ADD SECONDTAG 
+		$scope.AddSecondTag = function() {
+			
+		$scope.name = { };
+		$scope.id = { };
+
+	    var urlToGET = getDomain() + '/academi-co/resources/tags/' + "{" + id + "}";
+	    var req = {
+	                method: 'POST',
+	                url: urlToGET,
+	                headers: {
+	                          'Content-Type': 'application/json',
+	                          'Accept': 'application/json'
+	                        },
+	                data: $scope.SecondTag
+	              };
+		
+	    
+	    $http(req).then(
+	            function(response){
+	              console.log("secondtag created perfectly");
+	                             },
+	            function(response){
+	              console.log("ERROR : secondtag cannot be created!");
+	              // console.log(response.statusText);
+	              // console.log(response.status);
+	              // console.log("End error message");
+	              alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+	               switch(response.status){
+	                 case 400:
+	                   alert(response.data + " invalid!");
+	                 case 403:
+	                   window.location.replace("/academi-co/#!/forbidden");
+	                   break;
+	                 case 404:
+	                   window.location.replace("/academi-co/#!/notFound");
+	                   break;
+	                 case 405:
+	                   window.location.replace("/academi-co/#!/internalServerError");
+	                   break;
+	               }
+	              }
+	       
+	            )
+		}
+  // POST ADD BANNER
   // DISPLAY BANNERS, PUT/DELETE BANNER
 });
 
