@@ -107,6 +107,9 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 			<web-resource-name>Token Services</web-resource-name>
 			<url-pattern>/resources/auth/*</url-pattern>
 			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
 			<web-resource-name>Logout Services</web-resource-name>
@@ -170,8 +173,9 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<display-name>Users Realm</display-name>
 		<web-resource-collection>
 			<web-resource-name>Users Realm</web-resource-name>
-			<url-pattern>/settingsPreferences.html</url-pattern>
+			<url-pattern>/pages/settingsPreferences.html</url-pattern>
 			<url-pattern>/pages/postThread.html</url-pattern>
+			<url-pattern>/pages/loginSuccess.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 			<http-method>PUT</http-method>
@@ -191,7 +195,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<display-name>Moderators Realm</display-name>
 		<web-resource-collection>
 			<web-resource-name>Moderators Realm</web-resource-name>
-			<url-pattern>/moderation.html</url-pattern>
+			<url-pattern>/pages/moderation.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 			<http-method>PUT</http-method>
@@ -210,7 +214,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<display-name>Administrators Realm</display-name>
 		<web-resource-collection>
 			<web-resource-name>Administrators Realm</web-resource-name>
-			<url-pattern>/administration.html</url-pattern>
+			<url-pattern>/pages/administration.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 			<http-method>PUT</http-method>
