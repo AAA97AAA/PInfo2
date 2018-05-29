@@ -122,14 +122,21 @@
   border: 3px solid #e0e0e0;
   margin-bottom: 20px;
   background-color: #ffffff;
-  color: #0000;
+  color: black;
 }
 
 #inputEmailAdminAdd {
   border: 3px solid #e0e0e0;
   margin-bottom: 20px;
   background-color: #ffffff;
-  color: #0000;
+  color: black;
+}
+
+#inputPasswordAdminAdd {
+  border: 3px solid #e0e0e0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  color: black;
 }
 
 

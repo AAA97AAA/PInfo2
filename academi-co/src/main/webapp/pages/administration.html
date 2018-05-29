@@ -39,18 +39,21 @@
 <!-- Modal for Add Administrator -->
 <div id="AddAdministratorContent" style="display:none;" class="modalBackground">
 	<button class="closeButton" onclick="document.getElementById('AddAdministratorContent').style.display='none'">&times;</button>
-	<form class="modalContent">
+	<form name="addAdministratorForm" class="modalContent">
 		<h2 id="textCreateAdmin">Create Administrator</h2>
 		<br>
 		<strong>Username: </strong> <br>
-		<input type="text" id="inputUsernameAdminAdd" name="UsernameEntry" placeholder="Username" required>
+		<input type="text" id="inputUsernameAdminAdd" name="UsernameEntry" placeholder="Username" ng-model="admin.username" required>
 		<br>
 		<strong>E-mail: </strong> <br>
-		<input type="email" id="inputEmailAdminAdd" name="EmailEntry" placeholder="Email" required>
+		<input type="email" id="inputEmailAdminAdd" name="EmailEntry" placeholder="Email" ng-model="admin.email" required>
+		<br>
+		<strong>Password: </strong> <br>
+		<input type="password" id="inputPasswordAdminAdd" name="PasswordEntry" placeholder="Password" ng-model="admin.password" required>
 		<br>
 		<br>
 		<br>
-		<input id="CreateAdminButton" type="submit" class="CreateAdminButton" onclick="document.getElementById('AddAdministratorContent').style.display='none'" value="Create Admin">
+		<input id="CreateAdminButton" type="submit" class="CreateAdminButton" ng-click="AddAdministrator()" ng-disabled="addAdministratorForm.$invalid$" value="Create Admin">
 		<br>
 		<br>
 	</form>
