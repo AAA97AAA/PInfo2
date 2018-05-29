@@ -8,132 +8,26 @@
     <packaging>war</packaging>
 
     <dependencies>
-   		<dependency>
-            <groupId>org.jboss.arquillian</groupId>
-            <artifactId>arquillian-bom</artifactId>
-            <version>1.3.0.Final</version>
-            <scope>test</scope>
-            <type>pom</type>
-        </dependency>
+    
+    	<!-- Wildfly main dependencies -->
+    	
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- Wildfly main dependencies (end) -->
+        
+        
+        <!-- Database and search dependencies -->
+        
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.45</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
-		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.12</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier -->
-		<dependency>
-		    <groupId>nl.jqno.equalsverifier</groupId>
-		    <artifactId>equalsverifier</artifactId>
-		    <version>2.4.5</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>2.18.3</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-web</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.core/arquillian-core-api -->
-		<dependency>
-		    <groupId>org.jboss.arquillian.core</groupId>
-		    <artifactId>arquillian-core-api</artifactId>
-		    <version>1.4.0.Final</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.junit/arquillian-junit-container -->
-		<dependency>
-		    <groupId>org.jboss.arquillian.junit</groupId>
-		    <artifactId>arquillian-junit-container</artifactId>
-		    <version>1.4.0.Final</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.wildfly.arquillian/wildfly-arquillian-container-managed -->
-		<dependency>
-		    <groupId>org.wildfly.arquillian</groupId>
-		    <artifactId>wildfly-arquillian-container-managed</artifactId>
-		    <version>2.1.0.Final</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.eclipsesource.jaxrs/jersey-all -->
-		<dependency>
-		    <groupId>com.eclipsesource.jaxrs</groupId>
-		    <artifactId>jersey-all</artifactId>
-		    <version>2.22.2</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-annotations</artifactId>
-		    <version>2.9.5</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.9.5</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.fasterxml.jackson.datatype</groupId>
-		    <artifactId>jackson-datatype-jsr310</artifactId>
-		    <version>2.4.0</version>
-		</dependency>
-	    <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
-		<dependency>
-		    <groupId>com.lmax</groupId>
-		    <artifactId>disruptor</artifactId>
-		    <version>3.4.2</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxrs -->
-		<dependency>
-		    <groupId>org.jboss.resteasy</groupId>
-		    <artifactId>resteasy-jaxrs</artifactId>
-		    <version>3.5.1.Final</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- Arquillian - jacoco -->
-		<dependency>
-			<groupId>org.jboss.arquillian.extension</groupId>
-			<artifactId>arquillian-jacoco</artifactId>
-			<version>1.0.0.Alpha9</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jacoco</groupId>
-			<artifactId>org.jacoco.core</artifactId>
-			<version>0.7.8</version>
-			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
@@ -166,18 +60,166 @@
             <artifactId>jose4j</artifactId>
             <version>0.5.0</version>
         </dependency>
+		
+		<!-- Database and search dependencies (end) -->
+		
+		
+		<!-- Unit testing dependencies -->
+		
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.12</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier -->
+		<dependency>
+		    <groupId>nl.jqno.equalsverifier</groupId>
+		    <artifactId>equalsverifier</artifactId>
+		    <version>2.4.5</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.18.3</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Unit testing dependencies (end) -->
+		
+		
+		<!-- Logging dependencies -->
+		
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		
+		<!-- Logging dependencies (end) -->
+		
+		
+		<!-- Arquillian dependencies -->
+		
+		<dependency>
+            <groupId>org.jboss.arquillian</groupId>
+            <artifactId>arquillian-bom</artifactId>
+            <version>1.3.0.Final</version>
+            <scope>test</scope>
+            <type>pom</type>
+        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.core/arquillian-core-api -->
+		<dependency>
+		    <groupId>org.jboss.arquillian.core</groupId>
+		    <artifactId>arquillian-core-api</artifactId>
+		    <version>1.4.0.Final</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.junit/arquillian-junit-container -->
+		<dependency>
+		    <groupId>org.jboss.arquillian.junit</groupId>
+		    <artifactId>arquillian-junit-container</artifactId>
+		    <version>1.4.0.Final</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.wildfly.arquillian/wildfly-arquillian-container-managed -->
+		<dependency>
+		    <groupId>org.wildfly.arquillian</groupId>
+		    <artifactId>wildfly-arquillian-container-managed</artifactId>
+		    <version>2.1.0.Final</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- Arquillian - jacoco -->
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-jacoco</artifactId>
+			<version>1.0.0.Alpha9</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Arquillian dependencies (end) -->
+		
+		
+		<!-- Additional test resources -->
+		
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>org.jacoco.core</artifactId>
+			<version>0.7.8</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.eclipsesource.jaxrs/jersey-all -->
+		<dependency>
+		    <groupId>com.eclipsesource.jaxrs</groupId>
+		    <artifactId>jersey-all</artifactId>
+		    <version>2.22.2</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+		<dependency>
+		    <groupId>com.lmax</groupId>
+		    <artifactId>disruptor</artifactId>
+		    <version>3.4.2</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxrs -->
+		<dependency>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-jaxrs</artifactId>
+		    <version>3.5.1.Final</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<!-- Additional test resources (end) -->
+		
+		
+		<!-- Marshalling dependencies -->
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.9.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.5</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.datatype</groupId>
+		    <artifactId>jackson-datatype-jsr310</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+		
+		<!-- Marshalling dependencies (end) -->
+	    
+	    
+	    <!-- Security dependencies -->
+		
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>2.5.6</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.45</version>
-		</dependency>
+        
+        <!-- Security dependencies (end) -->
+        
     </dependencies>
 
     <build>

@@ -188,6 +188,14 @@ public class UserServiceRs {
 		return Response.ok(result).build();
 	}
 	
+	/**
+	 * Get all of user's posts in the given order and range
+	 * @param id
+	 * @param order
+	 * @param from
+	 * @param length
+	 * @return
+	 */
 	@GET
 	@Path("/{id}/posts")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -201,6 +209,11 @@ public class UserServiceRs {
 		return Response.ok(posts).build();
 	}
 	
+	/**
+	 * Utility function for database constraint violation errors parsing
+	 * @param error
+	 * @return
+	 */
 	private String isolateErrorMessage(Throwable error) {
 		Matcher match = Pattern.compile("for key '(.+)'").matcher(error.getMessage());
 		if (match.find()) {

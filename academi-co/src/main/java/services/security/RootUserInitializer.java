@@ -28,6 +28,10 @@ public class RootUserInitializer implements ServletContextListener {
 		// Nothing to do
 	}
 
+	/**
+	 * Sets the original administrator at server startup as well as the servlet
+	 * context for loading the default profile picture
+	 */
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		ContextProvider.setContext(event.getServletContext());
@@ -36,7 +40,7 @@ public class RootUserInitializer implements ServletContextListener {
 			try {
 				userService.addUser(
 						UserFactory.createUser("root", "root@academi-co.ch", "admin", UserType.ADMINISTRATOR.getStringVal())
-						);
+					);
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
