@@ -108,7 +108,7 @@ route.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
             templateUrl : 'pages/profile.html',
             controller  : 'profileController'
         })
-        .when('/result', {
+        .when('/result/:searchParameters', {
             title       : 'Search - Academi-co',
             templateUrl : 'pages/result.html',
             controller  : 'resultController'

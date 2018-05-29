@@ -6,10 +6,6 @@
 
 /* Controller for Administrator page */
 app.controller('adminController', function($scope, $http){
-  //   var url = window.location.href;
-  //  var arr = url.split("/");
-  //   var result = arr[0] + "//" + arr[2];
-  //  console.log(result); 
 
   // TODO: 
   // PUT ADD ADMIN
@@ -66,7 +62,7 @@ app.controller('postThreadController', function($scope, $http){
 });
 
 /* Controller for profile page */
-app.controller('profileController', function($scope, $http){
+app.controller('profileController', function($scope, $http, $routeParams){
   // TODO: 
   // conditional display: settings button displayed only for the corresponding user
   
@@ -99,10 +95,13 @@ app.controller('profileController', function($scope, $http){
 });
 
 /* Controller for result page */
-app.controller('resultController', function($scope, $http){
+app.controller('resultController', function($scope, $http, $routeParams){
   // TODO: 
   // result of request
   // do the path param 
+  console.log("Bonjout " + $routeParams.searchParameters);
+  $scope.message = $routeParams.searchParameters;
+  
   
 });
 
@@ -128,28 +127,46 @@ app.controller('signUpController', function($scope, $http) {
       // password encryption
       $scope.user.password = document.getElementById("password").value;
     
+      var urlToGET = getDomain() + '/academi-co/resources/users/';
       var req = {
                   method: 'POST',
-                  url: 'http://localhost:8080/academi-co/resources/users/',
+                  url: urlToGET,
                   headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json'
                           },
                   data: $scope.user
                 };
-    
-      $http(req).then(
-        function(response){
-          console.log("account created perfectly");
+                
+
+  
+
+       $http(req).then(
+         function(response){
+           console.log("account created perfectly");
                           },
-        function(response){
-          console.log("ERROR : account cannot be created!");
-          console.log(response.statusText);
-          console.log(response.status);
-          // console.log("End error message");
-          }
+         function(response){
+           console.log("ERROR : account cannot be created!");
+           // console.log(response.statusText);
+           // console.log(response.status);
+           // console.log("End error message");
+           alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+           // switch(response.status){
+           //   case 400:
+           //     alert(response.data + " invalid!");
+           //   case 403:
+           //     window.location.replace("/academi-co/#!/forbidden");
+           //     break;
+           //   case 404:
+           //     window.location.replace("/academi-co/#!/notFound");
+           //     break;
+           //   case 405:
+           //     window.location.replace("/academi-co/#!/internalServerError");
+           //     break;
+           // }
+           }
     
-        )
+         )
     
     // window.location.href = "login.jsp";
     // alert("Welcome " + $scope.user.username + "! Please login.");
@@ -179,14 +196,18 @@ app.controller('threadController', function($scope, $http, $routeParams){
     // if we correctly have the result, we just take the data
      $scope.thread = response.data;
   }, function(response) {
-    // if there is error
-    if(response.status == 404){
-      window.location.replace("/academi-co/#!/notFound");
-    } else if(response.status == 403) {
-      window.location.replace("/academi-co/#!/forbidden");
-    } else if(response.status == 405) {
-      window.location.replace("/academi-co/#!/internalServerError");
-    }
+      // if there is error
+      switch(response.status){
+        case 403:
+          window.location.replace("/academi-co/#!/forbidden");
+          break;
+        case 404:
+          window.location.replace("/academi-co/#!/notFound");
+          break;
+        case 405:
+          window.location.replace("/academi-co/#!/internalServerError");
+          break;
+      }
   });
 
   // TODO: if user not connected: remove textArea 
@@ -263,23 +284,39 @@ app.controller('isConnectHeader', function($scope, $http){
         // 'Content-Type': 'application/json'
       },
     }).then(function(response) {
-      alert("oklm");
+      console.log("logged");
+      window.location.replace("/academi-co/#!/home");
     }, function(response) {
-      alert("error " + response.status);
-      // if there is error
-      if(response.status == 404){
-        window.location.replace("/academi-co/#!/notFound");
-      } else if(response.status == 403) {
-        window.location.replace("/academi-co/#!/forbidden");
-      } else if(response.status == 405) {
-        window.location.replace("/academi-co/#!/internalServerError");
-      } else {
-        // alert("error " + response.status);
+      console.log("problem login " + response.status + " " + response.statusText);
+      switch(response.status){
+        case 403:
+          window.location.replace("/academi-co/#!/forbidden");
+          break;
+        case 404:
+          window.location.replace("/academi-co/#!/notFound");
+          break;
+        case 405:
+          window.location.replace("/academi-co/#!/internalServerError");
+          break;
       }
     });
-    
+          // alert("error " + response.status);
+      // // if there is error
+      // if(response.status == 404){
+      //   window.location.replace("/academi-co/#!/notFound");
+      // } else if(response.status == 403) {
+      //   window.location.replace("/academi-co/#!/forbidden");
+      // } else if(response.status == 405) {
+      //   window.location.replace("/academi-co/#!/internalServerError");
+      // } else {
+      //   // alert("error " + response.status);
+      // }
 
   };
+
+  $scope.signUp = function() {
+    window.location.replace("/academi-co/#!/signUp");
+  }
 
 });
 
@@ -428,14 +465,28 @@ app.controller('isConnectHeader', function($scope, $http){
 
 
 
-// // /* Controller for simple search */
-// // app.controller('simplifiedSearchController', function($scope, $http){
+ /* Controller for simple search */
+app.controller('simplifiedSearchController', function($scope, $http){
 
-// //   $scope.search = {};
+  $scope.search = {};
+  $scope.simplifiedSearch = function() {
+    if($scope.search.title == null){
+      // when the user has entered nothing, we don't search it
+      // and ask him to fill out the field
+    } else {
+      searchUrl = getDomain() + '/academi-co/#!/result/title=' + $scope.search.title;
+      // console.log(searchUrl);
+      window.location.replace(searchUrl); 
+    }
+  }
+});
 
-// //   $scope.onSubmit = function() {
-// //     alert($scope.search.title);
+/* Controller for advanced search */
+app.controller('advancedSearchController', function($scope, $http){
+  
+  $scope.search = {};
 
-// //   }
-// // });
+  document.getElementById("myUL1");
+  document.getElementById("myUL2");
 
+});
