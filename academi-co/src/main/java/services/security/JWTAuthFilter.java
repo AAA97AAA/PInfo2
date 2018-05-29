@@ -2,7 +2,10 @@ package services.security;
 
 import java.io.IOException;
 import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
+import java.security.cert.CertificateException;
+
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -79,9 +82,22 @@ public class JWTAuthFilter implements ContainerRequestFilter {
 
         JwtConsumer jwtConsumer;
 		try {
+			KeytoolUtility key = null;
+			try {
+				key = new KeytoolUtility();
+			} catch (CertificateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			jwtConsumer = new JwtConsumerBuilder()
 			        .setRequireSubject() // the JWT must have a subject claim
-			        .setVerificationKey(KeytoolUtility.getPublicKey()) // verify the signature with the public key
+			        .setVerificationKey(key.getPublicKey()) // verify the signature with the public key
 			        .build(); // create the JwtConsumer instance
 			try {
 	            //  Validate the JWT and process it to the Claims
