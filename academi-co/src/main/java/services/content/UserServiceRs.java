@@ -29,6 +29,7 @@ import dom.content.ConcreteUser;
 import dom.content.Post;
 import dom.content.User;
 import dom.content.UserType;
+import services.utility.ErrorPayload;
 import services.utility.View;
 
 /**
@@ -127,7 +128,7 @@ public class UserServiceRs {
 				if (match.find()) {
 					fault = match.group(1);
 				}
-				return Response.status(Status.BAD_REQUEST).entity(fault).build();
+				return Response.status(Status.BAD_REQUEST).entity(new ErrorPayload(fault)).build();
 			}
 			
 			// Else code 500
@@ -184,7 +185,7 @@ public class UserServiceRs {
 				if (match.find()) {
 					fault = match.group(1);
 				}
-				return Response.status(Status.BAD_REQUEST).entity(fault).build();
+				return Response.status(Status.BAD_REQUEST).entity(new ErrorPayload(fault)).build();
 			}
 			
 			// Else code 500
