@@ -87,11 +87,11 @@ route.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
             templateUrl : 'pages/loginError.html',
             controller  : 'loginErrorController'
         })
-        .when('/moderation', {
-            title       : 'Moderator - Academi-co',
-            templateUrl : 'pages/moderation.html',
-            controller  : 'moderationController'
-        })
+        // .when('/moderation', {
+        //     title       : 'Moderator - Academi-co',
+        //     templateUrl : 'pages/moderation.html',
+        //     controller  : 'moderationController'
+        // })
         .when('/notFound', {
             title       : '404 Not Found - Academi-co',
             templateUrl : 'pages/notFound.html',

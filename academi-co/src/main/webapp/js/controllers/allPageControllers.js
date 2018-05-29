@@ -235,11 +235,11 @@ app.controller('loginSuccessController', function($scope, $http){
 })
 
 
-/* Controller for moderation page */
-app.controller('moderationController', function($scope, $http){
-  // TODO: no need to control the access because, web.xml does it well
-  // if modo --> 
-});
+// /* Controller for moderation page */
+// app.controller('moderationController', function($scope, $http){
+//   // TODO: no need to control the access because, web.xml does it well
+//   // if modo --> 
+// });
 
 /* Controller for notFound page */
 app.controller('notFoundController', function($scope, $http){
@@ -291,7 +291,7 @@ app.controller('resultController', function($scope, $http, $routeParams){
   // TODO: 
   // result of request
   // do the path param 
-  console.log("Bonjout " + $routeParams.searchParameters);
+  console.log("Bonjour " + $routeParams.searchParameters);
   $scope.message = $routeParams.searchParameters;
   
   
@@ -312,11 +312,12 @@ app.controller('signUpController', function($scope, $http) {
   
   
     if(document.getElementById("password").value != document.getElementById("password2").value) {
-      alert("Those passwords didn't match. Try again.");
+      $.growl.error({ message: "Those passwords didn't match. Try again." });
     } else {
+      // This is useless (back-end don't really care about that)
+      // but in term of lisibility, this defines the new user as REGISTERED
       $scope.user.type = 'REGISTERED';
-    // alert(sha256_digest($scope.user.password));
-      // password encryption
+      
       $scope.user.password = document.getElementById("password").value;
     
       var urlToGET = getDomain() + '/academi-co/resources/users/';
@@ -330,43 +331,41 @@ app.controller('signUpController', function($scope, $http) {
                   data: $scope.user
                 };
                 
-
-  
-
        $http(req).then(
          function(response){
-           console.log("account created perfectly");
+           // account has been created correctly, we redirect the user to the login page
+           $.growl.notice({ message: "Account perfectly created! Please login." });
+           // here we're sending him to the protected ressource loginSuccess that will load him login page
+           window.location.replace("/academi-co/#!/loginSuccess");
+           
                           },
          function(response){
-           console.log("ERROR : account cannot be created!");
-           // console.log(response.statusText);
-           // console.log(response.status);
-           // console.log("End error message");
-           alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-           // switch(response.status){
-           //   case 400:
-           //     alert(response.data + " invalid!");
-           //   case 403:
-           //     window.location.replace("/academi-co/#!/forbidden");
-           //     break;
-           //   case 404:
-           //     window.location.replace("/academi-co/#!/notFound");
-           //     break;
-           //   case 405:
-           //     window.location.replace("/academi-co/#!/internalServerError");
-           //     break;
-           // }
+
+            // console.log("ERROR : account cannot be created! " + response);
+            switch(response.status){
+              case 400:
+              // message in case of EMAIL or USERNAME already used
+               var errorMessage =  response.data.message + " already used!";
+               $.growl.error({ message: errorMessage });             
+               break;
+              case 403:
+                 window.location.replace("/academi-co/#!/forbidden");
+                 break;
+              case 404:
+                window.location.replace("/academi-co/#!/notFound");
+                break;
+              case 405:
+                window.location.replace("/academi-co/#!/internalServerError");
+                break;
+             }
            }
     
          )
     
-    // window.location.href = "login.jsp";
-    // alert("Welcome " + $scope.user.username + "! Please login.");
     }
   
   }
-  // TODO: hash will change 
-  //       redirect to correct page when error  (waiting for Kaïko to prepare the error)
+
 });
 
 /* Controller for thread page */
@@ -464,34 +463,35 @@ app.controller('isConnectHeader', function($scope, $http){
   // login function 
   $scope.login = function() {
 
-    // we construct the url that we want to get
-    var urlToGET = getDomain() + '/academi-co/resources/auth';
+    // // we construct the url that we want to get
+    // // var urlToGET = getDomain() + '/academi-co/resources/auth';
+    // var urlToGET = "https://localhost:8443/academi-co/resources/auth";
 
-    // console.log(urlToGET);
-    $http({
-      method: 'GET',
-      url: urlToGET,
-      headers: {
-        'Accept': 'application/json',
-        // 'Content-Type': 'application/json'
-      },
-    }).then(function(response) {
-      console.log("logged");
-      window.location.replace("/academi-co/#!/home");
-    }, function(response) {
-      console.log("problem login " + response.status + " " + response.statusText);
-      switch(response.status){
-        case 403:
-          window.location.replace("/academi-co/#!/forbidden");
-          break;
-        case 404:
-          window.location.replace("/academi-co/#!/notFound");
-          break;
-        case 405:
-          window.location.replace("/academi-co/#!/internalServerError");
-          break;
-      }
-    });
+    // // console.log(urlToGET);
+    // $http({
+    //   method: 'GET',
+    //   url: urlToGET,
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    // }).then(function(response) {
+    //   console.log("logged");
+    //   window.location.replace("/academi-co/#!/home");
+    // }, function(response) {
+    //   console.log("problem login " + response.status + " " + response.statusText);
+    //   switch(response.status){
+    //     case 403:
+    //       window.location.replace("/academi-co/#!/forbidden");
+    //       break;
+    //     case 404:
+    //       window.location.replace("/academi-co/#!/notFound");
+    //       break;
+    //     case 405:
+    //       window.location.replace("/academi-co/#!/internalServerError");
+    //       break;
+    //   }
+    // });
           // alert("error " + response.status);
       // // if there is error
       // if(response.status == 404){
@@ -658,7 +658,7 @@ app.controller('isConnectHeader', function($scope, $http){
 
 
  /* Controller for simple search */
-app.controller('simplifiedSearchController', function($scope, $http){
+ app.controller('simplifiedSearchController', function($scope, $http){
 
   $scope.search = {};
   $scope.simplifiedSearch = function() {
