@@ -1,45 +1,3 @@
-//Create a "close" button and append it to each list item
-var myNodelist1 = document.getElementById("myUL1").getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist1.length; i++) {
-var spanPrimaryTag = document.createElement("SPAN");
-var txt = document.createTextNode("\u00D7");
-spanPrimaryTag.className = "closePrimaryTag";
-spanPrimaryTag.appendChild(txt);
-myNodelist1[i].appendChild(spanPrimaryTag);
-}
-
-//Click on a close button to hide the current list item
-var closePrimaryTag = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < closePrimaryTag.length; i++) {
- closePrimaryTag[i].onclick = function() {
- var div = this.parentElement;
- div.style.display = "none";
-}
-}
-
-//Create a "close" button and append it to each list item
-var myNodelist2 = document.getElementById("myUL2").getElementsByTagName("LI");
-var j;
-for (j = 0; j < myNodelist2.length; j++) {
-var spanSecondaryTag = document.createElement("SPAN");
-var txt = document.createTextNode("\u00D7");
-spanSecondaryTag.className = "closeSecondaryTag";
-spanSecondaryTag.appendChild(txt);
-myNodelist2[j].appendChild(spanSecondaryTag);
-}
-
-//Click on a close button to hide the current list item
-var closeSecondaryTag = document.getElementsByClassName("close");
-var j;
-for (j = 0; j < closeSecondaryTag.length; j++) {
-closeSecondaryTag[j].onclick = function() {
-var div = this.parentElement;
-div.style.display = "none";
-}
-}
-
 /* Create a new list item when clicking on the "Add" button */
 /* Function for primary tag in advanced search: when click in Add button */
 function newElement1() {
@@ -51,13 +9,13 @@ function newElement1() {
 	var size1 = containerPrimaryTag.getElementsByTagName("li").length;
 
 	if (inputValue === 'Select primarytag:') {
-		alert("You must select something!");
+		$.growl.error({ message: "You must select something." });
 	} 
 	else if (size1 < 1) {		
 		containerPrimaryTag.appendChild(li);
 	} 
 	else {
-		alert("You can't add more than 1 primary tag");
+		$.growl.error({ message: "You can't add more than one primary tag." });
 	}
 
 	document.getElementById("primarytag").value;
@@ -69,7 +27,7 @@ function newElement1() {
 	li.appendChild(spanPrimaryTag);
 	
 	spanPrimaryTag.onclick = function() { 
-	containerPrimaryTag.removeChild(containerPrimaryTag.childNodes);
+	containerPrimaryTag.removeChild(li);
 
 	}
 }
@@ -85,13 +43,13 @@ function newElement2() {
 	var size2 = containerSecondaryTag.getElementsByTagName("li").length;
 	
 	if (inputValue === 'Select secondarytag:') {
-		alert("You must select something!");
+		$.growl.error({ message: "You must select something." });
 	} 
 	else if (size2 < 3) {		
 		containerSecondaryTag.appendChild(li);
 	} 
 	else {
-		alert("You can't add more than 3 secondary tag");
+		$.growl.error({ message: "You can't add more than three secondary tags." });
 	}
 
 	document.getElementById("secondarytag").value;
@@ -103,7 +61,7 @@ function newElement2() {
 	li.appendChild(spanSecondaryTag);
 
 	spanSecondaryTag.onclick = function() { 
-	containerSecondaryTag.removeChild(containerSecondaryTag.childNodes);
+	containerSecondaryTag.removeChild(li);
 
 	}
 }
