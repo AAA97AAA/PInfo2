@@ -46,6 +46,7 @@ import dom.content.PostFactory;
 import dom.content.QuestionThread;
 import dom.content.User;
 import dom.content.UserFactory;
+import dom.content.UserType;
 import dom.content.Vote;
 import dom.documentsManager.Document;
 import dom.inbox.Inbox;
@@ -121,7 +122,8 @@ public class ConcretePostServiceIntegrationTest {
 			byte[] buffer = new byte[10];
 			new Random().nextBytes(buffer);
 			String baseName = new String(buffer);
-			User author = UserFactory.createUser(baseName + "post", baseName + "@onch.com", "012345", User.REGISTERED);
+			User author = UserFactory.createUser(baseName + "post", baseName + "@onch.com", "012345",
+					UserType.REGISTERED.getStringVal());
 			MainTag subject = TagFactory.createMainTag("subject42");
 			Tag languageTag = TagFactory.createTag("engrrrish");
 			trx.begin();
@@ -268,7 +270,7 @@ public class ConcretePostServiceIntegrationTest {
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		
 		// Create voter
-		User voter = UserFactory.createUser("voterName", "haha@hoho.huhu", "pass", User.REGISTERED);
+		User voter = UserFactory.createUser("voterName", "haha@hoho.huhu", "pass", UserType.REGISTERED.getStringVal());
 		trx.begin();
 		em.persist(voter);
 		trx.commit();

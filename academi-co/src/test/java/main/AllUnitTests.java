@@ -11,7 +11,7 @@ import services.search.AllSearchTests;
 import services.utility.AllUtilityTests;
 
 /**
- * Main test suite: Launches all the tests in the project.
+ * Main unit test suite: Launches all the unit tests in the project.
  * 
  * @author kaikoveritch
  *

@@ -27,6 +27,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import dom.content.ConcreteUser;
 import dom.content.User;
+import dom.content.UserType;
 import dom.documentsManager.ConcreteDocument;
 import dom.documentsManager.Document;
 import services.documentsManager.ConcreteDocumentService;
@@ -90,7 +91,7 @@ public class ConcreteUserServiceTest {
 		String name = "name";
 		String email = "email";
 		String password = "password";
-		String type = User.REGISTERED;
+		String type = UserType.REGISTERED.getStringVal();
 		String digest = "nksdfgjpot323lkjlk";
 		
 		// Adding behavior

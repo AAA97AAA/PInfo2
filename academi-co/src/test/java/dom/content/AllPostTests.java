@@ -11,7 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ PostFactoryTest.class, ConcreteCommentTest.class, ConcretePostTest.class, ConcreteQuestionThreadTest.class })
+@SuiteClasses({ PostFactoryTest.class, ConcreteCommentTest.class, ConcretePostTest.class, ConcreteQuestionThreadTest.class,
+	VoteTest.class })
 public class AllPostTests {
 
 }

@@ -46,6 +46,7 @@ import dom.content.PostFactory;
 import dom.content.QuestionThread;
 import dom.content.User;
 import dom.content.UserFactory;
+import dom.content.UserType;
 import dom.documentsManager.Document;
 import dom.documentsManager.DocumentFactory;
 import dom.inbox.Inbox;
@@ -122,7 +123,8 @@ public class ConcreteUserServiceIntegrationTest {
 		trx.commit();
 		// Add test user to table
 		trx.begin();
-		sampleUser = UserFactory.createUser("someVerySpecialName", "email@lol.com", "password", User.REGISTERED);
+		sampleUser = UserFactory.createUser("someVerySpecialName", "email@lol.com", "password",
+				UserType.REGISTERED.getStringVal());
 		em.persist(sampleUser);
 		trx.commit();
 	}
@@ -142,7 +144,8 @@ public class ConcreteUserServiceIntegrationTest {
 
 	@Test
 	public void testAddUser() throws Throwable {
-		User newUser = service.addUser(UserFactory.createUser("imaginativeName", "puf@pouf.paf", "secret", User.REGISTERED));
+		User newUser = service.addUser(UserFactory.createUser("imaginativeName", "puf@pouf.paf", "secret",
+				UserType.REGISTERED.getStringVal()));
 		trx.begin();
 		User inMemory = em.find(ConcreteUser.class, newUser.getId());
 		trx.commit();
@@ -156,7 +159,7 @@ public class ConcreteUserServiceIntegrationTest {
 		String username = "mirobolous";
 		String email = "frivolous@outrageous.ous";
 		String password = "dubious";
-		String type = User.ADMINISTRATOR;
+		String type = UserType.ADMINISTRATOR.getStringVal();
 		String bio = "Scrumptious";
 		boolean canBeModerator = false;
 		Document profilePicture = DocumentFactory.createDocument("spontaneous.jpg", new byte[] {1, 2, 3});
@@ -188,7 +191,8 @@ public class ConcreteUserServiceIntegrationTest {
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		
 		// Create another user
-		User author = UserFactory.createUser("patrick", "p.brunschwick@ponpon.com", "ppp", User.REGISTERED);
+		User author = UserFactory.createUser("patrick", "p.brunschwick@ponpon.com", "ppp",
+				UserType.REGISTERED.getStringVal());
 		trx.begin();
 		em.persist(author);
 		trx.commit();

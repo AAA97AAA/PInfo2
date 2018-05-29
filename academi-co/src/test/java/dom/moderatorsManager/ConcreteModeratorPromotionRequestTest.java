@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 
 import dom.content.User;
-import dom.moderatorsManager.ConcreteModeratorPromotionRequest;
+import dom.content.UserType;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 /**
@@ -55,7 +55,7 @@ public class ConcreteModeratorPromotionRequestTest {
 		request.accept();
 		
 		// Verify that originator has been promoted
-		verify(originator, times(1)).setType(User.MODERATOR);
+		verify(originator, times(1)).setType(UserType.MODERATOR.getStringVal());
 	}
 
 	/**

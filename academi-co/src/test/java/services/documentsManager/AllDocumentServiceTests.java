@@ -10,7 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ConcreteDocumentServiceTest.class })
+@SuiteClasses({ ConcreteDocumentServiceTest.class, AdvertisementSchedulerTest.class })
 public class AllDocumentServiceTests {
 
 }

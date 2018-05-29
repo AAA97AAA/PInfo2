@@ -83,7 +83,7 @@ public class TagServiceRs {
 	public Response getMainTag(@PathParam("id") long id) {
 		MainTag tag = service.getMainTag(id);
 		if (tag == null) {
-			Response.status(Status.NOT_FOUND).build();
+			return Response.status(Status.NOT_FOUND).build();
 		}
 		return Response.ok(tag).build();
 	}

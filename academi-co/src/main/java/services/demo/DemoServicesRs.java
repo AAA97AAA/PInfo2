@@ -21,6 +21,7 @@ import dom.content.PostFactory;
 import dom.content.QuestionThread;
 import dom.content.User;
 import dom.content.UserFactory;
+import dom.content.UserType;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
@@ -66,7 +67,8 @@ public class DemoServicesRs {
 		List<User> users = new ArrayList<User>();
 		for (int i = 0; i < nUsers; i++) {
 			users.add(userService.addUser(
-					UserFactory.createUser("user" + i, "mail" + i + "@mail.com", "secret", User.REGISTERED)));
+					UserFactory.createUser("user" + i, "mail" + i + "@mail.com", "secret",
+							UserType.REGISTERED.getStringVal())));
 		}
 		
 		// Add tags

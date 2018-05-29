@@ -3,6 +3,8 @@ package services.security;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
@@ -16,6 +18,9 @@ import javax.ws.rs.container.ContainerResponseFilter;
 * 
 */
 public class JWTResponseFilter implements ContainerResponseFilter {
+	
+	@Inject
+	private JWTokenUtility tokenUtility;
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
@@ -27,7 +32,7 @@ public class JWTResponseFilter implements ContainerResponseFilter {
         }
 
         List<Object> jwt = new ArrayList<Object>();
-        jwt.add(JWTokenUtility.buildJWT(requestContext.getSecurityContext().getUserPrincipal().getName()));
+        jwt.add(tokenUtility.buildJWT(requestContext.getSecurityContext().getUserPrincipal().getName()));
         responseContext.getHeaders().put("jwt", jwt);
     }
 }

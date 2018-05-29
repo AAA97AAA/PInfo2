@@ -5,10 +5,16 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
 import org.jose4j.jws.AlgorithmIdentifiers;
 import org.jose4j.jws.JsonWebSignature;
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.lang.JoseException;
+
+import services.content.UserService;
 
 /**
 *
@@ -18,9 +24,17 @@ import org.jose4j.lang.JoseException;
 * @source https://github.com/abhirockzz/jaxrs-with-jwt
 * 
 */
-public class JWTokenUtility {
+@Stateless
+public class ConcreteJWTokenUtility implements JWTokenUtility {
 
-    public static String buildJWT(String subject) {
+    // Serial version (auto-generated)
+	private static final long serialVersionUID = 6187832853534108134L;
+	
+	@Inject
+	private UserService userService;
+
+	@Override
+	public String buildJWT(String subject) {
         JwtClaims claims = new JwtClaims();
         claims.setSubject(subject); // the subject/principal is whom the token is about
 

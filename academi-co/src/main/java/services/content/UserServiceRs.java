@@ -28,6 +28,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import dom.content.ConcreteUser;
 import dom.content.Post;
 import dom.content.User;
+import dom.content.UserType;
 import services.utility.View;
 
 /**
@@ -95,7 +96,7 @@ public class UserServiceRs {
 	public Response addUser(ConcreteUser user, @Context UriInfo uriInfo) throws NoSuchAlgorithmException {
 		
 		// only for basic users
-		user.setType(User.REGISTERED);
+		user.setType(UserType.REGISTERED.getStringVal());
 		
 		return addUserByAdministrator(user, uriInfo);
 	}
@@ -152,7 +153,7 @@ public class UserServiceRs {
 	public Response modifyUser(@PathParam("id") long id, ConcreteUser newUser) {
 		
 		// basic user only
-		newUser.setType(User.REGISTERED);
+		newUser.setType(UserType.REGISTERED.getStringVal());
 		
 		return modifyUserByAdministrator(id, newUser);
 	}

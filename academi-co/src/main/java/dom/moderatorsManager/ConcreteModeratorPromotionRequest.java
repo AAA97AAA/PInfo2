@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import dom.content.ConcreteUser;
 import dom.content.User;
+import dom.content.UserType;
 
 /**
  * User request to become a moderator implementation.
@@ -57,7 +58,7 @@ public class ConcreteModeratorPromotionRequest implements ModeratorPromotionRequ
 	 */
 	@Override
 	public void accept() {
-		originator.setType(User.MODERATOR);
+		originator.setType(UserType.MODERATOR.getStringVal());
 	}
 	
 	

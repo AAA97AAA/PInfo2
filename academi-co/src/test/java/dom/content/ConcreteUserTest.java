@@ -38,7 +38,7 @@ public class ConcreteUserTest {
 		String email = "email@domain.com";
 		String password = "supersecret";
 		Document profilePicture = mock(ConcreteDocument.class);
-		String type = ConcreteUser.REGISTERED;
+		String type = UserType.REGISTERED.getStringVal();
 		String bio = "Interesting life or whatever...";
 		boolean canBeModerator = true;
 		Inbox inbox = mock(ConcreteInbox.class);
@@ -163,7 +163,7 @@ public class ConcreteUserTest {
 		String email = "email@domain.com";
 		String password = "supersecret";
 		ConcreteDocument profilePicture = mock(ConcreteDocument.class);
-		String type = ConcreteUser.REGISTERED;
+		String type = UserType.REGISTERED.getStringVal();
 		String bio = "Interesting life or whatever...";
 		boolean canBeModerator = true;
 		Inbox inbox = mock(ConcreteInbox.class);
@@ -208,7 +208,7 @@ public class ConcreteUserTest {
 		String password = "supersecret";
 		Document profilePicture = mock(ConcreteDocument.class);
 		when(profilePicture.toString()).thenReturn("picture");
-		String type = ConcreteUser.REGISTERED;
+		String type = UserType.REGISTERED.getStringVal();
 		String bio = "Interesting life or whatever...";
 		boolean canBeModerator = true;
 		Inbox inbox = mock(ConcreteInbox.class);

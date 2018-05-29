@@ -15,12 +15,6 @@ import dom.inbox.Inbox;
  */
 @JsonDeserialize(as = ConcreteUser.class)
 public interface User {
-	
-	/***** Constants *****/
-	static public String BANNED = "BANNED";
-	static public String REGISTERED = "REGISTERED";
-	static public String MODERATOR = "MODERATOR";
-	static public String ADMINISTRATOR = "ADMINISTRATOR";
 
 	public long getId();
 

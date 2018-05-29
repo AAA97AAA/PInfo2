@@ -15,6 +15,7 @@ import dom.content.PostFactory;
 import dom.content.QuestionThread;
 import dom.content.User;
 import dom.content.UserFactory;
+import dom.content.UserType;
 import dom.tags.MainTag;
 import dom.tags.SecondaryTag;
 import dom.tags.Tag;
@@ -49,7 +50,7 @@ public class FakeUserService implements UserService {
 	
 	@Override
 	public User getUser(String username) {
-		User user = UserFactory.createUser(username, "email", "password", User.REGISTERED);
+		User user = UserFactory.createUser(username, "email", "password", UserType.REGISTERED.getStringVal());
 		user.setBio("I'm such a cool guy...");
 		for (long i = 0; i < 20; i+=2) {
 			MainTag subject = TagFactory.createMainTag("subject" + i);

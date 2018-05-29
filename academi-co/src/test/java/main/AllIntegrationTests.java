@@ -10,6 +10,12 @@ import services.documentsManager.ConcreteAdvertisementServiceIntegrationTest;
 import services.documentsManager.ConcreteDocumentServiceIntegrationTest;
 import services.tags.ConcreteTagServiceIntegrationTest;
 
+/**
+ * Main integration test suite: Launches all the integration tests.
+ * 
+ * @author kaikoveritch
+ *
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ ConcreteAdvertisementServiceIntegrationTest.class, ConcreteDocumentServiceIntegrationTest.class,
 	ConcreteUserServiceIntegrationTest.class, ConcretePostServiceIntegrationTest.class,
