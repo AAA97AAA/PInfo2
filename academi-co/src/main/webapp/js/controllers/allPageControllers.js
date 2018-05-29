@@ -29,17 +29,21 @@ app.controller('adminController', function($scope, $http){
     
     $http(req).then(
             function(response){
-              console.log("account created perfectly");
+              // console.log("account created perfectly");
+              $.growl.notice({ message: "Administrator created successfully!" });
                              },
             function(response){
-              console.log("ERROR : account cannot be created!");
+              $.growl.error({ message: "Administrator cannot be created." });
+              // console.log("ERROR : account cannot be created!");
               // console.log(response.statusText);
               // console.log(response.status);
               // console.log("End error message");
               alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
                switch(response.status){
                  case 400:
-                   alert(response.data + " invalid!");
+                  //  alert(response.data + " invalid!");
+                  $.growl.error({ message: "Administrator cannot be created." });
+                   break;
                  case 403:
                    window.location.replace("/academi-co/#!/forbidden");
                    break;
@@ -77,17 +81,19 @@ app.controller('adminController', function($scope, $http){
 
 	    $http(req).then(
 	            function(response){
-	              console.log("language tag created perfectly");
+	              $.growl.notice({ message: "Language tag perfectly created." });
 	                             },
 	            function(response){
-	              console.log("ERROR : language tag cannot be created!");
+                $.growl.error({ message: "ERROR : language tag cannot be created!"});
 	              // console.log(response.statusText);
 	              // console.log(response.status);
 	              // console.log("End error message");
-	              alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+	              // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
 	               switch(response.status){
-	                 case 400:
-	                   alert(response.data + " invalid!");
+                   case 400:
+                   $.growl.error({ message: "ERROR : language tag cannot be created! Already existing."});
+                    //  alert(response.data + " invalid!");
+                    break;
 	                 case 403:
 	                   window.location.replace("/academi-co/#!/forbidden");
 	                   break;
@@ -125,17 +131,19 @@ app.controller('adminController', function($scope, $http){
     
     $http(req).then(
             function(response){
-              console.log("maintag created perfectly");
+              $.growl.notice({ message: "Maintag perfectly created." });
                              },
             function(response){
-              console.log("ERROR : maintag cannot be created!");
+              $.growl.error({ message: "Maintag cannot be created." });
               // console.log(response.statusText);
               // console.log(response.status);
               // console.log("End error message");
-              alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+              // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
                switch(response.status){
                  case 400:
-                   alert(response.data + " invalid!");
+                  //  alert(response.data + " invalid!");
+                  $.growl.error({ message: "Maintag cannot be created. Already existing" });
+                   break;
                  case 403:
                    window.location.replace("/academi-co/#!/forbidden");
                    break;
@@ -171,10 +179,10 @@ app.controller('adminController', function($scope, $http){
 	    
 	    $http(req).then(
 	            function(response){
-	              console.log("secondtag created perfectly");
+	              $.growl.notice({ message: "Secondary tag perfectly created." });
 	                             },
 	            function(response){
-	              console.log("ERROR : secondtag cannot be created!");
+	              $.growl.error({ message: "Secondary tag cannot be created." });
 	              // console.log(response.statusText);
 	              // console.log(response.status);
 	              // console.log("End error message");
@@ -467,31 +475,31 @@ app.controller('isConnectHeader', function($scope, $http){
     // // var urlToGET = getDomain() + '/academi-co/resources/auth';
     // var urlToGET = "https://localhost:8443/academi-co/resources/auth";
 
-    // // console.log(urlToGET);
-    // $http({
-    //   method: 'GET',
-    //   url: urlToGET,
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    // }).then(function(response) {
-    //   console.log("logged");
-    //   window.location.replace("/academi-co/#!/home");
-    // }, function(response) {
-    //   console.log("problem login " + response.status + " " + response.statusText);
-    //   switch(response.status){
-    //     case 403:
-    //       window.location.replace("/academi-co/#!/forbidden");
-    //       break;
-    //     case 404:
-    //       window.location.replace("/academi-co/#!/notFound");
-    //       break;
-    //     case 405:
-    //       window.location.replace("/academi-co/#!/internalServerError");
-    //       break;
-    //   }
-    // });
+    // console.log(urlToGET);
+     $http({
+       method: 'GET',
+       url: urlToGET,
+       headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+       },
+     }).then(function(response) {
+       console.log("logged");
+       window.location.replace("/academi-co/#!/home");
+     }, function(response) {
+       console.log("problem login " + response.status + " " + response.statusText);
+       switch(response.status){
+         case 403:
+           window.location.replace("/academi-co/#!/forbidden");
+           break;
+         case 404:
+           window.location.replace("/academi-co/#!/notFound");
+           break;
+         case 405:
+           window.location.replace("/academi-co/#!/internalServerError");
+           break;
+       }
+     });
           // alert("error " + response.status);
       // // if there is error
       // if(response.status == 404){
