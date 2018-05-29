@@ -88,3 +88,27 @@ transition: 0.3s;
   margin-right: auto;
   margin-top:5%;
 }
+
+
+/*  Modal background -> popup background when we click on a button */
+
+.modalBackground {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background: rgba(71,78,93,0.85);
+  padding-top: 50px;
+}
+
+
+.modalContent {
+  background-color: white;
+  margin: 5% auto 15% auto;
+  border-radius: 5px;
+  width: 50%;
+}
