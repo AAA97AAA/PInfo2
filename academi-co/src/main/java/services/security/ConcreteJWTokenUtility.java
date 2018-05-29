@@ -1,8 +1,10 @@
 package services.security;
 
+import java.io.IOException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,12 +38,22 @@ public class ConcreteJWTokenUtility implements JWTokenUtility {
 	@Override
 	public String buildJWT(String subject) {
         JwtClaims claims = new JwtClaims();
-        claims.setSubject(subject); // the subject/principal is whom the token is about
+        claims.setSubject(Long.toString(userService.getUser(subject).getId())); // the subject/principal is whom the token is about
 
         JsonWebSignature jws = new JsonWebSignature();
         jws.setPayload(claims.toJson());
         try {
-			jws.setKey(KeytoolUtility.getPrivateKey());
+        		KeytoolUtility key = null;
+				try {
+					key = new KeytoolUtility();
+				} catch (CertificateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			jws.setKey(key.getPrivateKey());
 		} catch (UnrecoverableKeyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
