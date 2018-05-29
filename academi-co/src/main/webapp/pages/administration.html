@@ -60,6 +60,60 @@
 </div>
 <!-- End modal for Add Administrator -->
 
+<!-- Modal for Add MainTag -->
+<div id="AddMainTagContent" style="display:none;" class="modalBackground">
+	<button class="closeButton" onclick="document.getElementById('AddMainTagContent').style.display='none'">&times;</button>
+	<form name="addMainTagForm" class="modalContent">
+		<h2 id="textCreateMainTag">Create primary tag</h2>
+		<br>
+		<strong>Primary Tag: </strong> <br>
+		<input type="text" id="MainTagAdd" name="MainTagEntry" placeholder="Primary Tag" ng-model="maintag.*" required>
+		<br>
+		<br>
+		<br>
+		<input id="CreateMainTagButton" type="submit" class="CreateMainTagButton" ng-click="AddMainTag()" ng-disabled="addMainTagForm.$invalid$" value="Create MainTag">
+		<br>
+		<br>
+	</form>
+</div>
+<!-- End modal for Add Tag -->
+
+<!-- Modal for Add MainTag -->
+<div id="AddSecondTagContent" style="display:none;" class="modalBackground">
+	<button class="closeButton" onclick="document.getElementById('AddSecondTagContent').style.display='none'">&times;</button>
+	<form name="addSecondTagForm" class="modalContent">
+		<h2 id="textCreateSecondTag">Create secondary tag</h2>
+		<br>
+		<strong>Secondary Tag: </strong> <br>
+		<input type="text" id="SecondTagAdd" name="SecondTagEntry" placeholder="Second Tag" ng-model="maintag.*" required>
+		<br>
+		<br>
+		<br>
+		<input id="CreateSecondTagButton" type="submit" class="CreateSecondTagButton" ng-click="AddSecondTag()" ng-disabled="addSecondTagForm.$invalid$" value="Create SecondTag">
+		<br>
+		<br>
+	</form>
+</div>
+<!-- End modal for Add Tag -->
+
+<!-- Modal for Add LangTag -->
+<div id="AddLangTagContent" style="display:none;" class="modalBackground">
+	<button class="closeButton" onclick="document.getElementById('AddLangTagContent').style.display='none'">&times;</button>
+	<form name="addLangTagForm" class="modalContent">
+		<h2 id="textCreateLangTag">Create language tag</h2>
+		<br>
+		<strong>Language Tag: </strong> <br>
+		<input type="text" id="LangTagAdd" name="LangTagEntry" placeholder="Lang Tag" ng-model="maintag.*" required>
+		<br>
+		<br>
+		<br>
+		<input id="CreateLangTagButton" type="submit" class="CreateLangTagButton" ng-click="AddLangTag()" ng-disabled="addLangTagForm.$invalid$" value="Create LangTag">
+		<br>
+		<br>
+	</form>
+</div>
+<!-- End modal for Add Tag -->
+
 <!-- END Not Displayed elements -->
 
 
@@ -67,6 +121,9 @@
 <div style="text-align:center">
 	<button id="ManageBanners"  type="button" class="buttonAdmin" onclick="document.getElementById('ManageBannersContent').style.display='block'">Manage Banners</button>
 	<button id="AddAdministrator"  type="button" class="buttonAdmin" onclick="document.getElementById('AddAdministratorContent').style.display='block'">Add Administrator</button>
+    <button id="AddMainTag"  type="button" class="buttonAdmin" onclick="document.getElementById('AddMainTagContent').style.display='block'">Add primary tag</button>
+    <button id="AddSecondTag"  type="button" class="buttonAdmin" onclick="document.getElementById('AddSecondTagContent').style.display='block'">Add secondary tag</button>
+    <button id="AddLangTag"  type="button" class="buttonAdmin" onclick="document.getElementById('AddLangTagContent').style.display='block'">Add language tag</button>
 </div>
 <!-- END Displayed elements -->
 

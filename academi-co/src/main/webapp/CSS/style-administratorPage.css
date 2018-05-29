@@ -111,6 +111,53 @@
   font-family: "Times New Roman", Times, serif;
 }
 
+/* ADD MAINTAG */
+.CreateMainTagButton {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  position: relative;
+  bottom: 15px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* ADD SECONDTAG */
+.CreateSecondTagButton {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  position: relative;
+  bottom: 15px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* ADD LANGTAG */
+.CreateLangTagButton {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 5px;
+  opacity: 0.9;
+  position: relative;
+  bottom: 15px;
+  font-family: "Times New Roman", Times, serif;
+}
 
 #textCreateAdmin {
   font-size: 24px;
