@@ -30,6 +30,7 @@
         <div id="searchBarHeader" ng-controller="simplifiedSearchController">
             <form name="simplfiedSearch">
                 <!-- Post Thread Button -->
+                <!-- TODO : changer le href en une action qui on click redirige sur la page new thread -->
                 <button href="/academi-co/#!/newThread" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></button>
                 <!-- Search Bar -->
                 <!-- Search Bar input box -->
@@ -82,7 +83,7 @@
     
         <!-- Advanced Research -->
         <div id="advancedResearchContent" class="searchnav w3-theme-d5" style="display:none" ng-controller="advancedSearchController">
-            <form name="advancedSearch"></form>
+            <form name="advancedSearch">
                 <span style="position:absolute; left:35%; width:200px; top:100px;">Keywords</span><br><input type="text" id="keyword" style="position:absolute; left:42%; width:200px; top:100px;" ng-model="search.title"></input>
                 <span style="position:absolute; left:49%; width:200px; top:180px;">From date</span><br>
                 <!--         <input type="text" id="dateBegin" style="position:absolute; left:57%; width:200px; top:180px;"></input> -->
