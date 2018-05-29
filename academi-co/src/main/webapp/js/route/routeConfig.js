@@ -129,6 +129,11 @@ route.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
             templateUrl : 'pages/thread.html',
             controller  : 'threadController'
         })
+        .when('/loginSuccess', {
+            title       : 'Login Success - Academi-co',
+            templateUrl : 'pages/loginSuccess.html',
+            controller  : 'loginSuccessController'
+        })
         .when('/preview', {
             title       : 'Preview - Academi-co',
             templateUrl : 'pages/preview.html',

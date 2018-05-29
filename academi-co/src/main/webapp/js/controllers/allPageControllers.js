@@ -43,6 +43,12 @@ app.controller('loginErrorController', function($scope, $http){
 
 });
 
+/*Controller for loginSuccess page */
+app.controller('loginSuccessController', function($scope, $http){
+
+})
+
+
 /* Controller for moderation page */
 app.controller('moderationController', function($scope, $http){
   // TODO: no need to control the access because, web.xml does it well
