@@ -1,108 +1,121 @@
 package services.content;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.concurrent.ThreadLocalRandom;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import dom.content.ConcreteUser;
-import dom.documentsManager.ConcreteDocument;
+import dom.content.User;
 
 /**
- * Unit tests for user service class
- * @author petrbinko
+ * Test class for UserServiceRs.
+ * 
+ * @author kaikoveritch
  *
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceRsTest {
 	
-	// Mocks
 	@Mock
-	ConcreteUser fakeUser;
+	private UserService service;
 	
-	@Mock
-	ConcreteDocument fakeDocument;
-	
-	@Mock
-	ConcreteUserService service;
-	
-	// Instance of QuestionThreadServiceRs in which mocks will be injected
 	@InjectMocks
-	UserServiceRs serviceRs;
+	private UserServiceRs serviceRest;
 	
-	/**
-	 * Unit test for method GetUser from rest implementation of UserService
-	 */
+	@Mock
+	private User user;
+	
+//	private List<Post> posts;
+	
+
+	@Before
+	public void setup() throws Throwable {
+//		posts = new ArrayList<Post>();
+		when(service.getUser(anyLong())).thenReturn(user);
+		when(service.getUser(anyString())).thenReturn(user);
+//		when(service.addUser(any(User.class))).thenReturn(user);
+//		when(service.modifyUser(anyLong(), any(User.class))).thenReturn(user);
+//		when(service.getUserPosts(anyLong(), anyString(), anyInt(), anyInt())).thenReturn(posts);
+	}
+	
+	
+	@Test
+	public void testGetUserForSession() {
+		
+		// Test success
+		String name = "lol";
+		Response response = serviceRest.getUserForSession(name);
+		verify(service, times(1)).getUser(name);
+		assertSame("Wrong user in response.", user, response.getEntity());
+		assertEquals("Wrong response code.", Status.OK.getStatusCode(), response.getStatus());
+		
+		// Test failure
+		String badname = "badlol";
+		when(service.getUser(badname)).thenReturn(null);
+		response = serviceRest.getUserForSession(badname);
+		verify(service, times(1)).getUser(badname);
+		assertNull("Wrong user in response.", response.getEntity());
+		assertEquals("Wrong response code.", Status.NOT_FOUND.getStatusCode(), response.getStatus());
+	}
+
 	@Test
 	public void testGetUser() {
-		
-		// Random id generation
-		long id = ThreadLocalRandom.current().nextLong();
-		
-		// Specifying behavior for mock objects related to calls in the service
-		when(service.getUser(id)).thenReturn(fakeUser);
-		
-		// Calling method getUser on rest service
-		serviceRs.getUser(id);
-		
-		// Verifying right calls on method
+
+		// Test success
+		long id = 42;
+		Response response = serviceRest.getUser(id);
 		verify(service, times(1)).getUser(id);
+		assertSame("Wrong user in response.", user, response.getEntity());
+		assertEquals("Wrong response code.", Status.OK.getStatusCode(), response.getStatus());
+		
+		// Test failure
+		long badid = 24;
+		when(service.getUser(badid)).thenReturn(null);
+		response = serviceRest.getUser(badid);
+		verify(service, times(1)).getUser(badid);
+		assertNull("Wrong user in response.", response.getEntity());
+		assertEquals("Wrong response code.", Status.NOT_FOUND.getStatusCode(), response.getStatus());
 	}
-	
-//	/**
-//	 * Unit test for addUser method in the rest implementation of UserService
-//	 * @throws URISyntaxException 
-//	 */
+
 //	@Test
-//	public void testAddUser() throws URISyntaxException {
-//		
-//		when(service.addUser(fakeUser)).thenReturn(fakeUser);
-//		
-//		serviceRs.addUser(fakeUser);
-//		
-//		verify(service, times(1)).addUser(fakeUser);
-//
+//	public void testAddUser() {
+//		fail("Not yet implemented");
 //	}
-	
-	/**
-	 * Unit test for modifyUser method in the rest implementation of UserService
-	 * @throws Throwable 
-	 */
-	@Test
-	public void testModifyUser() throws Throwable {
-		
-		// Random id generation
-		long id = ThreadLocalRandom.current().nextLong();
-		
-		when(service.modifyUser(id, fakeUser)).thenReturn(fakeUser);
-		
-		serviceRs.modifyUser(id, fakeUser);
-		
-		verify(service, times(1)).modifyUser(id, fakeUser);
-		
-		
-	}
-	
-//	/**
-//	 * Unit test for modifyUserProfilePicture in the rest implementation of UserService
-//	 */
+
 //	@Test
-//	public void testModifyProfilePicture() {
+//	public void testAddUserByAdministrator() {
 //		
-//		// Random id generation
-//		long id = ThreadLocalRandom.current().nextLong();
-//		
-//		serviceRs.modifyUserProfilePicture(id, fakeDocument);
-//		
-//		verify(service, times(1)).modifyUserProfilePicture(id, fakeDocument);
-//		
+//		// Test success
+//		Response response = serviceRest.addUserByAdministrator(user, uriInfo);
+//	}
+
+//	@Test
+//	public void testModifyUser() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	public void testModifyUserByAdministrator() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	public void testGetUserPosts() {
+//		fail("Not yet implemented");
 //	}
 
 }

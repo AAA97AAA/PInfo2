@@ -123,11 +123,7 @@ public class UserServiceRs {
 			
 			// Code 400 if constraint violation
 			if (e.getClass().toString().equals(MySQLIntegrityConstraintViolationException.class.toString())) {
-				String fault = new String();
-				Matcher match = Pattern.compile("for key '(.+)'").matcher(e.getMessage());
-				if (match.find()) {
-					fault = match.group(1);
-				}
+				String fault = isolateErrorMessage(e);
 				return Response.status(Status.BAD_REQUEST).entity(new ErrorPayload(fault)).build();
 			}
 			
@@ -180,11 +176,7 @@ public class UserServiceRs {
 			
 			// Code 400 if constraint violation
 			if (e.getClass().toString().equals(MySQLIntegrityConstraintViolationException.class.toString())) {
-				String fault = new String();
-				Matcher match = Pattern.compile("for key '(.+)'").matcher(e.getMessage());
-				if (match.find()) {
-					fault = match.group(1);
-				}
+				String fault = isolateErrorMessage(e);
 				return Response.status(Status.BAD_REQUEST).entity(new ErrorPayload(fault)).build();
 			}
 			
@@ -207,5 +199,13 @@ public class UserServiceRs {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 		return Response.ok(posts).build();
+	}
+	
+	private String isolateErrorMessage(Throwable error) {
+		Matcher match = Pattern.compile("for key '(.+)'").matcher(error.getMessage());
+		if (match.find()) {
+			return match.group(1);
+		}
+		return null;
 	}
 }
