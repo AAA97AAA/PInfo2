@@ -9,7 +9,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<auth-method>FORM</auth-method>
 		<realm-name>academi-co-realm</realm-name>
 		<form-login-config>
-			<form-login-page>/pages/login.html</form-login-page>
+			<form-login-page>/pages/loginForm.html</form-login-page>
 			<form-error-page>/pages/loginError.html</form-error-page>
 		</form-login-config>
 	</login-config>
@@ -161,6 +161,14 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
 	<security-constraint>
 		<display-name>Users Realm</display-name>
+		<web-resource-collection>
+			<web-resource-name>Login</web-resource-name>
+			<url-pattern>/pages/login.html</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
 		<web-resource-collection>
 			<web-resource-name>Login Success</web-resource-name>
 			<url-pattern>/pages/loginSuccess.html</url-pattern>
