@@ -5,29 +5,6 @@
 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<display-name>academi-co-Service-RS</display-name>
 
-	<!-- <servlet>
-		<display-name>Academi-co JAX-RS Servlet</display-name>
-		<servlet-name>Academi-co_JAX-RS_Servlet</servlet-name>
-		<init-param>
-            <param-name>javax.ws.rs.Application</param-name>
-            <param-value>dom.jaxrsConfig.JAXRSConfiguration</param-value>
-        </init-param>
-		<init-param>
-            <param-name>debug</param-name>
-            <param-value>0</param-value>
-        </init-param>
-        <init-param>
-            <param-name>listings</param-name>
-            <param-value>false</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DefaultServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
-	</servlet-mapping> -->
-
-
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>academi-co-realm</realm-name>
@@ -39,17 +16,17 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
 	<error-page>
         <error-code>403</error-code>
-        <location>/forbidden.html</location>
+        <location>/pages/forbidden.html</location>
     </error-page>
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/notFound.html</location>
+		<location>/pages/notFound.html</location>
 	</error-page>
 
 	<error-page>
         <error-code>500</error-code>
-        <location>/internalServerError.html</location>
+        <location>/pages/internalServerError.html</location>
     </error-page>
 
 	<security-role>
@@ -65,28 +42,35 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<role-name>ADMINISTRATOR</role-name>
 	</security-role>
 
+
+
 	<security-constraint>
-		<display-name>Unprotected Methods</display-name>
+		<display-name>Unprotected Services</display-name>
 		<web-resource-collection>
-			<web-resource-name>Unprotected Posts Methods</web-resource-name>
+			<web-resource-name>Unprotected Posts Services</web-resource-name>
 			<url-pattern>/resources/posts/*</url-pattern>
 			<http-method>GET</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
-			<web-resource-name>Unprotected Users Methods</web-resource-name>
+			<web-resource-name>Unprotected Users Services</web-resource-name>
 			<url-pattern>/resources/users/*</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
-			<web-resource-name>Unprotected Advertisements Methods</web-resource-name>
+			<web-resource-name>Unprotected Advertisements Services</web-resource-name>
 			<url-pattern>/resources/advertisements/*</url-pattern>
 			<http-method>GET</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
-			<web-resource-name>Unprotected Tags Methods</web-resource-name>
+			<web-resource-name>Unprotected Tags Services</web-resource-name>
 			<url-pattern>/resources/tags/*</url-pattern>
 			<http-method>GET</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Unprotected Search Services</web-resource-name>
+			<url-pattern>/resources/search/*</url-pattern>
+			<http-method>POST</http-method>
 		</web-resource-collection>
 	</security-constraint>
 
@@ -106,14 +90,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<web-resource-collection>
 			<web-resource-name>Token Services</web-resource-name>
 			<url-pattern>/resources/auth/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
-			<http-method>PUT</http-method>
-			<http-method>DELETE</http-method>
-		</web-resource-collection>
-		<web-resource-collection>
-			<web-resource-name>Logout Services</web-resource-name>
-			<url-pattern>/resources/logout/*</url-pattern>
 			<http-method>GET</http-method>
 		</web-resource-collection>
 		<auth-constraint>
@@ -145,6 +121,12 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<security-constraint>
 		<display-name>Administrators Rest Facade</display-name>
 		<web-resource-collection>
+			<web-resource-name>Users Services</web-resource-name>
+			<url-pattern>/resources/users/*/administrator</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
 			<web-resource-name>Advertisements Services</web-resource-name>
 			<url-pattern>/resources/advertisements/*</url-pattern>
 			<http-method>POST</http-method>
@@ -154,11 +136,17 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 		<web-resource-collection>
 			<web-resource-name>Advertisements GET Services</web-resource-name>
 			<url-pattern>/resources/advertisements/all</url-pattern>
-			<http-method>GET</http-method>
+			<http-method>GEt</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
 			<web-resource-name>Tags Services</web-resource-name>
 			<url-pattern>/resources/tags/*</url-pattern>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>Demo Services</web-resource-name>
+			<url-pattern>/resources/demo/*</url-pattern>
+			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
 		<auth-constraint>
@@ -168,6 +156,8 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
+
+
 
 	<security-constraint>
 		<display-name>Users Realm</display-name>
@@ -208,7 +198,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<security-constraint>
 		<display-name>Moderators Realm</display-name>
 		<web-resource-collection>
-			<web-resource-name>Moderators Realm</web-resource-name>
+			<web-resource-name>Moderation</web-resource-name>
 			<url-pattern>/pages/moderation.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
@@ -227,7 +217,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<security-constraint>
 		<display-name>Administrators Realm</display-name>
 		<web-resource-collection>
-			<web-resource-name>Administrators Realm</web-resource-name>
+			<web-resource-name>Administration</web-resource-name>
 			<url-pattern>/pages/administration.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
@@ -241,6 +231,8 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
+
+
 
 	<session-config>
 		<cookie-config>
