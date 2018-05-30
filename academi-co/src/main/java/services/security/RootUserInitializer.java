@@ -5,6 +5,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dom.content.User;
 import dom.content.UserFactory;
 import dom.content.UserType;
@@ -19,6 +22,8 @@ import services.utility.ContextProvider;
  */
 @WebListener
 public class RootUserInitializer implements ServletContextListener {
+	
+	private static Logger logger = LogManager.getLogger(RootUserInitializer.class);
 	
 	@EJB(beanName = "ConcreteUserService")
 	private UserService userService;
@@ -42,7 +47,7 @@ public class RootUserInitializer implements ServletContextListener {
 						UserFactory.createUser("root", "root@academi-co.ch", "admin", UserType.ADMINISTRATOR.getStringVal())
 					);
 			} catch (Throwable e) {
-				e.printStackTrace();
+				logger.error("Exception.", e);
 			}
 		}
 	}

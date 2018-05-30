@@ -56,7 +56,6 @@ public class PostServiceRs {
 		return Response.ok(questionThread).build();
 	}
 	
-	// TODO Security : registered users alone can post new Threads
 	/**
 	 * Add question thread to database
 	 * @param questionThread
@@ -84,7 +83,6 @@ public class PostServiceRs {
 	
 	/**
 	 * Add a comment to the thread given by "id".
-	 * 
 	 * @param threadId
 	 * @param comment
 	 * @param uriInfo
@@ -106,7 +104,6 @@ public class PostServiceRs {
 	
 	/**
 	 * Sets the "banned" state of a post to the requested value in the payload.
-	 * 
 	 * @param id
 	 * @param post (only contains the "banned" value)
 	 * @return a post with only the new value of "banned"
@@ -124,6 +121,12 @@ public class PostServiceRs {
 		return Response.ok(result).build();
 	}
 	
+	/**
+	 * Update the voters and score status of a post.
+	 * @param id
+	 * @param vote
+	 * @return
+	 */
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -131,6 +134,9 @@ public class PostServiceRs {
 	@JsonView(View.PostVote.class)
 	public Response vote(@PathParam("id") long id, Vote vote) {
 		Post result = postService.vote(id, vote);
+		if (result == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
 		return Response.ok(result).build();
 	}
 }

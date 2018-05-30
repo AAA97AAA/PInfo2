@@ -16,6 +16,9 @@ public interface View {
 	// Main information about the entity
 	public static interface DocumentBase {};
 	
+	// Main information about an advertisement
+	public static interface AdvertisementBase extends DocumentBase {};
+	
 	
 	/***** Tag views *****/
 	

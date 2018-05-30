@@ -119,7 +119,7 @@ public class DemoServicesRs {
 	}
 	
 	@GET
-	@Path("/caca")
+	@Path("/irrelevant")
 	@Produces(MediaType.APPLICATION_JSON)
 	public MainTag putUserIntoDb() {
 		

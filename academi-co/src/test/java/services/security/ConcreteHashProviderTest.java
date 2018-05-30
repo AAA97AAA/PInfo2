@@ -7,12 +7,12 @@ import java.security.NoSuchAlgorithmException;
 import org.junit.Test;
 
 /**
- * Test class for HashProvider.
+ * Test class for ConcreteHashProvider.
  * 
  * @author kaikoveritch
  *
  */
-public class HashProviderTest {
+public class ConcreteHashProviderTest {
 
 	@Test
 	public void testHash() throws NoSuchAlgorithmException {

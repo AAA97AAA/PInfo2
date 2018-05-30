@@ -5,6 +5,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Servlet context listener to initialize Lucene indexes at
  * application startup for hibernate search.
@@ -15,6 +18,8 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class IndexInitializer implements ServletContextListener {
 	
+	static private Logger LOG = LogManager.getLogger(IndexInitializer.class);
+	
 	@EJB
 	private SearchService searchService;
 
@@ -22,9 +27,9 @@ public class IndexInitializer implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 		try {
 			searchService.initIndex();
-			System.out.println("Lucene indexes initialized.");
+			LOG.info("Lucene indexes initialized.");
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			LOG.warn("Lucen was interrupted while initializing: There might be some issues", e);
 		}
 	}
 

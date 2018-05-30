@@ -6,18 +6,24 @@ import java.util.Timer;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import dom.documentsManager.Advertisement;
+import services.utility.View;
 
 /**
  * REST services for fetching and updating advertisement banners
@@ -38,6 +44,8 @@ public class AdvertisementServiceRs {
 	 */
 	@GET
 	@Path("all")
+	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.AdvertisementBase.class)
 	public Response getAllAdvertisements() {
 		List<Advertisement> allAds = service.getAllAdvertisements();
 		return Response.ok(allAds).build();
@@ -49,6 +57,8 @@ public class AdvertisementServiceRs {
 	 */
 	@GET
 	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.AdvertisementBase.class)
 	public Response getCurrentAdvertisement() {
 		Advertisement ad = service.getCurrentAdvertisement();
 		if (ad == null) {
@@ -65,6 +75,9 @@ public class AdvertisementServiceRs {
 	 */
 	@POST
 	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.AdvertisementBase.class)
 	public Response addAdvertisement(Advertisement ad, @Context UriInfo uriInfo) {
 		Advertisement result = service.addAdvertisement(ad);
 		URI location = uriInfo.getAbsolutePathBuilder().path(Long.toString(result.getId())).build();
@@ -93,6 +106,7 @@ public class AdvertisementServiceRs {
 	 */
 	@PUT
 	@Path("setPeriod")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response changePeriod(Integer period, @Context ServletContext context) {
 		// Fetch running timer
 		Timer timer = (Timer) context.getAttribute("timer");
