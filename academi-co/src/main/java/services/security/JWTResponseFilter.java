@@ -34,7 +34,7 @@ public class JWTResponseFilter implements ContainerResponseFilter {
         List<Object> jwt = new ArrayList<Object>();
         jwt.add(tokenUtility.buildJWT(requestContext.getSecurityContext().getUserPrincipal().getName()));
         if (jwt != null) {
-        		responseContext.getHeaders().put("jwt", jwt);
+        	responseContext.getHeaders().put("jwt", jwt);
         }
     }
 }

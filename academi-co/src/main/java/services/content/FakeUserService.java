@@ -10,6 +10,9 @@ import java.util.Set;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dom.content.Post;
 import dom.content.PostFactory;
 import dom.content.QuestionThread;
@@ -39,6 +42,8 @@ public class FakeUserService implements UserService {
 
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = 2974345918086349674L;
+	
+	private static Logger logger = LogManager.getLogger(FakeUserService.class);
 
 	
 	/******************** Services ***********************/
@@ -55,7 +60,7 @@ public class FakeUserService implements UserService {
 		for (long i = 0; i < 20; i+=2) {
 			MainTag subject = TagFactory.createMainTag("subject" + i);
 			Tag language = TagFactory.createTag("EnglishMotherFucker");
-			Set<SecondaryTag> topics = new HashSet<SecondaryTag>();
+			Set<SecondaryTag> topics = new HashSet<>();
 			for (long j = 0; j < 3; j++) {
 				topics.add(TagFactory.createSecondaryTag("topic" + i + "-" + j, subject));
 			}
@@ -63,7 +68,7 @@ public class FakeUserService implements UserService {
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				logger.error("Interrupted.", e);
 			}
 		}
 		for (long i = 1; i < 20; i+=2) {
@@ -74,8 +79,7 @@ public class FakeUserService implements UserService {
 
 	@Override
 	public User addUser(User user) {
-		User initializedUser = UserFactory.createUser(user.getUsername(), user.getEmail(), user.getPassword(), user.getType());
-		return initializedUser;
+		return UserFactory.createUser(user.getUsername(), user.getEmail(), user.getPassword(), user.getType());
 	}
 
 	@Override
@@ -121,7 +125,7 @@ public class FakeUserService implements UserService {
 				}
 			};
 		}
-		List<Post> posts = new ArrayList<Post>(user.getPosts().values());
+		List<Post> posts = new ArrayList<>(user.getPosts().values());
 		Collections.sort(posts, comparator);
 		return posts;
 	}

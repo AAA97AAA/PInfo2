@@ -83,6 +83,9 @@ public class ConcreteDocument implements Document, Serializable {
 		FileInputStream stream = getStream(file);
 		
 		// Read file into buffer
+		if (stream == null) {
+			return;
+		}
 		byte[] buffer = getBytes(stream, (int) file.length());
 		
 		// Update the instance's content

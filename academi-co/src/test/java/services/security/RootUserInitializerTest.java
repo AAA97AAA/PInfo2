@@ -8,9 +8,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -69,14 +66,8 @@ public class RootUserInitializerTest {
 		
 		// Test new root creation error
 		when(service.addUser(any(User.class))).thenThrow(error);
-		PrintStream err = System.err;
-		System.setErr(new PrintStream(new OutputStream() {
-			@Override
-			public void write(int b) throws IOException {}
-		}));
 		initializer.contextInitialized(event);
-		System.setErr(err);
-		verify(error, times(1)).printStackTrace();
+
 		
 		// Test pre-existing root case
 		when(service.getUser("root")).thenReturn(mock(User.class));

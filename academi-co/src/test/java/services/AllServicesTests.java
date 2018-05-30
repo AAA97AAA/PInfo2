@@ -8,6 +8,7 @@ import dom.tags.AllTagsTests;
 import services.content.AllContentServiceTests;
 import services.documentsManager.AllDocumentServiceTests;
 import services.inbox.AllInboxServiceTests;
+import services.security.AllSecurityTests;
 import services.tags.AllTagServiceTests;
 
 /**
@@ -17,7 +18,7 @@ import services.tags.AllTagServiceTests;
  */
 @RunWith(Suite.class)
 @SuiteClasses({AllContentServiceTests.class, AllDocumentServiceTests.class, AllInboxServiceTests.class, AllTagsTests.class,
-	AllTagServiceTests.class})
+	AllTagServiceTests.class, AllSecurityTests.class})
 public class AllServicesTests {
 
 }
