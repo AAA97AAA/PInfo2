@@ -99,6 +99,9 @@ public class JWTAuthFilter implements ContainerRequestFilter {
 			} catch (IOException e) {
 				logger.error("Could not open file.", e);
 			}
+			if (key == null) {
+				return null;
+			}
 			jwtConsumer = new JwtConsumerBuilder()
 			        .setRequireSubject() // the JWT must have a subject claim
 			        .setVerificationKey(key.getPublicKey()) // verify the signature with the public key
