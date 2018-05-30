@@ -12,6 +12,10 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.consumer.InvalidJwtException;
 import org.jose4j.jwt.consumer.JwtConsumer;
@@ -28,6 +32,9 @@ import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 @Priority(Priorities.AUTHENTICATION)
 public class JWTAuthFilter implements ContainerRequestFilter {
 
+	// Error logger for file reading problems
+	static private Logger logger = LogManager.getLogger(JWTAuthFilter.class);
+	
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
@@ -86,14 +93,11 @@ public class JWTAuthFilter implements ContainerRequestFilter {
 			try {
 				key = new KeytoolUtility();
 			} catch (CertificateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("Error with certificate.", e);
 			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("Algorithm does not exist.", e);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("Could not open file.", e);
 			}
 			jwtConsumer = new JwtConsumerBuilder()
 			        .setRequireSubject() // the JWT must have a subject claim
@@ -104,12 +108,11 @@ public class JWTAuthFilter implements ContainerRequestFilter {
 	            JwtClaims jwtClaims = jwtConsumer.processToClaims(jwt);
 	            subject = (String) jwtClaims.getClaimValue("sub");
 	        } catch (InvalidJwtException e) {
-	            e.printStackTrace(); //on purpose
+				logger.error("The token is not valid.", e);
 	            throw e;
 	        }
-		} catch (KeyStoreException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (KeyStoreException e) {
+			logger.error("Key store exception.", e);
 		}
 
         return subject;

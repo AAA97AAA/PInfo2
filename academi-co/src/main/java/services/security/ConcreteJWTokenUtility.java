@@ -5,11 +5,12 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.jose4j.jws.AlgorithmIdentifiers;
 import org.jose4j.jws.JsonWebSignature;
@@ -28,6 +29,9 @@ import services.content.UserService;
 */
 @Stateless
 public class ConcreteJWTokenUtility implements JWTokenUtility {
+	
+	// Error logger for file reading problems
+	static private Logger logger = LogManager.getLogger(ConcreteJWTokenUtility.class);
 
     // Serial version (auto-generated)
 	private static final long serialVersionUID = 6187832853534108134L;
@@ -44,33 +48,31 @@ public class ConcreteJWTokenUtility implements JWTokenUtility {
         jws.setPayload(claims.toJson());
         try {
         		KeytoolUtility key = null;
-				try {
-					key = new KeytoolUtility();
-				} catch (CertificateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			try {
+				key = new KeytoolUtility();
+			} catch (CertificateException e) {
+				logger.error("Error with certificate.", e);
+			} catch (IOException e) {
+				logger.error("Could not open file.", e);
+			}
+			if (key == null) {
+				return null;
+			}
 			jws.setKey(key.getPrivateKey());
 		} catch (UnrecoverableKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Could not recover key.", e);
 		} catch (KeyStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Key store exception.", e);
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Algorithm does not exist.", e);
 		}
         jws.setAlgorithmHeaderValue(AlgorithmIdentifiers.RSA_USING_SHA256);
 
         String jwt = null;
         try {
             jwt = jws.getCompactSerialization();
-        } catch (JoseException ex) {
-            Logger.getLogger(JWTAuthFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JoseException e) {
+        		logger.error("Could not construct token.", e);
         }
         return jwt;
     }

@@ -32,9 +32,12 @@ public class AuthResource {
     public Response auth() {
     		String authenticatedUser = sctx.getUserPrincipal().getName();
     		String jwt = tokenUtility.buildJWT(authenticatedUser);
-    		Response resp = Response.ok(jwt)
-    				.header("jwt", jwt)
-    				.build();
+    		Response resp = null;
+    		if (jwt == null) {
+    			resp = Response.serverError().build();
+    		} else {
+    			resp = Response.ok(jwt).header("jwt", jwt).build();
+    		}
     		return resp;
     }
 }
