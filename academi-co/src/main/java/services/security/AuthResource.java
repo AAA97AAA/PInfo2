@@ -28,7 +28,7 @@ public class AuthResource {
 
     @GET
     @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response auth() {
     		String authenticatedUser = sctx.getUserPrincipal().getName();
     		String jwt = tokenUtility.buildJWT(authenticatedUser);
