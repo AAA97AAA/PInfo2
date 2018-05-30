@@ -22,10 +22,10 @@
 		<!-- Add Banner -->
 		<div>
 			<label for="profile_pic" class="BrowseButton">Choose Ad</label>
-			<input type="file" id="profile_pic" name="profile_pic" class="BrowseButton" accept=".jpg, .jpeg, .png" style="z-index:-1"></input>
-			<button id="UploadBannerButton" onclick="GrowlAdBanner()">Upload Ad</button>
+			<input type="file" id="profile_pic" name="profile_pic" class="BrowseButton" accept=".jpg, .jpeg, .png" style="z-index:-1" ng-model="NewAd.data"></input>
+			<button id="UploadBannerButton" onclick="GrowlAdBanner()"  ng-click="AddBanner()" >Upload Ad</button>
 			<!--  			HERE IS THE ID OF THE ENCODED IMAGE -->
-			<!--  			<p id="b64"></p> -->
+<!-- 			  			<p id="b64"></p>  -->
 			<br>
 			<hr>
 		</div>
