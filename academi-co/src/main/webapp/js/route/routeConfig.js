@@ -139,7 +139,6 @@ route.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
             templateUrl : 'pages/preview.html',
             controller  : 'previewController'
         })
-        
         // route for the home page
         .when('/', {
             title       : 'Home - Academi-co',
@@ -147,15 +146,8 @@ route.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
             controller  : 'homeController'
         })
         .otherwise({
-            redirectTo: '/notFound'
+             redirectTo: '/notFound'
         });
 
         
 }]);
-
-
-
-
-
-   
-

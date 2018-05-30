@@ -3,10 +3,26 @@
 
 <!-- Include JS scripts-->
 <script src="/academi-co/js/controllers/postThreadFunctions.js"></script>
-            
+<script src="/academi-co/js/controllers/domain.js"></script>
+<script src="/academi-co/js/controllers/cookieController.js"></script>
+
 <!-- Include CSS stylesheet-->
 <link rel="stylesheet" type="text/css" href="CSS/style-postthreadpage.css"/>
 
+
+
+<!-- Script for login -->
+<script>
+	/* 
+		This script checks if there is a token, if there is. 
+		We are in the page.
+		If not, we redirect to loginSuccess who will get the token
+	*/
+	if((getCookie('tokenJWT') == null) || (getCookie('tokenJWT') == '')){
+		window.location.replace(getProtectedURL("loginSuccess"));
+	}
+
+</script>
 
 
 <!-- Content of the page -->

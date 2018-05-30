@@ -1,8 +1,31 @@
-
 <!-- Include JS scripts-->
+<script src="/academi-co/js/controllers/domain.js"></script>
+<script src="/academi-co/js/controllers/cookieController.js"></script>
 
 <!-- Include CSS stylesheet-->
+<link rel="stylesheet" type="text/css" href="../CSS/style-forbidden.css"/>
 <link rel="stylesheet" type="text/css" href="CSS/style-forbidden.css"/>
 
 <!-- Content of the page -->
 <p id="loginSuccessText">You have been successfully logged on.</p>
+
+<!-- Redirection to home page -->
+<script>
+    // token created with the controller
+    
+    // window.location.replace(getProtectedURL("loginSuccess"));
+    
+    // document.getElementById("rightConnectedComponent").style.display = "block";
+    // document.getElementById("rightNonConnectedComponent").style.display = "none";
+    // window.location.replace(getProtectedURL(""));
+
+    // if token has been catched
+//     if((getCookie('tokenJWT') == null) || (getCookie('tokenJWT') == '')){
+//         // not connected
+//         window.location.reload();
+// 	} else {
+//       // connected
+//       window.location.replace(getProtectedURL(""));      
+//   }
+
+</script>

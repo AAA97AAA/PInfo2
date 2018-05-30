@@ -1,0 +1,54 @@
+<!-- Title of the page -->
+<!-- <title>Login - Academi-co</title> -->
+
+<!-- Include JS scripts-->
+
+<!-- Include CSS stylesheet-->
+<link rel="stylesheet" type="text/css" href="CSS/style-loginpage.css"/>
+
+
+<!-- Content of the page -->
+
+
+<!-- Logo -->
+<div class="logoHomePage">
+    <img id="logoHome" src="images/logo2.png"  alt="Logo">
+</div>
+<!-- Login Form -->
+<!--     <div class="logincontainer"> -->
+<!--         <br> -->
+<!--         <label for="uname"><b>Username</b></label> -->
+<!--         <input type="logintext" placeholder="Enter Username" name="uname" required> -->
+<!--         <br> -->
+<!--         <br> -->
+<!--         <label for="psw"><b>Password</b></label> -->
+<!--         <input type="password" placeholder="Enter Password" name="psw" required> -->
+<!--         <br> -->
+<!--         <br> -->
+<!--         <br> -->
+<!--         <button id="submitButton" type="submit">Login</button> -->
+<!--         <br> -->
+<!--     </div> -->
+<div class="logincontainer">
+    <!-- <form method=post action="j_security_check" >
+        <input type="text"  name= "j_username" >
+        <input type="password"  name= "j_password" >
+        </form>     -->
+    <form action="j_security_check" method=post>
+        <br>
+        <strong>Username: </strong>
+        <input type="logintext" placeholder="Enter Username" size="25" name="j_username">
+        <br>
+        <br>
+        <strong>Password: </strong>
+        <input type="password" placeholder="Enter Password" size="15" name="j_password">
+        <br>
+        <br>
+        <br>
+        <input class="submitButton" type="submit" value="Submit">
+        <br>
+        <br>
+        <a id="registerHere" href="/academi-co/#!/signUp">Don't have an account ? Register here.</a>
+        <!-- <input class="submitButton" type="reset" value="Reset"> -->
+    </form>
+</div>

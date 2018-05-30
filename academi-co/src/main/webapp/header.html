@@ -31,12 +31,12 @@
             <form name="simplfiedSearch">
                 <!-- Post Thread Button -->
                 <!-- TODO : changer le href en une action qui on click redirige sur la page new thread -->
-                <button href="/academi-co/#!/newThread" class="buttonHeader plusButton" title="New Post"><i class="fa fa-plus"></i></button>
+                <button class="buttonHeader plusButton" title="New Post" ng-click="newThread()"><i class="fa fa-plus"></i></button>
                 <!-- Search Bar -->
                 <!-- Search Bar input box -->
-                <input type="text" placeholder="Search..." name="search" ng-model="search.title" required></input>
+                <input type="text" placeholder="Search..." name="search" ng-model="search.title"></input>
                 <!-- Search Bar search submit button -->
-                <button type="submit" style="background-color: white; border-radius: 0px;"ng-click="simplifiedSearch()" ><i class="fa fa-search"></i></button>
+                <button type="submit" style="background-color: white; border-radius: 0px;" ng-click="simplifiedSearch()" ><i class="fa fa-search"></i></button>
                 <!-- Button to display Advanced Search Content -->
                 <button class="collapsible" style="font-size:23px;cursor:pointer; color:white;" onclick="showAdvancedSearch()">&#9660;</button>
             </form>
@@ -154,7 +154,7 @@
                     <span onclick="newElement2()" class="addBtn" style="border-radius: 0px; height:30px">Add</span>
                 </div>
                 <ul id="myUL2" style="width: 510px; margin-left:7%;"></ul>
-                <button onclick="GrowlAdvancedSearchBar()" type="submit" value="Submit" id="popUpYes" style="border-radius: 5px; position: absolute; top: 280px; left:80%; width: 200px; height:40px;">Submit</button>
+                <button onclick="GrowlAdvancedSearchBar()" type="submit" value="Submit" id="popUpYes" style="border-radius: 5px; position: absolute; top: 280px; left:80%; width: 200px; height:40px;" ng-click="submitAdvancedSearch()">Submit</button>
                 <script type="text/javascript" src="js/modules/script-growl.js"></script>
                 <br><br> 
             </form>
