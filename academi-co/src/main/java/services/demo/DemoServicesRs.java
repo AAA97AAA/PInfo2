@@ -101,6 +101,10 @@ public class DemoServicesRs {
 					PostFactory.createQuestionThread(users.get(u), "text" + i, "thread" + i,
 							subjects.get(s), lang, subjects.get(s).getChildren()))
 					);
+			for (int c = 0; c < 3; c++) {
+				postService.addPost(threads.get(i).getId(),
+						PostFactory.createComment(users.get(u), "answer" + c, threads.get(i)));
+			}
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {

@@ -52,8 +52,8 @@ public interface View {
 	// Base non-discriminant data on the post
 	public static interface PostBase {};
 	
-	// View for listing generic posts
-	public static interface PostGeneric extends PostBase, PostScore {};
+//	// View for listing generic posts
+//	public static interface PostGeneric extends PostBase, PostScore, PostMinimal {};
 	
 	// Main information about the post
 	public static interface PostCore extends PostMinimal, PostBase, PostVote, PostState, TagBase {};
