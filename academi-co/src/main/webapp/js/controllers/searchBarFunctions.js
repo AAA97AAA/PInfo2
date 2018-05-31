@@ -2,7 +2,7 @@
 /* Function for primary tag in advanced search: when click in Add button */
 function newElement1() {
 	var li = document.createElement("li");
-	var inputValue = document.getElementById("primarytag").value; 
+	var inputValue = document.getElementById("primarytag").options[document.getElementById("primarytag").selectedIndex].text; 
 	var t = document.createTextNode(inputValue);
 	li.appendChild(t);
 	var containerPrimaryTag = document.getElementById("myUL1")
@@ -18,7 +18,7 @@ function newElement1() {
 		$.growl.error({ message: "You can't add more than one primary tag." });
 	}
 
-	document.getElementById("primarytag").value;
+	document.getElementById("primarytag").options[document.getElementById("primarytag").selectedIndex].text;
 
 	var spanPrimaryTag = document.createElement("SPAN");
 	var txt = document.createTextNode("\u00D7");
@@ -36,7 +36,7 @@ function newElement1() {
 /* Function for secondary tag in advanced search: when click in Add button */
 function newElement2() {
 	var li = document.createElement("li");
-	var inputValue = document.getElementById("secondarytag").value; 
+	var inputValue = document.getElementById("secondarytag").options[document.getElementById("secondary").selectedIndex].text; 
 	var t = document.createTextNode(inputValue);
 	li.appendChild(t);
 	var containerSecondaryTag = document.getElementById("myUL2")	
@@ -52,7 +52,7 @@ function newElement2() {
 		$.growl.error({ message: "You can't add more than three secondary tags." });
 	}
 
-	document.getElementById("secondarytag").value;
+	document.getElementById("secondarytag").options[document.getElementById("secondary").selectedIndex].text;
 
 	var spanSecondaryTag = document.createElement("SPAN");
 	var txt = document.createTextNode("\u00D7");
