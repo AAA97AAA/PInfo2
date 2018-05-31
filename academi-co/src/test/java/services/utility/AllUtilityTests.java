@@ -11,7 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ContextHandlerTest.class, ObjectMapperContextResolverTest.class, VotersMarshallerTest.class })
+@SuiteClasses({ ContextHandlerTest.class, ObjectMapperContextResolverTest.class, VotersMarshallerTest.class,
+	ValidationHandlingTest.class, ErrorPayloadTest.class })
 public class AllUtilityTests {
 
 }

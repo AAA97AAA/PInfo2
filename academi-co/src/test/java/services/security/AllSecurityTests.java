@@ -12,7 +12,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ ConcreteHashProviderTest.class, RootUserInitializerTest.class, AuthResourceTest.class,
-	JWTResponseFilterTest.class })
+	JWTResponseFilterTest.class, JWTAuthFilterTest.class })
 public class AllSecurityTests {
 
 }

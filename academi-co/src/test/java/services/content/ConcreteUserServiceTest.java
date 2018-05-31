@@ -1,7 +1,11 @@
 package services.content;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -9,9 +13,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,6 +33,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import dom.content.ConcreteUser;
+import dom.content.Post;
+import dom.content.QuestionThread;
 import dom.content.User;
 import dom.content.UserType;
 import dom.documentsManager.ConcreteDocument;
@@ -77,9 +86,36 @@ public class ConcreteUserServiceTest {
 	private HashProvider hasher;
 	
 	@InjectMocks
-	ConcreteUserService userService;
+	private ConcreteUserService userService;
+	
+	@Mock
+	private Map<Long, Post> userPosts;
+	
+	@Mock
+	private Map<Long, QuestionThread> userFollowed;
 
 
+	@Test
+	public void testGetUser() {
+		long id = 0;
+		long badId = 23;
+		ConcreteUser user = mock(ConcreteUser.class);
+		when(user.getPosts()).thenReturn(userPosts);
+		when(user.getFollowedThreads()).thenReturn(userFollowed);
+		when(fakeEntityManager.find(ConcreteUser.class, id)).thenReturn(user);
+		when(fakeEntityManager.find(ConcreteUser.class, badId)).thenReturn(null);
+		
+		// Test success
+		User result = userService.getUser(id);
+		verify(userPosts, times(1)).size();
+		verify(userFollowed, times(1)).size();
+		assertSame("Wrong user returned", user, result);
+		
+		// Test failure
+		result = userService.getUser(badId);
+		assertNull("User wrongly returned.", result);
+	}
+	
 	/**
 	 * Unit tests for addUser method from service.	
 	 * @throws Throwable 
@@ -112,6 +148,16 @@ public class ConcreteUserServiceTest {
 		
 		// Verifying right method calls on objects in the service's function
 		verify(fakeEntityManager, times(1)).persist(any(User.class));
+		
+		// Control failure case
+		doThrow(new PersistenceException()).when(fakeEntityManager).persist(any(User.class));
+		boolean exceptionRaised = false;
+		try {
+			userService.addUser(fakeUser);
+		} catch (Throwable e) {
+			exceptionRaised = true;
+		}
+		assertTrue("Exception was not raised.", exceptionRaised);
 	}
 	
 	/**
@@ -140,7 +186,10 @@ public class ConcreteUserServiceTest {
 		order.verify(fakeEntityManager, times(1)).createQuery(fakeCriteriaQuery);
 		verify(fakeTypedQuery, times(1)).getSingleResult();
 		
-		
+		// Control failure
+		when(fakeTypedQuery.getSingleResult()).thenThrow(NoResultException.class);
+		User result = userService.getUser(username);
+		assertNull("User wrongly returned.", result);
 	}
 	
 	/**

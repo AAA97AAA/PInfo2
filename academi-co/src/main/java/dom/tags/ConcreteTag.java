@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Analyzer;
@@ -47,7 +46,6 @@ public class ConcreteTag implements Tag, Serializable {
 	@JsonView(View.TagMinimal.class)
 	private long id;
 	
-	@NotNull
 	@Column(name = "NAME")
 	@JsonView(View.TagBase.class)
 	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
@@ -98,7 +96,7 @@ public class ConcreteTag implements Tag, Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + name.hashCode();
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -117,7 +115,11 @@ public class ConcreteTag implements Tag, Serializable {
 		if (id != other.id) {
 			return false;
 		}
-		if (!name.equals(other.name)) {
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
 		}
 		return true;

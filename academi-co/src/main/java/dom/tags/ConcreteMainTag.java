@@ -99,7 +99,11 @@ public class ConcreteMainTag extends ConcreteTag implements MainTag, Serializabl
 		if (getId() != other.getId()) {
 			return false;
 		}
-		if (!getName().equals(other.getName())) {
+		if (getName() == null) {
+			if (other.getName() != null) {
+				return false;
+			}
+		} else if (!getName().equals(other.getName())) {
 			return false;
 		}
 		return true;

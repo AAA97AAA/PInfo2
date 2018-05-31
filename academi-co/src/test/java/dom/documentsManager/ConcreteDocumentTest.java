@@ -106,6 +106,9 @@ public class ConcreteDocumentTest {
 		
 		// Destroy test file
 		tmpfile.delete();
+		
+		// Call invalid file
+		document.download("doesNotExist.file");
 	}
 	
 	/**
