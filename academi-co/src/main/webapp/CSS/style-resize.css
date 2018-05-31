@@ -40,6 +40,28 @@ margin-right: auto;
     transition: 1s;
   }
 
+    /* Add padding to login container */
+  div.logincontainer {
+    background: #549bd1a4;
+    border-radius: 25px;
+    width: 60%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px;
+  }
+
+  /* Add padding to signup container */
+  div.signupcontainer {
+    background: #549bd1a4;
+    border-radius: 25px;
+    width: 60%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px;
+  }
+
 
 
 }
@@ -56,6 +78,7 @@ margin-right: auto;
     width:100%;
     float: center;
     background-color: #0b78d1;
+    text-align: center; /* This, align the right Component in the middle for mobile */
     /* transition: 0.3s; */
   }
   #rightConnectedComponent {
@@ -71,6 +94,27 @@ margin-right: auto;
     /* transition: 0.3s; */
   }
 
+    /* Add padding to login container */
+  div.logincontainer {
+    background: #549bd1a4;
+    border-radius: 25px;
+    width: 80%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px;
+  }
+
+  /* Add padding to signup container */
+  div.signupcontainer {
+    background: #549bd1a4;
+    border-radius: 25px;
+    width: 80%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px;
+  }
 
 }
 
