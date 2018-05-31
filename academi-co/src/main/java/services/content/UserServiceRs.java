@@ -199,7 +199,7 @@ public class UserServiceRs {
 	@GET
 	@Path("/{id}/posts")
 	@Produces(MediaType.APPLICATION_JSON)
-	@JsonView(View.PostBase.class)
+	@JsonView(View.PostChildCentered.class)
 	public Response getUserPosts(@PathParam("id") long id, @QueryParam("order") @DefaultValue("byDate") String order,
 			@QueryParam("from") @DefaultValue("0") int from, @QueryParam("len") @DefaultValue("0") int length) {
 		List<Post> posts = service.getUserPosts(id, order, from, length);

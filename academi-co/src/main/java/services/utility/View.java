@@ -43,11 +43,17 @@ public interface View {
 	// Information about the state of the post
 	public static interface PostState {}
 	
+	// A post's score
+	public static interface PostScore {};
+	
 	// Information about the post's votes
-	public static interface PostVote extends UserMinimal {};
+	public static interface PostVote extends PostScore, UserMinimal {};
 	
 	// Base non-discriminant data on the post
 	public static interface PostBase {};
+	
+//	// View for listing generic posts
+//	public static interface PostGeneric extends PostBase, PostScore, PostMinimal {};
 	
 	// Main information about the post
 	public static interface PostCore extends PostMinimal, PostBase, PostVote, PostState, TagBase {};
