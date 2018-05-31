@@ -49,26 +49,27 @@
                 </div>
             </div>
             <div class="w3-container w3-left w3-round w3-margin">
-                <h3><b>Preferences:</b></h3>
-                <br>
-                <h5><b>My bio:</b></h5>
-                <textarea rows="4" cols="50" id="userInput" style="resize:none;"></textarea>
-                <br><br><br><br>
-                <h3><b>Settings:</b></h3>
-                <br>
-                <h5>New username:</h5>
-                <input type="text" name="username"><br><br><br>
-                <h5>Change password:</h5>
-                <p>Actual password:</p>
-                <input type="text" name="actualpassword"><br><br><br>
-                <p>New password:</p>
-                <input type="text" name="newpassword"><br><br><br>
-                <p>Repeat new password:</p>
-                <input type="text" name="repeatpassword"><br><br><br>
-                <h5>New profile picture:</h5>
-                <input type="file" id="profile_pic" name="profile_pic" class="DefaultBrowseButton" accept=".jpg, .jpeg, .png"></input><br><br><br>
-                <input type="submit" value="Submit" id="popUpYes" style="width: 200px; height:40px;"><br><br><br>
-                	
+                <form name="settingsForm">
+                    <h3><b>Preferences:</b></h3>
+                    <br>
+                    <h5><b>My bio:</b></h5>
+                    <textarea rows="4" cols="50" id="userInput" style="resize:none;" ng-model="change.bio"></textarea>
+                    <br><br><br><br>
+                    <h3><b>Settings:</b></h3>
+                    <br>
+                    <!-- <h5>New username:</h5>
+                    <input type="text" name="username"><br><br><br> -->
+                    <h5>Change password:</h5>
+                    <!-- <p>Actual password:</p>
+                    <input type="text" name="actualpassword"><br><br><br> -->
+                    <p>New password:</p>
+                    <input type="password" name="newpassword" ng-model="change.password"><br><br><br>
+                    <p>Repeat new password:</p>
+                    <input id="repeatPasswordSettings" type="password" name="repeatpassword"><br><br><br>
+                    <h5>New profile picture:</h5>
+                    <input type="file" id="profile_pic" name="profile_pic" class="DefaultBrowseButton" accept=".jpg, .jpeg, .png"></input><br><br><br>
+                    <input type="submit" value="Submit" id="popUpYes" style="width: 200px; height:40px;" ng-click="settingsUpdate()"><br><br><br>
+                </form>
 <!--      <form name="addAdministratorForm" class="modalContent"> -->
 <!-- 		<h2 id="textCreatePreferences">Preferences:</h2> -->
 <!-- 		<br> -->

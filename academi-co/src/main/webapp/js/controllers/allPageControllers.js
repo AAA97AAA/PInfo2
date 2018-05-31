@@ -82,21 +82,21 @@ app.controller('adminController', function($scope, $rootScope, $http){
                 function(response){
                 $.growl.error({ message: "ERROR : language tag cannot be created!"});
 
-                   switch(response.status){
-                   case 400:
-                   $.growl.error({ message: "ERROR : language tag cannot be created! Already existing."});
-                    //  alert(response.data + " invalid!");
-                    break;
-                     case 403:
-                       window.location.replace("/academi-co/#!/forbidden");
-                       break;
-                     case 404:
-                       window.location.replace("/academi-co/#!/notFound");
-                       break;
-                     case 500:
-                       window.location.replace("/academi-co/#!/internalServerError");
-                       break;
-                   }
+                  //  switch(response.status){
+                  //  case 400:
+                  //  $.growl.error({ message: "ERROR : language tag cannot be created! Already existing."});
+                  //   //  alert(response.data + " invalid!");
+                  //   break;
+                  //    case 403:
+                  //      window.location.replace("/academi-co/#!/forbidden");
+                  //      break;
+                  //    case 404:
+                  //      window.location.replace("/academi-co/#!/notFound");
+                  //      break;
+                  //    case 500:
+                  //      window.location.replace("/academi-co/#!/internalServerError");
+                  //      break;
+                  //  }
                   }
 
                 )};
@@ -132,21 +132,21 @@ app.controller('adminController', function($scope, $rootScope, $http){
               // console.log(response.status);
               // console.log("End error message");
               // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-               switch(response.status){
-                 case 400:
-                  //  alert(response.data + " invalid!");
-                  $.growl.error({ message: "Maintag cannot be created. Already existing" });
-                   break;
-                 case 403:
-                   window.location.replace("/academi-co/#!/forbidden");
-                   break;
-                 case 404:
-                   window.location.replace("/academi-co/#!/notFound");
-                   break;
-                 case 500:
-                   window.location.replace("/academi-co/#!/internalServerError");
-                   break;
-               }
+              //  switch(response.status){
+              //    case 400:
+              //     //  alert(response.data + " invalid!");
+              //     $.growl.error({ message: "Maintag cannot be created. Already existing" });
+              //      break;
+              //    case 403:
+              //      window.location.replace("/academi-co/#!/forbidden");
+              //      break;
+              //    case 404:
+              //      window.location.replace("/academi-co/#!/notFound");
+              //      break;
+              //    case 500:
+              //      window.location.replace("/academi-co/#!/internalServerError");
+              //      break;
+              //  }
               }
 
             )
@@ -155,7 +155,7 @@ app.controller('adminController', function($scope, $rootScope, $http){
       // POST ADD SECONDTAG
         $scope.AddSecondTag = function() {
 
-        var urlToGET = getDomain() + '/academi-co/resources/tags/' + "{" + $scope.SecondTag.relatedMainTag + "}";
+        var urlToGET = getDomain() + '/academi-co/resources/tags/' + $scope.SecondTag.id;
         var req = {
                     method: 'POST',
                     url: urlToGET,
@@ -173,23 +173,24 @@ app.controller('adminController', function($scope, $rootScope, $http){
                                  },
                 function(response){
                   $.growl.error({ message: "Secondary tag cannot be created." });
+                  // alert("url " + urlToGET + " et " + $scope.SecondTag.name);
                   // console.log(response.statusText);
                   // console.log(response.status);
                   // console.log("End error message");
                   // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-                   switch(response.status){
-                     case 400:
-                       alert(response.data + " invalid!");
-                     case 403:
-                       window.location.replace("/academi-co/#!/forbidden");
-                       break;
-                     case 404:
-                       window.location.replace("/academi-co/#!/notFound");
-                       break;
-                     case 500:
-                       window.location.replace("/academi-co/#!/internalServerError");
-                       break;
-                   }
+                  //  switch(response.status){
+                  //    case 400:
+                  //      alert(response.data + " invalid!");
+                  //    case 403:
+                  //      window.location.replace("/academi-co/#!/forbidden");
+                  //      break;
+                  //    case 404:
+                  //      window.location.replace("/academi-co/#!/notFound");
+                  //      break;
+                  //    case 500:
+                  //      window.location.replace("/academi-co/#!/internalServerError");
+                  //      break;
+                  //  }
                   }
 
                 )
@@ -220,20 +221,20 @@ app.controller('adminController', function($scope, $rootScope, $http){
                 // console.log(response.statusText);
                 // console.log(response.status);
                 // console.log("End error message");
-                alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-                 switch(response.status){
-                   case 400:
-                     alert(response.data + " invalid!");
-                   case 403:
-                     window.location.replace("/academi-co/#!/forbidden");
-                     break;
-                   case 404:
-                     window.location.replace("/academi-co/#!/notFound");
-                     break;
-                   case 405:
-                     window.location.replace("/academi-co/#!/internalServerError");
-                     break;
-                 }
+                // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+                //  switch(response.status){
+                //    case 400:
+                //      alert(response.data + " invalid!");
+                //    case 403:
+                //      window.location.replace("/academi-co/#!/forbidden");
+                //      break;
+                //    case 404:
+                //      window.location.replace("/academi-co/#!/notFound");
+                //      break;
+                //    case 500:
+                //      window.location.replace("/academi-co/#!/internalServerError");
+                //      break;
+                //  }
                 }
          
               )
@@ -265,17 +266,17 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
                           },
         function(response){
           $.growl.error({ message: "Error while loading tags"});
-            switch(response.status){
-              case 403:
-                window.location.replace("/academi-co/#!/forbidden");
-                break;
-              case 404:
-                window.location.replace("/academi-co/#!/notFound");
-                break;
-              case 405:
-                window.location.replace("/academi-co/#!/internalServerError");
-                break;
-            }
+            // switch(response.status){
+            //   case 403:
+            //     window.location.replace("/academi-co/#!/forbidden");
+            //     break;
+            //   case 404:
+            //     window.location.replace("/academi-co/#!/notFound");
+            //     break;
+            //   case 500:
+            //     window.location.replace("/academi-co/#!/internalServerError");
+            //     break;
+            // }
           }
     
         )
@@ -356,7 +357,7 @@ app.controller('isConnectHeader', function($scope, $rootScope, $http){
                     case 404:
                       window.location.replace("/academi-co/#!/notFound");
                       break;
-                    case 405:
+                    case 500:
                       window.location.replace("/academi-co/#!/internalServerError");
                       break;
                   }
@@ -444,7 +445,7 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
                   case 404:
                     window.location.replace("/academi-co/#!/notFound");
                     break;
-                  case 405:
+                  case 500:
                     window.location.replace("/academi-co/#!/internalServerError");
                     break;
                 }
@@ -508,7 +509,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
             case 404:
               window.location.replace("/academi-co/#!/notFound");
               break;
-            case 405:
+            case 500:
               window.location.replace("/academi-co/#!/internalServerError");
               break;
           }
@@ -519,7 +520,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 
 
   $scope.Post = function(){
-        
+
         $scope.id = {};
         $scope.author = {"id": jwt_decode(getCookie('tokenJWT')).sub };
         $scope.title = { };
@@ -560,7 +561,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
                      case 404:
                        window.location.replace("/academi-co/#!/notFound");
                        break;
-                     case 405:
+                     case 500:
                        window.location.replace("/academi-co/#!/internalServerError");
                        break;
                    }
@@ -607,7 +608,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
                          case 404:
                            window.location.replace("/academi-co/#!/notFound");
                            break;
-                         case 405:
+                         case 500:
                            window.location.replace("/academi-co/#!/internalServerError");
                            break;
                        }
@@ -663,7 +664,7 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
       case 404:
         window.location.replace("/academi-co/#!/notFound");
         break;
-      case 405:
+      case 500:
         window.location.replace("/academi-co/#!/internalServerError");
         break;
     }
@@ -688,13 +689,27 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
   // TODO:
   // PUT / (Use JWT to be sure of the user)
    // PUT / (Use JWT to be sure of the user)
-   $scope.id = {};
-   $scope.username = {};
-   $scope.bio = {};
-   $scope.password= {};
-   $scope.profilePicture
-   $scope.SetSettings = function() {
-     var urlToGET = getDomain() + '/academi-co/resources/users/'+ "{"+ $scope.id +"}";
+
+   $scope.settingsUpdate = function() {
+
+    if($scope.change.password != document.getElementById("repeatPasswordSettings").value) {
+      // password did not match
+      $.growl.error({ message: "Those passwords didn't match. Try again." });
+
+    } else {
+      // TODO: check if there is update in bio/pp/password
+      // if there is, change
+      $scope.change = {}; // BIO PAssword OK
+      $scope.change.username = $rootScope.user.username;
+      // TODO need to change this to have correct thing
+      $scope.change.profilePicture = $rootScope.user.profilePicture;
+      $scope.change.type = "ADMINISTRATOR";
+      $scope.change.canBeModerator = 1;
+
+
+
+      // we need to PUT the change
+     var urlToGET = getDomain() + '/academi-co/resources/users/'+ $rootScope.user.id;
        var req = {
                  method: 'PUT',
                  url: urlToGET,
@@ -702,36 +717,37 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
                            'Content-Type': 'application/json',
                            'Accept': 'application/json'
                          },
-                 data: {'username':$scope.username,'bio':$scope.bio,'password':$scope.password,'profilePicture':$scope.profilePicture}
+                 data: $scope.change
                };
    
    
-    $http(req).then(
-               function(response){
-                 $.growl.notice({ message: "New settings setted perfectly created." });
-                                },
-               function(response){
-                 $.growl.error({ message: "New swttings cannot be setted." });
-                 // console.log(response.statusText);
-                 // console.log(response.status);
-                 // console.log("End error message");
-                 alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-                  switch(response.status){
-                    case 400:
-                      alert(response.data + " invalid!");
-                    case 403:
-                      window.location.replace("/academi-co/#!/forbidden");
-                      break;
-                    case 404:
-                      window.location.replace("/academi-co/#!/notFound");
-                      break;
-                    case 405:
-                      window.location.replace("/academi-co/#!/internalServerError");
-                      break;
+      $http(req).then(
+                function(response){
+                  $.growl.notice({ message: "Your settings has been updated!" });
+                                  },
+                function(response){
+                  $.growl.error({ message: "An error occured while updating your profile." + response.status});
+                  // console.log(response.statusText);
+                  // console.log(response.status);
+                  // console.log("End error message");
+                  // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+                  //   switch(response.status){
+                  //     case 400:
+                  //       alert(response.data + " invalid!");
+                  //     case 403:
+                  //       window.location.replace("/academi-co/#!/forbidden");
+                  //       break;
+                  //     case 404:
+                  //       window.location.replace("/academi-co/#!/notFound");
+                  //       break;
+                  //     case 500:
+                  //       window.location.replace("/academi-co/#!/internalServerError");
+                  //       break;
+                  //   }
                   }
-                 }
-          
-               )
+            
+                )
+      }
               
    }
 
@@ -769,7 +785,7 @@ app.controller('signUpController', function($scope, $rootScope, $http) {
            // account has been created correctly, we redirect the user to the login page
            $.growl.notice({ message: "Account perfectly created! Please login." });
            // here we're sending him to the protected ressource loginSuccess that will load him login page
-           window.location.replace("/academi-co/#!/loginSuccess");
+           window.location.replace(getProtectedURL("login"));
 
                           },
          function(response){

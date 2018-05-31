@@ -118,6 +118,8 @@ background-color: #0b78d1 ;
 .profilePicDropDown:hover .profilePicDropDownContent {
   display: block;
   border-radius: 5px;
+  right:0;
+  width:100px;
 }
 
 /* hide the dropdown of the profilePic */
