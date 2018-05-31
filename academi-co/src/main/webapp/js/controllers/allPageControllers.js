@@ -535,18 +535,19 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
   // just POST thread
 	
 	var listOfFils=[];
-	
+	var increment = -1;
 	$scope.getChildrenIDs = function(){
 		newElementPTP2();
 		
 		  var elements = document.getElementById("myULPTP2").getElementsByTagName("li");
-		    var elem = elements[0];
+		    increment += 1;
+		    var elem = elements[increment];
 		    var id1 = elem.innerText;
 		    id1 = id1.split(" ");
 		    var idFils= id1[0];
 		    listOfFils.push(idFils);
 		    //$.growl.error({ message: idFils});
-		    //$.growl.error({ message: listOfFils});
+		    $.growl.error({ message: listOfFils});
 		    
 	}
 
