@@ -155,6 +155,7 @@ public class ConcreteUserServiceTest {
 		long id2 = 42;
 
 		// Specifying behavior for mock objects related to calls in the service
+		String fakeHash = "lol";
 		User oldUser = mock(ConcreteUser.class);
 		Document fakePicture = mock(Document.class);
 		when(oldUser.getProfilePicture()).thenReturn(fakePicture);
@@ -162,15 +163,24 @@ public class ConcreteUserServiceTest {
 		when(fakeEntityManager.find(ConcreteUser.class, id)).thenReturn((ConcreteUser) oldUser);
 		
 		// Calling method modify user on user service
+		when(fakeUser.getPassword()).thenReturn("a");
+		when(hasher.hash("a")).thenReturn(fakeHash);
 		userService.modifyUser(id, fakeUser);
 		
 		// Verifying right method calls on objects in the service's function
-		InOrder order = inOrder(oldUser);
-		order.verify(oldUser, times(1)).setBio(null);
-		order.verify(oldUser, times(1)).setCanBeModerator(any(boolean.class));
-		order.verify(oldUser, times(1)).setPassword(null);
-		order.verify(oldUser, times(1)).setType(null);
-		order.verify(oldUser, times(1)).setUsername(null);
+		verify(oldUser, times(1)).setBio(any());
+		verify(oldUser, times(1)).setCanBeModerator(any(boolean.class));
+		verify(oldUser, times(1)).setPassword(fakeHash);
+		verify(oldUser, times(1)).setType(any());
+		verify(oldUser, times(1)).setUsername(any());
 		
+		// Call with empty password
+		when(fakeUser.getPassword()).thenReturn("");
+		userService.modifyUser(id, fakeUser);
+		verify(oldUser, times(2)).setBio(any());
+		verify(oldUser, times(2)).setCanBeModerator(any(boolean.class));
+		verify(oldUser, times(1)).setPassword(null);
+		verify(oldUser, times(2)).setType(any());
+		verify(oldUser, times(2)).setUsername(any());
 	}
 }

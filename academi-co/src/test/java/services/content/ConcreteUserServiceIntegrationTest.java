@@ -107,6 +107,9 @@ public class ConcreteUserServiceIntegrationTest {
 	
 	@Inject
 	private UserService service;
+	
+	@Inject
+	private HashProvider hasher;
 
 	
 	@Before
@@ -159,6 +162,7 @@ public class ConcreteUserServiceIntegrationTest {
 		String username = "mirobolous";
 		String email = "frivolous@outrageous.ous";
 		String password = "dubious";
+		String pwd = hasher.hash(password);
 		String type = UserType.ADMINISTRATOR.getStringVal();
 		String bio = "Scrumptious";
 		boolean canBeModerator = false;
@@ -176,7 +180,7 @@ public class ConcreteUserServiceIntegrationTest {
 		// Control result
 		assertEquals("Username wrongly updated.", newUser.getUsername(), result.getUsername());
 		assertNotEquals("Email changed (should not).", newUser.getEmail(), result.getEmail());
-		assertEquals("Password wrongly updated.", newUser.getPassword(), result.getPassword());
+		assertEquals("Password wrongly updated.", pwd, result.getPassword());
 		assertEquals("Type wrongly updated.", newUser.getType(), result.getType());
 		assertEquals("Bio wrongly updated.", newUser.getBio(), result.getBio());
 		assertEquals("Moderation postulation status wrongly updated.", newUser.isCanBeModerator(), result.isCanBeModerator());

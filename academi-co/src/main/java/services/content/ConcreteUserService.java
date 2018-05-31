@@ -118,10 +118,17 @@ public class ConcreteUserService implements UserService {
 		
 		User oldUser = getUser(id);
 		
+		String pwd;
+		if (newUser.getPassword().isEmpty()) {
+			pwd = oldUser.getPassword();
+		} else {
+			pwd = hasher.hash(newUser.getPassword());
+		}
+		
 		try {
 			oldUser.setBio(newUser.getBio());
 			oldUser.setCanBeModerator(newUser.isCanBeModerator());
-			oldUser.setPassword(newUser.getPassword());
+			oldUser.setPassword(pwd);
 			documentService.modifyProfilePicture(oldUser.getProfilePicture().getId(), newUser.getProfilePicture());
 			oldUser.setType(newUser.getType());
 			oldUser.setUsername(newUser.getUsername());
