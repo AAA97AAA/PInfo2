@@ -124,10 +124,11 @@
                     <h4 style="margin:0px">Primary tag</h4>
                     <select id="primarytag" style="Color:black;">
                         <option selected disabled >Select primarytag:</option>
-                        <option value="{{mainTag.id}}" ng-repeat="mainTag in primaryTag">{{mainTag.name}}</option>
+                        <option value={{mainTag.id}} ng-repeat="mainTag in primaryTag">{{mainTag.id}} {{mainTag.name}}</option>
                     </select>
                     <!--             <input type="text" id="myInput1" placeholder="" style="z-index:1"></input> -->
                     <span class="addBtn" onclick="newElement1()" style="border-radius: 0px; height:30px">Add</span>
+                    <!-- <span class="addBtn" onclick="getIDsPrimaryTag()" style="border-radius: 0px; height:30px">Test</span> -->
                 </div>
                 <ul id="myUL1" style="width: 510px; margin-left:7%;">
                 </ul>
@@ -136,7 +137,7 @@
                     <h4 style="margin:0px">Secondary tags</h4>
                     <select id="secondarytag" style="Color:black;">
                         <option selected disabled >Select secondarytag:</option>
-                        <option value="{{secondTag.id}}" ng-repeat="secondTag in secondaryTag">{{mainTag.name}}</option>
+                        <option id={{secondTag.id}} value="{{secondTag.id}}" ng-repeat="secondTag in secondaryTag">{{secondTag.name}}</option>
                     </select>
                     <!--             <input type="text" id="myInput2" placeholder=""> -->
                     <span class="addBtn" onclick="newElement2()" style="border-radius: 0px; height:30px">Add</span>

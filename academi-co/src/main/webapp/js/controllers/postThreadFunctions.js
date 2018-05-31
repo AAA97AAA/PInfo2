@@ -77,7 +77,9 @@
 
 function newElementPTP1() {
 	var li = document.createElement("li");
-	var inputValue = document.getElementById("primarytagPTP").options[document.getElementById("primarytagPTP").selectedIndex].text; 
+	var inputValue = document.getElementById("primarytagPTP").options[document.getElementById("primarytagPTP").selectedIndex].text;
+	temp = inputValue.split(" ");
+	inputValue = temp[1];
 	var t = document.createTextNode(inputValue);
 	li.appendChild(t);
 	var containerPrimaryTagPTP = document.getElementById("myULPTP1")
@@ -139,3 +141,12 @@ function newElementPTP2() {
 	}
 }
 
+function getIDsPrimaryTag() {
+	  var elements = document.getElementById("myUL1").getElementsByTagName("li");
+	  for (i = 0; i < elements.length; i++) {
+	    var elem = elements[i];
+	    var id1 = elem.innerText;
+	    id1 = id1.split(" ");
+	    //alert(id1[0]);
+	  }
+	}
