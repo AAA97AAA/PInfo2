@@ -60,9 +60,9 @@
                         <h3 style="margin:5px">Primary tag</h3>
                         <select id="primarytagPTP" style="Color:black;">
                             <option selected disabled>Select primarytag:</option>
-                            <option value="{{mainTag.id}}" ng-repeat="mainTag in primaryTag">{{mainTag.name}}</option>
+                            <option value="{{mainTag.id}}" ng-repeat="mainTag in primaryTag">{{mainTag.id}} {{mainTag.name}}</option>
                         </select>
-                        <span onclick="newElementPTP1()" class="addBtn" style="width:20%; height:10%">Add</span>
+                        <span ng-click="getChildrenPTP1()" class="addBtn" style="width:20%; height:10%">Add</span>
                     </div>
                     <ul id="myULPTP1" style="margin-left:20%; width: 60%;">
                     </ul>
@@ -71,7 +71,7 @@
                         <h3 style="margin:5px">Secondary tags</h3>
                         <select id="secondarytagPTP" style="Color:black;">
                             <option selected disabled>Select secondarytag:</option>
-                            <option value="{{secondaryTag.id}}" ng-repeat="secondaryTag in primaryTag[document.getElementById('primarytagPTP').selectedIndex - 1].children">{{secondaryTag.name}}</option>
+                            <option value="{{secondaryTag.id}}" ng-repeat="secondaryTag in secondaryTagDisplay2.children">{{secondaryTag.name}}</option>
 
                         </select>
                         <span onclick="newElementPTP2()" class="addBtn" style="width:20%; height:10%">Add</span>

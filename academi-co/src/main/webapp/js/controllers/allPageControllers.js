@@ -245,6 +245,55 @@ app.controller('adminController', function($scope, $rootScope, $http){
 
 /* Controller for advanced search */
 app.controller('advancedSearchController', function($scope, $rootScope, $http){
+	
+	$scope.getChildren = function(){
+		
+		newElement1();
+		
+		
+		  var elements = document.getElementById("myUL1").getElementsByTagName("li");
+		    var elem = elements[0];
+		    var id1 = elem.innerText;
+		    id1 = id1.split(" ");
+		    var idParent = id1[0];
+		    
+			
+		    var primaryTagURL = getDomain() + '/academi-co/resources/tags/' + idParent;
+		    // request
+		    
+
+		    
+		    var req = {
+		                  method: 'GET',
+		                  url   : primaryTagURL,
+		                  headers: {
+		                    'Content-Type': 'application/json',
+		                    'Accept': 'application/json'
+		                  },
+		            };
+		    
+			
+		    $http(req).then(
+		            function(response){
+		              $scope.secondaryTagDisplay = response.data;
+		              // alert("ok" + $scope.primaryTag[0].name);
+		                              },
+		            function(response){
+		              $.growl.error({ message: "Error while loading secondary tags"});
+		                // switch(response.status){
+		                //   case 403:
+		                //     window.location.replace("/academi-co/#!/forbidden");
+		                //     break;
+		                //   case 404:
+		                //     window.location.replace("/academi-co/#!/notFound");
+		                //     break;
+		                //   case 500:
+		                //     window.location.replace("/academi-co/#!/internalServerError");
+		                //     break;
+		                // }
+		              }
+		    )
+	}
 
     // First we need to retrieve the primary tags to show
     var primaryTagURL = getProtectedResources("tags");
@@ -296,6 +345,8 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
 
 });
 
+
+/* Controller for displaying the secondary tags related as children to maintags*/
 
 /* Controller for home page */
 app.controller('homeController', function($scope, $rootScope, $http){
@@ -482,6 +533,57 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
   // TODO: no need to control the access because, web.xml does it well
   // just POST thread
 
+     $scope.getChildrenPTP1 = function(){
+		
+		newElementPTP1();
+		
+		
+		  var elements = document.getElementById("myULPTP1").getElementsByTagName("li");
+		    var elem = elements[0];
+		    var id1 = elem.innerText;
+		    id1 = id1.split(" ");
+		    var idParent = id1[0];
+		    
+		   
+			
+		    var secondaryTagURL = getDomain() + '/academi-co/resources/tags/' + idParent;
+		    // request
+		    
+		    
+		    
+		    var req = {
+		                  method: 'GET',
+		                  url   : secondaryTagURL,
+		                  headers: {
+		                    'Content-Type': 'application/json',
+		                    'Accept': 'application/json'
+		                  },
+		            };
+		    
+			
+		    $http(req).then(
+		            function(response){
+		              $scope.secondaryTagDisplay2 = response.data;
+		              //$.growl.error({ message: $scope.secondaryTagDisplay2.children[0]});
+		              // alert("ok" + $scope.primaryTag[0].name);
+		                              },
+		            function(response){
+		              $.growl.error({ message: "Error while loading secondary tags"});
+		                // switch(response.status){
+		                //   case 403:
+		                //     window.location.replace("/academi-co/#!/forbidden");
+		                //     break;
+		                //   case 404:
+		                //     window.location.replace("/academi-co/#!/notFound");
+		                //     break;
+		                //   case 500:
+		                //     window.location.replace("/academi-co/#!/internalServerError");
+		                //     break;
+		                // }
+		              }
+		    )
+	}	
+	
   // First we need to retrieve the primary tags to show
   var primaryTagURL = getProtectedResources("tags");
   
