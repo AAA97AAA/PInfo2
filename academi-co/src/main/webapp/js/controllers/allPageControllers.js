@@ -28,7 +28,7 @@ app.controller('adminController', function($scope, $http){
 
     // execution of the request
     $http(req).then(
-            // œ function
+            // success function
             function(response){
               
             $.growl.notice({ message: "Administrator created successfully!" });
@@ -155,10 +155,7 @@ app.controller('adminController', function($scope, $http){
       // POST ADD SECONDTAG
         $scope.AddSecondTag = function() {
 
-        $scope.name = { };
-        $scope.id = { };
-
-        var urlToGET = getDomain() + '/academi-co/resources/tags/' + "{" + $scope.id + "}";
+        var urlToGET = getDomain() + '/academi-co/resources/tags/' + "{" + $scope.SecondTag.relatedMainTag + "}";
         var req = {
                     method: 'POST',
                     url: urlToGET,
@@ -248,6 +245,41 @@ app.controller('adminController', function($scope, $http){
 /* Controller for advanced search */
 app.controller('advancedSearchController', function($scope, $http){
 
+    // First we need to retrieve the primary tags to show
+    var primaryTagURL = getProtectedResources("tags");
+  
+    // request
+    var req = {
+                  method: 'GET',
+                  url   : primaryTagURL,
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  },
+            };
+    
+      $http(req).then(
+        function(response){
+          $scope.primaryTag = response.data;
+          // alert("ok" + $scope.primaryTag[0].name);
+                          },
+        function(response){
+          $.growl.error({ message: "Error while loading tags"});
+            switch(response.status){
+              case 403:
+                window.location.replace("/academi-co/#!/forbidden");
+                break;
+              case 404:
+                window.location.replace("/academi-co/#!/notFound");
+                break;
+              case 405:
+                window.location.replace("/academi-co/#!/internalServerError");
+                break;
+            }
+          }
+    
+        )
+
   $scope.search = {};
 
   document.getElementById("myUL1");
@@ -255,7 +287,7 @@ app.controller('advancedSearchController', function($scope, $http){
 
 
   $scope.submitAdvancedSearch = function() {
-    alert("oklm ta fait une recherche avec " + document.getElementsByTagName("li").value + " et " + document.getElementById("myUL2").value);
+    // alert("oklm ta fait une recherche avec " + document.getElementsByTagName("li").value + " et " + document.getElementById("myUL2").value);
     for (i = 0; i < document.getElementsByTagName("li").length; i++){
       console.log( document.getElementsById("myUL1").options[i]);
     }
@@ -296,6 +328,42 @@ app.controller('isConnectHeader', function($scope, $http){
     // alert("connected");
     // $scope.show_me = true;
 
+        // user data to obtain profile pic and link
+          var nom = "users/" + jwt_decode(getCookie('tokenJWT')).sub;
+          // alert(nom);
+          var userURL = getProtectedResources(nom);
+          
+          // request
+          var req = {
+                        method: 'GET',
+                        url   : userURL,
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json'
+                        },
+                  };
+          
+            $http(req).then(
+              function(response){
+                $scope.user = response.data;
+                                },
+              function(response){
+                $.growl.error({ message: "Error while loading user details"});
+                  switch(response.status){
+                    case 403:
+                      window.location.replace("/academi-co/#!/forbidden");
+                      break;
+                    case 404:
+                      window.location.replace("/academi-co/#!/notFound");
+                      break;
+                    case 405:
+                      window.location.replace("/academi-co/#!/internalServerError");
+                      break;
+                  }
+                }
+          
+              )
+
       // connected
        document.getElementById("rightNonConnectedComponent").style.display = 'none';
        document.getElementById("rightConnectedComponent").style.display = 'block';
@@ -317,6 +385,7 @@ app.controller('isConnectHeader', function($scope, $http){
   }
 
 
+  
 });
 
 
@@ -347,6 +416,42 @@ app.controller('loginSuccessController', function($scope, $http){
         $http.defaults.headers.common.Authorization = 'Bearer ' + response.data;
         // we have a global variable with the id of the user
         //  $rootScope.idUserConnecte =  jwt_decode(getCookie('tokenJWT')).sub;
+        // we need to take the data
+        var nom = "users/" + jwt_decode(getCookie('tokenJWT')).sub;
+        // alert(nom);
+        var userURL = getProtectedResources(nom);
+        
+        // request
+        var req = {
+                      method: 'GET',
+                      url   : userURL,
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                      },
+                };
+        
+          $http(req).then(
+            function(response){
+              $scope.user = response.data;
+                              },
+            function(response){
+              $.growl.error({ message: "Error while loading user details"});
+                switch(response.status){
+                  case 403:
+                    window.location.replace("/academi-co/#!/forbidden");
+                    break;
+                  case 404:
+                    window.location.replace("/academi-co/#!/notFound");
+                    break;
+                  case 405:
+                    window.location.replace("/academi-co/#!/internalServerError");
+                    break;
+                }
+              }
+        
+            )
+
         // we are connected
         document.getElementById("rightNonConnectedComponent").style.display = 'none';
         document.getElementById("rightConnectedComponent").style.display = 'block';
@@ -375,10 +480,48 @@ app.controller('loginSuccessController', function($scope, $http){
 app.controller('postThreadController', function($scope, $http){
   // TODO: no need to control the access because, web.xml does it well
   // just POST thread
+
+  // First we need to retrieve the primary tags to show
+  var primaryTagURL = getProtectedResources("tags");
+  
+  // request of primary tag with their children
+  var req = {
+                method: 'GET',
+                url   : primaryTagURL,
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+          };
+  
+    $http(req).then(
+      function(response){
+        $scope.primaryTag = response.data;
+        // alert("ok" + $scope.primaryTag[0].name);
+                        },
+      function(response){
+        $.growl.error({ message: "Error while loading primary tags"});
+          switch(response.status){
+            case 403:
+              window.location.replace("/academi-co/#!/forbidden");
+              break;
+            case 404:
+              window.location.replace("/academi-co/#!/notFound");
+              break;
+            case 405:
+              window.location.replace("/academi-co/#!/internalServerError");
+              break;
+          }
+        }
+  
+      )
+
+
+
   $scope.Post = function(){
         
-        $scope.id = { };
-        $scope.author = { };
+        $scope.id = {};
+        $scope.author = {"id": jwt_decode(getCookie('tokenJWT')).sub };
         $scope.title = { };
         $scope.content = { }; 
         $scope.creationDate = { };
@@ -407,10 +550,10 @@ app.controller('postThreadController', function($scope, $http){
                   // console.log(response.statusText);
                   // console.log(response.status);
                   // console.log("End error message");
-                  alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+                  // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
                    switch(response.status){
-                     case 400:
-                       alert(response.data + " invalid!");
+                    //  case 400:
+                    //    alert(response.data + " invalid!");
                      case 403:
                        window.location.replace("/academi-co/#!/forbidden");
                        break;
@@ -478,10 +621,24 @@ app.controller('postThreadController', function($scope, $http){
 /* Controller for profile page */
 app.controller('profileController', function($scope, $http, $routeParams){
   // TODO:
+
   // conditional display: settings button displayed only for the corresponding user
+  $scope.goSettings = function(){
+    window.location.replace(getProtectedURL("settings"));
+  }
 
   // get the ressource (the user n° id)
   // we construct the url that we want to get
+  var urlToGET = getDomain() + '/academi-co/resources/users/' + $routeParams.id;
+
+  // if it is the current user, we display the settings button, otherwise not
+  if($routeParams.id == jwt_decode(getCookie('tokenJWT')).sub) {
+    document.getElementById("settingsButton").style.display = "block";
+  } else {
+    document.getElementById("settingsButton").style.display = "none";
+  }
+
+
   var urlToGET = getDomain() + '/academi-co/resources/users/' + $routeParams.id;
 
   // console.log(urlToGET);
@@ -490,11 +647,12 @@ app.controller('profileController', function($scope, $http, $routeParams){
     url: urlToGET,
     headers: {
       'Accept': 'application/json',
-      // 'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     },
   }).then(function(response) {
     // if we correctly have the result, we just take the data
      $scope.myProfileData = response.data;
+     alert(myProfileData.bio);
   }, function(response) {
     switch(response.status){
       case 400:
@@ -643,28 +801,28 @@ app.controller('signUpController', function($scope, $http) {
 
 });
 
- /* Controller for simple search */
- app.controller('simplifiedSearchController', function($scope, $http){
+/* Controller for simple search */
+app.controller('simplifiedSearchController', function($scope, $http){
 
-  $scope.search = {};
+$scope.search = {};
 
-  $scope.simplifiedSearch = function() {
+$scope.simplifiedSearch = function() {
 
-    if(($scope.search.title == null) || ($scope.search.title == "")){
+  if(($scope.search.title == null) || ($scope.search.title == "")){
 
-      // when the user has entered nothing, we don't search it
-      // and ask him to fill out the field
-      $.growl.warning({ message: "Please enter something in the field." });
+    // when the user has entered nothing, we don't search it
+    // and ask him to fill out the field
+    $.growl.warning({ message: "Please enter something in the field." });
 
-    } else {
+  } else {
 
-      // we redirect him to the correct result page
-      searchUrl = getDomain() + '/academi-co/#!/result/title=' + $scope.search.title;
-      // console.log(searchUrl);
-      window.location.replace(searchUrl);
+    // we redirect him to the correct result page
+    searchUrl = getDomain() + '/academi-co/#!/result/title=' + $scope.search.title;
+    // console.log(searchUrl);
+    window.location.replace(searchUrl);
 
-    }
-  };
+  }
+};
 
   // the + Button redirect to newThread (does not work, because it is in the form)
   $scope.newThread = function() {

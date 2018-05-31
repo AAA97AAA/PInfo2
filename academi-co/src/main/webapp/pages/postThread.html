@@ -31,7 +31,7 @@
 <div class="w3-container w3-content" style="width:auto;margin-top:auto">
     <!-- The Grid -->
     <div class="w3-row">
-        <div ng-app="academi-co" ng-controller="profilePageLoad">
+        <div >
             <!--     Left Column -->
             <div class="w3-col m3">
                 <!--       Profile -->
@@ -54,52 +54,43 @@
                 </div>
             </div>
             <!-- Central column after MyPosts -->
-            <div class="w3-container w3-center w3-margin">
-                <div id="myDIVPTP1" class="header" style="background-color: #1f2c47; margin-left:20%; width: 60%;">
-                    <h3 style="margin:5px">Primary tag</h3>
-                    <select id="primarytagPTP" style="Color:black;">
-                        <option selected disabled>Select primarytag:</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="Biology">Biology</option>
-                        <option value="Philosophy">Philosophy</option>
-                        <option value="History">History</option>
-                        <option value="Geography">Geography</option>
-                    </select>
-                    <span onclick="newElementPTP1()" class="addBtn" style="width:20%; height:10%">Add</span>
-                </div>
-                <ul id="myULPTP1" style="margin-left:20%; width: 60%;">
-                </ul>
-                <br><br> <br><br> <br> <br>
-                <div id="myDIVPTP2" class="header"  style="background-color:#263659; margin-left:20%; width: 60%;">
-                    <h3 style="margin:5px">Secondary tags</h3>
-                    <select id="secondarytagPTP" style="Color:black;">
-                        <option selected disabled>Select secondarytag:</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="Biology">Biology</option>
-                        <option value="Philosophy">Philosophy</option>
-                        <option value="History">History</option>
-                        <option value="Geography">Geography</option>
-                    </select>
-                    <span onclick="newElementPTP2()" class="addBtn" style="width:20%; height:10%">Add</span>
-                </div>
-                <ul id="myULPTP2" style="margin-left:20%; width: 60%;">
-                </ul>
-                <div class="w3-left">
-                    <br><br>
-                    <h2>Title:</h2>
-                    <input type="text" id="userInput" style="width:70%; height:50%"></input><br>
-                    <br><br>
-                    <h2>Content:</h2>
-                    <div style="background-color:white;width:100.0%;">
-                        <textarea rows="20" cols="100" id="userInput" style="resize:none;"></textarea>
+            <form name="newPost">
+                <div class="w3-container w3-center w3-margin">
+                    <div id="myDIVPTP1" class="header" style="background-color: #1f2c47; margin-left:20%; width: 60%;">
+                        <h3 style="margin:5px">Primary tag</h3>
+                        <select id="primarytagPTP" style="Color:black;">
+                            <option selected disabled>Select primarytag:</option>
+                            <option value="{{mainTag.id}}" ng-repeat="mainTag in primaryTag">{{mainTag.name}}</option>
+                        </select>
+                        <span onclick="newElementPTP1()" class="addBtn" style="width:20%; height:10%">Add</span>
                     </div>
-                </div>
-                <br>
-                <button type="submit" value="Submit" id="popUpYes" style="width: 200px; height:40px;">Submit</button><br><br><br>
+                    <ul id="myULPTP1" style="margin-left:20%; width: 60%;">
+                    </ul>
+                    <br><br> <br><br> <br> <br>
+                    <div id="myDIVPTP2" class="header"  style="background-color:#263659; margin-left:20%; width: 60%;">
+                        <h3 style="margin:5px">Secondary tags</h3>
+                        <select id="secondarytagPTP" style="Color:black;">
+                            <option selected disabled>Select secondarytag:</option>
+                            <option value="{{secondaryTag.id}}" ng-repeat="secondaryTag in primaryTag[document.getElementById('primarytagPTP').selectedIndex - 1].children">{{secondaryTag.name}}</option>
+
+                        </select>
+                        <span onclick="newElementPTP2()" class="addBtn" style="width:20%; height:10%">Add</span>
+                    </div>
+                    <ul id="myULPTP2" style="margin-left:20%; width: 60%;">
+                    </ul>
+                    <div class="w3-left">
+                        <br><br>
+                        <h2>Title:</h2>
+                        <input type="text" id="userInput" style="width:70%; height:50%"></input><br>
+                        <br><br>
+                        <h2>Content:</h2>
+                        <div style="background-color:white;width:100.0%;">
+                            <textarea rows="20" cols="100" id="userInput" style="resize:none;"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" value="Submit" id="popUpYes" style="width: 200px; height:40px;" ng-click="Post()">Submit</button><br><br><br>
+                </form>
                 <!--     End Left Column -->
                
             </div>

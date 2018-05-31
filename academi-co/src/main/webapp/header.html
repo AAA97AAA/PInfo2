@@ -62,8 +62,8 @@
     
                 <!-- Profile Pic -->
                 <div class="profilePicDropDown">
-                    <a href="profile.html" class="buttonHeader profilePicButton" title="My Profile">
-                    <img src="images/defaultPP.png" style="height:29px;width:29px" alt="Avatar"></img>
+                    <a ng-href="#!/profile/{{user.id}}" class="buttonHeader profilePicButton" title="My Profile">
+                    <img ng-src="data:image/JPEG;base64,{{user.profilePicture.data}}" style="height:29px;width:29px" alt="Avatar"></img>
                     </a>
                     <div class="profilePicDropDownContent" style="right:0;width:100px">
                         <a class="logoutButton" href="logout.jsp">Logout</a>
@@ -124,13 +124,7 @@
                     <h4 style="margin:0px">Primary tag</h4>
                     <select id="primarytag" style="Color:black;">
                         <option selected disabled >Select primarytag:</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="Biology">Biology</option>
-                        <option value="Philosophy">Philosophy</option>
-                        <option value="History">History</option>
-                        <option value="Geography">Geography</option>
+                        <option value="{{mainTag.id}}" ng-repeat="mainTag in primaryTag">{{mainTag.name}}</option>
                     </select>
                     <!--             <input type="text" id="myInput1" placeholder="" style="z-index:1"></input> -->
                     <span onclick="newElement1()" class="addBtn" style="border-radius: 0px; height:30px">Add</span>

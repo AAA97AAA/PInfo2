@@ -13,7 +13,7 @@
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
         <!-- The Grid -->
         <div class="w3-row">
-            <div id="mainProfilePageContent" ng-controller="profilePageLoad">
+            <div id="mainProfilePageContent">
                 <!--     Left Column -->
                 <div class="w3-col m3">
                     <!--       Profile -->
@@ -27,7 +27,7 @@
                     <div class="w3-card w3-round">
                         <div class="w3-white">
                             <!-- TODO: display only if it his profile -->
-                            <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-cogs fa-fw"></i> Settings and preferences</button>
+                            <button id="settingsButton"  class="w3-button w3-block w3-theme-l1 w3-left-align" ng-click="goSettings()"><i class="fa fa-cogs fa-fw"></i> Settings and preferences</button>
                         </div>
                     </div>
                     <br>
