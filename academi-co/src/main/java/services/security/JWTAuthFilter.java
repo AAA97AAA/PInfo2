@@ -33,7 +33,7 @@ import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 public class JWTAuthFilter implements ContainerRequestFilter {
 
 	// Error logger for file reading problems
-	static private Logger logger = LogManager.getLogger(JWTAuthFilter.class);
+	private static Logger logger = LogManager.getLogger(JWTAuthFilter.class);
 	
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {

@@ -104,7 +104,7 @@ public class ConcretePost implements Post, Serializable {
 	private Set<User> downvoters;
 	
 	@Column(name = "SCORE")
-	@JsonView(View.PostVote.class)
+	@JsonView(View.PostScore.class)
 	@Field(index = Index.NO, analyze = Analyze.NO, store = Store.NO)
 	@SortableField
 	private int score;
