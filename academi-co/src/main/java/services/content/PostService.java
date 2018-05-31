@@ -21,7 +21,7 @@ public interface PostService extends Serializable {
 	
 	public QuestionThread getQuestionThread(long id);
 	
-	public QuestionThread addPost(QuestionThread questionThread);
+	public QuestionThread addPost(QuestionThread questionThread) throws IllegalArgumentException;
 	
 	public Comment addPost(long parentId, Comment comment);
 	

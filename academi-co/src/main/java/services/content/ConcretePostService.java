@@ -64,18 +64,21 @@ public class ConcretePostService implements PostService {
 	}
 	
 	@Override
-	public QuestionThread addPost(QuestionThread questionThread) {
+	public QuestionThread addPost(QuestionThread questionThread) throws IllegalArgumentException {
 		
 		// Fetch (and detach) the thread's attributes
 		User author = userService.getUser(questionThread.getAuthor().getId());
 		MainTag subject = tagService.getMainTag(questionThread.getSubject().getId());
 		Tag language = tagService.getLanguageTag(questionThread.getLanguage().getId());
+		Set<SecondaryTag> givenTopics = new HashSet<>();
+		for (SecondaryTag topic: questionThread.getTopics()) {
+			givenTopics.add(tagService.getSecondaryTag(topic.getId()));
+		}
 		entityManager.detach(author);
 		entityManager.detach(subject);
 		entityManager.detach(language);
 		Set<SecondaryTag> topics = new HashSet<SecondaryTag>(subject.getChildren());
-		topics.retainAll(questionThread.getTopics());
-//		topics.keySet().retainAll(questionThread.getTopics().stream().map(t -> t.getId()).collect(Collectors.toSet()));
+		topics.retainAll(givenTopics);
 		
 		// Control attributes' existence and validity
 		if (author == null || subject == null || language == null) {
