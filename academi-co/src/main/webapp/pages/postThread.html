@@ -71,10 +71,10 @@
                         <h3 style="margin:5px">Secondary tags</h3>
                         <select id="secondarytagPTP" style="Color:black;">
                             <option selected disabled>Select secondarytag:</option>
-                            <option value="{{secondaryTag.id}}" ng-repeat="secondaryTag in secondaryTagDisplay2.children">{{secondaryTag.name}}</option>
+                            <option value="{{secondaryTag.id}}" ng-repeat="secondaryTag in secondaryTagDisplay2.children">{{secondaryTag.id}} {{secondaryTag.name}}</option>
 
                         </select>
-                        <span onclick="newElementPTP2()" class="addBtn" style="width:20%; height:10%">Add</span>
+                        <span ng-click="getChildrenIDs()" class="addBtn" style="width:20%; height:10%">Add</span>
                     </div>
                     <ul id="myULPTP2" style="margin-left:20%; width: 60%;">
                     </ul>

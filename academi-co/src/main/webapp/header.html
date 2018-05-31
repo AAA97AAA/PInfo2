@@ -136,7 +136,7 @@
                     <h4 style="margin:0px">Secondary tags</h4>
                     <select id="secondarytag" style="Color:black;">
                         <option selected disabled >Select secondarytag:</option>
-                        <option id={{secondTag.id}} value="{{secondTag.id}}" ng-repeat="secondTag in secondaryTagDisplay.children">{{secondTag.name}}</option>
+                        <option id={{secondTag.id}} value="{{secondTag.id}}" ng-repeat="secondTag in secondaryTagDisplay.children">{{secondTag.id}} {{secondTag.name}}</option>
                     </select>
                     <!--             <input type="text" id="myInput2" placeholder=""> -->
                     <span class="addBtn" onclick="newElement2()" style="border-radius: 0px; height:30px">Add</span>

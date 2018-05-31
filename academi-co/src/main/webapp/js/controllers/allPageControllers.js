@@ -294,6 +294,7 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
 		              }
 		    )
 	}
+	
 
     // First we need to retrieve the primary tags to show
     var primaryTagURL = getProtectedResources("tags");
@@ -532,6 +533,22 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
 app.controller('postThreadController', function($scope, $rootScope, $http){
   // TODO: no need to control the access because, web.xml does it well
   // just POST thread
+	
+	var listOfFils=[];
+	
+	$scope.getChildrenIDs = function(){
+		newElementPTP2();
+		
+		  var elements = document.getElementById("myULPTP2").getElementsByTagName("li");
+		    var elem = elements[0];
+		    var id1 = elem.innerText;
+		    id1 = id1.split(" ");
+		    var idFils= id1[0];
+		    listOfFils.push(idFils);
+		    //$.growl.error({ message: idFils});
+		    //$.growl.error({ message: listOfFils});
+		    
+	}
 
      $scope.getChildrenPTP1 = function(){
 		
