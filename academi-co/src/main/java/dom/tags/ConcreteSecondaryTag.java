@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -29,7 +28,6 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 	// Serial version (auto-generated)
 	private static final long serialVersionUID = -8774104979011662031L;
 
-	@NotNull
 	@ManyToOne(targetEntity = ConcreteMainTag.class)
 	@JoinColumn(name = "PARENT")
 	@JsonView(View.TagChildCentered.class)
@@ -69,7 +67,7 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + parent.hashCode();
+		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		return result;
 	}
 
@@ -85,7 +83,11 @@ public class ConcreteSecondaryTag extends ConcreteTag implements SecondaryTag, S
 			return false;
 		}
 		ConcreteSecondaryTag other = (ConcreteSecondaryTag) obj;
-		if (!parent.equals(other.parent)) {
+		if (parent == null) {
+			if (other.parent != null) {
+				return false;
+			}
+		} else if (!parent.equals(other.parent)) {
 			return false;
 		}
 		if (getId() != other.getId()) {
