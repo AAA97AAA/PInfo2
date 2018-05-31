@@ -547,7 +547,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 		    var idFils= id1[0];
 		    listOfFils.push(idFils);
 		    //$.growl.error({ message: idFils});
-		    $.growl.error({ message: listOfFils});
+		    //$.growl.error({ message: listOfFils});
 		    
 	}
 
@@ -639,55 +639,67 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 
 
 
-  $scope.Post = function(){
-
-        $scope.id = {};
-        $scope.author = {"id": jwt_decode(getCookie('tokenJWT')).sub };
-        $scope.title = { };
-        $scope.content = { }; 
-        $scope.creationDate = { };
-        $scope.subject = { };
-        $scope.topics = { };
-        $scope.language = { };
+  $scope.CreatePost = function(){
+    	
+//        $.growl.error({ message: author});
+//        $.growl.error({ message: title});
+//        $scope.post.title = document.getElementById("userInput1").value;
+//    	$scope.post.title = document.getElementById("userInput1").value;
+//    	var rip = $scope.post.title 
+        $.growl.error({ message: ""});
+//        $scope.content = document.getElementById("userInput2").value;
+//        $.growl.error({ message: content.value})
+//        $scope.creationDate = "";
+//        $scope.subject = {"id":idParent};
+//        $scope.topics = { };
+//        $scope.language = { };
         
-     var urlToGET = getDomain() + '/academi-co/resources/posts/';
-        var req = {
-                method: 'POST',
-                url: urlToGET,
-                headers: {
-                          'Content-Type': 'application/json',
-                          'Accept': 'application/json'
-                        },
-                data: {'id':$scope.id, 'author':$scope.author,'title':$scope.title,'content':$scope.content,'creationDate':$scope.creationDate,'subject':$scope.subject,'topics':$scope.topics,'language':$scope.language}
-              };
-    
-    
-     $http(req).then(
-                function(response){
-                  $.growl.notice({ message: "Post perfectly created." });
-                                 },
-                function(response){
-                  $.growl.error({ message: "Post cannot be created." });
-                  // console.log(response.statusText);
-                  // console.log(response.status);
-                  // console.log("End error message");
-                  // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-                   switch(response.status){
-                    //  case 400:
-                    //    alert(response.data + " invalid!");
-                     case 403:
-                       window.location.replace("/academi-co/#!/forbidden");
-                       break;
-                     case 404:
-                       window.location.replace("/academi-co/#!/notFound");
-                       break;
-                     case 500:
-                       window.location.replace("/academi-co/#!/internalServerError");
-                       break;
-                   }
-                  }
-           
-                )
+//        $.growl.error({ message: author});
+//        $.growl.error({ message: title});
+//        $.growl.error({ message: content});
+//        $.growl.error({ message: creationDate});
+//        $.growl.error({ message: subject});
+//        $.growl.error({ message: topics});
+//        $.growl.error({ message: language});
+       
+//     var urlToPOST = getDomain() + '/academi-co/resources/posts/';
+//        var req = {
+//                method: 'POST',
+//                url: urlToPOST,
+//                headers: {
+//                          'Content-Type': 'application/json',
+//                          'Accept': 'application/json'
+//                        },
+//                //data: {$scope.author,'title':$scope.title,'content':$scope.content,'creationDate':$scope.creationDate,'subject':$scope.subject,'topics':$scope.topics,'language':$scope.language}
+//              };
+//    
+//    
+//     $http(req).then(
+//                function(response){
+//                  $.growl.notice({ message: "Post perfectly created." });
+//                                 },
+//                function(response){
+//                  $.growl.error({ message: "Post cannot be created." });
+//                  // console.log(response.statusText);
+//                  // console.log(response.status);
+//                  // console.log("End error message");
+//                  // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+//                   switch(response.status){
+//                    //  case 400:
+//                    //    alert(response.data + " invalid!");
+//                     case 403:
+//                       window.location.replace("/academi-co/#!/forbidden");
+//                       break;
+//                     case 404:
+//                       window.location.replace("/academi-co/#!/notFound");
+//                       break;
+//                     case 500:
+//                       window.location.replace("/academi-co/#!/internalServerError");
+//                       break;
+//                   }
+//                  }
+//           
+//                )
         }
 
         $scope.Comment = function(){
