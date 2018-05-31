@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,7 +57,7 @@ public class ConcreteQuestionThreadTest {
 		int score = 3;
 		boolean banned = false;
 		String title = "title";
-		List<Comment> answers = new LinkedList<Comment>();
+		Set<Comment> answers = new LinkedHashSet<Comment>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
 			answers.add(mock(ConcreteComment.class));
 		}
@@ -198,7 +198,7 @@ public class ConcreteQuestionThreadTest {
 		int score = 3;
 		boolean banned = false;
 		String title = "title";
-		List<Comment> answers = new LinkedList<Comment>();
+		Set<Comment> answers = new LinkedHashSet<Comment>();
 		for (long i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
 			answers.add(mock(ConcreteComment.class));
 		}
@@ -256,10 +256,11 @@ public class ConcreteQuestionThreadTest {
 		int score = 3;
 		boolean banned = false;
 		String title = "title";
-		List<Comment> answers = new LinkedList<Comment>();
+		Set<Comment> answers = new LinkedHashSet<Comment>();
 		for (int i = 0; i < ThreadLocalRandom.current().nextLong(min, max); i++) {
-			answers.add(mock(ConcreteComment.class));
-			when(answers.get(i).toString()).thenReturn("answer" + i);
+			ConcreteComment comment = mock(ConcreteComment.class);
+			when(comment.toString()).thenReturn("answer" + i);
+			answers.add(comment);
 		}
 		MainTag subject = mock(ConcreteMainTag.class);
 		when(subject.toString()).thenReturn("subject");

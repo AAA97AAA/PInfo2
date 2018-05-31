@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -76,7 +76,7 @@ public class PostFactoryTest {
 		// Verify that the expected object was obtained
 		assertEquals("Object wrongly instantiated.",
 				new ConcreteQuestionThread(author, content, date, new HashSet<User>(),
-						new HashSet<User>(), 0, false, title, new LinkedList<Comment>(),
+						new HashSet<User>(), 0, false, title, new LinkedHashSet<Comment>(),
 						subject, language, topics), thread);
 	}
 	

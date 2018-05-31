@@ -3,7 +3,7 @@ package dom.content;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -111,7 +111,7 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	@OneToMany(targetEntity = ConcreteComment.class, mappedBy = "question", fetch = FetchType.EAGER)
 	@OrderBy("creationDate ASC, id ASC")
 	@JsonView(View.PostParentCentered.class)
-	private List<Comment> answers;
+	private Set<Comment> answers;
 
 	@NotNull
 	@ManyToOne(targetEntity = ConcreteMainTag.class)
@@ -140,11 +140,11 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 
 	ConcreteQuestionThread() {
 		super();
-		answers = new LinkedList<Comment>();
+		answers = new LinkedHashSet<Comment>();
 	}
 
 	ConcreteQuestionThread(User author, String content, LocalDateTime creationDate, Set<User> upvoters,
-			Set<User> downvoters, int score, boolean isBanned, String title, List<Comment> answers,
+			Set<User> downvoters, int score, boolean isBanned, String title, Set<Comment> answers,
 			MainTag subject, Tag languageTag, Set<SecondaryTag> topics) {
 		super(author, content, creationDate, upvoters, downvoters, score, isBanned);
 		this.title = title;
@@ -189,11 +189,11 @@ public class ConcreteQuestionThread extends ConcretePost implements Serializable
 	}
 
 	@Override
-	public List<Comment> getAnswers() {
+	public Set<Comment> getAnswers() {
 		return answers;
 	}
 
-	void setAnswers(List<Comment> answers) {
+	void setAnswers(Set<Comment> answers) {
 		this.answers = answers;
 	}
 
