@@ -5,7 +5,7 @@
 */
 
 /* Controller for Administrator page */
-app.controller('adminController', function($scope, $http){
+app.controller('adminController', function($scope, $rootScope, $http){
 
   // Add an administrator
     $scope.AddAdministrator = function() {
@@ -243,7 +243,7 @@ app.controller('adminController', function($scope, $http){
 });
 
 /* Controller for advanced search */
-app.controller('advancedSearchController', function($scope, $http){
+app.controller('advancedSearchController', function($scope, $rootScope, $http){
 
     // First we need to retrieve the primary tags to show
     var primaryTagURL = getProtectedResources("tags");
@@ -260,7 +260,7 @@ app.controller('advancedSearchController', function($scope, $http){
     
       $http(req).then(
         function(response){
-          $scope.primaryTag = response.data;
+          $rootScope.primaryTag = response.data;
           // alert("ok" + $scope.primaryTag[0].name);
                           },
         function(response){
@@ -297,7 +297,7 @@ app.controller('advancedSearchController', function($scope, $http){
 
 
 /* Controller for home page */
-app.controller('homeController', function($scope, $http){
+app.controller('homeController', function($scope, $rootScope, $http){
   // DISPLAY THE TAGS + if click on TAG, search result for tag
 
 
@@ -306,7 +306,7 @@ app.controller('homeController', function($scope, $http){
 /* Controller for conditional display (if logged in or logged out)  */
 /* HEADER : controller for the header to check if the user is connected or not and display the correct one */
 
-app.controller('isConnectHeader', function($scope, $http){
+app.controller('isConnectHeader', function($scope, $rootScope, $http){
 
   // alert("header charged");
 
@@ -345,7 +345,7 @@ app.controller('isConnectHeader', function($scope, $http){
           
             $http(req).then(
               function(response){
-                $scope.user = response.data;
+                $rootScope.user = response.data;
                                 },
               function(response){
                 $.growl.error({ message: "Error while loading user details"});
@@ -394,7 +394,7 @@ app.controller('isConnectHeader', function($scope, $http){
 /*
     This controller is doing the GET for JWT Token once the user gets connected
 */
-app.controller('loginSuccessController', function($scope, $http){
+app.controller('loginSuccessController', function($scope, $rootScope, $http){
 
   // link to GET the token
   var urlToGET = getProtectedResources("auth");
@@ -433,7 +433,7 @@ app.controller('loginSuccessController', function($scope, $http){
         
           $http(req).then(
             function(response){
-              $scope.user = response.data;
+              $rootScope.user = response.data;
                               },
             function(response){
               $.growl.error({ message: "Error while loading user details"});
@@ -477,7 +477,7 @@ app.controller('loginSuccessController', function($scope, $http){
 
 
 /* Controller for postThread page */
-app.controller('postThreadController', function($scope, $http){
+app.controller('postThreadController', function($scope, $rootScope, $http){
   // TODO: no need to control the access because, web.xml does it well
   // just POST thread
 
@@ -496,7 +496,7 @@ app.controller('postThreadController', function($scope, $http){
   
     $http(req).then(
       function(response){
-        $scope.primaryTag = response.data;
+        $rootScope.primaryTag = response.data;
         // alert("ok" + $scope.primaryTag[0].name);
                         },
       function(response){
@@ -619,7 +619,7 @@ app.controller('postThreadController', function($scope, $http){
 });
 
 /* Controller for profile page */
-app.controller('profileController', function($scope, $http, $routeParams){
+app.controller('profileController', function($scope, $rootScope, $http, $routeParams){
   // TODO:
 
   // conditional display: settings button displayed only for the corresponding user
@@ -672,7 +672,7 @@ app.controller('profileController', function($scope, $http, $routeParams){
 });
 
 /* Controller for result page */
-app.controller('resultController', function($scope, $http, $routeParams){
+app.controller('resultController', function($scope, $rootScope, $http, $routeParams){
   // TODO:
   // result of request
   // do the path param
@@ -684,7 +684,7 @@ app.controller('resultController', function($scope, $http, $routeParams){
 
 
 /* Controller for settings and preferences page */
-app.controller('settingsPreferencesController', function($scope, $http){
+app.controller('settingsPreferencesController', function($scope, $rootScope, $http){
   // TODO:
   // PUT / (Use JWT to be sure of the user)
    // PUT / (Use JWT to be sure of the user)
@@ -738,7 +738,7 @@ app.controller('settingsPreferencesController', function($scope, $http){
 });
 
 /* Controller for signUp page */
-app.controller('signUpController', function($scope, $http) {
+app.controller('signUpController', function($scope, $rootScope, $http) {
   $scope.user = {};
 
   $scope.onSubmit = function() {
@@ -802,7 +802,7 @@ app.controller('signUpController', function($scope, $http) {
 });
 
 /* Controller for simple search */
-app.controller('simplifiedSearchController', function($scope, $http){
+app.controller('simplifiedSearchController', function($scope, $rootScope, $http){
 
 $scope.search = {};
 
@@ -833,7 +833,7 @@ $scope.simplifiedSearch = function() {
 });
 
 /* Controller for thread page */
-app.controller('threadController', function($scope, $http, $routeParams){
+app.controller('threadController', function($scope, $rootScope, $http, $routeParams){
   // get the ressource (the thread n° id)
 
   // we construct the url that we want to get
@@ -873,50 +873,50 @@ app.controller('threadController', function($scope, $http, $routeParams){
 });
 
 /* Controller for forbidden page */
-app.controller('forbiddenController', function($scope, $http){
+app.controller('forbiddenController', function($scope, $rootScope, $http){
 
 });
 
 /* Controller for help page */
-app.controller('helpController', function($scope, $http){
+app.controller('helpController', function($scope, $rootScope, $http){
 
 });
 
 /* Controller for internal Server Error page */
-app.controller('internalServerErrorController', function($scope, $http){
+app.controller('internalServerErrorController', function($scope, $rootScope, $http){
 
 
 });
 
 /* Controller for login page */
-app.controller('loginController', function($scope, $http){
+app.controller('loginController', function($scope, $rootScope, $http){
 
 });
 
 /* Controller for loginError page */
-app.controller('loginErrorController', function($scope, $http){
+app.controller('loginErrorController', function($scope, $rootScope, $http){
 
 });
 
 // /* Controller for moderation page */
-// app.controller('moderationController', function($scope, $http){
+// app.controller('moderationController', function($scope, $rootScope, $http){
 //   // TODO: no need to control the access because, web.xml does it well
 //   // if modo -->
 // });
 
 /* Controller for notFound page */
-app.controller('notFoundController', function($scope, $http){
+app.controller('notFoundController', function($scope, $rootScope, $http){
 
 
 });
 
 /* Controller for preview page*/
-app.controller('previewController', function($scope, $http){
+app.controller('previewController', function($scope, $rootScope, $http){
 
 });
 
 /* Controller for logout page*/
-app.controller('logoutController', function($scope, $http){
+app.controller('logoutController', function($scope, $rootScope, $http){
   
 });
 
@@ -924,7 +924,7 @@ app.controller('logoutController', function($scope, $http){
 //      if the user has opened advanced search, will he be able to write something in the normal search bar
 
 // /* controller that allow only connected user to reply a thread */
-// app.controller('threadTextAreaConnected', function($scope, $http) {
+// app.controller('threadTextAreaConnected', function($scope, $rootScope, $http) {
 
 //   if(getCookie('username') == 'null'){
 //     document.getElementById("textAreaThread").style.display = 'none';
@@ -939,7 +939,7 @@ app.controller('logoutController', function($scope, $http){
 // /* how to GET element */
 
 // // moduleAngular
-// route.controller('profilePageLoad', function($scope, $http) {
+// route.controller('profilePageLoad', function($scope, $rootScope, $http) {
 
 //   $http({
 //   method: 'GET',
@@ -960,7 +960,7 @@ app.controller('logoutController', function($scope, $http){
 
 
 // app
-// .controller('profilePageLoad', function($scope, $http) {
+// .controller('profilePageLoad', function($scope, $rootScope, $http) {
 // 	$http.get("http://localhost:8080/academi-co/resources/users/2")
 // 	.then(function(response) {
 // 		$scope.myProfileData = response.data;
@@ -969,7 +969,7 @@ app.controller('logoutController', function($scope, $http){
 
 
 // app
-// .controller('threadLoad', function($scope, $http) {
+// .controller('threadLoad', function($scope, $rootScope, $http) {
 // 	$http.get("http://localhost:8080/academi-co/resources/posts/2")
 // 	.then(function(response) {
 // 		$scope.thread = response.data;
@@ -980,7 +980,7 @@ app.controller('logoutController', function($scope, $http){
 
 // /* POST User (create an account) */
 
-// app.controller('signUpController', function($scope, $http) {
+// app.controller('signUpController', function($scope, $rootScope, $http) {
 //   $scope.user = {};
 
 //   $scope.onSubmit = function() {
@@ -1026,7 +1026,7 @@ app.controller('logoutController', function($scope, $http){
 
 // /* controller for the header to check if the user is connected or not and display the correct one */
 
-// app.controller('isConnectHeader', function($scope, $http){
+// app.controller('isConnectHeader', function($scope, $rootScope, $http){
 //   var notConnected = getCookie('username') == 'null';
 //   var notDefined = getCookie('username') == null;
 
