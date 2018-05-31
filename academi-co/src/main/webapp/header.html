@@ -127,7 +127,7 @@
                         <option value="{{mainTag.id}}" ng-repeat="mainTag in primaryTag">{{mainTag.name}}</option>
                     </select>
                     <!--             <input type="text" id="myInput1" placeholder="" style="z-index:1"></input> -->
-                    <span onclick="newElement1()" class="addBtn" style="border-radius: 0px; height:30px">Add</span>
+                    <span class="addBtn" onclick="newElement1()" style="border-radius: 0px; height:30px">Add</span>
                 </div>
                 <ul id="myUL1" style="width: 510px; margin-left:7%;">
                 </ul>
@@ -135,17 +135,11 @@
                 <div id="myDIV2" class="header"  style="background-color: #263659; height:80px;  width: 510px; margin-left:7%;">
                     <h4 style="margin:0px">Secondary tags</h4>
                     <select id="secondarytag" style="Color:black;">
-                        <option selected disabled>Select secondarytag:</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="Biology">Biology</option>
-                        <option value="Philosophy">Philosophy</option>
-                        <option value="History">History</option>
-                        <option value="Geography">Geography</option>
+                        <option selected disabled >Select secondarytag:</option>
+                        <option value="{{secondTag.id}}" ng-repeat="secondTag in secondaryTag">{{mainTag.name}}</option>
                     </select>
                     <!--             <input type="text" id="myInput2" placeholder=""> -->
-                    <span onclick="newElement2()" class="addBtn" style="border-radius: 0px; height:30px">Add</span>
+                    <span class="addBtn" onclick="newElement2()" style="border-radius: 0px; height:30px">Add</span>
                 </div>
                 <ul id="myUL2" style="width: 510px; margin-left:7%;"></ul>
                 <button onclick="GrowlAdvancedSearchBar()" type="submit" value="Submit" id="popUpYes" style="border-radius: 5px; position: absolute; top: 280px; left:80%; width: 200px; height:40px;" ng-click="submitAdvancedSearch()">Submit</button>
