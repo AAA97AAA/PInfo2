@@ -279,7 +279,7 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
 		              // alert("ok" + $scope.primaryTag[0].name);
 		                              },
 		            function(response){
-		              $.growl.error({ message: "Error while loading secondary tags"});
+		              // $.growl.error({ message: "Error while loading secondary tags"});
 		                // switch(response.status){
 		                //   case 403:
 		                //     window.location.replace("/academi-co/#!/forbidden");
@@ -315,7 +315,7 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
           // alert("ok" + $scope.primaryTag[0].name);
                           },
         function(response){
-          $.growl.error({ message: "Error while loading tags"});
+          // $.growl.error({ message: "Error while loading tags"});
             // switch(response.status){
             //   case 403:
             //     window.location.replace("/academi-co/#!/forbidden");
@@ -644,47 +644,27 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 
 
   $scope.CreatePost = function(){
-    	
-//        $.growl.error({ message: author});
-//        $.growl.error({ message: title});
-//        $scope.post.title = document.getElementById("userInput1").value;
+
       $scope.post = {};
     	$scope.post.title = document.getElementById("userInput1").value;
-//    	var rip = $scope.post.title 
-        //  $.growl.error({ message: $scope.post.title});
-        $scope.post.content = document.getElementById("userInput2").value;
-//        $.growl.error({ message: content.value})
-        $scope.post.creationDate = null;
-       $scope.post.subject = {"id": $rootScope.idParentPost};
-        $scope.post.topics = { };
-        $scope.post.topics = [{"id": 2}, {"id":4}];
+      $scope.post.content = document.getElementById("userInput2").value;
+      $scope.post.creationDate = null;
+      $scope.post.subject = {"id": $rootScope.idParentPost};
+      $scope.post.topics = [];
+      // $scope.post.topics = [{"id": 3}, {"id":4}];
 
-    //    var splitted = String($rootScope.secondaryTagsPost);
-    //    splitted = splitted.split(",");
+      // we split the secondaryTagsPost value to obtain the values
+      var splitted = String($rootScope.secondaryTagsPost);
+      splitted = splitted.split(",");
+      // we add the elements to the topics
+      for (var i=0; i<splitted.length; i++){
+        $scope.post.topics[i] = {"id": splitted[i]};
+      }
+      // Here, we need to get the language tag id
+      $scope.post.language = { "id": 1};
 
-    //    for (var i=0; i<3; i++){
-    //     // $scope.post.topics.push({"id": splitted[i]});
-    //     $.growl.notice({message: splitted[i]});
-    // }
+      $scope.post.author = {"id": $rootScope.user.id };
 
-      //  $.growl.notice({message: splitted[0]});
-
-      // $scope.post.topics({"id": $rootScope.idParentPost});
-      //  $scope.post.topics = { "id" : $rootScope.secondaryTagsPost}
-       
-      //  $scope.post.topics.concat( $rootScope.secondaryTagsPost );
-
-      //  $.growl.error({ message: $scope.post.topics[0].id});
-        $scope.post.language = { "id": 2};
-        $scope.post.author = {"id": $rootScope.user.id };
-        
-//        $.growl.error({ message: author});
-//        $.growl.error({ message: title});
-//        $.growl.error({ message: content});
-//        $.growl.error({ message: creationDate});
-//        $.growl.error({ message: subject});
-//        $.growl.error({ message: topics});
-//        $.growl.error({ message: language});
        
      var urlToPOST = getDomain() + '/academi-co/resources/posts/';
         var req = {
@@ -695,35 +675,19 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
                           'Accept': 'application/json'
                         },
                         data: $scope.post
-                //data: {$scope.author,'title':$scope.title,'content':$scope.content,'creationDate':$scope.creationDate,'subject':$scope.subject,'topics':$scope.topics,'language':$scope.language}
               };
     
     
       $http(req).then(
                  function(response){
-                  $.growl.notice({ message: "Post perfectly created." });
+                  $.growl.notice({ message: "Post perfectly created."});
+                  var profilepage = "/academi-co/#!/profile/" + $rootScope.user.id;
+                  window.location.replace(profilepage);
                                   },
                  function(response){
-                   $.growl.error({ message: "Post cannot be created." + response.data });
-// //                  // console.log(response.statusText);
-// //                  // console.log(response.status);
-// //                  // console.log("End error message");
-// //                  // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-// //                   switch(response.status){
-// //                    //  case 400:
-// //                    //    alert(response.data + " invalid!");
-// //                     case 403:
-// //                       window.location.replace("/academi-co/#!/forbidden");
-// //                       break;
-// //                     case 404:
-// //                       window.location.replace("/academi-co/#!/notFound");
-// //                       break;
-// //                     case 500:
-// //                       window.location.replace("/academi-co/#!/internalServerError");
-// //                       break;
-// //                   }
-                   }
-// //           
+                   $.growl.error({ message: "Post cannot be created."});
+                   window.location.replace("/academi-co/#!");
+                   }          
                  )
         }
 
@@ -786,7 +750,7 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
   }
 
   $scope.viewThread = function(idPost) {
-    alert(idPost);
+    window.location.replace(getProtectedURL("threads/") + idPost);
   }
 
   // get the ressource (the user n° id)

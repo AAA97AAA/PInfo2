@@ -70,7 +70,8 @@
                             <img ng-src="data:image/JPEG;base64,{{myProfileData.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
                             <span class="w3-right w3-opacity">{{post.creationDate | date:"dd/MM/yyyy 'at' h:mma"}}</span>
                             <br>
-                            <button class="w3-right" ng-click="viewThread({{post.title}})">View Thread</button>
+                            <button class="w3-right" ng-click="viewThread(post.id)" ng-if= post.title>View Thread</button>
+                            <button class="w3-right" ng-click="viewThread(post.question.id)" ng-if= "!post.title"=>View Corresponding Thread</button>
                             <h4>{{myProfileData.username}}</h4>
                             <div class="content">
                                 <!-- score -->
