@@ -9,7 +9,7 @@ app.controller('adminController', function($scope, $rootScope, $http){
 
   // Add an administrator
     $scope.AddAdministrator = function() {
-    
+
     // set the new account to administrator type
       $scope.admin.type = 'ADMINISTRATOR';
 
@@ -24,13 +24,13 @@ app.controller('adminController', function($scope, $rootScope, $http){
                           'Accept': 'application/json'
                         },
                 data: $scope.admin
-              };  
+              };
 
     // execution of the request
     $http(req).then(
             // success function
             function(response){
-              
+
             $.growl.notice({ message: "Administrator created successfully!" });
                              },
             // failed function
@@ -64,7 +64,7 @@ app.controller('adminController', function($scope, $rootScope, $http){
         $scope.name = { };
 
       var urlToGET = getDomain() + '/academi-co/resources/tags/languages/';
-      
+
         var req = {
           method: 'POST',
           url: urlToGET,
@@ -197,9 +197,9 @@ app.controller('adminController', function($scope, $rootScope, $http){
         }
   // POST ADD BANNER
   $scope.AddBanner = function() {
-                
+
     $scope.data = { };
-    
+
       var urlToGET = getDomain() + '/academi-co/resources/advertisements/';
       var req = {
                   method: 'POST',
@@ -210,8 +210,8 @@ app.controller('adminController', function($scope, $rootScope, $http){
                           },
                   data: $scope.NewAd
                 };
-    
-      
+
+
       $http(req).then(
               function(response){
                 $.growl.notice({ message: "Banner perfectly created." });
@@ -236,7 +236,7 @@ app.controller('adminController', function($scope, $rootScope, $http){
                 //      break;
                 //  }
                 }
-         
+
               )
     }
 
@@ -245,24 +245,55 @@ app.controller('adminController', function($scope, $rootScope, $http){
 
 /* Controller for advanced search */
 app.controller('advancedSearchController', function($scope, $rootScope, $http){
-	
+
+  var listOfFils=[];
+  var increment = -1;
+  $scope.getChildrenSecondaryTags = function(){
+    // $.growl.error({ message: "BONJOUR" + listOfFils});
+    newElement2();
+
+      var elements = document.getElementById("myUL2").getElementsByTagName("li");
+        increment += 1;
+        var elem = elements[increment];
+        // $.growl.error({ message: elem.innerText});
+        var id1 = elem.innerText;
+        id1 = id1.split(" ");
+        var idFils= id1[1];
+        listOfFils.push(idFils);
+        
+		    //$.growl.error({ message: idFils});
+        //
+        // $.growl.error({ message: listOfFils});
+        
+
+
+        $rootScope.secondaryTagsPost = listOfFils;
+        $rootScope.SecondaryTagsAdvancedResearch = listOfFils;
+
+         
+
+
+  }
+
 	$scope.getChildren = function(){
-		
+
 		newElement1();
-		
-		
+
+
 		  var elements = document.getElementById("myUL1").getElementsByTagName("li");
 		    var elem = elements[0];
 		    var id1 = elem.innerText;
 		    id1 = id1.split(" ");
-		    var idParent = id1[0];
-		    
-			
+        var idParent = id1[0];
+        var nameParent = id1[1];
+        $rootScope.PrimaryTagAdvancedResearch = nameParent;
+
+
 		    var primaryTagURL = getDomain() + '/academi-co/resources/tags/' + idParent;
 		    // request
-		    
 
-		    
+
+
 		    var req = {
 		                  method: 'GET',
 		                  url   : primaryTagURL,
@@ -271,8 +302,8 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
 		                    'Accept': 'application/json'
 		                  },
 		            };
-		    
-			
+
+
 		    $http(req).then(
 		            function(response){
 		              $scope.secondaryTagDisplay = response.data;
@@ -294,11 +325,11 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
 		              }
 		    )
 	}
-	
+
 
     // First we need to retrieve the primary tags to show
     var primaryTagURL = getProtectedResources("tags");
-  
+
     // request
     var req = {
                   method: 'GET',
@@ -308,7 +339,7 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
                     'Accept': 'application/json'
                   },
             };
-    
+
       $http(req).then(
         function(response){
           $rootScope.primaryTag = response.data;
@@ -328,20 +359,87 @@ app.controller('advancedSearchController', function($scope, $rootScope, $http){
             //     break;
             // }
           }
-    
+
         )
 
   $scope.search = {};
 
-  document.getElementById("myUL1");
-  document.getElementById("myUL2");
+  // document.getElementById("myUL1");
+  // document.getElementById("myUL2");
 
 
   $scope.submitAdvancedSearch = function() {
+    
     // alert("oklm ta fait une recherche avec " + document.getElementsByTagName("li").value + " et " + document.getElementById("myUL2").value);
-    for (i = 0; i < document.getElementsByTagName("li").length; i++){
-      console.log( document.getElementsById("myUL1").options[i]);
+    // for (i = 0; i < document.getElementsByTagName("li").length; i++){
+    //   console.log( document.getElementsById("myUL1").options[i]);
+    // }
+
+    var advancedSearchQuery;
+    var myTitle; var myPrimaryTag; var myTopics; var myAuthor; var myFromDate; var myToDate;
+    if($scope.search.title == undefined) {
+
+      myTitle = "";
+
+    } else {
+
+      myTitle = "title=" + $scope.search.title;
+
     }
+
+    if($rootScope.PrimaryTagAdvancedResearch == undefined) {
+
+      myPrimaryTag = "";
+
+    } else {
+      var sol = String($rootScope.PrimaryTagAdvancedResearch).replace(/[\W_]+/g," ");
+      myPrimaryTag = "subject=" + sol;
+
+    }
+     if($rootScope.SecondaryTagsAdvancedResearch == undefined) {
+
+       myTopics = "";
+
+     } else {
+
+       var sol = String($rootScope.SecondaryTagsAdvancedResearch).replace(/[\W_]+/g," ");
+       myTopics = "topics=" + sol;
+
+     }
+
+    if($scope.search.author == undefined) {
+
+      myAuthor = "";
+
+    } else {
+
+      myAuthor = "author=" + $scope.search.author;
+
+    }
+    
+    if($scope.search.from == undefined) {
+     
+      myFromDate = "";
+
+    } else {
+      
+      myFromDate = "from=" + $scope.search.from;
+
+    }
+    if($scope.search.to == undefined) {
+
+      myToDate = "";
+
+    } else {
+
+      myToDate = "to=" + $scope.search.to;
+
+    }
+     
+    advancedSearchQuery = myTitle + "&" + myPrimaryTag + "&" + myTopics + "&" + myAuthor + "&" + myFromDate + "&" + myToDate;
+    // advancedSearchQuery = myTitle + "&" + myPrimaryTag + "&" + myAuthor + "&" + myFromDate + "&" + myToDate;
+    var searchUrl = "/academi-co/#!/result/" + advancedSearchQuery;
+    window.location.replace(searchUrl);
   }
 
 });
@@ -376,7 +474,7 @@ app.controller('isConnectHeader', function($scope, $rootScope, $http){
     // alert("not connected");
     document.getElementById("rightConnectedComponent").style.display = 'none';
     document.getElementById("rightNonConnectedComponent").style.display = 'block';
-    
+
     } else {
     // alert("connected");
     // $scope.show_me = true;
@@ -385,7 +483,7 @@ app.controller('isConnectHeader', function($scope, $rootScope, $http){
           var nom = "users/" + jwt_decode(getCookie('tokenJWT')).sub;
           // alert(nom);
           var userURL = getProtectedResources(nom);
-          
+
           // request
           var req = {
                         method: 'GET',
@@ -395,7 +493,7 @@ app.controller('isConnectHeader', function($scope, $rootScope, $http){
                           'Accept': 'application/json'
                         },
                   };
-          
+
             $http(req).then(
               function(response){
                 $rootScope.user = response.data;
@@ -414,7 +512,7 @@ app.controller('isConnectHeader', function($scope, $rootScope, $http){
                       break;
                   }
                 }
-          
+
               )
 
       // connected
@@ -426,13 +524,13 @@ app.controller('isConnectHeader', function($scope, $rootScope, $http){
       //   document.getElementById("adminButton").style.display = "none";
       //  }
       //  alert("done");
-      
+
   }
 
 
   // login function (when login button is pressed)
   $scope.login = function() {
-    // we redirect to login page 
+    // we redirect to login page
     window.location.replace(getProtectedURL("login"));
   };
 
@@ -443,7 +541,7 @@ app.controller('isConnectHeader', function($scope, $rootScope, $http){
   }
 
 
-  
+
 });
 
 
@@ -478,7 +576,7 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
         var nom = "users/" + jwt_decode(getCookie('tokenJWT')).sub;
         // alert(nom);
         var userURL = getProtectedResources(nom);
-        
+
         // request
         var req = {
                       method: 'GET',
@@ -488,7 +586,7 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
                         'Accept': 'application/json'
                       },
                 };
-        
+
           $http(req).then(
             function(response){
               $rootScope.user = response.data;
@@ -507,7 +605,7 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
                     break;
                 }
               }
-        
+
             )
 
           //   // To know if a user is administrator or not
@@ -520,7 +618,7 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
           //               'Accept': 'application/json'
           //             },
           //       };
-        
+
           //  $http(req).then(
           //    function(response){
           //      $scope.isAdmin = response.data;
@@ -540,11 +638,11 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
           // //           break;
           // //       }
           // //     }
-        
+
           // //   )
           //         }
 
-          
+
 
         // we are connected
         document.getElementById("rightNonConnectedComponent").style.display = 'none';
@@ -579,12 +677,12 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
 app.controller('postThreadController', function($scope, $rootScope, $http){
   // TODO: no need to control the access because, web.xml does it well
   // just POST thread
-	
+
 	var listOfFils=[];
 	var increment = -1;
 	$scope.getChildrenIDs = function(){
 		newElementPTP2();
-		
+
 		  var elements = document.getElementById("myULPTP2").getElementsByTagName("li");
 		    increment += 1;
 		    var elem = elements[increment];
@@ -594,32 +692,32 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 		    listOfFils.push(idFils);
 		    //$.growl.error({ message: idFils});
         //$.growl.error({ message: listOfFils});
-        
+
         $rootScope.secondaryTagsPost = listOfFils;
 
         // $.growl.error({ message: $rootScope.my1});
-		    
+
 	}
 
      $scope.getChildrenPTP1 = function(){
-		
+
 		  newElementPTP1();
-		
-		
+
+
 		  var elements = document.getElementById("myULPTP1").getElementsByTagName("li");
 		    var elem = elements[0];
 		    var id1 = elem.innerText;
 		    id1 = id1.split(" ");
         var idParent = id1[0];
         $rootScope.idParentPost = idParent;
-		    
-		   
-			
+
+
+
 		    var secondaryTagURL = getDomain() + '/academi-co/resources/tags/' + idParent;
 		    // request
-		    
-		    
-		    
+
+
+
 		    var req = {
 		                  method: 'GET',
 		                  url   : secondaryTagURL,
@@ -628,8 +726,8 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 		                    'Accept': 'application/json'
 		                  },
 		            };
-		    
-			
+
+
 		    $http(req).then(
 		            function(response){
 		              $scope.secondaryTagDisplay2 = response.data;
@@ -651,11 +749,11 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 		                // }
 		              }
 		    )
-	}	
-	
+	}
+
   // First we need to retrieve the primary tags to show
   var primaryTagURL = getProtectedResources("tags");
-  
+
   // request of primary tag with their children
   var req = {
                 method: 'GET',
@@ -665,7 +763,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
                   'Accept': 'application/json'
                 },
           };
-  
+
     $http(req).then(
       function(response){
         $rootScope.primaryTag = response.data;
@@ -685,7 +783,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
               break;
           }
         }
-  
+
       )
 
 
@@ -711,7 +809,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 
       $scope.post.author = {"id": $rootScope.user.id };
 
-       
+
      var urlToPOST = getDomain() + '/academi-co/resources/posts/';
         var req = {
                 method: 'POST',
@@ -722,8 +820,8 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
                         },
                         data: $scope.post
               };
-    
-    
+
+
       $http(req).then(
                  function(response){
                   $.growl.notice({ message: "Post perfectly created."});
@@ -733,17 +831,17 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
                  function(response){
                    $.growl.error({ message: "Post cannot be created."});
                    window.location.replace("/academi-co/#!");
-                   }          
+                   }
                  )
         }
 
       //   $scope.Comment = function(){
-            
+
       //       $scope.id = { };
       //       $scope.author = { };
-      //       $scope.content = { }; 
+      //       $scope.content = { };
       //       $scope.creationDate = { };
-            
+
       //    var urlToGET = getDomain() + '/academi-co/resources/posts/'+ "{"+ $scope.id +"}";
       //       var req = {
       //               method: 'POST',
@@ -754,8 +852,8 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
       //                       },
       //               data: {'id':$scope.id,'author':$scope.author,'content':$scope.content,'creationDate':$scope.creationDate}
       //             };
-        
-        
+
+
       //    $http(req).then(
       //               function(response){
       //                 $.growl.notice({ message: "Post perfectly created." });
@@ -780,7 +878,7 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
       //                      break;
       //                  }
       //                 }
-               
+
       //           )
       // }
 
@@ -851,7 +949,7 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
     }
   });
 
-  // Getting user posts 
+  // Getting user posts
   var urlToGET = getDomain() + '/academi-co/resources/users/' + $routeParams.id + '/posts';
   $http({
     method: 'GET',
@@ -884,24 +982,70 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
 
 /* Controller for result page */
 app.controller('resultController', function($scope, $rootScope, $http, $routeParams){
+
   // TODO:
   // result of request
   // do the path param
   // console.log("Bonjour " + $routeParams.searchParameters);
+
+  // function to redirect to the corresponding thread
+  $scope.viewThread = function(idPost) {
+    window.location.replace(getProtectedURL("threads/") + idPost);
+  }
+
   var searchContent = String($routeParams.searchParameters);
 
    // var that will contain the search query JSON
    $scope.searchRequest = {};
 
-   searchContent = searchContent.split("=");
+   // separate the parameters
+   searchContent = searchContent.split("&");
 
-   var left = searchContent[0]=="title";
+    for (var i=0; i<searchContent.length; i++){
+        // for each parameter
+        // we extract the left and right component
+        onelement = searchContent[i].split("=");
 
-   $scope.searchRequest = {"title": searchContent[1]};
+        left = onelement[0];
+        right = onelement[1];
+
+        if(left == "title"){
+          // keyword (title)
+          $scope.searchRequest.title = right;
+
+        } else if(left == "author") {
+
+          $scope.searchRequest.author = right;
+
+        } else if(left == "subject") {
+
+          $scope.searchRequest.subject = right;
+
+        } else if(left == "topics") {
+
+          $scope.searchRequest.topics = right;
+
+        } else if(left == "from") {
+
+          $scope.searchRequest.from = right;
+
+        } else if(left == "to") {
+
+          $scope.searchRequest.to = right;
+
+        }
+
+       }
 
 
 
-  // first we split with the & 
+  //  var left = searchContent[0]=="title";
+
+  //  $scope.searchRequest = {"title": searchContent[1]};
+
+
+
+  // first we split with the &
 
   // searchContent = searchContent.split("&");
 
@@ -918,7 +1062,7 @@ app.controller('resultController', function($scope, $rootScope, $http, $routePar
 
 
 
- 
+
 
 
   // doing the post and get the result
@@ -932,17 +1076,17 @@ app.controller('resultController', function($scope, $rootScope, $http, $routePar
                           'Accept': 'application/json'
                         },
                 data: $scope.searchRequest
-              };  
-            
+              };
+
 
     // execution of the request
     $http(req).then(
             // success function
             function(response){
-             
+
             $scope.result = response.data;
-            
-                             
+
+
             // failed function
             },
             function(response){
@@ -966,7 +1110,7 @@ app.controller('resultController', function($scope, $rootScope, $http, $routePar
               }
 
             )
-  
+
 
 
 });
@@ -983,13 +1127,13 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
 
   // $.growl.error({ message: " ouais et " + document.getElementById("b64").});
    $scope.settingsUpdate = function() {
-    
+
     // IF PASSWORD NOT WRITTEN
     if($scope.change.password == null){
         // password not changed
         $scope.change.password = '';
 
-        // username 
+        // username
         $scope.change.username = $rootScope.user.username;
 
         if($scope.change.bio == null){
@@ -1002,7 +1146,7 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
         // $.growl.error({ message: "5." +  (newProfilePicture == '')});
         $scope.change.profilePicture =  {};
         if(newProfilePicture == '') {
-          // if no image   
+          // if no image
           $scope.change.profilePicture.data = $rootScope.user.profilePicture.data;
         } else {
           // if image
@@ -1013,7 +1157,7 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
         // BIO and password already in variable
         // $scope.change = {};
 
-        
+
         // Just for the JSON
         $scope.change.profilePicture.name = 'pp';
         $scope.change.canBeModerator = 1;
@@ -1021,11 +1165,11 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
         // user type (can be modified only by admin)
         $scope.change.type = "";
 
-    
+
     // IF BIO NOT WRITTEN
     } else if($scope.change.bio == null){
 
-        // username 
+        // username
         $scope.change.username = $rootScope.user.username;
 
         $scope.change.bio = "";
@@ -1036,30 +1180,30 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
         // $.growl.error({ message: "5." +  (newProfilePicture == '')});
         $scope.change.profilePicture =  {};
         if(newProfilePicture == '') {
-          // if no image   
+          // if no image
           $scope.change.profilePicture.data = $rootScope.user.profilePicture.data;
         } else {
           // if image
           $scope.change.profilePicture.data = newProfilePicture;
-  
+
         }
-        
+
         // Just for the JSON
         $scope.change.profilePicture.name = 'pp';
         $scope.change.canBeModerator = 1;
-  
+
         // user type (can be modified only by admin)
         $scope.change.type = "";
 
     // IF PASSWORD ENTERED ARE NOT THE SAME
     } else if($scope.change.password != document.getElementById("repeatPasswordSettings").value) {
-        // password did not match     
+        // password did not match
         $.growl.error({ message: "Those passwords didn't match. Try again." });
-      
+
         // IF BIO AND PASSWORD CHANGED
     } else {
-      
-        // username 
+
+        // username
         $scope.change.username = $rootScope.user.username;
 
         // profile pic, if there is no profile pic, we put the same otherwise, we change it
@@ -1067,7 +1211,7 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
         // $.growl.error({ message: "5." +  (newProfilePicture == '')});
         $scope.change.profilePicture =  {};
         if(newProfilePicture == '') {
-          // if no image   
+          // if no image
           $scope.change.profilePicture.data = $rootScope.user.profilePicture.data;
         } else {
           // if image
@@ -1084,10 +1228,10 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
         // user type (can be modified only by admin)
         $scope.change.type = "";
     }
-      
-      
 
-      
+
+
+
       // we need to PUT the change
      var urlToGET = getDomain() + '/academi-co/resources/users/'+ $rootScope.user.id;
        var req = {
@@ -1099,8 +1243,8 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
                          },
                  data: $scope.change
                };
-   
-   
+
+
       $http(req).then(
                 function(response){
                   $.growl.notice({ message: "Your settings has been updated!" });
@@ -1128,10 +1272,10 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
                   //       break;
                   //   }
                   }
-            
+
                 )
-      
-              
+
+
    }
 
 });
@@ -1282,8 +1426,8 @@ app.controller('threadController', function($scope, $rootScope, $http, $routePar
 
   // function that post a comment
   $scope.postComment = function() {
-   
-    
+
+
     // a User reply to a thread
     var URLPostComment = getProtectedResources("posts/") + $routeParams.id;
 
@@ -1308,7 +1452,7 @@ app.controller('threadController', function($scope, $rootScope, $http, $routePar
                 'Accept': 'application/json'
               },
       data: $scope.reply
-    };  
+    };
 
     $http(req).then(
       // success function
@@ -1326,7 +1470,7 @@ app.controller('threadController', function($scope, $rootScope, $http, $routePar
 
 
   }
-  
+
 
 });
 
@@ -1375,7 +1519,7 @@ app.controller('previewController', function($scope, $rootScope, $http){
 
 /* Controller for logout page*/
 app.controller('logoutController', function($scope, $rootScope, $http){
-  
+
 });
 
 // TODO: one or two controller for search

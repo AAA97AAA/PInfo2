@@ -86,6 +86,7 @@
                                     <br>
                                     <span style="color:gray"><i class="glyphicon glyphicon-download"></i></span>
                                 </div>
+                                
                             </div>
                             <!-- Posts -->
                             <div id="post" class="w3-row-padding" style="width:90%; float:left" >
@@ -93,7 +94,7 @@
                                 <div id="postTitle" ng-if= post.title>
                                     <p><b>{{post.title}}</b></p>
                                 </div>
-                                <p>{{post.content}}</p>
+                                <p>{{post.content}}</p><br>
                                 <!-- Tags -->
                                 <!-- this is not displayed if it is a reply (ng-if) -->
                                 <div class="w3-row-padding" style="margin:0 - 16px" ng-if= post.title>

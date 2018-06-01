@@ -36,7 +36,7 @@
 						{{thread.title}}
 					</h3>
 					<hr>
-					<img ng-src="data:image/JPEG;base64,{{thread.author.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+					<a href="/academi-co/#!/profile/{{thread.author.id}}"></a><img ng-src="data:image/JPEG;base64,{{thread.author.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px"></a>
 					<span class="w3-right w3-opacity">{{thread.creationDate | date:"dd/MM/yyyy 'at' h:mma"}}</span>
 					<h4>{{thread.author.username}}</h4>
 					<br>
