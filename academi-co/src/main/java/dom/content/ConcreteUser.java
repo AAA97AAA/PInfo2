@@ -93,7 +93,7 @@ public class ConcreteUser implements User, Serializable {
 	@NotNull
 	@OneToOne(targetEntity = ConcreteInbox.class, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "INBOX")
-	@JsonView(View.UserSession.class)
+	@JsonView(View.UserNope.class)
 	private Inbox inbox;
 	
 	@OneToMany(targetEntity = ConcretePost.class, mappedBy = "author")

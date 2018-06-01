@@ -73,6 +73,9 @@ public interface View {
 	
 	/***** User views *****/
 	
+	// Information not to be shown
+	public static interface UserNope {};
+	
 	// Minimal user discriminant data (id)
 	public static interface UserMinimal {};
 	
@@ -110,7 +113,7 @@ public interface View {
 	public static interface UserSession extends UserPost, UserType, UserSessionModifiable {};
 	
 	// Information about a user for profile pages
-	public static interface UserProfile extends UserPost, PostCore, UserProfileModifiable {};
+	public static interface UserProfile extends UserPost, PostCore, UserProfileModifiable, UserType {};
 	
 	// Information that will (normally) not be sent with the user
 	public static interface UserExcessive {};
