@@ -547,20 +547,25 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 		    var idFils= id1[0];
 		    listOfFils.push(idFils);
 		    //$.growl.error({ message: idFils});
-		    //$.growl.error({ message: listOfFils});
+        //$.growl.error({ message: listOfFils});
+        
+        $rootScope.secondaryTagsPost = listOfFils;
+
+        // $.growl.error({ message: $rootScope.my1});
 		    
 	}
 
      $scope.getChildrenPTP1 = function(){
 		
-		newElementPTP1();
+		  newElementPTP1();
 		
 		
 		  var elements = document.getElementById("myULPTP1").getElementsByTagName("li");
 		    var elem = elements[0];
 		    var id1 = elem.innerText;
 		    id1 = id1.split(" ");
-		    var idParent = id1[0];
+        var idParent = id1[0];
+        $rootScope.idParentPost = idParent;
 		    
 		   
 			
@@ -638,21 +643,40 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
       )
 
 
-
   $scope.CreatePost = function(){
     	
 //        $.growl.error({ message: author});
 //        $.growl.error({ message: title});
 //        $scope.post.title = document.getElementById("userInput1").value;
-//    	$scope.post.title = document.getElementById("userInput1").value;
+      $scope.post = {};
+    	$scope.post.title = document.getElementById("userInput1").value;
 //    	var rip = $scope.post.title 
-        $.growl.error({ message: ""});
-//        $scope.content = document.getElementById("userInput2").value;
+        //  $.growl.error({ message: $scope.post.title});
+        $scope.post.content = document.getElementById("userInput2").value;
 //        $.growl.error({ message: content.value})
-//        $scope.creationDate = "";
-//        $scope.subject = {"id":idParent};
-//        $scope.topics = { };
-//        $scope.language = { };
+        $scope.post.creationDate = null;
+       $scope.post.subject = {"id": $rootScope.idParentPost};
+        $scope.post.topics = { };
+        $scope.post.topics = [{"id": 2}, {"id":4}];
+
+    //    var splitted = String($rootScope.secondaryTagsPost);
+    //    splitted = splitted.split(",");
+
+    //    for (var i=0; i<3; i++){
+    //     // $scope.post.topics.push({"id": splitted[i]});
+    //     $.growl.notice({message: splitted[i]});
+    // }
+
+      //  $.growl.notice({message: splitted[0]});
+
+      // $scope.post.topics({"id": $rootScope.idParentPost});
+      //  $scope.post.topics = { "id" : $rootScope.secondaryTagsPost}
+       
+      //  $scope.post.topics.concat( $rootScope.secondaryTagsPost );
+
+      //  $.growl.error({ message: $scope.post.topics[0].id});
+        $scope.post.language = { "id": 2};
+        $scope.post.author = {"id": $rootScope.user.id };
         
 //        $.growl.error({ message: author});
 //        $.growl.error({ message: title});
@@ -662,92 +686,93 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 //        $.growl.error({ message: topics});
 //        $.growl.error({ message: language});
        
-//     var urlToPOST = getDomain() + '/academi-co/resources/posts/';
-//        var req = {
-//                method: 'POST',
-//                url: urlToPOST,
-//                headers: {
-//                          'Content-Type': 'application/json',
-//                          'Accept': 'application/json'
-//                        },
-//                //data: {$scope.author,'title':$scope.title,'content':$scope.content,'creationDate':$scope.creationDate,'subject':$scope.subject,'topics':$scope.topics,'language':$scope.language}
-//              };
-//    
-//    
-//     $http(req).then(
-//                function(response){
-//                  $.growl.notice({ message: "Post perfectly created." });
-//                                 },
-//                function(response){
-//                  $.growl.error({ message: "Post cannot be created." });
-//                  // console.log(response.statusText);
-//                  // console.log(response.status);
-//                  // console.log("End error message");
-//                  // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-//                   switch(response.status){
-//                    //  case 400:
-//                    //    alert(response.data + " invalid!");
-//                     case 403:
-//                       window.location.replace("/academi-co/#!/forbidden");
-//                       break;
-//                     case 404:
-//                       window.location.replace("/academi-co/#!/notFound");
-//                       break;
-//                     case 500:
-//                       window.location.replace("/academi-co/#!/internalServerError");
-//                       break;
-//                   }
-//                  }
-//           
-//                )
+     var urlToPOST = getDomain() + '/academi-co/resources/posts/';
+        var req = {
+                method: 'POST',
+                url: urlToPOST,
+                headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json'
+                        },
+                        data: $scope.post
+                //data: {$scope.author,'title':$scope.title,'content':$scope.content,'creationDate':$scope.creationDate,'subject':$scope.subject,'topics':$scope.topics,'language':$scope.language}
+              };
+    
+    
+      $http(req).then(
+                 function(response){
+                  $.growl.notice({ message: "Post perfectly created." });
+                                  },
+                 function(response){
+                   $.growl.error({ message: "Post cannot be created." + response.data });
+// //                  // console.log(response.statusText);
+// //                  // console.log(response.status);
+// //                  // console.log("End error message");
+// //                  // alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+// //                   switch(response.status){
+// //                    //  case 400:
+// //                    //    alert(response.data + " invalid!");
+// //                     case 403:
+// //                       window.location.replace("/academi-co/#!/forbidden");
+// //                       break;
+// //                     case 404:
+// //                       window.location.replace("/academi-co/#!/notFound");
+// //                       break;
+// //                     case 500:
+// //                       window.location.replace("/academi-co/#!/internalServerError");
+// //                       break;
+// //                   }
+                   }
+// //           
+                 )
         }
 
-        $scope.Comment = function(){
+      //   $scope.Comment = function(){
             
-            $scope.id = { };
-            $scope.author = { };
-            $scope.content = { }; 
-            $scope.creationDate = { };
+      //       $scope.id = { };
+      //       $scope.author = { };
+      //       $scope.content = { }; 
+      //       $scope.creationDate = { };
             
-         var urlToGET = getDomain() + '/academi-co/resources/posts/'+ "{"+ $scope.id +"}";
-            var req = {
-                    method: 'POST',
-                    url: urlToGET,
-                    headers: {
-                              'Content-Type': 'application/json',
-                              'Accept': 'application/json'
-                            },
-                    data: {'id':$scope.id,'author':$scope.author,'content':$scope.content,'creationDate':$scope.creationDate}
-                  };
+      //    var urlToGET = getDomain() + '/academi-co/resources/posts/'+ "{"+ $scope.id +"}";
+      //       var req = {
+      //               method: 'POST',
+      //               url: urlToGET,
+      //               headers: {
+      //                         'Content-Type': 'application/json',
+      //                         'Accept': 'application/json'
+      //                       },
+      //               data: {'id':$scope.id,'author':$scope.author,'content':$scope.content,'creationDate':$scope.creationDate}
+      //             };
         
         
-         $http(req).then(
-                    function(response){
-                      $.growl.notice({ message: "Post perfectly created." });
-                                     },
-                    function(response){
-                      $.growl.error({ message: "Post cannot be created." });
-                      // console.log(response.statusText);
-                      // console.log(response.status);
-                      // console.log("End error message");
-                      alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
-                       switch(response.status){
-                         case 400:
-                           alert(response.data + " invalid!");
-                         case 403:
-                           window.location.replace("/academi-co/#!/forbidden");
-                           break;
-                         case 404:
-                           window.location.replace("/academi-co/#!/notFound");
-                           break;
-                         case 500:
-                           window.location.replace("/academi-co/#!/internalServerError");
-                           break;
-                       }
-                      }
+      //    $http(req).then(
+      //               function(response){
+      //                 $.growl.notice({ message: "Post perfectly created." });
+      //                                },
+      //               function(response){
+      //                 $.growl.error({ message: "Post cannot be created." });
+      //                 // console.log(response.statusText);
+      //                 // console.log(response.status);
+      //                 // console.log("End error message");
+      //                 alert(response.data + " " + response.status + " "  + response.statusText + " invalid!");
+      //                  switch(response.status){
+      //                    case 400:
+      //                      alert(response.data + " invalid!");
+      //                    case 403:
+      //                      window.location.replace("/academi-co/#!/forbidden");
+      //                      break;
+      //                    case 404:
+      //                      window.location.replace("/academi-co/#!/notFound");
+      //                      break;
+      //                    case 500:
+      //                      window.location.replace("/academi-co/#!/internalServerError");
+      //                      break;
+      //                  }
+      //                 }
                
-                )
-      }
+      //           )
+      // }
 
 });
 
@@ -758,6 +783,10 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
   // conditional display: settings button displayed only for the corresponding user
   $scope.goSettings = function(){
     window.location.replace(getProtectedURL("settings"));
+  }
+
+  $scope.viewThread = function(idPost) {
+    alert(idPost);
   }
 
   // get the ressource (the user n° id)
@@ -771,7 +800,7 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
     document.getElementById("settingsButton").style.display = "none";
   }
 
-
+  // Getting User details
   var urlToGET = getDomain() + '/academi-co/resources/users/' + $routeParams.id;
 
   // console.log(urlToGET);
@@ -785,13 +814,12 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
   }).then(function(response) {
     // if we correctly have the result, we just take the data
      $scope.myProfileData = response.data;
-     alert(myProfileData.bio);
   }, function(response) {
     switch(response.status){
       case 400:
         alert(response.data + " invalid!");
       case 403:
-        window.location.replace("/academi-co/#!/forbidden");
+        window.location.replace("/academi-co/#!/forbidden");var urlToGET = getDomain() + '/academi-co/resources/users/' + $routeParams.id;
         break;
       case 404:
         window.location.replace("/academi-co/#!/notFound");
@@ -801,6 +829,35 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
         break;
     }
   });
+
+  // Getting user posts 
+  var urlToGET = getDomain() + '/academi-co/resources/users/' + $routeParams.id + '/posts';
+  $http({
+    method: 'GET',
+    url: urlToGET,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  }).then(function(response) {
+    // if we correctly have the result, we just take the data
+     $scope.userPosts = response.data;
+  }, function(response) {
+    // switch(response.status){
+    //   case 400:
+    //     alert(response.data + " invalid!");
+    //   case 403:
+    //     window.location.replace("/academi-co/#!/forbidden");var urlToGET = getDomain() + '/academi-co/resources/users/' + $routeParams.id;
+    //     break;
+    //   case 404:
+    //     window.location.replace("/academi-co/#!/notFound");
+    //     break;
+    //   case 500:
+    //     window.location.replace("/academi-co/#!/internalServerError");
+    //     break;
+    // }
+  });
+
 
 });
 
@@ -812,6 +869,56 @@ app.controller('resultController', function($scope, $rootScope, $http, $routePar
   console.log("Bonjour " + $routeParams.searchParameters);
   $scope.message = $routeParams.searchParameters;
 
+  // parsing with parameters
+  $scope.searchRequest;
+
+
+  // doing the post and get the result
+  var urlToGET = getProtectedResources('search');
+    // our request
+    var req = {
+                method: 'POST',
+                url: urlToGET,
+                headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json'
+                        },
+                data: $scope.searchRequest
+              };  
+            
+
+    // execution of the request
+    $http(req).then(
+            // success function
+            function(response){
+              
+            $scope.result = response.data;
+                             
+            // failed function
+            },
+            function(response){
+              $.growl.error({ message: "Error while searching for result." });
+
+              //  switch(response.status){
+              //    case 400:
+              //     //  alert(response.data + " invalid!");
+              //     $.growl.error({ message: "Administrator cannot be created." });
+              //      break;
+              //    case 403:
+              //      window.location.replace("/academi-co/#!/forbidden");
+              //      break;
+              //    case 404:
+              //      window.location.replace("/academi-co/#!/notFound");
+              //      break;
+              //    case 500:
+              //      window.location.replace("/academi-co/#!/internalServerError");
+              //      break;
+              //  }
+              }
+
+            )
+  
+
 
 });
 
@@ -822,24 +929,116 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
   // PUT / (Use JWT to be sure of the user)
    // PUT / (Use JWT to be sure of the user)
 
+  //  $scope.change = {};
+
+
+  // $.growl.error({ message: " ouais et " + document.getElementById("b64").});
    $scope.settingsUpdate = function() {
+    
+    // IF PASSWORD NOT WRITTEN
+    if($scope.change.password == null){
+        // password not changed
+        $scope.change.password = '';
 
-    if($scope.change.password != document.getElementById("repeatPasswordSettings").value) {
-      // password did not match
-      $.growl.error({ message: "Those passwords didn't match. Try again." });
+        // username 
+        $scope.change.username = $rootScope.user.username;
 
+        if($scope.change.bio == null){
+          $scope.change.bio = "";
+        }
+
+
+        // profile pic, if there is no profile pic, we put the same otherwise, we change it
+        var newProfilePicture = document.getElementById("b64").innerText.replace(/^data:image\/[a-z]+;base64,/, "");
+        // $.growl.error({ message: "5." +  (newProfilePicture == '')});
+        $scope.change.profilePicture =  {};
+        if(newProfilePicture == '') {
+          // if no image   
+          $scope.change.profilePicture.data = $rootScope.user.profilePicture.data;
+        } else {
+          // if image
+          $scope.change.profilePicture.data = newProfilePicture;
+
+        }
+
+        // BIO and password already in variable
+        // $scope.change = {};
+
+        
+        // Just for the JSON
+        $scope.change.profilePicture.name = 'pp';
+        $scope.change.canBeModerator = 1;
+
+        // user type (can be modified only by admin)
+        $scope.change.type = "";
+
+    
+    // IF BIO NOT WRITTEN
+    } else if($scope.change.bio == null){
+
+        // username 
+        $scope.change.username = $rootScope.user.username;
+
+        $scope.change.bio = "";
+
+
+        // profile pic, if there is no profile pic, we put the same otherwise, we change it
+        var newProfilePicture = document.getElementById("b64").innerText.replace(/^data:image\/[a-z]+;base64,/, "");
+        // $.growl.error({ message: "5." +  (newProfilePicture == '')});
+        $scope.change.profilePicture =  {};
+        if(newProfilePicture == '') {
+          // if no image   
+          $scope.change.profilePicture.data = $rootScope.user.profilePicture.data;
+        } else {
+          // if image
+          $scope.change.profilePicture.data = newProfilePicture;
+  
+        }
+        
+        // Just for the JSON
+        $scope.change.profilePicture.name = 'pp';
+        $scope.change.canBeModerator = 1;
+  
+        // user type (can be modified only by admin)
+        $scope.change.type = "";
+
+    // IF PASSWORD ENTERED ARE NOT THE SAME
+    } else if($scope.change.password != document.getElementById("repeatPasswordSettings").value) {
+        // password did not match     
+        $.growl.error({ message: "Those passwords didn't match. Try again." });
+      
+        // IF BIO AND PASSWORD CHANGED
     } else {
-      // TODO: check if there is update in bio/pp/password
-      // if there is, change
-      $scope.change = {}; // BIO PAssword OK
-      $scope.change.username = $rootScope.user.username;
-      // TODO need to change this to have correct thing
-      $scope.change.profilePicture = $rootScope.user.profilePicture;
-      $scope.change.type = "ADMINISTRATOR";
-      $scope.change.canBeModerator = 1;
+      
+        // username 
+        $scope.change.username = $rootScope.user.username;
 
+        // profile pic, if there is no profile pic, we put the same otherwise, we change it
+        var newProfilePicture = document.getElementById("b64").innerText.replace(/^data:image\/[a-z]+;base64,/, "");
+        // $.growl.error({ message: "5." +  (newProfilePicture == '')});
+        $scope.change.profilePicture =  {};
+        if(newProfilePicture == '') {
+          // if no image   
+          $scope.change.profilePicture.data = $rootScope.user.profilePicture.data;
+        } else {
+          // if image
+          $scope.change.profilePicture.data = newProfilePicture;
 
+        }
+        // BIO and password already in variable
+        // $scope.change = {};
 
+        // Just for the JSON
+        $scope.change.profilePicture.name = 'pp';
+        $scope.change.canBeModerator = 1;
+
+        // user type (can be modified only by admin)
+        $scope.change.type = "";
+    }
+      
+      
+
+      
       // we need to PUT the change
      var urlToGET = getDomain() + '/academi-co/resources/users/'+ $rootScope.user.id;
        var req = {
@@ -856,9 +1055,12 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
       $http(req).then(
                 function(response){
                   $.growl.notice({ message: "Your settings has been updated!" });
-                                  },
+                  $rootScope.user.profilePicture = $scope.change.profilePicture;
+                  window.location.replace(getDomain() + '/academi-co/#!/profile/'+ $rootScope.user.id);
+                },
                 function(response){
-                  $.growl.error({ message: "An error occured while updating your profile." + response.status});
+                  $.growl.error({ message: "An error occured while updating your profile." + response.status + " " + response});
+                  // alert(response.data);
                   // console.log(response.statusText);
                   // console.log(response.status);
                   // console.log("End error message");
@@ -879,11 +1081,12 @@ app.controller('settingsPreferencesController', function($scope, $rootScope, $ht
                   }
             
                 )
-      }
+      
               
    }
 
 });
+
 
 /* Controller for signUp page */
 app.controller('signUpController', function($scope, $rootScope, $http) {
@@ -982,6 +1185,20 @@ $scope.simplifiedSearch = function() {
 
 /* Controller for thread page */
 app.controller('threadController', function($scope, $rootScope, $http, $routeParams){
+
+  // conditional display: a non connected user cannot answer a thread
+  if((getCookie('tokenJWT') == null) || (getCookie('tokenJWT') == '')){
+
+    // not connected
+    document.getElementById("textAreaThread").style.display = "none";
+
+  } else {
+
+    // connected
+    document.getElementById("textAreaThread").style.display = "block";
+
+  }
+
   // get the ressource (the thread n° id)
 
   // we construct the url that we want to get
@@ -1013,10 +1230,54 @@ app.controller('threadController', function($scope, $rootScope, $http, $routePar
       }
   });
 
-  // TODO: if user not connected: remove textArea
-  // document.getElementById("textAreaThread").style.display = "none";
 
-  // TODO: function onSubmit (PUT)
+  // function that post a comment
+  $scope.postComment = function() {
+   
+    
+    // a User reply to a thread
+    var URLPostComment = getProtectedResources("posts/") + $routeParams.id;
+
+    // content for a reply is ready
+    $scope.reply = {};
+    // author of the reply
+    $scope.reply.author = {"id" : $rootScope.user.id};
+    // creationDate set at null, that back-end will take care of
+    $scope.reply.creationDate = null;
+    //
+    $scope.reply.content = document.getElementById("userInputReply").value;
+
+
+
+
+    // we create the http request POST
+    var req = {
+      method: 'POST',
+      url: urlToGET,
+      headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+      data: $scope.reply
+    };  
+
+    $http(req).then(
+      // success function
+      function(response){
+        location.reload();
+        // $.growl.notice({message: "nice"});
+                       },
+      // failed function
+      function(response){
+        $.growl.error({ message: "Comment cannot be created. Please contact administration" + response.data});
+        }
+
+      )
+
+
+
+  }
+  
 
 });
 

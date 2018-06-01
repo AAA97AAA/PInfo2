@@ -4,6 +4,7 @@
 <!-- Include JS scripts-->
 <script src="/academi-co/js/controllers/domain.js"></script>
 <script src="/academi-co/js/controllers/cookieController.js"></script>
+<script src="/academi-co/js/modules/script-settingsPreferences.js"></script>
 
 <!-- Include CSS stylesheet-->
 
@@ -51,15 +52,14 @@
             <div class="w3-container w3-left w3-round w3-margin">
                 <form name="settingsForm">
                     <h3><b>Preferences:</b></h3>
-                    <br>
                     <h5><b>My bio:</b></h5>
                     <textarea rows="4" cols="50" id="userInput" style="resize:none;" ng-model="change.bio"></textarea>
-                    <br><br><br><br>
+                    <br>
                     <h3><b>Settings:</b></h3>
                     <br>
                     <!-- <h5>New username:</h5>
                     <input type="text" name="username"><br><br><br> -->
-                    <h5>Change password:</h5>
+                    <h5><b>Change password:</b></h5>
                     <!-- <p>Actual password:</p>
                     <input type="text" name="actualpassword"><br><br><br> -->
                     <p>New password:</p>
@@ -68,6 +68,8 @@
                     <input id="repeatPasswordSettings" type="password" name="repeatpassword"><br><br><br>
                     <h5>New profile picture:</h5>
                     <input type="file" id="profile_pic" name="profile_pic" class="DefaultBrowseButton" accept=".jpg, .jpeg, .png"></input><br><br><br>
+                    <p id="b64" style="display:none"></p>
+                    <br>
                     <input type="submit" value="Submit" id="popUpYes" style="width: 200px; height:40px;" ng-click="settingsUpdate()"><br><br><br>
                 </form>
 <!--      <form name="addAdministratorForm" class="modalContent"> -->
