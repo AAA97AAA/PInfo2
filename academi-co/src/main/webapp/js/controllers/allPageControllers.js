@@ -420,6 +420,11 @@ app.controller('isConnectHeader', function($scope, $rootScope, $http){
       // connected
        document.getElementById("rightNonConnectedComponent").style.display = 'none';
        document.getElementById("rightConnectedComponent").style.display = 'block';
+      //  if($rootScope.user.type == "ADMINISTRATOR"){
+      //    document.getElementById("adminButton").style.display = "block";
+      //  } else {
+      //   document.getElementById("adminButton").style.display = "none";
+      //  }
       //  alert("done");
       
   }
@@ -505,9 +510,50 @@ app.controller('loginSuccessController', function($scope, $rootScope, $http){
         
             )
 
+          //   // To know if a user is administrator or not
+          //   var userDetailsURL = getProtectedResources('/login/') + $rootScope.user.username;
+          //           var req = {
+          //             method: 'GET',
+          //             url   : userDetailsURL,
+          //             headers: {
+          //               'Content-Type': 'application/json',
+          //               'Accept': 'application/json'
+          //             },
+          //       };
+        
+          //  $http(req).then(
+          //    function(response){
+          //      $scope.isAdmin = response.data;
+          //      $.growl.error({ message: "user:" + $scope.isAdmin.user_type});
+          //                      },
+          //    function(response){
+          //      $.growl.error({ message: "Error ADMIN"});
+          //        switch(response.status){
+          // //         case 403:
+          // //           window.location.replace("/academi-co/#!/forbidden");
+          // //           break;
+          // //         case 404:
+          // //           window.location.replace("/academi-co/#!/notFound");
+          // //           break;
+          // //         case 500:
+          // //           window.location.replace("/academi-co/#!/internalServerError");
+          // //           break;
+          // //       }
+          // //     }
+        
+          // //   )
+          //         }
+
+          
+
         // we are connected
         document.getElementById("rightNonConnectedComponent").style.display = 'none';
         document.getElementById("rightConnectedComponent").style.display = 'block';
+        // if($rootScope.user.type == "ADMINISTRATOR"){
+        //   document.getElementById("adminButton").style.display = "block";
+        // } else {
+        //   document.getElementById("adminButton").style.display = "none";
+        // }
         // we redirect to home page
         window.location.replace(getProtectedURL(""));
 
@@ -744,6 +790,11 @@ app.controller('postThreadController', function($scope, $rootScope, $http){
 app.controller('profileController', function($scope, $rootScope, $http, $routeParams){
   // TODO:
 
+
+  $scope.goAdmin = function() {
+    window.location.replace(getProtectedURL("admin"));
+  }
+
   // conditional display: settings button displayed only for the corresponding user
   $scope.goSettings = function(){
     window.location.replace(getProtectedURL("settings"));
@@ -760,6 +811,12 @@ app.controller('profileController', function($scope, $rootScope, $http, $routePa
   // if it is the current user, we display the settings button, otherwise not
   if($routeParams.id == jwt_decode(getCookie('tokenJWT')).sub) {
     document.getElementById("settingsButton").style.display = "block";
+    if($rootScope.user.type == "ADMINISTRATOR"){
+      // $.growl.notice({message: "yo l'admin"});
+      document.getElementById("adminButtonSettings").style.display = "block";
+    } else {
+     document.getElementById("adminButtonSettings").style.display = "none";
+    }
   } else {
     document.getElementById("settingsButton").style.display = "none";
   }
@@ -830,11 +887,38 @@ app.controller('resultController', function($scope, $rootScope, $http, $routePar
   // TODO:
   // result of request
   // do the path param
-  console.log("Bonjour " + $routeParams.searchParameters);
-  $scope.message = $routeParams.searchParameters;
+  // console.log("Bonjour " + $routeParams.searchParameters);
+  var searchContent = String($routeParams.searchParameters);
 
-  // parsing with parameters
-  $scope.searchRequest;
+   // var that will contain the search query JSON
+   $scope.searchRequest = {};
+
+   searchContent = searchContent.split("=");
+
+   var left = searchContent[0]=="title";
+
+   $scope.searchRequest = {"title": searchContent[1]};
+
+
+
+  // first we split with the & 
+
+  // searchContent = searchContent.split("&");
+
+  // var onelement; var left;
+  //     // we add the elements to the topics
+  //     for (var i=0; i<searchContent.length; i++){
+  //       // $scope.post.topics[i] = {"id": splitted[i]};
+  //       onelement = searchContent[i].split("=");
+  //       left = onelement[0];
+  //       $scope.searchRequest = { left : onelement[1]};
+  //     }
+
+
+
+
+
+ 
 
 
   // doing the post and get the result
@@ -855,13 +939,14 @@ app.controller('resultController', function($scope, $rootScope, $http, $routePar
     $http(req).then(
             // success function
             function(response){
-              
+             
             $scope.result = response.data;
+            
                              
             // failed function
             },
             function(response){
-              $.growl.error({ message: "Error while searching for result." });
+              $.growl.error({ message: "Error while searching for result."});
 
               //  switch(response.status){
               //    case 400:

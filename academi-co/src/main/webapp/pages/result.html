@@ -15,7 +15,7 @@
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
         <!-- The Grid -->
         <div class="w3-row">
-            <div id="mainSearchPageContent" ng-controller="searchPageLoad">
+            <div id="mainSearchPageContent">
                 <!--     Left Column -->
                 <div class="w3-col m3">
                     <br>
@@ -28,12 +28,13 @@
                     <div class="w3-container w3-card w3-theme-l5 w3-round w3-margin">
                         <br>
                         <!-- thread/posts -->
-                        <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in myProfileData.posts" >
+                        <div class="w3-container w3-card w3-white w3-round w3-margin" ng-repeat="post in result.results" >
                             <br>
                             <br>
-                            <img ng-src="data:image/JPEG;base64,{{myProfileData.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
+                            <img ng-src="data:image/JPEG;base64,{{post.author.profilePicture.data}}" alt="Avatar" class="w3-left w3-margin-right" style="width:60px">
                             <span class="w3-right w3-opacity">{{post.creationDate | date:"dd/MM/yyyy 'at' h:mma"}}</span>
-                            <h4>{{myProfileData.username}}</h4>
+                            <h4>{{post.author.username}}</h4>
+                            <br>
                             <div class="content">
                                 <!-- score -->
                                 <hr>
